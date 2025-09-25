@@ -1,39 +1,8 @@
 import React from "react";
 import { ArrowRight, Github, Download, ChevronDown } from "lucide-react";
-import { usePostHog } from 'posthog-js/react';
 import RevealAnimation from "./ui/RevealAnimation";
 
 const HeroSection: React.FC = () => {
-  const posthog = usePostHog();
-
-  const handleContactClick = () => {
-    posthog.capture('hero_contact_clicked', {
-      section: 'hero',
-      action: 'contact_navigation'
-    });
-  };
-
-  const handleGithubClick = () => {
-    posthog.capture('hero_github_clicked', {
-      section: 'hero',
-      action: 'github_visit'
-    });
-  };
-
-  const handleResumeDownload = () => {
-    posthog.capture('hero_resume_download', {
-      section: 'hero',
-      action: 'resume_download'
-    });
-  };
-
-  const handleLearnMoreClick = () => {
-    posthog.capture('hero_learn_more_clicked', {
-      section: 'hero',
-      action: 'about_navigation'
-    });
-  };
-
   return (
     <section
       id="home"
@@ -84,7 +53,6 @@ const HeroSection: React.FC = () => {
             <div className="flex flex-wrap gap-4 justify-center">
               <a
                 href="#contact"
-                onClick={handleContactClick}
                 className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition-all duration-300 transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:scale-105 hover:translate-y-[-3px]"
               >
                 Contact Me
@@ -94,17 +62,15 @@ const HeroSection: React.FC = () => {
                 href="https://github.com/deepakyannadle"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleGithubClick}
                 className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition-all duration-300 transform hover:bg-gray-800 hover:shadow-lg hover:scale-105 hover:translate-y-[-3px]"
               >
                 <Github size={18} />
                 GitHub
               </a>
               <a
-                href="https://drive.google.com/file/d/1-resume-link/view?usp=sharing"
+                href="https://drive.google.com/file/"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleResumeDownload}
                 className="flex gap-2 items-center py-3 px-6 bg-white rounded-lg border shadow-md transition-all duration-300 transform hover:bg-gray-50 hover:shadow-lg hover:scale-105 border-foreground/10 hover:translate-y-[-3px]"
               >
                 <Download size={18} />
@@ -112,7 +78,6 @@ const HeroSection: React.FC = () => {
               </a>
               <a
                 href="#about"
-                onClick={handleLearnMoreClick}
                 className="py-3 px-6 rounded-lg border shadow-md transition-all duration-300 transform hover:shadow-lg hover:scale-105 bg-white/80 backdrop-blur-sm border-foreground/10 hover:translate-y-[-3px]"
               >
                 Learn More
