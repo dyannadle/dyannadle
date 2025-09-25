@@ -59,6 +59,15 @@ const HeroSection: React.FC = () => {
                 <ArrowRight size={18} className="ml-1 animate-pulse" />
               </a>
               <a
+                href="https://github.com/deepakyannadle"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition-all duration-300 transform hover:bg-gray-800 hover:shadow-lg hover:scale-105 hover:translate-y-[-3px]"
+              >
+                <Github size={18} />
+                GitHub
+              </a>
+              <a
                 href="https://drive.google.com/file/d/1-resume-link/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
