@@ -48,7 +48,6 @@ const Footer: React.FC = () => {
         <div className="flex flex-col justify-between items-center text-sm md:flex-row text-white/60">
           <p className="flex gap-2 items-center">
             © {currentYear} Deepak Yannadle. All rights reserved.
-            <span className="hidden md:inline">•</span>
             <span className="text-blue-300"></span>
           </p>
           <div className="flex mt-4 space-x-6 md:mt-0">
