@@ -68,7 +68,7 @@ const HeroSection: React.FC = () => {
                 GitHub
               </a>
               <a
-                href="https://drive.google.com/file/"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex gap-2 items-center py-3 px-6 bg-white rounded-lg border shadow-md transition-all duration-300 transform hover:bg-gray-50 hover:shadow-lg hover:scale-105 border-foreground/10 hover:translate-y-[-3px]"
