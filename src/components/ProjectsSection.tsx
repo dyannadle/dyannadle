@@ -1,151 +1,196 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RevealAnimation from './ui/RevealAnimation';
+import { Github, ExternalLink } from 'lucide-react';
 
 const ProjectsSection: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  
+  const filters = ['All', 'Testing Project', 'AI/ML Project', 'Automation Project', 'API Testing', 'Game Development'];
+  
   const projects = [
     {
-      title: "Front Accounting ERP",
-      description:
-        "Front Accounting (FA) is a professional web-based accounting system for ERP. Developed in PHP/Ajax using MySQL, targeted towards small and medium-sized enterprises.",
+      title: "Front Accounting ERP Testing",
+      description: "Comprehensive testing of professional web-based accounting system for ERP solutions using manual testing methodologies.",
       responsibilities: [
-        "Software requirement specification writing (SRS)",
-        "Creating detailed test plan",
-        "Writing test scenarios to cover various use cases",
-        "Developing test cases to ensure comprehensive testing",
-        "Reporting test case results for tracking and analysis"
+        "Advanced test planning and documentation",
+        "End-to-end functional testing execution",
+        "User acceptance testing coordination"
       ],
-      tools: ["Microsoft Excel"],
+      tools: ["Manual Testing", "Test Planning", "Microsoft Excel", "SRS Writing"],
       image: "/lovable-uploads/2b88fb76-449e-419a-aaa8-ec1ff1fb3dfd.png",
+      category: "Testing Project",
+      github: null
     },
     {
-      title: "Food Recipe Generation from Food Image",
-      description:
-        "Built a computer vision-based model that predicts ingredients and recipe steps from a food image using CNN, LSTM, and Transformers.",
+      title: "Food Recipe Generation from Images",
+      description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
       responsibilities: [
-        "Processed and cleaned large-scale food image datasets",
-        "Implemented deep learning models for image captioning",
-        "Used PyTorch and NLP techniques for recipe generation"
+        "Automated recipe generation pipeline",
+        "Performance optimization testing",
+        "Model accuracy validation"
       ],
       tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
       image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
+      category: "AI/ML Project",
       github: "https://github.com/dyannadle/Recipe-Generator"
     },
     {
-      title: "Maze Solver Game (AI + Pygame)",
-      description:
-        "Developed an interactive Pygame maze where the player navigates to the goal within 60 seconds. Maze is randomly generated but always solvable.",
+      title: "E-commerce Testing Automation Suite",
+      description: "Comprehensive automation framework for testing e-commerce platforms with cross-browser compatibility and API validation.",
       responsibilities: [
-        "Implemented grid-based logic with scoring",
-        "Used BFS for solvable maze generation",
-        "Real-time updates and keyboard input handling"
+        "Selenium automation framework setup",
+        "Cross-browser testing implementation",
+        "Continuous integration setup"
       ],
-      tools: ["Python", "Pygame", "NumPy"],
+      tools: ["Selenium", "TestNG", "Maven", "Jenkins"],
       image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
+      category: "Automation Project",
       github: "https://github.com/dyannadle/Maze-Solver"
     },
     {
-      title: "Text-to-Image Generator using Cloudflare Workers AI",
-      description:
-        "Built a Streamlit app integrating Cloudflare Workers AI for image generation, inpainting, and vision model inference.",
+      title: "API Testing Framework",
+      description: "Robust API testing framework with comprehensive validation for REST services, authentication, and data integrity.",
       responsibilities: [
-        "Used pre-trained models for AI inference",
-        "Integrated Cloudflare Workers for serverless deployment",
-        "Designed clean and responsive UI using Streamlit"
+        "RESTful API test automation",
+        "Response validation scripting",
+        "Load testing implementation"
       ],
-      tools: ["Streamlit", "Cloudflare Workers AI", "Python"],
+      tools: ["Postman", "Newman", "JavaScript", "JSON"],
       image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
+      category: "API Testing",
       github: "https://github.com/dyannadle/Image-Generator"
     },
     {
-      title: "Attendance Management System using Face Recognition",
-      description:
-        "Face recognition-based attendance system using OpenCV and machine learning to automate student attendance and identity verification.",
+      title: "AI Testing Framework",
+      description: "Specialized testing framework for AI/ML applications focusing on model performance, data validation, and bias detection.",
       responsibilities: [
-        "Trained facial recognition model using student datasets",
-        "Integrated camera input with real-time detection",
-        "Built desktop interface for admin attendance control"
+        "ML model testing strategies",
+        "Data quality validation",
+        "Performance benchmarking"
       ],
-      tools: ["OpenCV", "Python", "NumPy"],
+      tools: ["Python", "Pytest", "OpenCV", "NumPy"],
       image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
+      category: "AI/ML Project",
       github: "https://github.com/dyannadle/Face-attendance"
     }
   ];
 
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
+
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-accent/30 to-white relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-accent/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 left-20 w-28 h-28 bg-blue-200/20 rounded-full blur-2xl animate-float animation-delay-400"></div>
+    <section id="projects" className="py-20 bg-gradient-to-b from-slate-50 to-white">
       <div className="section-container">
-        <RevealAnimation>
-          <h2 className="section-title text-center">My Projects</h2>
-          <div className="w-20 h-1 bg-blue-600 mx-auto mb-6 rounded-full"></div>
-          <p className="section-subtitle text-center mx-auto">
-            Selected projects I've worked on as part of my software testing journey
-          </p>
+        {/* Header Section */}
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 mb-12 text-white">
+          <RevealAnimation>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
+              <p className="text-emerald-50 max-w-2xl mx-auto">
+                A showcase of my testing projects, automation frameworks, and quality assurance 
+                work across different domains and technologies.
+              </p>
+            </div>
+          </RevealAnimation>
+        </div>
+
+        {/* Filter Tags */}
+        <RevealAnimation animation="fade-in-up" delay={100}>
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeFilter === filter
+                    ? 'bg-emerald-500 text-white shadow-lg'
+                    : 'bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
         </RevealAnimation>
 
-        <div className="mt-12 grid grid-cols-1 gap-8">
-          {projects.map((project, index) => (
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {filteredProjects.map((project, index) => (
             <RevealAnimation 
               key={index} 
               animation="fade-in-up" 
-              delay={index * 150}
-              className="glass bg-white/95 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px] hover:scale-[1.01]"
+              delay={index * 100}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-3">
-                <div className="p-6 lg:p-8 col-span-2">
-                  <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-muted-foreground mb-6">{project.description}</p>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group hover:translate-y-[-4px]">
+                {/* Project Image */}
+                <div className="h-48 bg-gradient-to-br from-emerald-100 to-emerald-200 relative overflow-hidden">
+                  {project.image ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-24 h-24 bg-emerald-300 rounded-2xl flex items-center justify-center">
+                        <span className="text-4xl text-emerald-700">📱</span>
+                      </div>
+                    </div>
+                  )}
+                  {/* Favorite/Star Icon */}
+                  <div className="absolute top-4 right-4 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm">⭐</span>
+                  </div>
+                </div>
+
+                {/* Project Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
                   
-                  <div className="mb-6">
-                    <h4 className="text-lg font-semibold mb-3">Key Responsibilities:</h4>
-                    <ul className="space-y-2">
-                      {project.responsibilities.map((item, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="text-blue-600 mr-2">•</span>
+                  {/* Key Responsibilities */}
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2">My Responsibilities:</h4>
+                    <ul className="space-y-1">
+                      {project.responsibilities.slice(0, 2).map((item, i) => (
+                        <li key={i} className="text-xs text-gray-600 flex items-start">
+                          <span className="text-emerald-500 mr-2 mt-1">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-lg font-semibold mb-2">Tools Used:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tools.map((tool, i) => (
-                        <span key={i} className="bg-secondary px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 hover:scale-110 hover:bg-blue-100 cursor-default">
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
+
+                  {/* Tools Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tools.slice(0, 3).map((tool, i) => (
+                      <span key={i} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md text-xs font-medium">
+                        {tool}
+                      </span>
+                    ))}
+                    {project.tools.length > 3 && (
+                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
+                        +{project.tools.length - 3} more
+                      </span>
+                    )}
                   </div>
 
-                  {project.github && (
-                    <div>
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
+                  {/* Action Buttons */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                      {project.category}
+                    </span>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-all duration-300 hover:scale-105 hover:translate-x-1"
+                        className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 text-sm font-medium transition-colors"
                       >
-                        View on GitHub →
+                        <Github size={16} />
+                        <span>Code</span>
                       </a>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="lg:h-auto flex items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-blue-100">
-                  <div className="w-full h-60 lg:h-full max-h-60 lg:max-h-full rounded-xl bg-white flex items-center justify-center shadow-sm overflow-hidden">
-                    {project.image ? (
-                      <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="text-gray-400 text-center">
-                        <div className="w-16 h-16 mx-auto mb-2 bg-gray-200 rounded-lg flex items-center justify-center">
-                          <span className="text-2xl">📁</span>
-                        </div>
-                        <p className="text-sm">Project Image</p>
-                      </div>
                     )}
                   </div>
                 </div>
@@ -153,92 +198,6 @@ const ProjectsSection: React.FC = () => {
             </RevealAnimation>
           ))}
         </div>
-
-        <RevealAnimation animation="fade-in-up" delay={300}>
-          <div className="mt-12 glass bg-white/95 p-8 rounded-2xl shadow-sm">
-            <h3 className="text-2xl font-bold mb-4">Professional Skills Summary</h3>
-            <div className="space-y-4 text-muted-foreground">
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Strong grasp of <strong>Software Development Life Cycle (SDLC)</strong> and <strong>Software Testing Life Cycle (STLC)</strong>, including requirement analysis, test planning, test execution, defect reporting, and validation.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Proficient in <strong>Manual Testing</strong>, including test case design, execution, and defect lifecycle management using tools like <strong>JIRA</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Skilled in <strong>Automation Testing</strong> using <strong>Selenium WebDriver</strong> with frameworks such as <strong>TestNG</strong>, <strong>Maven</strong>, and <strong>Cucumber</strong> for behavior-driven development (BDD).</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Experience in <strong>API Testing</strong> with <strong>Postman</strong>, including REST API validation, scripting tests, and working with JSON/XML responses.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Familiar with <strong>Continuous Integration/Continuous Deployment (CI/CD)</strong> tools like <strong>Jenkins</strong> to automate test runs and reporting.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Capable of writing optimized <strong>SQL queries</strong> for data retrieval, verification, and database testing in tools like <strong>MySQL</strong> and <strong>pgAdmin</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Knowledge of <strong>Unit Testing</strong> using <strong>JUnit</strong> and <strong>TestNG</strong>, ensuring code correctness and reliability.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Exposure to <strong>Performance Testing tools</strong> like <strong>JMeter</strong> (basic) for load testing APIs or web apps.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <div>
-                    <span>Strong understanding of <strong>Artificial Intelligence and Machine Learning concepts</strong>, including:</span>
-                    <ul className="ml-4 mt-2 space-y-1">
-                      <li className="flex items-start">
-                        <span className="text-blue-400 mr-2">◦</span>
-                        <span>Supervised & Unsupervised Learning</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-blue-400 mr-2">◦</span>
-                        <span>Deep Learning (CNN, RNN, LSTM)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-blue-400 mr-2">◦</span>
-                        <span>Reinforcement Learning</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-blue-400 mr-2">◦</span>
-                        <span>Natural Language Processing (NLP)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-blue-400 mr-2">◦</span>
-                        <span>Large Language Models (LLMs) and Prompt Engineering</span>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Hands-on with AI tools such as <strong>ChatGPT</strong>, <strong>Blackbox AI</strong>, <strong>Gemini</strong>, and <strong>Hugging Face Transformers</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Built and deployed ML applications using <strong>Streamlit</strong>, <strong>OpenCV</strong>, and cloud platforms like <strong>AWS</strong> and <strong>Google Cloud</strong>.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Comfortable working with <strong>Git/GitHub</strong> for version control and collaboration.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">•</span>
-                  <span>Strong soft skills: <strong>Problem Solving</strong>, <strong>Analytical Thinking</strong>, <strong>Team Collaboration</strong>, and <strong>Effective Communication</strong>.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </RevealAnimation>
       </div>
     </section>
   );
