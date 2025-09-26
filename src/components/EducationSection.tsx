@@ -13,18 +13,18 @@ const EducationSection: React.FC = () => {
   ];
 
   const certifications = [
-    { name: 'Certified Software Tester', institution: 'Quastech', year: '2024', icon: '🏆' },
-    { name: 'Google Associate Cloud Engineer', institution: 'Google Cloud', year: '2024', icon: '☁️' },
-    { name: 'AWS Academy Introduction to Cloud', institution: 'Amazon', year: '2024', icon: '🚀' },
-    { name: 'Career Essentials in Generative AI', institution: 'Microsoft & LinkedIn', year: '2024', icon: '🤖' },
-    { name: 'Android App Development', institution: 'Internshala', year: '2023', icon: '📱' },
-    { name: 'Data Manipulation with pandas', institution: 'DataCamp', year: '2023', icon: '🐼' },
-    { name: 'Value Added Course By SAP', institution: 'SAP & Edunet', year: '2023', icon: '💼' },
-    { name: 'Maharashtra State Certificate in IT', institution: 'Government', year: '2023', icon: '🎓' },
-    { name: 'Joining Data in SQL', institution: 'DataCamp', year: '2023', icon: '🗄️' },
-    { name: 'Google AI Essentials', institution: 'Google', year: '2024', icon: '🧠' },
-    { name: 'What is Generative AI?', institution: 'LinkedIn Learning', year: '2024', icon: '✨' },
-    { name: 'GenAI Powered Data Analytics', institution: 'Coursera', year: '2024', icon: '📊' }
+    { name: 'Certified Software Tester', institution: 'Quastech', year: '2024' },
+    { name: 'Google Associate Cloud Engineer', institution: 'Google Cloud', year: '2024'},
+    { name: 'AWS Academy Introduction to Cloud', institution: 'Amazon', year: '2024' },
+    { name: 'Career Essentials in Generative AI', institution: 'Microsoft & LinkedIn', year: '2024' },
+    { name: 'Android App Development', institution: 'Internshala', year: '2023',  },
+    { name: 'Data Manipulation with pandas', institution: 'DataCamp', year: '2023' },
+    { name: 'Value Added Course By SAP', institution: 'SAP & Edunet', year: '2023'  },
+    { name: 'Maharashtra State Certificate in IT', institution: 'Government', year: '2023'},
+    { name: 'Joining Data in SQL', institution: 'DataCamp', year: '2023'},
+    { name: 'Google AI Essentials', institution: 'Google', year: '2024'  },
+    { name: 'What is Generative AI?', institution: 'LinkedIn Learning', year: '2024' },
+    { name: 'GenAI Powered Data Analytics', institution: 'Coursera', year: '2024' }
   ];
 
   const continuousLearningSkills = [
