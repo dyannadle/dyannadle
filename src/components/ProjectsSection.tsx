@@ -35,20 +35,21 @@ const ProjectsSection: React.FC = () => {
       github: "https://github.com/dyannadle/Recipe-Generator"
     },
     {
-      title: "E-commerce Testing Automation Suite(Flipkart)",
-      description: "Comprehensive automation framework for testing e-commerce platforms with cross-browser compatibility and API validation.",
+      title: "Maze Solver Game",
+      description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
       responsibilities: [
-        "Selenium automation framework setup",
-        "Cross-browser testing implementation",
-        "Continuous integration setup"
+       "Designed and implemented maze generation algorithms (e.g., Recursive Backtracker).",
+        "Integrated pathfinding algorithms (e.g., A* search or BFS) for automated solving.",
+        "Developed a visual game interface using Pygame to display the maze and solver's path.",
+        "Managed logic for user interaction and game state (e.g., manual solving mode)."
       ],
-      tools: ["Selenium", "TestNG", "Maven", "Jenkins"],
+      tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
       image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
-      category: "Automation Project",
-      Paper Punlished : ""
+      category: "AI/ML Project",
+      Paper Punlished : null 
       github: "https://github.com/dyannadle/Maze-Solver"
     },
-    {
+    
 {
   title: "Image Model Cloudflare Workers AI",
   description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
@@ -62,7 +63,7 @@ const ProjectsSection: React.FC = () => {
   category: "AI/ML Project",
   github: "https://github.com/dyannadle/Image-Generator"
 },
-    {
+    
  {
   title: "Attendance System",
   description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in CSV/Excel and reporting features.",
@@ -75,8 +76,26 @@ const ProjectsSection: React.FC = () => {
   image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
   category: "AI/ML Project",
   github: "https://github.com/dyannadle/Face-attendance"
+},
+      {
+  title: "Popular Web Series Page UI Testing",
+  description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series, focusing on navigation, interaction, and content rendering validation.",
+  responsibilities: [
+    "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials).",
+    "Tested search functionality to ensure accurate filtering of web series based on user input.",
+    "Validated the responsiveness and visual state changes of filter buttons (Trending, Newest, Comedy).",
+    "Checked the working of 'like/favorite' and 'share' buttons for each web series card.",
+    "Ensured smooth vertical scrolling and proper loading of additional content.",
+    "Confirmed clear visibility and accessibility of all UI elements on different device sizes and screen resolutions."
+  ],
+  tools: ["Manual Testing", "Google sheet ", "Bug Tracking Software (JIRA)", "UI Specifications Document"]
+        image :""
+        category: "Testing Project",
+  github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
 }
 
+
+      
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
