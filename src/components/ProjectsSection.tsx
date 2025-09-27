@@ -19,7 +19,7 @@ const ProjectsSection: React.FC = () => {
       tools: ["Manual Testing", "Test Planning", "Microsoft Excel", "SRS Writing"],
       image: "/lovable-uploads/2b88fb76-449e-419a-aaa8-ec1ff1fb3dfd.png",
       category: "Testing Project",
-      github: null
+      github: "https://github.com/dyannadle/Manual-Projects"
     },
     {
       title: "Food Recipe Generation from Images",
@@ -35,7 +35,7 @@ const ProjectsSection: React.FC = () => {
       github: "https://github.com/dyannadle/Recipe-Generator"
     },
     {
-      title: "E-commerce Testing Automation Suite",
+      title: "E-commerce Testing Automation Suite(Flipkart)",
       description: "Comprehensive automation framework for testing e-commerce platforms with cross-browser compatibility and API validation.",
       responsibilities: [
         "Selenium automation framework setup",
@@ -45,35 +45,38 @@ const ProjectsSection: React.FC = () => {
       tools: ["Selenium", "TestNG", "Maven", "Jenkins"],
       image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
       category: "Automation Project",
+      Paper Punlished : ""
       github: "https://github.com/dyannadle/Maze-Solver"
     },
     {
-      title: "API Testing Framework",
-      description: "Robust API testing framework with comprehensive validation for REST services, authentication, and data integrity.",
-      responsibilities: [
-        "RESTful API test automation",
-        "Response validation scripting",
-        "Load testing implementation"
-      ],
-      tools: ["Postman", "Newman", "JavaScript", "JSON"],
-      image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
-      category: "API Testing",
-      github: "https://github.com/dyannadle/Image-Generator"
-    },
+{
+  title: "Image Model Cloudflare Workers AI",
+  description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
+  responsibilities: [
+    "Implemented AI-powered image generation",
+    "Integrated Cloudflare Workers AI API with Streamlit",
+    "Managed environment setup and dependencies"
+  ],
+  tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
+  image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
+  category: "AI/ML Project",
+  github: "https://github.com/dyannadle/Image-Generator"
+},
     {
-      title: "AI Testing Framework",
-      description: "Specialized testing framework for AI/ML applications focusing on model performance, data validation, and bias detection.",
-      responsibilities: [
-        "ML model testing strategies",
-        "Data quality validation",
-        "Performance benchmarking"
-      ],
-      tools: ["Python", "Pytest", "OpenCV", "NumPy"],
-      image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
-      category: "AI/ML Project",
-      github: "https://github.com/dyannadle/Face-attendance"
-    }
-  ];
+ {
+  title: "Attendance System",
+  description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in CSV/Excel and reporting features.",
+  responsibilities: [
+    "Designed and implemented face recognition-based attendance marking",
+    "Integrated data storage and report generation using Pandas/CSV",
+    "Built user interface with Tkinter for ease of use"
+  ],
+  tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
+  image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
+  category: "AI/ML Project",
+  github: "https://github.com/dyannadle/Face-attendance"
+}
+
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
