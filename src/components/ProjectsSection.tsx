@@ -32,6 +32,7 @@ const ProjectsSection: React.FC = () => {
       tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
       image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
       category: "AI/ML Project",
+      Paper Punlished : null, 
       github: "https://github.com/dyannadle/Recipe-Generator"
     },
     {
@@ -46,7 +47,6 @@ const ProjectsSection: React.FC = () => {
       tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
       image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
       category: "AI/ML Project",
-      Paper Punlished : null 
       github: "https://github.com/dyannadle/Maze-Solver"
     },
     
@@ -89,7 +89,7 @@ const ProjectsSection: React.FC = () => {
     "Confirmed clear visibility and accessibility of all UI elements on different device sizes and screen resolutions."
   ],
   tools: ["Manual Testing", "Google sheet ", "Bug Tracking Software (JIRA)", "UI Specifications Document"]
-        image :""
+        image :"" ,
         category: "Testing Project",
   github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
 }
