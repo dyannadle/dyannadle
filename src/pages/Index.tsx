@@ -29,7 +29,7 @@ const Index: React.FC = () => {
       <HeroSection />
       <AboutSection />
 
-      {/* 👇 Add HoverCards here */}
+      {/* ✅ Add HoverCards here so it actually shows */}
       <HoverCards />
 
       <ProjectsSection />
