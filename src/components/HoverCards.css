@@ -1,26 +1,16 @@
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1000px;
-  margin: 50px auto;
-}
-
 .card {
   position: relative;
   background: #e8fff3;
-  padding: 30px;
   border-radius: 12px;
+  padding: 20px;
   text-align: center;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 /* Tooltip */
@@ -28,7 +18,7 @@
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  bottom: -120px;   /* adjust so it fits long text */
+  bottom: -70px;
   left: 50%;
   transform: translateX(-50%);
   background: #333;
@@ -36,12 +26,9 @@
   padding: 10px 14px;
   border-radius: 6px;
   font-size: 14px;
-  white-space: normal;   /* allows multi-line */
-  width: 240px;
-  line-height: 1.4;
-  transition: opacity 0.3s;
-  z-index: 1;
-  text-align: left;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
 .card:hover .tooltip {
