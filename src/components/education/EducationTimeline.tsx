@@ -6,6 +6,18 @@ interface EducationTimelineProps {
   educationData: EducationItemType[];
 }
 
+// Function to get favicon URL from a given website URL
+const getFaviconUrl = (url: string): string => {
+  try {
+    const domain = new URL(url).hostname;
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+  } catch (error) {
+    return "/default-favicon.png"; // fallback if URL is broken
+  }
+};
+
+// EducationTimeline component to display education items in a timeline format
+
 const EducationTimeline: React.FC<EducationTimelineProps> = ({
   educationData,
 }) => {
@@ -39,9 +51,14 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
                 <h4 className="mb-1 text-xl font-semibold">{item.degree}</h4>
                 {(() => {
                   return (
-                    <span className="inline-block mb-2 font-medium">
-                      {item.institution}
-                    </span>
+<a
+  href={item.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block mb-2 font-medium text-blue-600 hover:underline"
+>
+  {item.institution}
+</a>
                   );
                 })()}
                 <p className="mb-3 text-sm text-gray-500">{item.duration}</p>

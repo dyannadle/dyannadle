@@ -1,220 +1,334 @@
-import React, { useState } from 'react';
+// React and Hooks
+import React, { useState, useCallback } from 'react';
+
+// Animation wrapper component
 import RevealAnimation from './ui/RevealAnimation';
-import { Github, ExternalLink } from 'lucide-react';
+// Icons
+import { Github } from 'lucide-react';
+
+// Filters list (defined outside component to avoid recreation)
+const filters = [
+  'All',
+  'Favorites',
+  'Testing Project',
+  'AI/ML Project',
+  'Automation Project',
+  'API Testing',
+  'Game Development',
+];
+
+// Projects data (also outside component)
+const projects = [
+  {
+    title: "Front Accounting ERP Testing",
+    description: "Comprehensive testing of professional web-based accounting system for ERP solutions using manual testing methodologies.",
+    responsibilities: [
+      "Developed detailed test plans, test cases, and test scripts based on ERP requirements and specifications.",
+      "Executed end-to-end functional testing covering modules like accounting, inventory, and payroll to ensure system integrity.",
+      "Coordinated and conducted User Acceptance Testing (UAT) with stakeholders to validate business workflows.",
+      "Identified, logged, and tracked defects using bug tracking tools, ensuring timely resolution.",
+      "Collaborated with developers and business analysts to clarify requirements and resolve issues."
+    ],
+    tools: ["Manual Testing", "Test Planning", "Microsoft Excel", "SRS Writing"],
+    image: "/lovable-uploads/2b88fb76-449e-419a-aaa8-ec1ff1fb3dfd.png",
+    category: "Testing Project",
+    github: "https://github.com/dyannadle/Manual-Projects"
+  },
+  {
+    title: "Food Recipe Generation from Images",
+    description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
+    responsibilities: [
+      "Designed and implemented an automated pipeline for generating recipes from food images using convolutional and recurrent neural networks.",
+      "Performed extensive performance optimization and hyperparameter tuning to improve model accuracy and efficiency.",
+      "Validated model predictions against labeled datasets to ensure recipe relevance and correctness.",
+      "Collaborated on dataset collection and preprocessing to enhance training data quality.",
+      "Documented model architecture and results for academic publication."
+    ],
+    tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
+    image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
+    category: "AI/ML Project",
+    paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
+    github: "https://github.com/dyannadle/Recipe-Generator",
+  },
+  {
+    title: "Maze Solver Game",
+    description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
+    responsibilities: [
+      "Designed and implemented maze generation algorithms, including Recursive Backtracker, for random maze creation.",
+      "Developed and integrated pathfinding algorithms such as A* search and Breadth-First Search for automated maze solving.",
+      "Created a responsive graphical user interface with Pygame to visualize maze generation and solver's path dynamically.",
+      "Implemented user controls for manual maze navigation and game state management.",
+      "Conducted extensive testing and debugging to ensure smooth gameplay and accurate pathfinding."
+    ],
+
+    tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
+    image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
+    category: "AI/ML Project, Game Development",
+    github: "https://github.com/dyannadle/Maze-Solver",
+  },
+  {
+    title: "Image Model Cloudflare Workers AI",
+    description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
+    responsibilities: [
+      "Developed AI-powered image generation features using Cloudflare Workers AI API integrated into Streamlit interface.",
+      "Implemented REST API calls and handled asynchronous image processing requests efficiently.",
+      "Managed environment configuration, dependencies, and deployment for seamless application performance.",
+      "Optimized user experience through responsive UI design and error handling.",
+      "Documented API usage and application setup for future maintenance."
+    ],
+    tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
+    image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
+    category: "AI/ML Project",
+    github: "https://github.com/dyannadle/Image-Generator"
+  },
+  {
+    title: "Attendance System",
+    description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in Excel and reporting features.",
+    responsibilities: [
+      "Designed and implemented a face recognition attendance system using OpenCV to detect and record attendance automatically.",
+      "Integrated data storage using Pandas and Excel formats for easy report generation and record maintenance.",
+      "Developed a user-friendly GUI with Tkinter to facilitate manual overrides and attendance review.",
+      "Tested system accuracy under various lighting and environmental conditions to ensure reliability.",
+      "Generated detailed attendance reports and analytics to assist management."
+    ],
+    tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
+    image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
+    category: "AI/ML Project",
+    github: "https://github.com/dyannadle/Face-attendance"
+  },
+  {
+    title: "Popular Web Series Page UI Testing",
+    description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series,focusing on navigation, interaction, and content rendering validation.",
+    responsibilities: [
+      "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials) across devices.",
+      "Tested search functionality rigorously to ensure accurate filtering and retrieval of web series based on user input.",
+      "Validated responsiveness and visual state changes of filter buttons (Trending, Newest, Comedy) under different scenarios.",
+      "Checked functionality and feedback of 'like/favorite' and 'share' buttons for each web series card to enhance UX.",
+      "Ensured smooth vertical scrolling and lazy loading of additional content without performance issues.",
+      "Confirmed clear visibility, accessibility compliance, and UI consistency across various screen sizes and resolutions."
+    ],
+    tools: ["Manual Testing", "Google Sheets", "Bug Tracking Software (JIRA)", "UI Specifications Document"],
+    image: "UI Testing.png",
+    category: "Testing Project",
+    github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
+  }
+];
 
 const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-  
-  const filters = ['All', 'Testing Project', 'AI/ML Project', 'Automation Project', 'API Testing', 'Game Development'];
-  
-  const projects = [
-    {
-      title: "Front Accounting ERP Testing",
-      description: "Comprehensive testing of professional web-based accounting system for ERP solutions using manual testing methodologies.",
-      responsibilities: [
-        "Advanced test planning and documentation",
-        "End-to-end functional testing execution",
-        "User acceptance testing coordination"
-      ],
-      tools: ["Manual Testing", "Test Planning", "Microsoft Excel", "SRS Writing"],
-      image: "/lovable-uploads/2b88fb76-449e-419a-aaa8-ec1ff1fb3dfd.png",
-      category: "Testing Project",
-      github: "https://github.com/dyannadle/Manual-Projects"
-    },
-    {
-      title: "Food Recipe Generation from Images",
-      description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
-      responsibilities: [
-        "Automated recipe generation pipeline",
-        "Performance optimization testing",
-        "Model accuracy validation"
-      ],
-      tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
-      image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
-      category: "AI/ML Project",
-      Paper Punlished : null, 
-      github: "https://github.com/dyannadle/Recipe-Generator"
-    },
-    {
-      title: "Maze Solver Game",
-      description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
-      responsibilities: [
-       "Designed and implemented maze generation algorithms (e.g., Recursive Backtracker).",
-        "Integrated pathfinding algorithms (e.g., A* search or BFS) for automated solving.",
-        "Developed a visual game interface using Pygame to display the maze and solver's path.",
-        "Managed logic for user interaction and game state (e.g., manual solving mode)."
-      ],
-      tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
-      image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
-      category: "AI/ML Project",
-      github: "https://github.com/dyannadle/Maze-Solver"
-    },
-    
-{
-  title: "Image Model Cloudflare Workers AI",
-  description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
-  responsibilities: [
-    "Implemented AI-powered image generation",
-    "Integrated Cloudflare Workers AI API with Streamlit",
-    "Managed environment setup and dependencies"
-  ],
-  tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
-  image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
-  category: "AI/ML Project",
-  github: "https://github.com/dyannadle/Image-Generator"
-},
-    
- {
-  title: "Attendance System",
-  description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in CSV/Excel and reporting features.",
-  responsibilities: [
-    "Designed and implemented face recognition-based attendance marking",
-    "Integrated data storage and report generation using Pandas/CSV",
-    "Built user interface with Tkinter for ease of use"
-  ],
-  tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
-  image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
-  category: "AI/ML Project",
-  github: "https://github.com/dyannadle/Face-attendance"
-},
-      {
-  title: "Popular Web Series Page UI Testing",
-  description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series, focusing on navigation, interaction, and content rendering validation.",
-  responsibilities: [
-    "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials).",
-    "Tested search functionality to ensure accurate filtering of web series based on user input.",
-    "Validated the responsiveness and visual state changes of filter buttons (Trending, Newest, Comedy).",
-    "Checked the working of 'like/favorite' and 'share' buttons for each web series card.",
-    "Ensured smooth vertical scrolling and proper loading of additional content.",
-    "Confirmed clear visibility and accessibility of all UI elements on different device sizes and screen resolutions."
-  ],
-  tools: ["Manual Testing", "Google sheet ", "Bug Tracking Software (JIRA)", "UI Specifications Document"]
-        image :"" ,
-        category: "Testing Project",
-  github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
-}
+  const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
+  const [modalProject, setModalProject] = useState<typeof projects[0] | null>(null);
+  const [fullDescription, setFullDescription] = useState(false); // Track if full description is shown
+  const [showAllTools, setShowAllTools] = useState<{ [key: number]: boolean }>({});
 
+  // Filter projects based on activeFilter and favorites
+  const filteredProjects = activeFilter === 'All'
+    ? projects
+    : activeFilter === 'Favorites'
+    ? projects.filter((project) => favoritedProjects.includes(project.title))
+    : projects.filter((project) => project.category.includes(activeFilter));
 
-      
+  const toggleFavorite = useCallback((title: string) => {
+    setFavoritedProjects((prev) =>
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
+    );
+  }, []);
 
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const closeModal = () => {
+    setModalProject(null);
+    setFullDescription(false); // Reset description state when modal is closed
+  };
+
+  // Full Description Logic
+  const handleDescriptionClick = () => {
+    setFullDescription((prev) => !prev);
+  };
 
   return (
     <section id="projects" className="py-20 bg-gradient-to-b from-slate-50 to-white">
       <div className="section-container">
-        {/* Header Section */}
-        <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 mb-12 text-white">
-          <RevealAnimation>
-            <div className="text-center">
-              <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-              <p className="text-emerald-50 max-w-2xl mx-auto">
-                A showcase of my testing projects, automation frameworks, and quality assurance 
-                work across different domains and technologies.
-              </p>
+
+        {/* Modal */}
+        {modalProject && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={closeModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            tabIndex={-1}
+          >
+            <div
+              className="bg-white rounded-xl max-w-3xl w-full p-6 relative overflow-y-auto max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl font-bold"
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+
+              {/* Full Image */}
+              <div className="mb-4">
+                <img
+                  src={modalProject.image}
+                  alt={modalProject.title}
+                  className="w-full h-full object-cover rounded-md"
+                />
+              </div>
+
+              <h2 id="modal-title" className="text-2xl font-bold mb-4">{modalProject.title}</h2>
+              <p className="mb-4">{modalProject.description}</p>
+
+              {/* Show Full Description Button */}
+              <button
+                onClick={handleDescriptionClick}
+                className="text-emerald-600 hover:text-emerald-700 font-medium mb-4"
+              >
+                {fullDescription ? 'Show Less' : 'Show Full Description'}
+              </button>
+
+              {fullDescription && (
+                <div className="mt-4">
+                  <h3 className="font-semibold mb-2">Responsibilities:</h3>
+                  <ul className="list-disc list-inside mb-4">
+                    {modalProject.responsibilities.map((resp, i) => (
+                      <li key={i}>{resp}</li>
+                    ))}
+                  </ul>
+                  <h3 className="font-semibold mb-2">Tools Used:</h3>
+                  <ul className="list-disc list-inside">
+                    {modalProject.tools.map((tool, i) => (
+                      <li key={i}>{tool}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Github Link */}
+              {modalProject.github && (
+                <a
+                  href={modalProject.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center mt-6 gap-2 hover:text-emerald-700 text-emerald-600 font-semibold"
+                  aria-label={`View GitHub repository for ${modalProject.title}`}
+                >
+                  <Github size={24} />
+                  GitHub
+                </a>
+              )}
+
+              {/* Paper Published Link (if exists) */}
+              {modalProject.paperPublished && (
+                <a
+                  href={`/papers/${modalProject.paperPublished}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mt-4 text-sm text-gray-500 underline"
+                  aria-label={`View published paper for ${modalProject.title}`}
+                >
+                  View Published Paper
+                </a>
+              )}
             </div>
-          </RevealAnimation>
+          </div>
+        )}
+
+        {/* Header */}
+        <h2 className="section-title">Projects</h2>
+        <p className="text-gray-600 max-w-4xl mx-auto text-center mb-8 leading-relaxed">
+          Showcasing my projects ranging from AI/ML, automation, game development, and manual testing.
+          You can filter by category or favorites.
+        </p>
+
+        {/* Filters */}
+        <div className="flex justify-center flex-wrap gap-2 mb-12">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              className={`capitalize text-gray-800 px-4 py-1 rounded-full border-2 border-emerald-600 transition-colors duration-300
+                ${activeFilter === filter ? 'bg-emerald-600 text-white font-semibold' : 'hover:bg-emerald-600 hover:text-white'}`}
+              onClick={() => setActiveFilter(filter)}
+              aria-pressed={activeFilter === filter}
+            >
+              {filter}
+            </button>
+          ))}
         </div>
 
-        {/* Filter Tags */}
-        <RevealAnimation animation="fade-in-up" delay={100}>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeFilter === filter
-                    ? 'bg-emerald-500 text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200'
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </RevealAnimation>
-
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {filteredProjects.map((project, index) => (
-            <RevealAnimation 
-              key={index} 
-              animation="fade-in-up" 
-              delay={index * 100}
-            >
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group hover:translate-y-[-4px]">
-                {/* Project Image */}
-                <div className="h-48 bg-gradient-to-br from-emerald-100 to-emerald-200 relative overflow-hidden">
-                  {project.image ? (
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-24 h-24 bg-emerald-300 rounded-2xl flex items-center justify-center">
-                        <span className="text-4xl text-emerald-700">📱</span>
-                      </div>
-                    </div>
-                  )}
-                  {/* Favorite/Star Icon */}
-                  <div className="absolute top-4 right-4 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">⭐</span>
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {filteredProjects.map((project, idx) => (
+            <RevealAnimation key={project.title}>
+              <div className="bg-white rounded-xl shadow-lg relative overflow-hidden group cursor-pointer">
+                {/* Image */}
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
 
-                {/* Project Content */}
-                <div className="p-6">
+                {/* Favorite button */}
+                <button
+                  onClick={() => toggleFavorite(project.title)}
+                  className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-emerald-600 hover:text-white transition-colors"
+                  aria-label={`Toggle favorite for ${project.title}`}
+                >
+                  {favoritedProjects.includes(project.title) ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      stroke="none"
+                      className="w-6 h-6 text-emerald-600"
+                    >
+                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      className="w-6 h-6"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                    </svg>
+                  )}
+                </button>
+
+                {/* Content */}
+                <div className="p-6" onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`}>
                   <h3 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h3>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
-                  
-                  {/* Key Responsibilities */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2">My Responsibilities:</h4>
-                    <ul className="space-y-1">
-                      {project.responsibilities.slice(0, 2).map((item, i) => (
-                        <li key={i} className="text-xs text-gray-600 flex items-start">
-                          <span className="text-emerald-500 mr-2 mt-1">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
 
-                  {/* Tools Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tools.slice(0, 3).map((tool, i) => (
-                      <span key={i} className="bg-emerald-50 text-emerald-700 px-2 py-1 rounded-md text-xs font-medium">
-                        {tool}
-                      </span>
-                    ))}
-                    {project.tools.length > 3 && (
-                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
-                        +{project.tools.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                      {project.category}
-                    </span>
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 text-sm font-medium transition-colors"
+                  <h4 className="font-semibold mb-2">Tools:</h4>
+                  <ul className="flex flex-wrap gap-2 text-xs font-medium text-gray-600">
+                    {(showAllTools[idx] ? project.tools : project.tools.slice(0, 4)).map((tool, i) => (
+                      <li
+                        key={i}
+                        className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg whitespace-nowrap"
                       >
-                        <Github size={16} />
-                        <span>Code</span>
-                      </a>
+                        {tool}
+                      </li>
+                    ))}
+                    {project.tools.length > 4 && (
+                      <button
+                        className="text-emerald-600 hover:text-emerald-700 ml-2 underline"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowAllTools((prev) => ({ ...prev, [idx]: !prev[idx] }));
+                        }}
+                      >
+                        {showAllTools[idx] ? 'Show Less' : `+${project.tools.length - 4} More`}
+                      </button>
                     )}
-                  </div>
+                  </ul>
                 </div>
               </div>
             </RevealAnimation>

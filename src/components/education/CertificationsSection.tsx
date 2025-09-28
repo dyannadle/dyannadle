@@ -8,7 +8,7 @@ const certifications = [
   {
     id: '1',
     name: 'Certified Software Tester',
-    url: 'https://drive.google.com/file/d/1t-TsZGlUhrmtHANRSpa76NRgsyIOXI5q/view?usp=sharing'
+    url: '/Certificates/Certified Software Tester.pdf'
   },
   {
     id: '2',
