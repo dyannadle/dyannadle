@@ -8,7 +8,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import HoverCards from "@/ui/HoverCards";
+
 
 const Index: React.FC = () => {
   useEffect(() => {
@@ -28,10 +28,6 @@ const Index: React.FC = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
-
-      {/* ✅ Add HoverCards here so it actually shows */}
-      <HoverCards />
-
       <ProjectsSection />
       <EducationSection />
       <SkillsSection />
