@@ -1,3 +1,4 @@
+// src/components/EducationSection.tsx
 import React from 'react';
 import RevealAnimation from './ui/RevealAnimation';
 import { educationData } from '@/data/educationData';
@@ -114,7 +115,7 @@ const EducationSection: React.FC = () => {
     },
   ];
 
-  // Continuous learning skill tags (with hover pop animation)
+  // Continuous learning skill tags
   const continuousLearningSkills = [
     { name: 'Testing Framework', icon: <BookOpen size={20} /> },
     { name: 'Quality Assurance', icon: <Award size={20} /> },
@@ -165,8 +166,6 @@ const EducationSection: React.FC = () => {
         </RevealAnimation>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-
           {/* ---------- Education Section ---------- */}
           <RevealAnimation animation="fade-in-right">
             <div>
@@ -181,9 +180,8 @@ const EducationSection: React.FC = () => {
                 {educationData.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div
-                      className={`w-12 h-12 ${
-                        iconColors[index % iconColors.length]
-                      } rounded-xl flex items-center justify-center flex-shrink-0`}
+                      className={`w-12 h-12 ${iconColors[index % iconColors.length]} 
+                      rounded-xl flex items-center justify-center flex-shrink-0`}
                     >
                       <GraduationCap className="text-white" size={20} />
                     </div>
@@ -192,14 +190,14 @@ const EducationSection: React.FC = () => {
                     <div className="flex-1 bg-white rounded-xl p-6 shadow-md border border-gray-100">
                       <h4 className="font-bold text-lg text-gray-800 mb-1">{item.degree}</h4>
 
-                      {/* ✅ Institution name with favicon and hyperlink */}
+                      {/* Institution with favicon */}
                       <div className="flex items-center gap-2 mb-2">
                         <img
                           src={getFaviconUrl(item.url)}
                           alt={item.institution}
                           className="w-5 h-5 rounded"
                           onError={(e) => {
-                            e.currentTarget.src = '/default-favicon.png'; // fallback icon
+                            e.currentTarget.src = '/default-favicon.png';
                           }}
                         />
                         <a
@@ -278,7 +276,7 @@ const EducationSection: React.FC = () => {
               LinkedIn Learning, and attending online conferences.
             </p>
 
-            {/* Skills Grid with hover pop */}
+            {/* Skills Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {continuousLearningSkills.map((skill, index) => (
                 <div
@@ -294,23 +292,21 @@ const EducationSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Highlighted areas with tooltip info */}
+            {/* Highlighted areas with dynamic tooltip */}
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
                 <div key={index} className="relative group">
                   <span className="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium cursor-pointer">
                     • {area.name}
                   </span>
-                  {/* Tooltip */}
-                  
-                  
-  {/* Tooltip with fade + scale animation */}
-  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white shadow-lg rounded-lg text-gray-600 text-sm 
-    opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
-    transition-all duration-300 ease-out z-10">
-    Covers Selenium, Cypress, Playwright, and other automation frameworks.
-  </div>
-</div>
+                  <div
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white shadow-lg 
+                    rounded-lg text-gray-600 text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
+                    transition-all duration-300 ease-out z-10"
+                  >
+                    {area.description}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
