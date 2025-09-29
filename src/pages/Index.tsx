@@ -9,12 +9,6 @@ import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
-// 💡 Idea-based components (placeholders – add when ready)
-import HoverCards from "@/components/ui/HoverCards";       // Idea 5
-import ContactForm from "@/components/ui/ContactForm";     // Idea 6
-import Testimonials from "@/components/ui/Testimonials";   // Idea 10
-import TerminalAbout from "@/components/ui/TerminalAbout"; // Idea 13
-import GameHub from "@/components/ui/GameHub";             // Idea 18
 
 const Index: React.FC = () => {
   useEffect(() => {
@@ -35,14 +29,6 @@ const Index: React.FC = () => {
       <HeroSection />
       <AboutSection />
       <ProjectsSection />
-
-      {/* Extra idea-based sections */}
-      <HoverCards />        {/* Idea 5 */}
-      <ContactForm />       {/* Idea 6 */}
-      <Testimonials />      {/* Idea 10 */}
-      <TerminalAbout />     {/* Idea 13 */}
-      <GameHub />           {/* Idea 18 */}
-
       <EducationSection />
       <SkillsSection />
       <ExperienceSection />
