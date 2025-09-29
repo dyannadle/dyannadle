@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Linkedin, Mail, Phone, Send } from "lucide-react";
+import { Linkedin, Mail, Send } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
-import { useToast } from "@/hooks/use-toast";
 
 const ContactSection: React.FC = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
+    date: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false); // ✅ modal state
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,34 +25,21 @@ const ContactSection: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://formspree.io/f/mkgqjaol", {
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        toast({
-          title: "✅ Success",
-          description: "Your message has been sent successfully!",
-        });
-
-        // Reset form
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setShowModal(true); // ✅ Show Thank You Modal
+        setFormData({ name: "", email: "", subject: "", message: "", date: "" });
       } else {
-        toast({
-          title: "❌ Error",
-          description: "Something went wrong. Please try again.",
-          variant: "destructive",
-        });
+        alert("Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error(error);
-      toast({
-        title: "❌ Error",
-        description: "Network issue. Please try again later.",
-        variant: "destructive",
-      });
+      alert("Network issue. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -182,6 +169,21 @@ const ContactSection: React.FC = () => {
                   />
                 </div>
 
+                {/* ✅ Date Field */}
+                <div>
+                  <label htmlFor="date" className="block mb-2 text-sm font-medium">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    id="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    required
+                    className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  />
+                </div>
+
                 <div>
                   <label htmlFor="message" className="block mb-2 text-sm font-medium">
                     Message
@@ -209,6 +211,22 @@ const ContactSection: React.FC = () => {
           </RevealAnimation>
         </div>
       </div>
+
+      {/* ✅ Thank You Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 shadow-lg text-center max-w-md">
+            <h2 className="text-2xl font-bold text-green-600 mb-4">🎉 Thank You!</h2>
+            <p className="text-gray-600 mb-6">Your message has been sent successfully. I will get back to you soon.</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:scale-105 transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
