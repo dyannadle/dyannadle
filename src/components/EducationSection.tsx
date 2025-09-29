@@ -1,7 +1,6 @@
-// src/components/EducationSection.tsx
-import React from 'react';
-import RevealAnimation from './ui/RevealAnimation';
-import { educationData } from '@/data/educationData';
+import React from "react";
+import RevealAnimation from "./ui/RevealAnimation";
+import { educationData } from "@/data/educationData";
 import {
   GraduationCap,
   Award,
@@ -10,11 +9,11 @@ import {
   Code,
   Database,
   Globe,
-} from 'lucide-react';
+} from "lucide-react";
 
 const EducationSection: React.FC = () => {
   // Colors for icons in education timeline
-  const iconColors = ['bg-purple-500', 'bg-emerald-500', 'bg-blue-500', 'bg-orange-500'];
+  const iconColors = ["bg-purple-500", "bg-emerald-500", "bg-blue-500", "bg-orange-500"];
 
   // Function to fetch favicon dynamically based on institution URL
   const getFaviconUrl = (url: string): string =>
@@ -23,131 +22,131 @@ const EducationSection: React.FC = () => {
   // Certification list
   const certifications = [
     {
-      name: 'Certified Software Tester',
-      institution: 'Quastech',
-      year: '2025',
-      icon: '/logos/Quastech-logo.jpg.ico',
-      link: '/Certificates/Certified Software Tester.pdf',
+      name: "Certified Software Tester",
+      institution: "Quastech",
+      year: "2025",
+      icon: "/logos/Quastech-logo.jpg.ico",
+      link: "/Certificates/Certified Software Tester.pdf",
     },
     {
-      name: 'GenAI Powered Data Analytics',
-      institution: 'Coursera',
-      year: '2025',
-      icon: '/logos/coursera logo.svg',
-      link: '/Certificates/GenAI Powered Data Analytics.pdf',
+      name: "GenAI Powered Data Analytics",
+      institution: "Coursera",
+      year: "2025",
+      icon: "/logos/coursera logo.svg",
+      link: "/Certificates/GenAI Powered Data Analytics.pdf",
     },
     {
-      name: 'Google Associate Cloud Engineer',
-      institution: 'Google Cloud',
-      year: '2024',
-      icon: '/logos/google-cloud-storage.png',
-      link: '/Certificates/Google_Associate_Cloud_Engineer_Certificate.pdf',
+      name: "Google Associate Cloud Engineer",
+      institution: "Google Cloud",
+      year: "2024",
+      icon: "/logos/google-cloud-storage.png",
+      link: "/Certificates/Google_Associate_Cloud_Engineer_Certificate.pdf",
     },
     {
-      name: 'AWS Academy Introduction to Cloud',
-      institution: 'Amazon',
-      year: '2024',
-      icon: '/logos/AWS-Logo.png',
-      link: '/Certificates/AWS Academy Introduction to Cloud.pdf',
+      name: "AWS Academy Introduction to Cloud",
+      institution: "Amazon",
+      year: "2024",
+      icon: "/logos/AWS-Logo.png",
+      link: "/Certificates/AWS Academy Introduction to Cloud.pdf",
     },
     {
-      name: 'Career Essentials in Generative AI',
-      institution: 'Microsoft & LinkedIn',
-      year: '2024',
-      icon: '/logos/linkedin-learning-logo.jpg',
-      link: '/Certificates/Career Essentials in Generative AI.pdf',
+      name: "Career Essentials in Generative AI",
+      institution: "Microsoft & LinkedIn",
+      year: "2024",
+      icon: "/logos/linkedin-learning-logo.jpg",
+      link: "/Certificates/Career Essentials in Generative AI.pdf",
     },
     {
-      name: 'Google AI Essentials',
-      institution: 'Coursera',
-      year: '2024',
-      icon: '/logos/coursera logo.svg',
-      link: '/Certificates/Google AI Essentials.pdf',
+      name: "Google AI Essentials",
+      institution: "Coursera",
+      year: "2024",
+      icon: "/logos/coursera logo.svg",
+      link: "/Certificates/Google AI Essentials.pdf",
     },
     {
-      name: 'What is Generative AI?',
-      institution: 'LinkedIn Learning',
-      year: '2024',
-      icon: '/logos/linkedin-learning-logo.jpg',
-      link: '/Certificates/What is Generative AI.pdf',
+      name: "What is Generative AI?",
+      institution: "LinkedIn Learning",
+      year: "2024",
+      icon: "/logos/linkedin-learning-logo.jpg",
+      link: "/Certificates/What is Generative AI.pdf",
     },
     {
-      name: 'Data Manipulation with pandas',
-      institution: 'DataCamp',
-      year: '2023',
-      icon: '/logos/DC.png',
-      link: '/Certificates/Data Manipulation with pandas.pdf',
+      name: "Data Manipulation with pandas",
+      institution: "DataCamp",
+      year: "2023",
+      icon: "/logos/DC.png",
+      link: "/Certificates/Data Manipulation with pandas.pdf",
     },
     {
-      name: 'Value Added Course By SAP',
-      institution: 'SAP & Edunet',
-      year: '2023',
-      icon: '/',
-      link: '/Certificates/Value Added Course By SAP.pdf',
+      name: "Value Added Course By SAP",
+      institution: "SAP & Edunet",
+      year: "2023",
+      icon: "/",
+      link: "/Certificates/Value Added Course By SAP.pdf",
     },
     {
-      name: 'Joining Data in SQL',
-      institution: 'DataCamp',
-      year: '2023',
-      icon: '/logos/DC.png',
-      link: '/Certificates/Joining Data in SQL.pdf',
+      name: "Joining Data in SQL",
+      institution: "DataCamp",
+      year: "2023",
+      icon: "/logos/DC.png",
+      link: "/Certificates/Joining Data in SQL.pdf",
     },
     {
-      name: 'Introduction to Python',
-      institution: 'DataCamp',
-      year: '2023',
-      icon: '/logos/DC.png',
-      link: '/Certificates/Introduction to Python.pdf',
+      name: "Introduction to Python",
+      institution: "DataCamp",
+      year: "2023",
+      icon: "/logos/DC.png",
+      link: "/Certificates/Introduction to Python.pdf",
     },
     {
-      name: 'Android App Development',
-      institution: 'Internshala',
-      year: '2022',
-      icon: '/logos/internshala-logo.jpg',
-      link: '/Certificates/Android App Development.pdf',
+      name: "Android App Development",
+      institution: "Internshala",
+      year: "2022",
+      icon: "/logos/internshala-logo.jpg",
+      link: "/Certificates/Android App Development.pdf",
     },
     {
-      name: 'Maharashtra State Certificate in IT',
-      institution: 'MS-CIT',
-      year: '2019',
-      icon: '/logos/logo-mscit.png',
-      link: '/Certificates/Maharashtra State Certificate in IT.pdf',
+      name: "Maharashtra State Certificate in IT",
+      institution: "MS-CIT",
+      year: "2019",
+      icon: "/logos/logo-mscit.png",
+      link: "/Certificates/Maharashtra State Certificate in IT.pdf",
     },
   ];
 
-  // Continuous learning skill tags
+  // Continuous learning skill tags with tooltip
   const continuousLearningSkills = [
-    { name: 'Testing Framework', icon: <BookOpen size={20} /> },
-    { name: 'Quality Assurance', icon: <Award size={20} /> },
-    { name: 'Cloud Technologies', icon: <Globe size={20} /> },
-    { name: 'Development Process', icon: <Code size={20} /> },
-    { name: 'Data Science', icon: <Database size={20} /> },
-    { name: 'Certification', icon: <GraduationCap size={20} /> },
-    { name: 'Artificial Intelligence', icon: <Brain size={20} /> },
-    { name: 'Academic Growth', icon: <BookOpen size={20} /> },
+    { name: "Testing Framework", icon: <BookOpen size={20} /> },
+    { name: "Quality Assurance", icon: <Award size={20} /> },
+    { name: "Cloud Technologies", icon: <Globe size={20} /> },
+    { name: "Development Process", icon: <Code size={20} /> },
+    { name: "Data Science", icon: <Database size={20} /> },
+    { name: "Certification", icon: <GraduationCap size={20} /> },
+    { name: "Artificial Intelligence", icon: <Brain size={20} /> },
+    { name: "Academic Growth", icon: <BookOpen size={20} /> },
   ];
 
   // Highlighted areas with tooltip info
   const highlightedAreas = [
     {
-      name: 'Advanced Testing Frameworks',
-      description: 'Covers Selenium, Cypress, Playwright, and other automation frameworks.',
+      name: "Advanced Testing Frameworks",
+      description: "Covers Selenium, Cypress, Playwright, and other automation frameworks.",
     },
     {
-      name: 'AI in Software Testing',
-      description: 'Applying ML/AI for defect prediction, test optimization, and automation.',
+      name: "AI in Software Testing",
+      description: "Applying ML/AI for defect prediction, test optimization, and automation.",
     },
     {
-      name: 'Cloud Testing Strategies',
-      description: 'Testing apps in cloud platforms like AWS, Azure, and GCP.',
+      name: "Cloud Testing Strategies",
+      description: "Testing apps in cloud platforms like AWS, Azure, and GCP.",
     },
     {
-      name: 'Performance Engineering',
-      description: 'Load, stress, and scalability testing to ensure system reliability.',
+      name: "Performance Engineering",
+      description: "Load, stress, and scalability testing to ensure system reliability.",
     },
     {
-      name: 'API Security Testing',
-      description: 'OWASP practices, Postman, and BurpSuite for secure APIs.',
+      name: "API Security Testing",
+      description: "OWASP practices, Postman, and BurpSuite for secure APIs.",
     },
   ];
 
@@ -180,8 +179,7 @@ const EducationSection: React.FC = () => {
                 {educationData.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div
-                      className={`w-12 h-12 ${iconColors[index % iconColors.length]} 
-                      rounded-xl flex items-center justify-center flex-shrink-0`}
+                      className={`w-12 h-12 ${iconColors[index % iconColors.length]} rounded-xl flex items-center justify-center flex-shrink-0`}
                     >
                       <GraduationCap className="text-white" size={20} />
                     </div>
@@ -190,14 +188,14 @@ const EducationSection: React.FC = () => {
                     <div className="flex-1 bg-white rounded-xl p-6 shadow-md border border-gray-100">
                       <h4 className="font-bold text-lg text-gray-800 mb-1">{item.degree}</h4>
 
-                      {/* Institution with favicon */}
+                      {/* ✅ Institution name with favicon and hyperlink */}
                       <div className="flex items-center gap-2 mb-2">
                         <img
                           src={getFaviconUrl(item.url)}
                           alt={item.institution}
                           className="w-5 h-5 rounded"
                           onError={(e) => {
-                            e.currentTarget.src = '/default-favicon.png';
+                            e.currentTarget.src = "/default-favicon.png"; // fallback icon
                           }}
                         />
                         <a
@@ -276,72 +274,54 @@ const EducationSection: React.FC = () => {
               LinkedIn Learning, and attending online conferences.
             </p>
 
-            {/* Skills Grid */}
+            {/* Skills Grid with hover tooltips */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {continuousLearningSkills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl p-4 text-center shadow-sm border border-emerald-100 
-                  transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
-                >
-                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-emerald-600">
-                    {skill.icon}
+                <div key={index} className="relative group">
+                  <div
+                    className="bg-white rounded-xl p-4 text-center shadow-sm border border-emerald-100 
+                    transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
+                  >
+                    <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-emerald-600">
+                      {skill.icon}
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">{skill.name}</p>
                   </div>
-                  <p className="text-sm font-medium text-gray-700">{skill.name}</p>
+
+                  {/* Tooltip for each skill */}
+                  <div
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-gray-800 text-white 
+                    rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
+                    transition-all duration-300 ease-out z-10"
+                  >
+                    {(() => {
+                      switch (skill.name) {
+                        case "Testing Framework":
+                          return "Covers JUnit, TestNG, Selenium, Cypress, and Playwright for automation.";
+                        case "Quality Assurance":
+                          return "Focuses on software quality processes, test planning, and bug tracking.";
+                        case "Cloud Technologies":
+                          return "Learn AWS, Azure, and GCP basics, including compute and storage.";
+                        case "Development Process":
+                          return "Agile, Scrum, CI/CD pipelines, and DevOps practices.";
+                        case "Data Science":
+                          return "Python, Pandas, ML basics, and visualization tools.";
+                        case "Certification":
+                          return "ISTQB, AWS, Azure, and career-boosting certifications.";
+                        case "Artificial Intelligence":
+                          return "Intro to AI, ML, NLP, and real-world AI-powered apps.";
+                        case "Academic Growth":
+                          return "Research, projects, publishing, and continuous learning.";
+                        default:
+                          return "";
+                      }
+                    })()}
+                  </div>
                 </div>
               ))}
             </div>
 
-{/* Skills Grid with hover tooltips */}
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-  {continuousLearningSkills.map((skill, index) => (
-    <div key={index} className="relative group">
-      <div
-        className="bg-white rounded-xl p-4 text-center shadow-sm border border-emerald-100 
-        transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
-      >
-        <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-emerald-600">
-          {skill.icon}
-        </div>
-        <p className="text-sm font-medium text-gray-700">{skill.name}</p>
-      </div>
-
-      {/* Tooltip for each skill */}
-      <div
-        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-gray-800 text-white 
-        rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
-        transition-all duration-300 ease-out z-10"
-      >
-        {(() => {
-          switch (skill.name) {
-            case 'Testing Framework':
-              return 'Covers JUnit, TestNG, Selenium, Cypress, and Playwright for automation.';
-            case 'Quality Assurance':
-              return 'Focuses on software quality processes, test planning, and bug tracking.';
-            case 'Cloud Technologies':
-              return 'Learn AWS, Azure, and GCP basics, including compute and storage.';
-            case 'Development Process':
-              return 'Agile, Scrum, CI/CD pipelines, and DevOps practices.';
-            case 'Data Science':
-              return 'Python, Pandas, ML basics, and visualization tools.';
-            case 'Certification':
-              return 'ISTQB, AWS, Azure, and career-boosting certifications.';
-            case 'Artificial Intelligence':
-              return 'Intro to AI, ML, NLP, and real-world AI-powered apps.';
-            case 'Academic Growth':
-              return 'Research, projects, publishing, and continuous learning.';
-            default:
-              return '';
-          }
-        })()}
-      </div>
-    </div>
-  ))}
-</div>
-
-
-
-            {/* Highlighted areas with dynamic tooltip */}
+            {/* Highlighted areas with tooltip info */}
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
                 <div key={index} className="relative group">
@@ -349,8 +329,8 @@ const EducationSection: React.FC = () => {
                     • {area.name}
                   </span>
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white shadow-lg 
-                    rounded-lg text-gray-600 text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white shadow-lg rounded-lg text-gray-600 text-sm 
+                    opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
                     transition-all duration-300 ease-out z-10"
                   >
                     {area.description}
