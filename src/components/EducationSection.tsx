@@ -292,6 +292,55 @@ const EducationSection: React.FC = () => {
               ))}
             </div>
 
+{/* Skills Grid with hover tooltips */}
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+  {continuousLearningSkills.map((skill, index) => (
+    <div key={index} className="relative group">
+      <div
+        className="bg-white rounded-xl p-4 text-center shadow-sm border border-emerald-100 
+        transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
+      >
+        <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-emerald-600">
+          {skill.icon}
+        </div>
+        <p className="text-sm font-medium text-gray-700">{skill.name}</p>
+      </div>
+
+      {/* Tooltip for each skill */}
+      <div
+        className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-gray-800 text-white 
+        rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
+        transition-all duration-300 ease-out z-10"
+      >
+        {(() => {
+          switch (skill.name) {
+            case 'Testing Framework':
+              return 'Covers JUnit, TestNG, Selenium, Cypress, and Playwright for automation.';
+            case 'Quality Assurance':
+              return 'Focuses on software quality processes, test planning, and bug tracking.';
+            case 'Cloud Technologies':
+              return 'Learn AWS, Azure, and GCP basics, including compute and storage.';
+            case 'Development Process':
+              return 'Agile, Scrum, CI/CD pipelines, and DevOps practices.';
+            case 'Data Science':
+              return 'Python, Pandas, ML basics, and visualization tools.';
+            case 'Certification':
+              return 'ISTQB, AWS, Azure, and career-boosting certifications.';
+            case 'Artificial Intelligence':
+              return 'Intro to AI, ML, NLP, and real-world AI-powered apps.';
+            case 'Academic Growth':
+              return 'Research, projects, publishing, and continuous learning.';
+            default:
+              return '';
+          }
+        })()}
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
             {/* Highlighted areas with dynamic tooltip */}
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
