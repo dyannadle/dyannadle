@@ -1,4 +1,3 @@
-
 import React from 'react';
 import RevealAnimation from './ui/RevealAnimation';
 import SkillsList from './skills/SkillsList';
@@ -12,12 +11,16 @@ import {
 
 const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-indigo-50/40 to-purple-50/30 relative overflow-hidden">
+    <section 
+      id="skills"
+      className="relative min-h-screen flex items-center bg-white"
+    >
       {/* Animated background elements */}
       <div className="absolute top-10 left-1/4 w-24 h-24 bg-indigo-200/20 rounded-full blur-2xl animate-float"></div>
       <div className="absolute bottom-10 right-1/4 w-20 h-20 bg-purple-200/20 rounded-full blur-2xl animate-float animation-delay-300"></div>
       <div className="absolute top-1/2 left-10 w-16 h-16 bg-blue-200/20 rounded-full blur-xl animate-float animation-delay-600"></div>
-      <div className="section-container">
+
+      <div className="section-container relative z-10">
         <RevealAnimation>
           <h2 className="section-title text-center">My Skills</h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-6 rounded-full"></div>
@@ -40,9 +43,11 @@ const SkillsSection: React.FC = () => {
           </RevealAnimation>
 
           <RevealAnimation animation="fade-in-left" delay={200}>
-            <h3 className="text-2xl font-bold mb-6">Skill Categories</h3>
-            <SkillCategories categories={skillCategories} />
-            <ApproachSection />
+            <div>
+              <h3 className="text-2xl font-bold mb-6">Skill Categories</h3>
+              <SkillCategories categories={skillCategories} />
+              <ApproachSection />
+            </div>
           </RevealAnimation>
         </div>
       </div>

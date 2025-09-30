@@ -145,7 +145,9 @@ const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-slate-50 to-white">
+    <section id="projects"
+  className="min-h-screen flex items-center bg-gradient-to-br from-indigo-100 via-sky-50 to-cyan-100"
+>
       <div className="section-container">
 
         {/* Modal */}
@@ -220,6 +222,8 @@ const ProjectsSection: React.FC = () => {
                   GitHub
                 </a>
               )}
+import SectionWrapper from "@/components/SectionWrapper";
+
 
               {/* Paper Published Link (if exists) */}
               {modalProject.paperPublished && (

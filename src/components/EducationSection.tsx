@@ -12,14 +12,11 @@ import {
 } from "lucide-react";
 
 const EducationSection: React.FC = () => {
-  // Colors for icons in education timeline
   const iconColors = ["bg-purple-500", "bg-emerald-500", "bg-blue-500", "bg-orange-500"];
 
-  // Function to fetch favicon dynamically based on institution URL
   const getFaviconUrl = (url: string): string =>
     `https://www.google.com/s2/favicons?domain=${url}&sz=32`;
 
-  // Certification list
   const certifications = [
     {
       name: "Certified Software Tester",
@@ -114,7 +111,6 @@ const EducationSection: React.FC = () => {
     },
   ];
 
-  // Continuous learning skill tags with tooltip
   const continuousLearningSkills = [
     { name: "Testing Framework", icon: <BookOpen size={20} /> },
     { name: "Quality Assurance", icon: <Award size={20} /> },
@@ -126,7 +122,6 @@ const EducationSection: React.FC = () => {
     { name: "Academic Growth", icon: <BookOpen size={20} /> },
   ];
 
-  // Highlighted areas with tooltip info
   const highlightedAreas = [
     {
       name: "Advanced Testing Frameworks",
@@ -151,7 +146,10 @@ const EducationSection: React.FC = () => {
   ];
 
   return (
-    <section id="education" className="py-20 bg-gradient-to-b from-slate-50 to-white">
+    <section
+      id="education"
+      className="min-h-screen flex items-center bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100"
+    >
       <div className="section-container">
         {/* ---------- Header ---------- */}
         <RevealAnimation>
@@ -185,17 +183,19 @@ const EducationSection: React.FC = () => {
                     </div>
 
                     {/* Card for each education entry */}
-                    <div className="flex-1 bg-white rounded-xl p-6 shadow-md border border-gray-100">
+                    <div
+                      className="flex-1 bg-white rounded-xl p-6 shadow-md border border-gray-100 
+                      hover:shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    >
                       <h4 className="font-bold text-lg text-gray-800 mb-1">{item.degree}</h4>
 
-                      {/* ✅ Institution name with favicon and hyperlink */}
                       <div className="flex items-center gap-2 mb-2">
                         <img
                           src={getFaviconUrl(item.url)}
                           alt={item.institution}
                           className="w-5 h-5 rounded"
                           onError={(e) => {
-                            e.currentTarget.src = "/default-favicon.png"; // fallback icon
+                            e.currentTarget.src = "/default-favicon.png";
                           }}
                         />
                         <a
@@ -209,7 +209,13 @@ const EducationSection: React.FC = () => {
                       </div>
 
                       <p className="text-sm text-gray-500 mb-3">{item.duration}</p>
-                      <p className="text-gray-600 text-sm leading-relaxed">{item.details}</p>
+
+                      {/* Render each detail as a bullet list */}
+                      <ul className="list-disc list-inside space-y-1 text-gray-600 text-sm">
+                        {item.details.map((detail: string, i: number) => (
+                          <li key={i}>{detail}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 ))}
@@ -274,7 +280,6 @@ const EducationSection: React.FC = () => {
               LinkedIn Learning, and attending online conferences.
             </p>
 
-            {/* Skills Grid with hover tooltips */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {continuousLearningSkills.map((skill, index) => (
                 <div key={index} className="relative group">
@@ -288,7 +293,7 @@ const EducationSection: React.FC = () => {
                     <p className="text-sm font-medium text-gray-700">{skill.name}</p>
                   </div>
 
-                  {/* Tooltip for each skill */}
+                  {/* Tooltip */}
                   <div
                     className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-gray-800 text-white 
                     rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
@@ -321,7 +326,6 @@ const EducationSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Highlighted areas with tooltip info */}
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
                 <div key={index} className="relative group">
