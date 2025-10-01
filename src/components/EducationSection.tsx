@@ -148,8 +148,7 @@ const EducationSection: React.FC = () => {
   return (
     <section
       id="education"
-      className="min-h-screen flex items-center"
-      style={{ background: 'var(--gradient-primary)' }}
+      className="min-h-screen flex items-center bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50"
     >
       <div className="section-container">
         {/* ---------- Header ---------- */}
@@ -176,17 +175,17 @@ const EducationSection: React.FC = () => {
 
               <div className="space-y-6">
                 {educationData.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4">
+                  <div key={index} className="flex items-start gap-4 animate-fade-in-right" style={{ animationDelay: `${index * 100}ms` }}>
                     <div
-                      className={`w-12 h-12 ${iconColors[index % iconColors.length]} rounded-xl flex items-center justify-center flex-shrink-0`}
+                      className={`w-12 h-12 ${iconColors[index % iconColors.length]} rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 hover:scale-110 hover:rotate-6 shadow-lg`}
                     >
                       <GraduationCap className="text-white" size={20} />
                     </div>
 
                     {/* Card for each education entry */}
                     <div
-                      className="flex-1 bg-card rounded-xl p-6 shadow-md border border-border 
-                      hover:shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      className="flex-1 bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-border 
+                      hover:shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                     >
                       <h4 className="font-bold text-lg text-card-foreground mb-1">{item.degree}</h4>
 
@@ -237,26 +236,27 @@ const EducationSection: React.FC = () => {
                 </span>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
                 {certifications.map((cert, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-4 bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-md transition-shadow"
+                    className="flex items-center gap-4 bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:scale-102 animate-fade-in-left"
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md" />
+                    <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md transition-transform duration-300 hover:scale-110" />
                     <div className="flex-1">
                       <a
                         href={cert.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-semibold text-card-foreground text-sm hover:text-primary"
+                        className="font-semibold text-card-foreground text-sm hover:text-primary transition-colors duration-200 story-link"
                       >
                         {cert.name}
                       </a>
                       <p className="text-muted-foreground text-xs">{cert.institution}</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-muted-foreground text-xs">{cert.year}</span>
+                      <span className="text-muted-foreground text-xs font-medium">{cert.year}</span>
                     </div>
                   </div>
                 ))}
@@ -267,9 +267,9 @@ const EducationSection: React.FC = () => {
 
         {/* ---------- Continuous Learning Section ---------- */}
         <RevealAnimation animation="fade-in-up" delay={400}>
-          <div className="mt-16 glass rounded-2xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+          <div className="mt-16 bg-gradient-to-r from-purple-50 via-pink-50 to-blue-50 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all duration-500">
+            <div className="flex items-center gap-3 mb-6 animate-fade-in">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center animate-pulse">
                 <Brain className="text-primary-foreground" size={20} />
               </div>
               <h3 className="text-2xl font-bold text-foreground">Continuous Learning</h3>
@@ -283,15 +283,15 @@ const EducationSection: React.FC = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {continuousLearningSkills.map((skill, index) => (
-                <div key={index} className="relative group">
+                <div key={index} className="relative group animate-zoom-in" style={{ animationDelay: `${index * 100}ms` }}>
                   <div
-                    className="bg-card rounded-xl p-4 text-center shadow-sm border border-border 
-                    transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
+                    className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center shadow-md border border-border 
+                    transition-all duration-300 hover:scale-110 hover:shadow-xl hover:-translate-y-2 cursor-pointer hover:border-primary/50"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary group-hover:rotate-12 transition-transform duration-300">
                       {skill.icon}
                     </div>
-                    <p className="text-sm font-medium text-card-foreground">{skill.name}</p>
+                    <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors duration-200">{skill.name}</p>
                   </div>
 
                   {/* Tooltip */}
@@ -329,12 +329,12 @@ const EducationSection: React.FC = () => {
 
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
-                <div key={index} className="relative group">
-                  <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-medium cursor-pointer">
+                <div key={index} className="relative group animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+                  <span className="bg-gradient-to-r from-primary/20 to-secondary/20 text-primary px-3 py-1 rounded-full text-sm font-medium cursor-pointer hover:scale-105 hover:shadow-md transition-all duration-300 inline-block">
                     • {area.name}
                   </span>
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-card shadow-lg rounded-lg text-muted-foreground text-sm 
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white/95 backdrop-blur-sm shadow-xl rounded-lg text-muted-foreground text-sm border border-primary/20
                     opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
                     transition-all duration-300 ease-out z-10"
                   >

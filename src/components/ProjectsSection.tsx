@@ -146,8 +146,7 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section id="projects"
-  className="min-h-screen flex items-center"
-  style={{ background: 'var(--gradient-secondary)' }}
+  className="min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
 >
       <div className="section-container">
 
@@ -252,8 +251,8 @@ const ProjectsSection: React.FC = () => {
           {filters.map((filter) => (
             <button
               key={filter}
-              className={`capitalize px-4 py-1 rounded-full border-2 transition-colors duration-300
-                ${activeFilter === filter ? 'bg-primary text-primary-foreground border-primary font-semibold' : 'text-foreground border-primary hover:bg-primary hover:text-primary-foreground'}`}
+              className={`capitalize px-4 py-1 rounded-full border-2 transition-all duration-300 transform hover:scale-105
+                ${activeFilter === filter ? 'bg-primary text-primary-foreground border-primary font-semibold shadow-lg animate-pulse' : 'text-foreground border-primary/50 hover:bg-primary hover:text-primary-foreground hover:shadow-md'}`}
               onClick={() => setActiveFilter(filter)}
               aria-pressed={activeFilter === filter}
             >
@@ -266,19 +265,19 @@ const ProjectsSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {filteredProjects.map((project, idx) => (
             <RevealAnimation key={project.title}>
-              <div className="bg-white rounded-xl shadow-lg relative overflow-hidden group cursor-pointer">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg relative overflow-hidden group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                 {/* Image */}
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-48 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
                   loading="lazy"
                 />
 
                 {/* Favorite button */}
                 <button
                   onClick={() => toggleFavorite(project.title)}
-                  className="absolute top-3 right-3 bg-card p-2 rounded-full shadow-md hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 hover:rotate-12"
                   aria-label={`Toggle favorite for ${project.title}`}
                 >
                   {favoritedProjects.includes(project.title) ? (
