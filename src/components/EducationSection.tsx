@@ -148,14 +148,15 @@ const EducationSection: React.FC = () => {
   return (
     <section
       id="education"
-      className="min-h-screen flex items-center bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100"
+      className="min-h-screen flex items-center"
+      style={{ background: 'var(--gradient-primary)' }}
     >
       <div className="section-container">
         {/* ---------- Header ---------- */}
         <RevealAnimation>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Academic Journey</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Academic Journey</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               My educational background and professional certifications that have built the foundation of
               my expertise in software testing and quality assurance.
             </p>
@@ -167,10 +168,10 @@ const EducationSection: React.FC = () => {
           <RevealAnimation animation="fade-in-right">
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                  <GraduationCap className="text-white" size={20} />
+                <div className="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center">
+                  <GraduationCap className="text-secondary-foreground" size={20} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">Education</h3>
+                <h3 className="text-2xl font-bold text-foreground">Education</h3>
               </div>
 
               <div className="space-y-6">
@@ -184,10 +185,10 @@ const EducationSection: React.FC = () => {
 
                     {/* Card for each education entry */}
                     <div
-                      className="flex-1 bg-white rounded-xl p-6 shadow-md border border-gray-100 
+                      className="flex-1 bg-card rounded-xl p-6 shadow-md border border-border 
                       hover:shadow-xl hover:scale-105 transition-transform duration-300 cursor-pointer"
                     >
-                      <h4 className="font-bold text-lg text-gray-800 mb-1">{item.degree}</h4>
+                      <h4 className="font-bold text-lg text-card-foreground mb-1">{item.degree}</h4>
 
                       <div className="flex items-center gap-2 mb-2">
                         <img
@@ -202,16 +203,16 @@ const EducationSection: React.FC = () => {
                           href={item.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-medium text-blue-600 hover:underline"
+                          className="font-medium text-primary hover:underline"
                         >
                           {item.institution}
                         </a>
                       </div>
 
-                      <p className="text-sm text-gray-500 mb-3">{item.duration}</p>
+                      <p className="text-sm text-muted-foreground mb-3">{item.duration}</p>
 
                       {/* Render each detail as a bullet list */}
-                      <ul className="list-disc list-inside space-y-1 text-gray-600 text-sm">
+                      <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
                         {item.details.map((detail: string, i: number) => (
                           <li key={i}>{detail}</li>
                         ))}
@@ -227,11 +228,11 @@ const EducationSection: React.FC = () => {
           <RevealAnimation animation="fade-in-left" delay={200}>
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                  <Award className="text-white" size={20} />
+                <div className="w-8 h-8 bg-success rounded-lg flex items-center justify-center">
+                  <Award className="text-success-foreground" size={20} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800">Professional Certifications</h3>
-                <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-medium">
+                <h3 className="text-2xl font-bold text-foreground">Professional Certifications</h3>
+                <span className="bg-success/10 text-success px-3 py-1 rounded-full text-sm font-medium">
                   {certifications.length} Certifications
                 </span>
               </div>
@@ -240,7 +241,7 @@ const EducationSection: React.FC = () => {
                 {certifications.map((cert, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-4 bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                    className="flex items-center gap-4 bg-card rounded-lg p-4 shadow-sm border border-border hover:shadow-md transition-shadow"
                   >
                     <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md" />
                     <div className="flex-1">
@@ -248,14 +249,14 @@ const EducationSection: React.FC = () => {
                         href={cert.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-semibold text-gray-800 text-sm hover:text-emerald-600"
+                        className="font-semibold text-card-foreground text-sm hover:text-primary"
                       >
                         {cert.name}
                       </a>
-                      <p className="text-gray-500 text-xs">{cert.institution}</p>
+                      <p className="text-muted-foreground text-xs">{cert.institution}</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-gray-400 text-xs">{cert.year}</span>
+                      <span className="text-muted-foreground text-xs">{cert.year}</span>
                     </div>
                   </div>
                 ))}
@@ -266,15 +267,15 @@ const EducationSection: React.FC = () => {
 
         {/* ---------- Continuous Learning Section ---------- */}
         <RevealAnimation animation="fade-in-up" delay={400}>
-          <div className="mt-16 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-2xl p-8">
+          <div className="mt-16 glass rounded-2xl p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
-                <Brain className="text-white" size={20} />
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <Brain className="text-primary-foreground" size={20} />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800">Continuous Learning</h3>
+              <h3 className="text-2xl font-bold text-foreground">Continuous Learning</h3>
             </div>
 
-            <p className="text-gray-600 mb-8 leading-relaxed">
+            <p className="text-muted-foreground mb-8 leading-relaxed">
               I am committed to continuous learning and professional development, regularly updating
               my skills and knowledge through various educational platforms including Coursera, DataCamp,
               LinkedIn Learning, and attending online conferences.
@@ -284,18 +285,18 @@ const EducationSection: React.FC = () => {
               {continuousLearningSkills.map((skill, index) => (
                 <div key={index} className="relative group">
                   <div
-                    className="bg-white rounded-xl p-4 text-center shadow-sm border border-emerald-100 
+                    className="bg-card rounded-xl p-4 text-center shadow-sm border border-border 
                     transition-transform duration-300 hover:scale-105 hover:shadow-md cursor-pointer"
                   >
-                    <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-3 text-emerald-600">
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary">
                       {skill.icon}
                     </div>
-                    <p className="text-sm font-medium text-gray-700">{skill.name}</p>
+                    <p className="text-sm font-medium text-card-foreground">{skill.name}</p>
                   </div>
 
                   {/* Tooltip */}
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-gray-800 text-white 
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-foreground text-background 
                     rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
                     transition-all duration-300 ease-out z-10"
                   >
@@ -329,11 +330,11 @@ const EducationSection: React.FC = () => {
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
               {highlightedAreas.map((area, index) => (
                 <div key={index} className="relative group">
-                  <span className="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-medium cursor-pointer">
+                  <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-medium cursor-pointer">
                     • {area.name}
                   </span>
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white shadow-lg rounded-lg text-gray-600 text-sm 
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-card shadow-lg rounded-lg text-muted-foreground text-sm 
                     opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
                     transition-all duration-300 ease-out z-10"
                   >

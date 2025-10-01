@@ -146,7 +146,8 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section id="projects"
-  className="min-h-screen flex items-center bg-gradient-to-br from-indigo-100 via-sky-50 to-cyan-100"
+  className="min-h-screen flex items-center"
+  style={{ background: 'var(--gradient-secondary)' }}
 >
       <div className="section-container">
 
@@ -166,7 +167,7 @@ const ProjectsSection: React.FC = () => {
             >
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl font-bold"
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-3xl font-bold"
                 aria-label="Close modal"
               >
                 ×
@@ -181,13 +182,13 @@ const ProjectsSection: React.FC = () => {
                 />
               </div>
 
-              <h2 id="modal-title" className="text-2xl font-bold mb-4">{modalProject.title}</h2>
-              <p className="mb-4">{modalProject.description}</p>
+              <h2 id="modal-title" className="text-2xl font-bold mb-4 text-foreground">{modalProject.title}</h2>
+              <p className="mb-4 text-muted-foreground">{modalProject.description}</p>
 
               {/* Show Full Description Button */}
               <button
                 onClick={handleDescriptionClick}
-                className="text-emerald-600 hover:text-emerald-700 font-medium mb-4"
+                className="text-primary hover:text-primary/80 font-medium mb-4"
               >
                 {fullDescription ? 'Show Less' : 'Show Full Description'}
               </button>
@@ -215,15 +216,13 @@ const ProjectsSection: React.FC = () => {
                   href={modalProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center mt-6 gap-2 hover:text-emerald-700 text-emerald-600 font-semibold"
+                  className="flex items-center mt-6 gap-2 hover:text-primary text-primary/80 font-semibold"
                   aria-label={`View GitHub repository for ${modalProject.title}`}
                 >
                   <Github size={24} />
                   GitHub
                 </a>
               )}
-import SectionWrapper from "@/components/SectionWrapper";
-
 
               {/* Paper Published Link (if exists) */}
               {modalProject.paperPublished && (
@@ -242,8 +241,8 @@ import SectionWrapper from "@/components/SectionWrapper";
         )}
 
         {/* Header */}
-        <h2 className="section-title">Projects</h2>
-        <p className="text-gray-600 max-w-4xl mx-auto text-center mb-8 leading-relaxed">
+        <h2 className="section-title text-foreground">Projects</h2>
+        <p className="text-muted-foreground max-w-4xl mx-auto text-center mb-8 leading-relaxed">
           Showcasing my projects ranging from AI/ML, automation, game development, and manual testing.
           You can filter by category or favorites.
         </p>
@@ -253,8 +252,8 @@ import SectionWrapper from "@/components/SectionWrapper";
           {filters.map((filter) => (
             <button
               key={filter}
-              className={`capitalize text-gray-800 px-4 py-1 rounded-full border-2 border-emerald-600 transition-colors duration-300
-                ${activeFilter === filter ? 'bg-emerald-600 text-white font-semibold' : 'hover:bg-emerald-600 hover:text-white'}`}
+              className={`capitalize px-4 py-1 rounded-full border-2 transition-colors duration-300
+                ${activeFilter === filter ? 'bg-primary text-primary-foreground border-primary font-semibold' : 'text-foreground border-primary hover:bg-primary hover:text-primary-foreground'}`}
               onClick={() => setActiveFilter(filter)}
               aria-pressed={activeFilter === filter}
             >
@@ -279,7 +278,7 @@ import SectionWrapper from "@/components/SectionWrapper";
                 {/* Favorite button */}
                 <button
                   onClick={() => toggleFavorite(project.title)}
-                  className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:bg-emerald-600 hover:text-white transition-colors"
+                  className="absolute top-3 right-3 bg-card p-2 rounded-full shadow-md hover:bg-primary hover:text-primary-foreground transition-colors"
                   aria-label={`Toggle favorite for ${project.title}`}
                 >
                   {favoritedProjects.includes(project.title) ? (
@@ -288,7 +287,7 @@ import SectionWrapper from "@/components/SectionWrapper";
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       stroke="none"
-                      className="w-6 h-6 text-emerald-600"
+                      className="w-6 h-6 text-primary"
                     >
                       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
@@ -308,22 +307,22 @@ import SectionWrapper from "@/components/SectionWrapper";
 
                 {/* Content */}
                 <div className="p-6" onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`}>
-                  <h3 className="text-xl font-bold mb-3 text-gray-800">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-foreground">{project.title}</h3>
+                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{project.description}</p>
 
-                  <h4 className="font-semibold mb-2">Tools:</h4>
-                  <ul className="flex flex-wrap gap-2 text-xs font-medium text-gray-600">
+                  <h4 className="font-semibold mb-2 text-foreground">Tools:</h4>
+                  <ul className="flex flex-wrap gap-2 text-xs font-medium">
                     {(showAllTools[idx] ? project.tools : project.tools.slice(0, 4)).map((tool, i) => (
                       <li
                         key={i}
-                        className="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg whitespace-nowrap"
+                        className="bg-primary/10 text-primary px-2 py-1 rounded-lg whitespace-nowrap"
                       >
                         {tool}
                       </li>
                     ))}
                     {project.tools.length > 4 && (
                       <button
-                        className="text-emerald-600 hover:text-emerald-700 ml-2 underline"
+                        className="text-primary hover:text-primary/80 ml-2 underline"
                         onClick={(e) => {
                           e.stopPropagation();
                           setShowAllTools((prev) => ({ ...prev, [idx]: !prev[idx] }));
