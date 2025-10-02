@@ -175,21 +175,22 @@ const ContactSection: React.FC = () => {
             Get in touch with me for opportunities or collaborations
           </p>
           
-          {/* Hire Me Button */}
-          <div className="flex justify-center mt-8 mb-4">
-            <RevealAnimation animation="zoom-in" delay={200}>
+          {/* CTA Buttons */}
+          <RevealAnimation animation="fade-in-up" delay={500}>
+            <div className="flex flex-wrap gap-4 justify-center">
               <a
-                href="https://www.linkedin.com/in/deepakyannadle/"
+                href="https://www.linkedin.com/in/deepak-yannadle-4319771a1//"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex gap-3 items-center py-4 px-12 text-white text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-xl transition-all duration-300 transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-110 animate-pulse"
+                className="flex gap-2 items-center py-3 px-8 text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg shadow-lg transition transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-xl hover:-translate-y-2 hover:scale-105 animate-pulse"
               >
-                <Send className="w-5 h-5" />
-                Hire Me Now
+                Hire Me
+                <ArrowRight size={18} className="ml-1" />
               </a>
-            </RevealAnimation>
-          </div>
-        </RevealAnimation>
+              <a
+                href="#contact"
+                className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+              >
 
         {/* form container */}
         <div className="mx-auto mt-12 max-w-3xl">
