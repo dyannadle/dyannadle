@@ -46,7 +46,7 @@ const AboutSection: React.FC = () => {
                   </a>
                 </div>
                 <p className="text-muted-foreground">
-                  Professional experience as a Software Tester at Quastech Solutions, specializing in manual testing, requirement analysis, test planning, and defect reporting for ERP systems. Skilled in creating comprehensive test documentation and ensuring software quality through meticulous testing methodologies.
+                  Professional experience as a Mobile Application Tester at Pivot DevOps, specializing in manual testing, test case design, and defect reporting for mobile applications. Skilled in creating comprehensive test documentation, executing regression and functional testing, and ensuring software quality through meticulous testing methodologies in an Agile environment.
                 </p>
                   </div>
                 </RevealAnimation>
@@ -78,7 +78,7 @@ const AboutSection: React.FC = () => {
                   Experienced in functional and integration testing, with expertise in bug tracking tools like JIRA.
                 </p>
                 <p className="text-muted-foreground mt-2">
-                  Currently expanding into automation testing, learning Selenium, PyTest, and other frameworks to enhance efficiency and test coverage.
+                  I have foundational knowledge in automation testing and am currently mastering Selenium, PyTest, and other advanced frameworks to enhance testing efficiency, scalability, and test coverage in modern software development.
                 </p>
                   </div>
                 </RevealAnimation>

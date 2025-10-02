@@ -26,13 +26,19 @@ const ExperienceSection: React.FC = () => {
   return (
     <section
       id="experience"
-      className="min-h-screen flex items-center bg-gradient-to-br from-green-100 via-emerald-50 to-green-200"
+      className="relative min-h-screen flex items-center bg-gradient-to-br from-green-100 via-emerald-50 to-green-200 overflow-hidden"
     >
-      <div className="section-container w-full text-center">
-        <RevealAnimation>
-          <h2 className="section-title">Professional Experience</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-6 rounded-full"></div>
-          <p className="section-subtitle mx-auto">
+      {/* Animated background elements */}
+      <div className="absolute top-10 left-1/4 w-32 h-32 bg-emerald-300/30 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-teal-300/30 rounded-full blur-2xl animate-float animation-delay-300"></div>
+      <div className="absolute top-1/2 left-10 w-24 h-24 bg-green-300/20 rounded-full blur-xl animate-float animation-delay-600"></div>
+      <div className="absolute top-1/3 right-10 w-20 h-20 bg-lime-300/20 rounded-full blur-xl animate-float animation-delay-900"></div>
+      
+      <div className="section-container w-full text-center relative z-10">
+        <RevealAnimation animation="zoom-in">
+          <h2 className="section-title bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 bg-clip-text text-transparent">Professional Experience</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-6 rounded-full animate-pulse"></div>
+          <p className="section-subtitle mx-auto text-gray-700">
             My professional journey in software testing and quality assurance
           </p>
         </RevealAnimation>
@@ -42,8 +48,8 @@ const ExperienceSection: React.FC = () => {
             <RevealAnimation key={index} animation="fade-in-up" delay={200}>
               <div
                 className="glass bg-gradient-to-br from-white/95 to-emerald-50/80 
-                p-8 rounded-2xl shadow-md border border-emerald-100/50 
-                hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px]"
+                p-8 rounded-2xl shadow-lg border border-emerald-100/50 
+                hover:shadow-2xl transition-all duration-500 hover:translate-y-[-8px] hover:scale-[1.02] backdrop-blur-sm"
               >
                 {/* Header row */}
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">

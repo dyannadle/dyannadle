@@ -172,6 +172,7 @@
   animation: float 6s ease-in-out infinite;
 }
 
+/* Animation delays for float animation and others */
 .animation-delay-300 {
   animation-delay: 1s;
 }
@@ -180,8 +181,16 @@
   animation-delay: 1.5s;
 }
 
+.animation-delay-600 {
+  animation-delay: 1.8s;
+}
+
 .animation-delay-700 {
   animation-delay: 2s;
+}
+
+.animation-delay-900 {
+  animation-delay: 2.4s;
 }
 
 @keyframes fade-in-up {
@@ -393,13 +402,4 @@
 
 .glass::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #2563eb, #7c3aed);
-}
-
-/* Animation delays for float animation */
-.animation-delay-600 {
-  animation-delay: 1.8s;
-}
-
-.animation-delay-900 {
-  animation-delay: 2.4s;
 }

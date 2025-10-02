@@ -67,17 +67,26 @@ const HeroSection: React.FC = () => {
           <RevealAnimation animation="fade-in-up" delay={500}>
             <div className="flex flex-wrap gap-4 justify-center">
               <a
+                href="https://www.linkedin.com/in/deepakyannadle/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 items-center py-3 px-8 text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg shadow-lg transition transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-xl hover:-translate-y-2 hover:scale-105 animate-pulse"
+              >
+                Hire Me
+                <ArrowRight size={18} className="ml-1" />
+              </a>
+              <a
                 href="#contact"
-                className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1"
+                className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 Contact Me
-                <ArrowRight size={18} className="ml-1 animate-pulse" />
+                <ArrowRight size={18} className="ml-1" />
               </a>
               <a
                 href="https://github.com/dyannadle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1"
+                className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 <Github size={18} />
                 GitHub
@@ -86,14 +95,14 @@ const HeroSection: React.FC = () => {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1"
+                className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 <Download size={18} />
                 Download Resume
               </a>
               <a
                 href="#about"
-                className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1"
+                className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 Learn More
               </a>

@@ -170,10 +170,25 @@ const ContactSection: React.FC = () => {
           <h2 className="mb-2 text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-700 md:text-4xl">
             Contact Me
           </h2>
-          <div className="mx-auto mb-6 w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full" />
+          <div className="mx-auto mb-6 w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full animate-pulse" />
           <p className="mx-auto text-center section-subtitle">
             Get in touch with me for opportunities or collaborations
           </p>
+          
+          {/* Hire Me Button */}
+          <div className="flex justify-center mt-8 mb-4">
+            <RevealAnimation animation="zoom-in" delay={200}>
+              <a
+                href="https://www.linkedin.com/in/deepakyannadle/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex gap-3 items-center py-4 px-12 text-white text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-xl transition-all duration-300 transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-110 animate-pulse"
+              >
+                <Send className="w-5 h-5" />
+                Hire Me Now
+              </a>
+            </RevealAnimation>
+          </div>
         </RevealAnimation>
 
         {/* form container */}
