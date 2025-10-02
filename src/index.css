@@ -375,3 +375,31 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, hsl(var(--primary-variant)), hsl(var(--secondary-variant)));
 }
+
+/* Custom scrollbar for certifications section */
+.glass::-webkit-scrollbar {
+  width: 8px;
+}
+
+.glass::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.glass::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 10px;
+}
+
+.glass::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+}
+
+/* Animation delays for float animation */
+.animation-delay-600 {
+  animation-delay: 1.8s;
+}
+
+.animation-delay-900 {
+  animation-delay: 2.4s;
+}

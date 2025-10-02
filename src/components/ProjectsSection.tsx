@@ -266,13 +266,15 @@ const ProjectsSection: React.FC = () => {
           {filteredProjects.map((project, idx) => (
             <RevealAnimation key={project.title}>
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg relative overflow-hidden group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-                {/* Image */}
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
-                  loading="lazy"
-                />
+                {/* Image - Clickable */}
+                <div onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`} className="cursor-pointer">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
+                    loading="lazy"
+                  />
+                </div>
 
                 {/* Favorite button */}
                 <button

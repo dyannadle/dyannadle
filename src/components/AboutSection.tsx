@@ -41,10 +41,12 @@ const AboutSection: React.FC = () => {
                   <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
                     <Briefcase className="text-blue-600" size={20} />
                   </div>
-                  <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Experience</h3>
+                  <a href="#experience" className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 cursor-pointer">
+                    Experience
+                  </a>
                 </div>
                 <p className="text-muted-foreground">
-                  I've worked on projects involving Front Accounting ERP systems, creating detailed test plans, scenarios, and cases to ensure comprehensive testing.
+                  Professional experience as a Software Tester at Quastech Solutions, specializing in manual testing, requirement analysis, test planning, and defect reporting for ERP systems. Skilled in creating comprehensive test documentation and ensuring software quality through meticulous testing methodologies.
                 </p>
                   </div>
                 </RevealAnimation>

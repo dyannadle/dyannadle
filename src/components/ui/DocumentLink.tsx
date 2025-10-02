@@ -8,6 +8,7 @@ interface DocumentLinkProps {
   delay?: number;
   icon?: 'award' | 'external';
   className?: string;
+  logo?: string;
 }
 
 const DocumentLink: React.FC<DocumentLinkProps> = ({ 
@@ -15,7 +16,8 @@ const DocumentLink: React.FC<DocumentLinkProps> = ({
   url, 
   delay = 0, 
   icon = 'award',
-  className = '' 
+  className = '',
+  logo
 }) => {
   const IconComponent = icon === 'award' ? Award : ExternalLink;
 
@@ -25,11 +27,17 @@ const DocumentLink: React.FC<DocumentLinkProps> = ({
         href={url} 
         target="_blank" 
         rel="noopener noreferrer" 
-        className={`group bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl flex items-start border border-blue-100/50 hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-[1.02] hover:from-blue-100 hover:to-purple-100 ${className}`}
+        className={`group bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl flex items-start border border-blue-100/50 hover:shadow-xl transition-all duration-300 hover:translate-y-[-4px] hover:scale-[1.03] hover:from-blue-100 hover:to-purple-100 hover:border-blue-200 animate-fade-in ${className}`}
       >
-        <div className="mr-3 mt-1 p-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white group-hover:scale-110 transition-transform duration-300">
-          <IconComponent size={16} />
-        </div>
+        {logo ? (
+          <div className="mr-3 mt-1 w-10 h-10 flex items-center justify-center bg-white rounded-lg p-1.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+            <img src={logo} alt={`${name} logo`} className="w-full h-full object-contain" />
+          </div>
+        ) : (
+          <div className="mr-3 mt-1 p-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white group-hover:scale-110 transition-transform duration-300">
+            <IconComponent size={16} />
+          </div>
+        )}
         <div className="flex-1">
           <span className="font-medium text-gray-800 group-hover:text-blue-700 transition-colors duration-300">
             {name}

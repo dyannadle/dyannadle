@@ -13,7 +13,8 @@ const certifications = [
   {
     id: '2',
     name: 'GenAI Powered Data Analytics',
-    url: 'https://coursera.org/share/genai-data-analytics'
+    url: 'https://coursera.org/share/genai-data-analytics',
+    logo: '/logos/coursera logo.svg'
   },
   {
     id: '3',
@@ -48,7 +49,8 @@ const certifications = [
   {
     id: '9',
     name: 'Value Added Course By SAP & Edunet Foundation',
-    url: 'https://drive.google.com/file/d/1W3XMOJbD5yXVgNkZOgfIiXsosat9RL6L/view?usp=sharing'
+    url: 'https://drive.google.com/file/d/1W3XMOJbD5yXVgNkZOgfIiXsosat9RL6L/view?usp=sharing',
+    logo: '/logos/DC.png'
   },
   {
     id: '10',
@@ -63,7 +65,8 @@ const certifications = [
   {
     id: '12',
     name: 'Google AI Essentials',
-    url: 'https://coursera.org/share/be83f8383585447f5608a601680f8f05'
+    url: 'https://coursera.org/share/be83f8383585447f5608a601680f8f05',
+    logo: '/logos/coursera logo.svg'
   }
 ];
 
@@ -85,6 +88,7 @@ const CertificationsSection: React.FC = () => {
                 name={cert.name}
                 url={cert.url}
                 delay={300 + (index * 50)}
+                logo={cert.logo}
               />
             ))}
           </div>
