@@ -82,6 +82,31 @@ const AboutSection: React.FC = () => {
                 </p>
                   </div>
                 </RevealAnimation>
+                
+                <RevealAnimation animation="fade-in-up" delay={400}>
+                  <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
+                <div className="flex items-center mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center mr-3">
+                    <Database className="text-teal-600" size={20} />
+                  </div>
+                  <h3 className="text-xl font-semibold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">Soft Skills</h3>
+                </div>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start">
+                    <span className="text-teal-600 mr-2 font-bold">•</span>
+                    <span><strong>Communication:</strong> Clear and effective verbal and written communication with team members and stakeholders</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-teal-600 mr-2 font-bold">•</span>
+                    <span><strong>Team Collaboration:</strong> Working seamlessly in Agile teams to achieve common goals</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-teal-600 mr-2 font-bold">•</span>
+                    <span><strong>Problem Solving:</strong> Analytical mindset to identify root causes and propose effective solutions</span>
+                  </li>
+                </ul>
+                  </div>
+                </RevealAnimation>
               </div>
           </RevealAnimation>
         </div>

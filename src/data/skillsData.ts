@@ -4,6 +4,7 @@ export interface SkillItemType {
   name: string;
   level: number;
   description?: string;
+  version?: string;
 }
 
 export const technicalSkills: SkillItemType[] = [
@@ -24,6 +25,7 @@ export const technicalSkills: SkillItemType[] = [
     level: 80,
     description:
       "A popular tool for tracking bugs, managing projects, and handling agile workflows.",
+    version: "v9.x",
   },
   {
     name: "Basic JAVA",
@@ -54,18 +56,21 @@ export const technicalSkills: SkillItemType[] = [
     level: 70,
     description:
       "A powerful automation testing tool for web applications across different browsers.",
+    version: "v4.x",
   },
   {
     name: "Maven",
     level: 65,
     description:
       "A build automation and project management tool for Java-based applications.",
+    version: "v3.9.x",
   },
   {
     name: "Postman",
     level: 80,
     description:
       "A tool used for API development and testing, enabling sending requests and validating responses.",
+    version: "v11.x",
   },
   {
     name: "API Testing",
@@ -78,6 +83,7 @@ export const technicalSkills: SkillItemType[] = [
     level: 70,
     description:
       "A next-generation front end testing tool built for the modern web.",
+    version: "v13.x",
   },
   {
     name: "AI in Testing",
@@ -105,6 +111,7 @@ export const otherSkills: SkillItemType[] = [
     level: 80,
     description:
       "A widely used open-source relational database management system known for its speed and reliability.",
+    version: "v8.x",
   },
   {
     name: "Linux",

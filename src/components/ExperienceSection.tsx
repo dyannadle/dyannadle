@@ -20,6 +20,12 @@ const ExperienceSection: React.FC = () => {
         "Prepared detailed bug reports and provided feedback for enhancing user experience.",
         "Gained hands-on experience in mobile app testing methodologies, test documentation, and defect tracking.",
       ],
+      achievements: [
+        "Identified and reported 50+ critical bugs, improving app stability by 30%",
+        "Reduced regression testing time by 25% through optimized test case design",
+        "Achieved 95% test coverage across all mobile app features",
+        "Successfully collaborated with cross-functional teams to deliver 3 app releases on time",
+      ],
     },
   ];
 
@@ -87,6 +93,29 @@ const ExperienceSection: React.FC = () => {
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {experience.description}
                 </p>
+
+                {/* Achievements */}
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-emerald-700 flex items-center gap-2">
+                    <span className="text-2xl">🏆</span> Key Achievements:
+                  </h4>
+                  <ul className="space-y-2 text-left">
+                    {experience.achievements.map((achievement, i) => (
+                      <RevealAnimation
+                        key={i}
+                        animation="fade-in-right"
+                        delay={200 + i * 100}
+                      >
+                        <li className="flex items-start bg-emerald-50 p-3 rounded-lg">
+                          <span className="text-emerald-600 mr-3 mt-1 text-lg">✓</span>
+                          <span className="text-muted-foreground font-medium">
+                            {achievement}
+                          </span>
+                        </li>
+                      </RevealAnimation>
+                    ))}
+                  </ul>
+                </div>
 
                 {/* Responsibilities */}
                 <div>

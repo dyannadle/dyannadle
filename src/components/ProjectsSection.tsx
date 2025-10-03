@@ -22,6 +22,7 @@ const projects = [
   {
     title: "Front Accounting ERP Testing",
     description: "Comprehensive testing of professional web-based accounting system for ERP solutions using manual testing methodologies.",
+    duration: "2 months",
     responsibilities: [
       "Developed detailed test plans, test cases, and test scripts based on ERP requirements and specifications.",
       "Executed end-to-end functional testing covering modules like accounting, inventory, and payroll to ensure system integrity.",
@@ -37,6 +38,7 @@ const projects = [
   {
     title: "Food Recipe Generation from Images",
     description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
+    duration: "4 months",
     responsibilities: [
       "Designed and implemented an automated pipeline for generating recipes from food images using convolutional and recurrent neural networks.",
       "Performed extensive performance optimization and hyperparameter tuning to improve model accuracy and efficiency.",
@@ -53,6 +55,7 @@ const projects = [
   {
     title: "Maze Solver Game",
     description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
+    duration: "1 month",
     responsibilities: [
       "Designed and implemented maze generation algorithms, including Recursive Backtracker, for random maze creation.",
       "Developed and integrated pathfinding algorithms such as A* search and Breadth-First Search for automated maze solving.",
@@ -69,6 +72,7 @@ const projects = [
   {
     title: "Image Model Cloudflare Workers AI",
     description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
+    duration: "3 weeks",
     responsibilities: [
       "Developed AI-powered image generation features using Cloudflare Workers AI API integrated into Streamlit interface.",
       "Implemented REST API calls and handled asynchronous image processing requests efficiently.",
@@ -84,6 +88,7 @@ const projects = [
   {
     title: "Attendance System",
     description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in Excel and reporting features.",
+    duration: "6 weeks",
     responsibilities: [
       "Designed and implemented a face recognition attendance system using OpenCV to detect and record attendance automatically.",
       "Integrated data storage using Pandas and Excel formats for easy report generation and record maintenance.",
@@ -99,6 +104,7 @@ const projects = [
   {
     title: "Popular Web Series Page UI Testing",
     description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series,focusing on navigation, interaction, and content rendering validation.",
+    duration: "2 weeks",
     responsibilities: [
       "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials) across devices.",
       "Tested search functionality rigorously to ensure accurate filtering and retrieval of web series based on user input.",
@@ -182,6 +188,15 @@ const ProjectsSection: React.FC = () => {
               </div>
 
               <h2 id="modal-title" className="text-2xl font-bold mb-4 text-foreground">{modalProject.title}</h2>
+              
+              {/* Duration Badge */}
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {modalProject.duration}
+              </div>
+              
               <p className="mb-4 text-muted-foreground">{modalProject.description}</p>
 
               {/* Show Full Description Button */}
@@ -309,6 +324,15 @@ const ProjectsSection: React.FC = () => {
                 {/* Content */}
                 <div className="p-6" onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`}>
                   <h3 className="text-xl font-bold mb-3 text-foreground">{project.title}</h3>
+                  
+                  {/* Duration Badge */}
+                  <div className="inline-flex items-center gap-1 mb-3 px-2 py-1 bg-blue-50 text-blue-600 rounded-md text-xs font-semibold">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {project.duration}
+                  </div>
+                  
                   <p className="text-muted-foreground mb-4 text-sm leading-relaxed">{project.description}</p>
 
                   <h4 className="font-semibold mb-2 text-foreground">Tools:</h4>
