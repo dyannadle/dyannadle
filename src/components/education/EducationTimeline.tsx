@@ -25,11 +25,12 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
     <RevealAnimation animation="fade-in-right">
       <div>
         <h3 className="mb-6 text-2xl font-bold">Education Timeline</h3>
-        <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-1/2 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-blue-600 before:to-purple-600 before:z-0">
+        <div className="relative">
           {educationData.map((item, index) => (
-            <div key={index} className="flex relative z-10 gap-6">
-              <div className="flex flex-col items-center">
-                <div className="flex justify-center items-center w-10 h-10 text-white bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-md">
+            <div key={index} className="flex relative gap-6 pb-12 last:pb-0">
+              {/* Timeline Line - extends from center of dot */}
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div className="flex justify-center items-center w-10 h-10 text-white bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-lg z-10 animate-pulse">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -45,24 +46,28 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
                     <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
                   </svg>
                 </div>
-                <div className="w-0.5 h-full bg-gradient-to-b from-blue-600/30 to-purple-600/30"></div>
+                {/* Connecting line - only show if not last item */}
+                {index !== educationData.length - 1 && (
+                  <div className="w-0.5 flex-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 mt-2"></div>
+                )}
               </div>
-              <div className="p-6 mb-10 rounded-xl border border-blue-100 shadow-sm glass bg-white/90 card-hover">
-                <h4 className="mb-1 text-xl font-semibold">{item.degree}</h4>
-                {(() => {
-                  return (
-<a
-  href={item.url}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-block mb-2 font-medium text-blue-600 hover:underline"
->
-  {item.institution}
-</a>
-                  );
-                })()}
-                <p className="mb-3 text-sm text-gray-500">{item.duration}</p>
-                <p className="text-muted-foreground">{item.details}</p>
+              
+              {/* Content Card */}
+              <div className="flex-1 p-6 rounded-xl border border-blue-100 shadow-lg glass bg-white/90 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-blue-300">
+                <h4 className="mb-1 text-xl font-semibold text-gray-800">{item.degree}</h4>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mb-2 font-medium text-blue-600 transition-all hover:text-blue-700 hover:gap-3 hover:underline"
+                >
+                  {item.institution}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+                <p className="mb-3 text-sm text-gray-500 font-medium">{item.duration}</p>
+                <p className="text-gray-600 leading-relaxed">{item.details}</p>
               </div>
             </div>
           ))}
