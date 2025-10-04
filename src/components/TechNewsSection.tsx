@@ -34,7 +34,7 @@ const TechNewsSection: React.FC = () => {
         
         // Using News API with tech focus
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${randomQuery}&sortBy=publishedAt&pageSize=6&language=en&apiKey=YOUR_NEWS_API_KEY`
+          `https://newsapi.org/v2/everything?q=${randomQuery}&sortBy=publishedAt&pageSize=6&language=en&apiKey=87f062bf12894323afb623aa9f3dd8f1`
         );
         
         if (!response.ok) {
