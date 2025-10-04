@@ -21,7 +21,7 @@ const TechNewsSection: React.FC = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        // Fetch latest QA and software testing news
+        // Using GNews API (free tier with CORS support)
         const queries = [
           "software testing",
           "QA automation",
@@ -32,9 +32,8 @@ const TechNewsSection: React.FC = () => {
         
         const randomQuery = queries[Math.floor(Math.random() * queries.length)];
         
-        // Using News API with tech focus
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${randomQuery}&sortBy=publishedAt&pageSize=6&language=en&apiKey=87f062bf12894323afb623aa9f3dd8f1`
+          `https://gnews.io/api/v4/search?q=${randomQuery}&lang=en&max=6&apikey=87f062bf12894323afb623aa9f3dd8f1`
         );
         
         if (!response.ok) {
@@ -42,7 +41,18 @@ const TechNewsSection: React.FC = () => {
         }
         
         const data = await response.json();
-        setNews(data.articles || []);
+        // Transform GNews format to match our interface
+        const transformedArticles = (data.articles || []).map((article: any) => ({
+          title: article.title,
+          description: article.description,
+          url: article.url,
+          publishedAt: article.publishedAt,
+          source: {
+            name: article.source.name
+          },
+          urlToImage: article.image
+        }));
+        setNews(transformedArticles);
         setLoading(false);
       } catch (err) {
         setError("Unable to load latest tech news");

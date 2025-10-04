@@ -26,11 +26,22 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
       <div>
         <h3 className="mb-6 text-2xl font-bold">Education Timeline</h3>
         <div className="relative">
+          {/* Continuous connecting line from first to last */}
+          <div className="absolute left-5 top-10 bottom-12 w-0.5 bg-gradient-to-b from-orange-500 via-blue-600 to-purple-600"></div>
+          
           {educationData.map((item, index) => (
             <div key={index} className="flex relative gap-6 pb-12 last:pb-0">
-              {/* Timeline Line - extends from center of dot */}
+              {/* Timeline Dot */}
               <div className="flex flex-col items-center flex-shrink-0">
-                <div className="flex justify-center items-center w-10 h-10 text-white bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-lg z-10 animate-pulse">
+                <div 
+                  className={`flex justify-center items-center w-10 h-10 text-white rounded-full shadow-lg z-10 animate-pulse ${
+                    index === 0 
+                      ? 'bg-gradient-to-br from-orange-500 to-orange-600' 
+                      : index === educationData.length - 1
+                      ? 'bg-gradient-to-br from-purple-500 to-purple-600'
+                      : 'bg-gradient-to-br from-blue-500 to-blue-600'
+                  }`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -46,8 +57,6 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
                     <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
                   </svg>
                 </div>
-                {/* Connecting line - connects all items from start to end */}
-                <div className="w-0.5 flex-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 mt-2"></div>
               </div>
               
               {/* Content Card */}
