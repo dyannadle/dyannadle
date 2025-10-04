@@ -46,10 +46,8 @@ const EducationTimeline: React.FC<EducationTimelineProps> = ({
                     <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
                   </svg>
                 </div>
-                {/* Connecting line - only show if not last item */}
-                {index !== educationData.length - 1 && (
-                  <div className="w-0.5 flex-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 mt-2"></div>
-                )}
+                {/* Connecting line - connects all items from start to end */}
+                <div className="w-0.5 flex-1 bg-gradient-to-b from-blue-600 via-purple-600 to-blue-600 mt-2"></div>
               </div>
               
               {/* Content Card */}
