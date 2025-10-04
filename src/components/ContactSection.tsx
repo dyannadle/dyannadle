@@ -158,12 +158,12 @@ const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center bg-gradient-to-br from-gray-100 via-stone-50 to-zinc-100 overflow-hidden"
+      className="relative min-h-screen flex items-center bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-100 overflow-hidden"
     >
-      {/* soft floating pastel shapes */}
-      <div className="absolute top-20 left-16 w-40 h-40 rounded-full bg-rose-200/20 blur-3xl animate-float" />
-      <div className="absolute right-24 bottom-24 w-32 h-32 rounded-full bg-emerald-200/20 blur-2xl animate-float animation-delay-500" />
-      <div className="absolute top-1/3 right-1/4 w-28 h-28 rounded-full bg-indigo-200/20 blur-xl animate-float animation-delay-700" />
+      {/* Animated background elements */}
+      <div className="absolute top-10 right-1/4 w-32 h-32 bg-purple-300/20 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-blue-300/20 rounded-full blur-2xl animate-float animation-delay-300"></div>
+      <div className="absolute top-1/2 right-1/3 w-36 h-36 bg-indigo-300/20 rounded-full blur-3xl animate-float animation-delay-500"></div>
 
       <div className="section-container relative z-10">
         <RevealAnimation animation="fade-in-down" delay={100}>

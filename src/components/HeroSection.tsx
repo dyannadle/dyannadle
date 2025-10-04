@@ -67,15 +67,6 @@ const HeroSection: React.FC = () => {
           <RevealAnimation animation="fade-in-up" delay={500}>
             <div className="flex flex-wrap gap-4 justify-center">
               <a
-                href="https://www.linkedin.com/in/deepak-yannadle-4319771a1//"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex gap-2 items-center py-3 px-8 text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg shadow-lg transition transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-xl hover:-translate-y-2 hover:scale-105 animate-pulse"
-              >
-                Hire Me
-                <ArrowRight size={18} className="ml-1" />
-              </a>
-              <a
                 href="#contact"
                 className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
