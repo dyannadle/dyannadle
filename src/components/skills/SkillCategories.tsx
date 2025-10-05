@@ -50,9 +50,12 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
                         <TooltipContent
                           side="top"
                           align="start"
-                          className="max-w-xs border-blue-200 shadow-2xl bg-white z-[99999]"
+                           className="max-w-xs p-3 rounded-lg border border-blue-200 shadow-xl bg-white z-[99999] data-[state=delayed-open]:animate-fade-in data-[state=closed]:animate-fade-out"
                           sideOffset={10}
                         >
+                          <TooltipContent
+
+
                           <p className="text-xs leading-relaxed text-gray-800">
                             {description}
                           </p>
