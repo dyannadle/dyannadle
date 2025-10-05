@@ -33,24 +33,28 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
                 )}
               <ul className="space-y-2">
                 {subSection.skills.map((skill: string, skillIndex: number) => {
-                  const desc = subSection.descriptions?.[skillIndex] || skillTooltips[skill] || "";
+                  const description = subSection.descriptions[skillIndex] || skillTooltips[skill] || "No description available";
+                  
                   return (
                     <li key={skillIndex} className="flex items-center group/item">
                       <span className="mr-2 w-2 h-2 bg-blue-600 rounded-full group-hover/item:scale-150 transition-transform duration-300"></span>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <button type="button" className="text-gray-700 cursor-help hover:text-blue-600 transition-colors duration-300 font-medium focus:outline-none">
+                          <button 
+                            type="button" 
+                            className="text-left text-gray-700 cursor-help hover:text-blue-600 transition-colors duration-300 font-medium focus:outline-none"
+                          >
                             {skill}
                           </button>
                         </TooltipTrigger>
                         <TooltipContent
                           side="top"
                           align="start"
-                          className="max-w-xs border-blue-200 shadow-2xl bg-white"
+                          className="max-w-xs border-blue-200 shadow-2xl bg-white z-[99999]"
                           sideOffset={10}
                         >
                           <p className="text-xs leading-relaxed text-gray-800">
-                            {desc}
+                            {description}
                           </p>
                         </TooltipContent>
                       </Tooltip>
