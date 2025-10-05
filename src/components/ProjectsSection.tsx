@@ -123,8 +123,7 @@ const projects = [
 const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
-  const [modalProject, setModalProject] = useState<typeof projects[0] | null>(null);
-  const [fullDescription, setFullDescription] = useState(false); // Track if full description is shown
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [showAllTools, setShowAllTools] = useState<{ [key: number]: boolean }>({});
 
   // Filter projects based on activeFilter and favorites
@@ -140,15 +139,7 @@ const ProjectsSection: React.FC = () => {
     );
   }, []);
 
-  const closeModal = () => {
-    setModalProject(null);
-    setFullDescription(false); // Reset description state when modal is closed
-  };
 
-  // Full Description Logic
-  const handleDescriptionClick = () => {
-    setFullDescription((prev) => !prev);
-  };
 
   return (
     <section id="projects"
@@ -156,103 +147,6 @@ const ProjectsSection: React.FC = () => {
 >
       <div className="section-container">
 
-        {/* Modal */}
-        {modalProject && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]"
-            onClick={closeModal}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            tabIndex={-1}
-          >
-            <div
-              className="bg-white rounded-xl max-w-3xl w-full p-6 relative overflow-y-auto max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-3xl font-bold"
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-
-              {/* Full Image */}
-              <div className="mb-4">
-                <img
-                  src={modalProject.image}
-                  alt={modalProject.title}
-                  className="w-full h-full object-cover rounded-md"
-                />
-              </div>
-
-              <h2 id="modal-title" className="text-2xl font-bold mb-4 text-foreground">{modalProject.title}</h2>
-              
-              {/* Duration Badge */}
-              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {modalProject.duration}
-              </div>
-              
-              <p className="mb-4 text-muted-foreground">{modalProject.description}</p>
-
-              {/* Show Full Description Button */}
-              <button
-                onClick={handleDescriptionClick}
-                className="text-primary hover:text-primary/80 font-medium mb-4"
-              >
-                {fullDescription ? 'Show Less' : 'Show Full Description'}
-              </button>
-
-              {fullDescription && (
-                <div className="mt-4">
-                  <h3 className="font-semibold mb-2">Responsibilities:</h3>
-                  <ul className="list-disc list-inside mb-4">
-                    {modalProject.responsibilities.map((resp, i) => (
-                      <li key={i}>{resp}</li>
-                    ))}
-                  </ul>
-                  <h3 className="font-semibold mb-2">Tools Used:</h3>
-                  <ul className="list-disc list-inside">
-                    {modalProject.tools.map((tool, i) => (
-                      <li key={i}>{tool}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Github Link */}
-              {modalProject.github && (
-                <a
-                  href={modalProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center mt-6 gap-2 hover:text-primary text-primary/80 font-semibold"
-                  aria-label={`View GitHub repository for ${modalProject.title}`}
-                >
-                  <Github size={24} />
-                  GitHub
-                </a>
-              )}
-
-              {/* Paper Published Link (if exists) */}
-              {modalProject.paperPublished && (
-                <a
-                  href={`/papers/${modalProject.paperPublished}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-4 text-sm text-gray-500 underline"
-                  aria-label={`View published paper for ${modalProject.title}`}
-                >
-                  View Published Paper
-                </a>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Header */}
         <h2 className="section-title text-foreground">Projects</h2>
@@ -282,7 +176,7 @@ const ProjectsSection: React.FC = () => {
             <RevealAnimation key={project.title}>
               <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg relative overflow-hidden group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                 {/* Image - Clickable */}
-                <div onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`} className="cursor-pointer">
+                <div onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} role="button" tabIndex={0} aria-label={`Toggle details for ${project.title}`} className="cursor-pointer">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -322,7 +216,7 @@ const ProjectsSection: React.FC = () => {
                 </button>
 
                 {/* Content */}
-                <div className="p-6" onClick={() => setModalProject(project)} role="button" tabIndex={0} aria-label={`Open details for ${project.title}`}>
+                <div className="p-6" onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} role="button" tabIndex={0} aria-label={`Toggle details for ${project.title}`}>
                   <h3 className="text-xl font-bold mb-3 text-foreground">{project.title}</h3>
                   
                   {/* Duration Badge */}
@@ -357,6 +251,42 @@ const ProjectsSection: React.FC = () => {
                       </button>
                     )}
                   </ul>
+
+                  {expandedIndex === idx && (
+                    <div className="mt-4">
+                      <h3 className="font-semibold mb-2">Responsibilities:</h3>
+                      <ul className="list-disc list-inside mb-4">
+                        {project.responsibilities.map((resp, i) => (
+                          <li key={i}>{resp}</li>
+                        ))}
+                      </ul>
+
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center mt-4 gap-2 hover:text-primary text-primary/80 font-semibold"
+                          aria-label={`View GitHub repository for ${project.title}`}
+                        >
+                          <Github size={20} />
+                          GitHub
+                        </a>
+                      )}
+
+                      {project.paperPublished && (
+                        <a
+                          href={project.paperPublished}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block mt-2 text-sm underline text-muted-foreground"
+                          aria-label={`View published paper for ${project.title}`}
+                        >
+                          View Published Paper
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </RevealAnimation>
