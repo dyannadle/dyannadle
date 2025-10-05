@@ -151,13 +151,12 @@ const projects: Project[] = [
     image: "/lovable-uploads/Flipkart.png",
     category: "Automation Project",
     github: "https://github.com/dyannadle/Flipkart-Automation"
-
   },
 
   {
     title: "Echoes of the Past (AI Detective Game)",
     description: "A unique procedural narrative detective game using an integrated AI interpreter (Gemini 2.0 Flash) to generate story conclusions from fragmented clues.",
-    duration: "4 weeks",
+    duration: "2 weeks",
     responsibilities: [
       "Designed and implemented the core game logic in JavaScript, including movement between rooms and object interaction.",
       "Developed a procedural generation algorithm to create unique house layouts and dynamically place clues for each session.",
