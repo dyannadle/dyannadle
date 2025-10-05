@@ -31,30 +31,33 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
                     {subSection.subTitle}
                   </h5>
                 )}
-                <ul className="space-y-2">
-                  {subSection.skills.map((skill: string, skillIndex: number) => (
+              <ul className="space-y-2">
+                {subSection.skills.map((skill: string, skillIndex: number) => {
+                  const desc = subSection.descriptions?.[skillIndex] || skillTooltips[skill] || "";
+                  return (
                     <li key={skillIndex} className="flex items-center group/item">
                       <span className="mr-2 w-2 h-2 bg-blue-600 rounded-full group-hover/item:scale-150 transition-transform duration-300"></span>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-gray-700 cursor-help hover:text-blue-600 transition-colors duration-300 font-medium">
+                          <button type="button" className="text-gray-700 cursor-help hover:text-blue-600 transition-colors duration-300 font-medium focus:outline-none">
                             {skill}
-                          </span>
+                          </button>
                         </TooltipTrigger>
                         <TooltipContent
                           side="top"
                           align="start"
-                          className="max-w-xs border-blue-200 shadow-2xl bg-white/98 backdrop-blur-sm animate-fade-in"
+                          className="max-w-xs border-blue-200 shadow-2xl bg-white"
                           sideOffset={10}
                         >
                           <p className="text-xs leading-relaxed text-gray-800">
-                            {subSection.descriptions[skillIndex]}
+                            {desc}
                           </p>
                         </TooltipContent>
                       </Tooltip>
                     </li>
-                  ))}
-                </ul>
+                  );
+                })}
+              </ul>
               </div>
             ))}
           </RevealAnimation>
