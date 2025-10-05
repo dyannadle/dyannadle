@@ -172,7 +172,7 @@ const projects: Project[] = [
 "Firebase SDK (Auth & Firestore): (Planned for future use, currently included for environment compatibility but not fully utilized for saving/loading game state in this version."],
     image: "/lovable-uploads/Echo.png",
     category: "Game Development, AI/ML Project",
-    github: "https://github.com/dyannadle/AI-Narrative-Game",
+    github: "https://github.com/dyannadle/Games",
   },
   {
     title: "Front Accounting ERP Testing",
