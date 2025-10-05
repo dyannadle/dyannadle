@@ -1,4 +1,3 @@
-
 import React from 'react';
 import RevealAnimation from '@/components/ui/RevealAnimation';
 import SkillItem from './SkillItem';
@@ -23,6 +22,7 @@ const SkillsList: React.FC<SkillsListProps> = ({ title, skills, delay = 0, class
             level={skill.level} 
             index={index} 
             description={skill.description}
+            version={skill.version}
           />
         ))}
       </div>
