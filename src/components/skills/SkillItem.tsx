@@ -30,6 +30,15 @@ const SkillItem: React.FC<SkillItemProps> = ({ name, level, index, description, 
                   className="max-w-xs border-blue-200 shadow-2xl"
                   sideOffset={10}
                 >
+                  <TooltipContent ...>
+  <div>
+    <p className="text-xs leading-relaxed text-gray-800">{description}</p>
+    {version && (
+      <p className="text-[10px] text-gray-500 mt-1">Version: {version}</p>
+    )}
+  </div>
+</TooltipContent>
+
                   <p className="text-xs leading-relaxed">{description}</p>
                 </TooltipContent>
               </Tooltip>
