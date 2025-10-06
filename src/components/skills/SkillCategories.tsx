@@ -4,6 +4,7 @@ import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
+  TooltipProvider,
 } from "@/components/ui/tooltip";
 import { SkillCategory, skillTooltips } from "@/data/skillsData";
 
@@ -13,7 +14,8 @@ interface SkillCategoriesProps {
 
 const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <TooltipProvider delayDuration={100} skipDelayDuration={300}>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       {categories.map((category, index) => (
         <RevealAnimation
           key={index}
@@ -36,8 +38,8 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
               <ul className="space-y-2">
                 {subSection.skills.map((skill: string, skillIndex: number) => {
                   const description =
-                    subSection.descriptions[skillIndex] ||
-                    skillTooltips[skill] ||
+                    subSection.descriptions?.[skillIndex] ??
+                    skillTooltips[skill] ??
                     "No description available";
 
                   return (
@@ -55,12 +57,10 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
                             {skill}
                           </button>
                         </TooltipTrigger>
-                        <TooltipContent
-                          side="top"
-                          sideOffset={10}
-                          className="z-[9999] bg-white border px-2 py-1 text-xs text-gray-900 rounded shadow-md"
-                        >
-                          <p>{description}</p>
+                        <TooltipContent side="top" sideOffset={10}>
+                          <p className="max-w-xs text-balance leading-snug">
+                            {description}
+                          </p>
                         </TooltipContent>
                       </Tooltip>
                     </li>
@@ -72,6 +72,7 @@ const SkillCategories: React.FC<SkillCategoriesProps> = ({ categories }) => {
         </RevealAnimation>
       ))}
     </div>
+    </TooltipProvider>
   );
 };
 
