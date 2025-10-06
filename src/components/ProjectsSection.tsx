@@ -107,7 +107,7 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
 
 
 // Icons (StarOutline replaced with StarOff to fix the import error)
-import { Github, Star, StarOff, Clock } from 'lucide-react';
+import { Github, Star, StarOff, Clock, X } from 'lucide-react';
 
 // --- TYPE DEFINITIONS ---
 interface Project {
@@ -281,7 +281,8 @@ const filters = [
 const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showAllTools, setShowAllTools] = useState<{ [key: string]: boolean }>({});
 
   // Filter projects based on activeFilter and favorites
@@ -297,6 +298,16 @@ const ProjectsSection: React.FC = () => {
     );
   }, []);
 
+  const openModal = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
 
 
   return (
@@ -310,7 +321,7 @@ const ProjectsSection: React.FC = () => {
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Projects</span>
         </h2>
         <p className="text-gray-600 max-w-4xl mx-auto text-center mb-10 leading-relaxed">
-          Click a card to expand details inline. No popups.
+          Click the image or title to view full details in a popup (no page scrolling).
         </p>
 
         {/* Filters */}
@@ -336,12 +347,12 @@ const ProjectsSection: React.FC = () => {
             <RevealAnimation key={project.title}>
               <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-300/50">
                 
-                {/* Image - Toggle expand */}
+                {/* Image - Click to open popup */}
                 <div 
-                  onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} 
+                  onClick={() => openModal(project)} 
                   role="button" 
                   tabIndex={0} 
-                  aria-label={`Toggle details for ${project.title}`} 
+                  aria-label={`View details for ${project.title}`} 
                   className="cursor-pointer h-52 overflow-hidden"
                 >
                   <img
@@ -374,10 +385,10 @@ const ProjectsSection: React.FC = () => {
                   {/* Title - Clickable for Description Modal */}
                   <h3 
                     className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
-                    onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} 
+                    onClick={() => openModal(project)} 
                     role="button" 
                     tabIndex={0} 
-                    aria-label={`Toggle details for ${project.title}`}
+                    aria-label={`View details for ${project.title}`}
                   >
                     {project.title}
                   </h3>
@@ -414,49 +425,96 @@ const ProjectsSection: React.FC = () => {
                     )}
                   </ul>
 
-                  {expandedIndex === idx && (
-                    <div className="mt-4 space-y-4">
-                      <h4 className="font-semibold text-gray-800">Key Responsibilities</h4>
-                      <ul className="list-disc list-outside ml-5 space-y-2 text-sm text-gray-700">
-                        {project.responsibilities.map((resp, i) => (
-                          <li key={i}>{resp}</li>
-                        ))}
-                      </ul>
-                      <div className="flex gap-4 pt-2">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold underline"
-                            aria-label={`View GitHub repository for ${project.title}`}
-                          >
-                            <Github size={18} />
-                            View Code
-                          </a>
-                        )}
-                        {project.paperPublished && (
-                          <a
-                            href={project.paperPublished}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-green-700 hover:text-green-800 font-semibold underline"
-                            aria-label={`View published paper for ${project.title}`}
-                          >
-                            View Paper
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
                 </div>
               </div>
             </RevealAnimation>
           ))}
         </div>
       </div>
-      
+
+      {isModalOpen && selectedProject && (
+        <div
+          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white w-full max-w-5xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col h-full">
+              <header className="flex justify-between items-center p-4 border-b">
+                <h2 className="text-xl font-bold text-gray-900">{selectedProject.title}</h2>
+                <button
+                  aria-label="Close"
+                  onClick={closeModal}
+                  className="p-2 rounded-full hover:bg-gray-100"
+                >
+                  <X size={20} />
+                </button>
+              </header>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                <div className="p-4 flex items-center justify-center bg-gray-50">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="max-h-[60vh] md:max-h-[80vh] w-auto max-w-full object-contain rounded-md"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
+                    }}
+                  />
+                </div>
+                <div className="p-6 overflow-y-auto">
+                  <p className="text-gray-700 mb-4">{selectedProject.description}</p>
+
+                  <h3 className="text-lg font-semibold mb-2 text-blue-700">Key Responsibilities</h3>
+                  <ul className="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    {selectedProject.responsibilities.map((resp, i) => (
+                      <li key={i}>{resp}</li>
+                    ))}
+                  </ul>
+
+                  <h4 className="text-lg font-semibold mt-4 mb-2 text-purple-700">Technology Stack</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tools.map((tool, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4 pt-4">
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline font-semibold flex items-center gap-2"
+                      >
+                        <Github size={18} /> View Code
+                      </a>
+                    )}
+                    {selectedProject.paperPublished && (
+                      <a
+                        href={selectedProject.paperPublished}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-700 underline font-semibold"
+                      >
+                        View Paper
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };
