@@ -1,24 +1,14 @@
 // React and Hooks
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import { Github, Star, StarOff, Clock, X } from "lucide-react";
+import React, { useState, useCallback, Fragment, useEffect, useRef } from 'react';
 
-// --- Utility Function ---
-const cn = (...classes: (string | undefined)[]) =>
-  classes.filter(Boolean).join(" ");
+// --- START RevealAnimation Component (From uploaded RevealAnimation.tsx) ---
+// Note: This requires a utility function `cn` which is assumed to be present.
+const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
 
-// --- RevealAnimation Component ---
 interface RevealAnimationProps {
   children: React.ReactNode;
   className?: string;
-  animation?:
-    | "fade-in"
-    | "fade-in-up"
-    | "fade-in-down"
-    | "fade-in-left"
-    | "fade-in-right"
-    | "blur-in"
-    | "zoom-in"
-    | "flip-in";
+  animation?: 'fade-in' | 'fade-in-up' | 'fade-in-down' | 'fade-in-left' | 'fade-in-right' | 'blur-in' | 'zoom-in' | 'flip-in';
   delay?: number;
   threshold?: number;
   duration?: number;
@@ -28,8 +18,8 @@ interface RevealAnimationProps {
 
 const RevealAnimation: React.FC<RevealAnimationProps> = ({
   children,
-  className = "",
-  animation = "fade-in-up",
+  className = '',
+  animation = 'fade-in-up',
   delay = 0,
   threshold = 0.1,
   duration = 500,
@@ -54,52 +44,72 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
     );
 
     const currentRef = ref.current;
-    if (currentRef) observer.observe(currentRef);
-    return () => currentRef && observer.unobserve(currentRef);
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
   }, [threshold, once, hasAnimated]);
 
   const getAnimationClass = () => {
-    if (!isVisible) return "opacity-0";
+    if (!isVisible) return 'opacity-0';
+    
     switch (animation) {
-      case "fade-in":
-        return "animate-fade-in";
-      case "fade-in-up":
-        return "animate-fade-in-up";
-      case "fade-in-down":
-        return "animate-fade-in-down";
-      case "fade-in-left":
-        return "animate-fade-in-left";
-      case "fade-in-right":
-        return "animate-fade-in-right";
-      case "blur-in":
-        return "animate-blur-in";
-      case "zoom-in":
-        return "animate-zoom-in";
-      case "flip-in":
-        return "animate-flip-in";
+      case 'fade-in':
+        return 'animate-fade-in';
+      case 'fade-in-up':
+        return 'animate-fade-in-up';
+      case 'fade-in-down':
+        return 'animate-fade-in-down';
+      case 'fade-in-left':
+        return 'animate-fade-in-left';
+      case 'fade-in-right':
+        return 'animate-fade-in-right';
+      case 'blur-in':
+        return 'animate-blur-in';
+      case 'zoom-in':
+        return 'animate-zoom-in';
+      case 'flip-in':
+        return 'animate-flip-in';
       default:
-        return "animate-fade-in";
+        return 'animate-fade-in';
     }
   };
-
+  
+  // NOTE: This assumes Tailwind CSS animations like 'animate-fade-in-up' are defined elsewhere (e.g., in a CSS file).
+  // Without external CSS definitions, the animation will default to an immediate display.
+  // We'll keep the styles to allow for animation if the environment supports them.
   return (
     <div
       ref={ref}
-      className={cn(getAnimationClass(), className)}
+      className={cn(
+        getAnimationClass(),
+        className
+      )}
       style={{
         animationDelay: `${delay}ms`,
         animationDuration: `${duration}ms`,
         ...style,
-        opacity: isVisible || !once ? 1 : 0,
-        transform: isVisible || !once ? "none" : "translateY(20px)",
+        opacity: isVisible || !once ? 1 : 0, // Ensure initial opacity is set if not animating
+        transform: isVisible || !once ? 'none' : 'translateY(20px)', // Sample initial transform for smooth start
+        transition: 'opacity 0ms, transform 0ms', // Transition controlled by animation
       }}
     >
       {children}
     </div>
   );
 };
+// --- END RevealAnimation Component ---
 
-// --- Type Definitions ---
+
+// Icons (StarOutline replaced with StarOff to fix the import error)
+import { Github, Star, StarOff, Clock, X } from 'lucide-react';
+
+// --- TYPE DEFINITIONS ---
 interface Project {
   title: string;
   description: string;
@@ -112,137 +122,206 @@ interface Project {
   paperPublished?: string;
 }
 
-// --- Project Data ---
+
+// --- PROJECT DATA (Using the data provided in the previous turn) ---
 const projects: Project[] = [
+
   {
-    title: "E-commerce Site Automation (Flipkart)",
-    description:
-      "Developed a robust automation framework using Selenium and Python to validate critical business flows on the Flipkart e-commerce platform.",
+      title: "E-commerce Site Automation (Flipkart)",
+    description: "Developed a robust automation framework using Selenium and Python to validate critical business flows on the Flipkart e-commerce platform.",
     duration: "2 months",
     responsibilities: [
-      "Designed and implemented a Page Object Model framework.",
-      "Automated key e-commerce flows like search, cart, and checkout.",
-      "Integrated HTML reporting and CSV-based data management.",
-      "Conducted regression runs for CI stability.",
+      "Designed and implemented an end-to-end automation framework (Page Object Model) using Selenium WebDriver, Python, and pytest.",
+      "Automated key e-commerce scenarios including user registration, product search, filter application, cart addition, and checkout process.",
+      "Integrated logging and reporting (HTML reports) into the automation suite for easy test result analysis.",
+      "Managed and maintained test data using CSV/Excel files to support various test cases.",
+      "Conducted daily regression runs to ensure stability and detect defects early in the continuous integration pipeline."
     ],
-    tools: [
-      "Selenium WebDriver",
-      "Java",
-      "JavaScript",
-      "Page Object Model",
-      "HTML Reporting",
-    ],
+    tools: ["Selenium WebDriver", "Java", "Java Script", "Page Object Model", "HTML Reporting"],
     image: "/lovable-uploads/Flipkart.png",
     category: "Automation Project",
-    github: "https://github.com/dyannadle/Flipkart-Automation",
+    github: "https://github.com/dyannadle/Flipkart-Automation"
   },
+
   {
     title: "Echoes of the Past (AI Detective Game)",
-    description:
-      "A procedural narrative detective game that uses Google Gemini AI to infer story conclusions based on collected clues.",
+    description: "A unique procedural narrative detective game using an integrated AI interpreter (Gemini 2.0 Flash) to generate story conclusions from fragmented clues.",
     duration: "2 weeks",
     responsibilities: [
-      "Built core game logic and movement in JavaScript.",
-      "Implemented procedural generation and AI-driven narratives.",
-      "Created responsive UI with Tailwind and HTML5.",
+      "Designed and implemented the core game logic in JavaScript, including movement between rooms and object interaction.",
+      "Developed a procedural generation algorithm to create unique house layouts and dynamically place clues for each session.",
+      "Integrated the Google Gemini API to analyze collected clues and generate concise, plausible narrative conclusions.",
+      "Created a clean, text-based interface and persistent game log using HTML5 and Tailwind CSS for easy user exploration.",
+      "Focused on creating a dynamic mystery where multiple clue combinations lead to varied AI interpretations."
     ],
-    tools: [
-      "HTML5",
-      "Tailwind CSS",
-      "JavaScript",
-      "Google Gemini API",
-      "Firebase SDK",
-    ],
+    tools: ["HTML5: For the basic structure of the game.",
+"CSS3 (Tailwind CSS): For responsive and modern styling.",
+"JavaScript (ES6+): For all game logic, procedural generation, and interactivity.",
+"Google Gemini API (gemini-2.0-flash): Used for generating the narrative conclusion based on collected clues.",
+"Firebase SDK (Auth & Firestore): (Planned for future use, currently included for environment compatibility but not fully utilized for saving/loading game state in this version."],
     image: "/lovable-uploads/Echo.png",
     category: "Game Development, AI/ML Project",
     github: "https://github.com/dyannadle/Games",
   },
   {
     title: "Front Accounting ERP Testing",
-    description:
-      "Comprehensive testing of a professional ERP accounting system using manual testing methodologies.",
+    description: "Comprehensive testing of professional web-based accounting system for ERP solutions using manual testing methodologies.",
     duration: "2 months",
     responsibilities: [
-      "Created test cases for accounting and payroll modules.",
-      "Executed UAT with stakeholders.",
-      "Tracked bugs in JIRA and ensured timely fixes.",
+      "Developed detailed test plans, test cases, and test scripts based on ERP requirements and specifications.",
+      "Executed end-to-end functional testing covering modules like accounting, inventory, and payroll to ensure system integrity.",
+      "Coordinated and conducted User Acceptance Testing (UAT) with stakeholders to validate business workflows.",
+      "Identified, logged, and tracked defects using bug tracking tools, ensuring timely resolution.",
+      "Collaborated with developers and business analysts to clarify requirements and resolve issues."
     ],
-    tools: ["Manual Testing", "Test Planning", "Excel", "SRS Writing"],
-    image: "/lovable-uploads/ERP.png",
+    tools: ["Manual Testing", "Test Planning", "Microsoft Excel", "SRS Writing"],
+    image: "/lovable-uploads/2b88fb76-449e-419a-aaa8-ec1ff1fb3dfd.png",
     category: "Testing Project",
-    github: "https://github.com/dyannadle/Manual-Projects",
+    github: "https://github.com/dyannadle/Manual-Projects"
   },
+  {
+    title: "Food Recipe Generation from Images",
+    description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
+    duration: "4 months",
+    responsibilities: [
+      "Designed and implemented an automated pipeline for generating recipes from food images using convolutional and recurrent neural networks.",
+      "Performed extensive performance optimization and hyperparameter tuning to improve model accuracy and efficiency.",
+      "Validated model predictions against labeled datasets to ensure recipe relevance and correctness.",
+      "Collaborated on dataset collection and preprocessing to enhance training data quality.",
+      "Documented model architecture and results for academic publication."
+    ],
+    tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
+    image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
+    category: "AI/ML Project",
+    paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
+    github: "https://github.com/dyannadle/Recipe-Generator",
+  },
+  {
+    title: "Maze Solver Game",
+    description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
+    duration: "1 month",
+    responsibilities: [
+      "Designed and implemented maze generation algorithms, including Recursive Backtracker, for random maze creation.",
+      "Developed and integrated pathfinding algorithms such as A* search and Breadth-First Search for automated maze solving.",
+      "Created a responsive graphical user interface with Pygame to visualize maze generation and solver's path dynamically.",
+      "Implemented user controls for manual maze navigation and game state management.",
+      "Conducted extensive testing and debugging to ensure smooth gameplay and accurate pathfinding."
+    ],
+    tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
+    image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
+    category: "AI/ML Project, Game Development",
+    github: "https://github.com/dyannadle/Maze-Solver",
+  },
+    {
+    title: "Image Model Cloudflare Workers AI",
+    description: "Streamlit application leveraging Cloudflare Workers AI to generate and manipulate images using AI models.",
+    duration: "3 weeks",
+    responsibilities: [
+      "Developed AI-powered image generation features using Cloudflare Workers AI API integrated into Streamlit interface.",
+      "Implemented REST API calls and handled asynchronous image processing requests efficiently.",
+      "Managed environment configuration, dependencies, and deployment for seamless application performance.",
+      "Optimized user experience through responsive UI design and error handling.",
+      "Documented API usage and application setup for future maintenance."
+    ],
+    tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
+    image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
+    category: "AI/ML Project",
+    github: "https://github.com/dyannadle/Image-Generator"
+  },
+  {
+    title: "Attendance System",
+    description: "A Python-based face recognition attendance system using OpenCV for automatic detection and recording, with data storage in Excel and reporting features.",
+    duration: "6 weeks",
+    responsibilities: [
+      "Designed and implemented a face recognition attendance system using OpenCV to detect and record attendance automatically.",
+      "Integrated data storage using Pandas and Excel formats for easy report generation and record maintenance.",
+      "Developed a user-friendly GUI with Tkinter to facilitate manual overrides and attendance review.",
+      "Tested system accuracy under various lighting and environmental conditions to ensure reliability.",
+      "Generated detailed attendance reports and analytics to assist management."
+    ],
+    tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
+    image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
+    category: "AI/ML Project",
+    github: "https://github.com/dyannadle/Face-attendance"
+  },
+  {
+    title: "Popular Web Series Page UI Testing",
+    description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series,focusing on navigation, interaction, and content rendering validation.",
+    duration: "2 weeks",
+    responsibilities: [
+      "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials) across devices.",
+      "Tested search functionality rigorously to ensure accurate filtering and retrieval of web series based on user input.",
+      "Validated responsiveness and visual state changes of filter buttons (Trending, Newest, Comedy) under different scenarios.",
+      "Checked functionality and feedback of 'like/favorite' and 'share' buttons for each web series card to enhance UX.",
+      "Ensured smooth vertical scrolling and lazy loading of additional content without performance issues.",
+      "Confirmed clear visibility, accessibility compliance, and UI consistency across various screen sizes and resolutions."
+    ],
+    tools: ["Manual Testing", "Google Sheets", "Bug Tracking Software (JIRA)", "UI Specifications Document"],
+    image: "UI Testing.png",
+    category: "Testing Project",
+    github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
+  }
 ];
 
-// --- Filters ---
 const filters = [
-  "All",
-  "Favorites",
-  "Testing Project",
-  "AI/ML Project",
-  "Automation Project",
-  "Game Development",
+  'All',
+  'Favorites',
+  'Testing Project',
+  'AI/ML Project',
+  'Automation Project',
+  'API Testing',
+  'Game Development',
 ];
 
-// --- Main Component ---
-const ProjectsSection: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
-  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showAllTools, setShowAllTools] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+// --- MODAL COMPONENT ---
 
-  // Filter logic
-  const filteredProjects =
-    activeFilter === "All"
-      ? projects
-      : activeFilter === "Favorites"
-      ? projects.filter((p) => favoritedProjects.includes(p.title))
-      : projects.filter((p) => p.category.includes(activeFilter));
+
+// --- MAIN SHOWCASE COMPONENT ---
+
+const ProjectsSection: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showAllTools, setShowAllTools] = useState<{ [key: string]: boolean }>({});
+
+  // Filter projects based on activeFilter and favorites
+  const filteredProjects = activeFilter === 'All'
+    ? projects
+    : activeFilter === 'Favorites'
+    ? projects.filter((project) => favoritedProjects.includes(project.title))
+    : projects.filter((project) => project.category.includes(activeFilter));
 
   const toggleFavorite = useCallback((title: string) => {
     setFavoritedProjects((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
     );
   }, []);
 
-  const openImageModal = (project: Project) => {
+  const openModal = (project: Project) => {
     setSelectedProject(project);
-    setIsImageModalOpen(true);
+    setIsModalOpen(true);
   };
 
-  const openDetailsModal = (project: Project) => {
-    setSelectedProject(project);
-    setIsDetailsModalOpen(true);
-  };
-
-  const closeModals = () => {
-    setIsImageModalOpen(false);
-    setIsDetailsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
     setSelectedProject(null);
   };
 
+
+
   return (
-    <section
-      id="projects"
+    <section id="projects"
       className="min-h-screen pt-16 pb-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 font-sans"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
         <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4 text-gray-900 tracking-tight">
-          My{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Projects
-          </span>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Projects</span>
         </h2>
-        <p className="text-gray-600 max-w-3xl mx-auto text-center mb-10 leading-relaxed">
-          Click on the image to view project image, or click the title for full
-          details — both open popups without page scroll.
+        <p className="text-gray-600 max-w-4xl mx-auto text-center mb-10 leading-relaxed">
+          Click the image or title to view full details in a popup (no page scrolling).
         </p>
 
         {/* Filters */}
@@ -250,12 +329,12 @@ const ProjectsSection: React.FC = () => {
           {filters.map((filter) => (
             <button
               key={filter}
-              className={`capitalize px-4 py-2 rounded-full border-2 transition-all duration-300 transform hover:scale-105 shadow-md text-sm sm:text-base ${
-                activeFilter === filter
-                  ? "bg-blue-600 text-white border-blue-600 font-semibold shadow-lg shadow-blue-500/50"
-                  : "text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-400"
-              }`}
+              className={`capitalize px-4 py-2 rounded-full border-2 transition-all duration-300 transform hover:scale-105 shadow-md text-sm sm:text-base
+                ${activeFilter === filter 
+                    ? 'bg-blue-600 text-white border-blue-600 font-semibold shadow-lg shadow-blue-500/50' 
+                    : 'text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-400'}`}
               onClick={() => setActiveFilter(filter)}
+              aria-pressed={activeFilter === filter}
             >
               {filter}
             </button>
@@ -264,15 +343,16 @@ const ProjectsSection: React.FC = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
             <RevealAnimation key={project.title}>
               <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-300/50">
-                {/* Image */}
-                <div
-                  onClick={() => openImageModal(project)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View image for ${project.title}`}
+                
+                {/* Image - Click to open popup */}
+                <div 
+                  onClick={() => openModal(project)} 
+                  role="button" 
+                  tabIndex={0} 
+                  aria-label={`View details for ${project.title}`} 
                   className="cursor-pointer h-52 overflow-hidden"
                 >
                   <img
@@ -280,47 +360,51 @@ const ProjectsSection: React.FC = () => {
                     alt={project.title}
                     className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                     loading="lazy"
+                    onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "https://placehold.co/400x208/F0F4FF/4F46E5?text=Project+Image";
+                    }}
                   />
                 </div>
 
-                {/* Favorite */}
+                {/* Favorite button */}
                 <button
                   onClick={() => toggleFavorite(project.title)}
                   className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg text-gray-700 hover:text-red-500 transition-all duration-300 hover:scale-110"
+                  aria-label={`Toggle favorite for ${project.title}`}
                 >
                   {favoritedProjects.includes(project.title) ? (
                     <Star size={24} fill="#FBBF24" color="#FBBF24" />
                   ) : (
-                    <StarOff size={24} color="#4B5563" />
+                    <StarOff size={24} color="#4B5563" /> // FIX: Changed StarOutline to StarOff
                   )}
                 </button>
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3
-                    onClick={() => openDetailsModal(project)}
+                  {/* Title - Clickable for Description Modal */}
+                  <h3 
                     className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
+                    onClick={() => openModal(project)} 
+                    role="button" 
+                    tabIndex={0} 
+                    aria-label={`View details for ${project.title}`}
                   >
                     {project.title}
                   </h3>
-
+                  
+                  {/* Duration Badge */}
                   <div className="inline-flex items-center gap-1 mb-3 px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold shadow-sm">
-                    <Clock size={14} />
+                    <Clock size={14} className="flex-shrink-0" />
                     {project.duration}
                   </div>
+                  
+                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{project.description}</p>
 
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  <h4 className="font-semibold mb-2 text-gray-800">
-                    Tools Used:
-                  </h4>
+                  <h4 className="font-semibold mb-2 text-gray-800">Tools Used:</h4>
                   <ul className="flex flex-wrap gap-2 text-xs font-medium">
-                    {(showAllTools[project.title]
-                      ? project.tools
-                      : project.tools.slice(0, 4)
-                    ).map((tool, i) => (
+                    {/* Show limited tools, with expand button */}
+                    {(showAllTools[project.title] ? project.tools : project.tools.slice(0, 4)).map((tool, i) => (
                       <li
                         key={i}
                         className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full whitespace-nowrap shadow-inner"
@@ -333,18 +417,14 @@ const ProjectsSection: React.FC = () => {
                         className="text-blue-600 hover:text-blue-700 underline text-xs ml-2 mt-1"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setShowAllTools((prev) => ({
-                            ...prev,
-                            [project.title]: !prev[project.title],
-                          }));
+                          setShowAllTools((prev) => ({ ...prev, [project.title]: !prev[project.title] }));
                         }}
                       >
-                        {showAllTools[project.title]
-                          ? "Show Less"
-                          : `+${project.tools.length - 4} More`}
+                        {showAllTools[project.title] ? 'Show Less' : `+${project.tools.length - 4} More`}
                       </button>
                     )}
                   </ul>
+
                 </div>
               </div>
             </RevealAnimation>
@@ -352,106 +432,89 @@ const ProjectsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* IMAGE MODAL */}
-      {isImageModalOpen && selectedProject && (
+      {isModalOpen && selectedProject && (
         <div
           className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModals}
+          onClick={closeModal}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl overflow-hidden p-4 max-w-4xl w-full flex justify-center items-center relative animate-zoom-in"
+            className="bg-white w-full max-w-5xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              aria-label="Close"
-              onClick={closeModals}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/80 hover:bg-gray-200 transition"
-            >
-              <X size={20} />
-            </button>
-            <img
-              src={selectedProject.image}
-              alt={selectedProject.title}
-              className="max-h-[80vh] w-auto object-contain rounded-lg"
-            />
-          </div>
-        </div>
-      )}
+            <div className="flex flex-col h-full">
+              <header className="flex justify-between items-center p-4 border-b">
+                <h2 className="text-xl font-bold text-gray-900">{selectedProject.title}</h2>
+                <button
+                  aria-label="Close"
+                  onClick={closeModal}
+                  className="p-2 rounded-full hover:bg-gray-100"
+                >
+                  <X size={20} />
+                </button>
+              </header>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                <div className="p-4 flex items-center justify-center bg-gray-50">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="max-h-[60vh] md:max-h-[80vh] w-auto max-w-full object-contain rounded-md"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
+                    }}
+                  />
+                </div>
+                <div className="p-6 overflow-y-auto">
+                  <p className="text-gray-700 mb-4">{selectedProject.description}</p>
 
-      {/* DETAILS MODAL */}
-      {isDetailsModalOpen && selectedProject && (
-        <div
-          className="fixed inset-0 z-[1000] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModals}
-        >
-          <div
-            className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-3xl max-h-[90vh] relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-center p-4 border-b">
-              <h2 className="text-xl font-bold text-gray-900">
-                {selectedProject.title}
-              </h2>
-              <button
-                aria-label="Close"
-                onClick={closeModals}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="p-6 overflow-y-auto">
-              <p className="text-gray-700 mb-4">{selectedProject.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-blue-700">Key Responsibilities</h3>
+                  <ul className="list-disc ml-5 space-y-2 text-sm text-gray-700">
+                    {selectedProject.responsibilities.map((resp, i) => (
+                      <li key={i}>{resp}</li>
+                    ))}
+                  </ul>
 
-              <h3 className="text-lg font-semibold mb-2 text-blue-700">
-                Key Responsibilities
-              </h3>
-              <ul className="list-disc ml-5 space-y-2 text-sm text-gray-700">
-                {selectedProject.responsibilities.map((resp, i) => (
-                  <li key={i}>{resp}</li>
-                ))}
-              </ul>
+                  <h4 className="text-lg font-semibold mt-4 mb-2 text-purple-700">Technology Stack</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tools.map((tool, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
 
-              <h4 className="text-lg font-semibold mt-4 mb-2 text-purple-700">
-                Technology Stack
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {selectedProject.tools.map((tool, i) => (
-                  <span
-                    key={i}
-                    className="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-4 pt-4">
-                {selectedProject.github && (
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 underline font-semibold flex items-center gap-2"
-                  >
-                    <Github size={18} /> View Code
-                  </a>
-                )}
-                {selectedProject.paperPublished && (
-                  <a
-                    href={selectedProject.paperPublished}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-700 underline font-semibold"
-                  >
-                    View Paper
-                  </a>
-                )}
+                  <div className="flex gap-4 pt-4">
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline font-semibold flex items-center gap-2"
+                      >
+                        <Github size={18} /> View Code
+                      </a>
+                    )}
+                    {selectedProject.paperPublished && (
+                      <a
+                        href={selectedProject.paperPublished}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-700 underline font-semibold"
+                      >
+                        View Paper
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
+
     </section>
   );
 };
