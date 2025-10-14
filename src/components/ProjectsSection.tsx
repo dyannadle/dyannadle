@@ -122,6 +122,16 @@ interface Project {
   paperPublished?: string;
 }
 
+interface ModalContent {
+  type: 'image' | 'description' | null;
+  project: Project | null;
+}
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  content: ModalContent;
+}
 
 // --- PROJECT DATA (Using the data provided in the previous turn) ---
 const projects: Project[] = [
@@ -275,6 +285,118 @@ const filters = [
 
 // --- MODAL COMPONENT ---
 
+const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
+    if (!isOpen || !content.project) return null;
+
+    const { project } = content;
+    const isImage = content.type === 'image';
+    const isDescription = content.type === 'description';
+
+    const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
+
+    // Conditional classes for the modal body and content based on type
+    const modalBodyClasses = isImage 
+      ? "p-2 flex items-center justify-center h-full"
+      : "p-6 overflow-y-auto max-h-[75vh]"; // Standard scrollable description view
+
+    const modalContentClasses = isImage
+        ? "bg-white rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[98vh] overflow-hidden transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95 flex flex-col"
+        : "bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95";
+
+    return (
+        // Modal Overlay
+        <div 
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-[1000] backdrop-blur-sm transition-opacity duration-300"
+            onClick={onClose} // Close on clicking the backdrop
+        >
+            {/* Modal Content Box */}
+            <div 
+                className={modalContentClasses}
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the content
+            >
+                <header className="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
+                    <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+                    <button 
+                        onClick={onClose} 
+                        className="text-gray-500 hover:text-red-500 p-1 rounded-full hover:bg-red-50 transition-colors"
+                        aria-label="Close modal"
+                    >
+                        <X size={24} />
+                    </button>
+                </header>
+
+                <div className={modalBodyClasses}>
+                    {isImage && (
+                        <div className="flex justify-center items-center h-full w-full">
+                            <img 
+                                src={project.image} 
+                                alt={`Full view of ${project.title}`} 
+                                // FIX: Adjusted max-h to 90vh for maximum fit within viewport
+                                className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl border border-gray-100"
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
+                                }}
+                            />
+                        </div>
+                    )}
+                    
+                    {isDescription && (
+                        <div className="space-y-6 text-gray-700">
+                            {/* Short Description */}
+                            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4">{project.description}</p>
+                            
+                            {/* Responsibilities */}
+                            <h3 className="text-2xl font-semibold mb-3 text-blue-600 border-b pb-1">Key Responsibilities</h3>
+                            <ul className="list-disc list-outside ml-5 space-y-2">
+                                {project.responsibilities.map((resp, i) => (
+                                    <li key={i} className="leading-relaxed">{resp}</li>
+                                ))}
+                            </ul>
+
+                            {/* Tools Used */}
+                            <h3 className="text-xl font-semibold mb-3 text-blue-600 border-b pb-1">Technology Stack</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {project.tools.map((tool, i) => (
+                                    <span key={i} className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full font-medium shadow-sm">
+                                        {tool}
+                                    </span>
+                                ))}
+                            </div>
+
+                            {/* Links */}
+                            <div className="flex gap-4 pt-4 border-t mt-4">
+                                {project.github && (
+                                    <a
+                                        href={project.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 text-primary hover:text-blue-700 font-semibold transition-colors bg-blue-50 px-4 py-2 rounded-lg"
+                                        aria-label={`View GitHub repository for ${project.title}`}
+                                    >
+                                        <Github size={20} />
+                                        View Code on GitHub
+                                    </a>
+                                )}
+                                {project.paperPublished && (
+                                    <a
+                                        href={project.paperPublished}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 text-primary hover:text-blue-700 font-semibold transition-colors bg-green-50 px-4 py-2 rounded-lg"
+                                        aria-label={`View published paper for ${project.title}`}
+                                    >
+                                        View Published Paper
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 // --- MAIN SHOWCASE COMPONENT ---
 
@@ -282,7 +404,10 @@ const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [favoritedProjects, setFavoritedProjects] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [modalContent, setModalContent] = useState<ModalContent>({
+    type: null,
+    project: null,
+  });
   const [showAllTools, setShowAllTools] = useState<{ [key: string]: boolean }>({});
 
   // Filter projects based on activeFilter and favorites
@@ -298,16 +423,16 @@ const ProjectsSection: React.FC = () => {
     );
   }, []);
 
-  const openModal = (project: Project) => {
-    setSelectedProject(project);
+  const openModal = (type: 'image' | 'description', project: Project) => {
+    setModalContent({ type, project });
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedProject(null);
+    // Clear content slightly after closing for smooth transition
+    setTimeout(() => setModalContent({ type: null, project: null }), 300);
   };
-
 
 
   return (
@@ -321,7 +446,7 @@ const ProjectsSection: React.FC = () => {
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Projects</span>
         </h2>
         <p className="text-gray-600 max-w-4xl mx-auto text-center mb-10 leading-relaxed">
-          Click the image or title to view full details in a popup (no page scrolling).
+          Showcasing my work across AI/ML, automation, game development, and testing. Click the image to zoom in, or click the title for the full details.
         </p>
 
         {/* Filters */}
@@ -347,12 +472,12 @@ const ProjectsSection: React.FC = () => {
             <RevealAnimation key={project.title}>
               <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-300/50">
                 
-                {/* Image - Click to open popup */}
+                {/* Image - Clickable for Image Modal */}
                 <div 
-                  onClick={() => openModal(project)} 
+                  onClick={() => openModal('image', project)} 
                   role="button" 
                   tabIndex={0} 
-                  aria-label={`View details for ${project.title}`} 
+                  aria-label={`View full image for ${project.title}`} 
                   className="cursor-pointer h-52 overflow-hidden"
                 >
                   <img
@@ -385,10 +510,10 @@ const ProjectsSection: React.FC = () => {
                   {/* Title - Clickable for Description Modal */}
                   <h3 
                     className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
-                    onClick={() => openModal(project)} 
+                    onClick={() => openModal('description', project)} 
                     role="button" 
                     tabIndex={0} 
-                    aria-label={`View details for ${project.title}`}
+                    aria-label={`View full details for ${project.title}`}
                   >
                     {project.title}
                   </h3>
@@ -431,90 +556,15 @@ const ProjectsSection: React.FC = () => {
           ))}
         </div>
       </div>
-
-      {isModalOpen && selectedProject && (
-        <div
-          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={closeModal}
-        >
-          <div
-            className="bg-white w-full max-w-5xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex flex-col h-full">
-              <header className="flex justify-between items-center p-4 border-b">
-                <h2 className="text-xl font-bold text-gray-900">{selectedProject.title}</h2>
-                <button
-                  aria-label="Close"
-                  onClick={closeModal}
-                  className="p-2 rounded-full hover:bg-gray-100"
-                >
-                  <X size={20} />
-                </button>
-              </header>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                <div className="p-4 flex items-center justify-center bg-gray-50">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="max-h-[60vh] md:max-h-[80vh] w-auto max-w-full object-contain rounded-md"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
-                    }}
-                  />
-                </div>
-                <div className="p-6 overflow-y-auto">
-                  <p className="text-gray-700 mb-4">{selectedProject.description}</p>
-
-                  <h3 className="text-lg font-semibold mb-2 text-blue-700">Key Responsibilities</h3>
-                  <ul className="list-disc ml-5 space-y-2 text-sm text-gray-700">
-                    {selectedProject.responsibilities.map((resp, i) => (
-                      <li key={i}>{resp}</li>
-                    ))}
-                  </ul>
-
-                  <h4 className="text-lg font-semibold mt-4 mb-2 text-purple-700">Technology Stack</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tools.map((tool, i) => (
-                      <span
-                        key={i}
-                        className="text-xs px-3 py-1 bg-purple-100 text-purple-700 rounded-full"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-4 pt-4">
-                    {selectedProject.github && (
-                      <a
-                        href={selectedProject.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 underline font-semibold flex items-center gap-2"
-                      >
-                        <Github size={18} /> View Code
-                      </a>
-                    )}
-                    {selectedProject.paperPublished && (
-                      <a
-                        href={selectedProject.paperPublished}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-green-700 underline font-semibold"
-                      >
-                        View Paper
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      
+      {/* Project Modal (Handles both image zoom and full text) */}
+      {isModalOpen && (
+        <ProjectModal 
+            isOpen={isModalOpen} 
+            onClose={closeModal} 
+            content={modalContent} 
+        />
       )}
-
     </section>
   );
 };
