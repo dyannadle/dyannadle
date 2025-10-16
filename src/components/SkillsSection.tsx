@@ -12,7 +12,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 const SkillsSection: React.FC = () => {
   return (
-    <TooltipProvider delayDuration={0}>
+
       <section 
         id="skills"
         className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
@@ -55,7 +55,7 @@ const SkillsSection: React.FC = () => {
           </div>
         </div>
       </section>
-    </TooltipProvider>
+ 
   );
 };
 
