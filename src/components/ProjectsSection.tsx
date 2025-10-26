@@ -354,6 +354,35 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                                 ))}
                             </ul>
 
+
+                                  {/* Search + Filter UI */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+          <input
+            type="text"
+            placeholder="Search projects by title..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border dark:border-gray-700 dark:bg-gray-800 dark:text-white px-4 py-2 rounded-lg shadow-inner w-full sm:max-w-xs focus:ring-2 focus:ring-blue-500"
+          />
+
+          <div className='flex flex-wrap justify-center gap-2'>
+            {filters.map((cat) => (
+              <button
+                key={cat}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors shadow-sm
+                  ${filter === cat
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/50"
+                    : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200 hover:bg-blue-100 hover:text-blue-600"
+                  }`}
+                onClick={() => setFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+
                             {/* Tools Used */}
                             <h3 className="text-xl font-semibold mb-3 text-blue-600 border-b pb-1">Technology Stack</h3>
                             <div className="flex flex-wrap gap-2">
