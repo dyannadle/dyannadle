@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Github, Clock, Star, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- FIREBASE IMPORTS (MANDATORY FOR PERSISTENCE) ---
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithCustomToken, signInAnonymously } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot } from 'firebase/firestore'; // Removed unused collection import
+// --- FIREBASE IMPORTS (FIXED: Using full module imports to resolve Vite error) ---
+import * as firebaseApp from 'firebase/app';
+import * as firebaseAuth from 'firebase/auth';
+import * as firebaseFirestore from 'firebase/firestore'; 
 
 // --- CONFIGURATION ---
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -13,7 +13,7 @@ const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__f
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
 // Firestore path for favorites: /artifacts/{appId}/users/{userId}/favorites/userList
-const getFavoritesDocRef = (db: any, userId: string) => doc(db, 'artifacts', appId, 'users', userId, 'favorites', 'userList');
+const getFavoritesDocRef = (db: any, userId: string) => firebaseFirestore.doc(db, 'artifacts', appId, 'users', userId, 'favorites', 'userList');
 
 // --- INTERFACES ---
 interface Project {
@@ -191,7 +191,6 @@ const filters = [
 // --- APP COMPONENT (The Single File/Main Component) ---
 
 export default function App() {
-  // Fixes a potential Vite caching/resolution issue by regenerating the file.
   
   const [db, setDb] = useState<any>(null);
   const [userId, setUserId] = useState<string | null>(null);
@@ -210,16 +209,21 @@ export default function App() {
     }
 
     try {
-      const app = initializeApp(firebaseConfig);
-      const firestore = getFirestore(app);
-      const authService = getAuth(app);
+      // FIX: Access initializeApp from the imported module
+      const app = firebaseApp.initializeApp(firebaseConfig);
+      // FIX: Access getFirestore from the imported module
+      const firestore = firebaseFirestore.getFirestore(app);
+      // FIX: Access getAuth from the imported module
+      const authService = firebaseAuth.getAuth(app);
       setDb(firestore);
 
       const signIn = async () => {
         if (initialAuthToken) {
-          await signInWithCustomToken(authService, initialAuthToken);
+          // FIX: Access signInWithCustomToken from the imported module
+          await firebaseAuth.signInWithCustomToken(authService, initialAuthToken);
         } else {
-          await signInAnonymously(authService);
+          // FIX: Access signInAnonymously from the imported module
+          await firebaseAuth.signInAnonymously(authService);
         }
         setUserId(authService.currentUser?.uid || crypto.randomUUID());
       };
@@ -236,7 +240,8 @@ export default function App() {
     if (db && userId) {
       const docRef = getFavoritesDocRef(db, userId);
       
-      const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      // FIX: Access onSnapshot from the imported module
+      const unsubscribe = firebaseFirestore.onSnapshot(docRef, (docSnap) => {
         if (docSnap.exists() && Array.isArray(docSnap.data().list)) {
           setFavorites(docSnap.data().list);
         } else {
@@ -268,7 +273,8 @@ export default function App() {
 
     try {
       const docRef = getFavoritesDocRef(db, userId);
-      await setDoc(docRef, { list: newFavorites }, { merge: false }); // Use merge:false to overwrite just the list
+      // FIX: Access setDoc from the imported module
+      await firebaseFirestore.setDoc(docRef, { list: newFavorites }, { merge: false }); // Use merge:false to overwrite just the list
     } catch (error) {
       console.error("Error updating favorites in Firestore:", error);
     }
