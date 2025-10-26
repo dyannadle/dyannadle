@@ -272,7 +272,6 @@ const projects: Project[] = [
     github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
   }
 ];
-
 const filters = [
   'All',
   'Favorites',
