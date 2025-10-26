@@ -2,18 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Github, Clock, Star, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- FIREBASE IMPORTS (FIXED: Using full module imports to resolve Vite error) ---
-import * as firebaseApp from 'firebase/app';
-import * as firebaseAuth from 'firebase/auth';
-import * as firebaseFirestore from 'firebase/firestore'; 
+// NOTE ON FIREBASE IMPORTS: 
+// All Firebase imports are now handled dynamically inside useEffect (Step 1) 
+// using CDN paths to resolve persistent module resolution errors (Vite/Build Issue).
 
 // --- CONFIGURATION ---
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-// Firestore path for favorites: /artifacts/{appId}/users/{userId}/favorites/userList
-const getFavoritesDocRef = (db: any, userId: string) => firebaseFirestore.doc(db, 'artifacts', appId, 'users', userId, 'favorites', 'userList');
+// Helper to get Firestore document reference (uses dynamic imports in the logic below)
+let getFavoritesDocRef: any; 
+let setDoc: any;
+let onSnapshot: any;
+let signInWithCustomToken: any;
+let signInAnonymously: any;
+let getAuth: any;
+let getFirestore: any;
+let initializeApp: any;
+let doc: any;
 
 // --- INTERFACES ---
 interface Project {
@@ -22,11 +29,11 @@ interface Project {
   description: string;
   duration: string;
   responsibilities: string[];
-  tools: string[]; // Corrected to array of strings
+  tools: string[];
   image: string;
   category: string;
   github?: string;
-  paperPublished?: string; // Added missing field
+  paperPublished?: string;
 }
 
 interface PopupState {
@@ -35,8 +42,7 @@ interface PopupState {
   y: number;
 }
 
-// --- PROJECT DATA (FIXED: Added unique IDs and matched interface types) ---
-// Note: techStack was merged into tools for consistency with the interface.
+// --- PROJECT DATA ---
 const projects: Project[] = [
   {
     id: "p1",
@@ -201,54 +207,69 @@ export default function App() {
   const [popup, setPopup] = useState<PopupState | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // 1. FIREBASE INITIALIZATION AND AUTH
+  // 1. FIREBASE INITIALIZATION AND AUTH (FIXED: Dynamic CDN Imports)
   useEffect(() => {
-    if (!firebaseConfig) {
-      console.error("Firebase config is missing.");
-      return;
-    }
-
-    try {
-      // FIX: Access initializeApp from the imported module
-      const app = firebaseApp.initializeApp(firebaseConfig);
-      // FIX: Access getFirestore from the imported module
-      const firestore = firebaseFirestore.getFirestore(app);
-      // FIX: Access getAuth from the imported module
-      const authService = firebaseAuth.getAuth(app);
-      setDb(firestore);
-
-      const signIn = async () => {
-        if (initialAuthToken) {
-          // FIX: Access signInWithCustomToken from the imported module
-          await firebaseAuth.signInWithCustomToken(authService, initialAuthToken);
-        } else {
-          // FIX: Access signInAnonymously from the imported module
-          await firebaseAuth.signInAnonymously(authService);
+    const initializeFirebase = async () => {
+        if (!firebaseConfig) {
+            console.error("Firebase config is missing.");
+            return;
         }
-        setUserId(authService.currentUser?.uid || crypto.randomUUID());
-      };
 
-      signIn().catch(err => console.error("Firebase Sign-in Error:", err));
-      
-    } catch (e) {
-      console.error("Firebase Initialization Error:", e);
-    }
+        try {
+            // Dynamically import Firebase services via CDN URLs (last resort fix for module errors)
+            const appModule = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js');
+            const authModule = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js');
+            const firestoreModule = await import('https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js');
+            
+            // Assign imported functions globally for the component
+            initializeApp = appModule.initializeApp;
+            getAuth = authModule.getAuth;
+            signInWithCustomToken = authModule.signInWithCustomToken;
+            signInAnonymously = authModule.signInAnonymously;
+            getFirestore = firestoreModule.getFirestore;
+            onSnapshot = firestoreModule.onSnapshot;
+            setDoc = firestoreModule.setDoc;
+            doc = firestoreModule.doc;
+
+            // Define the helper using the imported 'doc' function
+            getFavoritesDocRef = (db: any, userId: string) => doc(db, 'artifacts', appId, 'users', userId, 'favorites', 'userList');
+
+
+            const app = initializeApp(firebaseConfig);
+            const firestore = getFirestore(app);
+            const authService = getAuth(app);
+            setDb(firestore);
+
+            const signIn = async () => {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(authService, initialAuthToken);
+                } else {
+                    await signInAnonymously(authService);
+                }
+                setUserId(authService.currentUser?.uid || crypto.randomUUID());
+            };
+
+            signIn().catch(err => console.error("Firebase Sign-in Error:", err));
+            
+        } catch (e) {
+            console.error("Firebase Initialization Error:", e);
+        }
+    };
+    initializeFirebase();
   }, []);
 
   // 2. FIRESTORE: Load favorites list using onSnapshot
   useEffect(() => {
-    if (db && userId) {
+    if (db && userId && onSnapshot) { // Check if onSnapshot is loaded
       const docRef = getFavoritesDocRef(db, userId);
       
-      // FIX: Access onSnapshot from the imported module
-      const unsubscribe = firebaseFirestore.onSnapshot(docRef, (docSnap) => {
+      const unsubscribe = onSnapshot(docRef, (docSnap: any) => {
         if (docSnap.exists() && Array.isArray(docSnap.data().list)) {
           setFavorites(docSnap.data().list);
         } else {
-          // Initialize list if document doesn't exist or list is empty
           setFavorites([]);
         }
-      }, (error) => {
+      }, (error: any) => {
         console.error("Firestore Snapshot Error:", error);
       });
 
@@ -258,9 +279,9 @@ export default function App() {
 
   // 3. FIRESTORE: Save/Update favorites list
   const toggleFavorite = async (e: React.MouseEvent, id: string) => {
-    e.stopPropagation(); // Stop card click handler from triggering
+    e.stopPropagation(); 
     
-    if (!db || !userId) {
+    if (!db || !userId || !setDoc) { // Check if setDoc is loaded
       console.warn("Database not ready. Cannot save favorite.");
       return;
     }
@@ -273,8 +294,7 @@ export default function App() {
 
     try {
       const docRef = getFavoritesDocRef(db, userId);
-      // FIX: Access setDoc from the imported module
-      await firebaseFirestore.setDoc(docRef, { list: newFavorites }, { merge: false }); // Use merge:false to overwrite just the list
+      await setDoc(docRef, { list: newFavorites }, { merge: false });
     } catch (error) {
       console.error("Error updating favorites in Firestore:", error);
     }
@@ -282,14 +302,12 @@ export default function App() {
 
   // Filter projects based on filter, search, and favorites list
   const filteredProjects = projects.filter((p) => {
-    // FIX: Category check uses includes to handle multi-category items (e.g., 'AI/ML Project, Game Development')
     const categoryMatch = filter === 'All'
       ? true
       : filter === 'Favorites'
         ? favorites.includes(p.id)
         : p.category.includes(filter);
 
-    // Search check
     const searchMatch = p.title.toLowerCase().includes(search.toLowerCase());
 
     return categoryMatch && searchMatch;
@@ -315,7 +333,6 @@ export default function App() {
   // Close popup on click outside (document click)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Check if the click occurred within the section element or the popup itself
       const popupElement = document.querySelector('.floating-popup');
       if (popup && popupElement && !popupElement.contains(event.target as Node)) {
         closePopup();
@@ -377,13 +394,13 @@ export default function App() {
                 className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 group cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }} // Staggered entry animation
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                onClick={(e) => handlePopup(e, p)} // Open popup on click anywhere on the card
+                onClick={(e) => handlePopup(e, p)}
               >
                 {/* Favorite Star Button */}
                 <button 
-                  onClick={(e) => toggleFavorite(e, p.id)} // Calls fixed toggleFavorite with event stopping
+                  onClick={(e) => toggleFavorite(e, p.id)}
                   className="absolute top-4 right-4 bg-white dark:bg-gray-900 p-1.5 rounded-full shadow-lg z-10 transition-transform hover:scale-110"
                   aria-label="Toggle favorite button"
                 >
