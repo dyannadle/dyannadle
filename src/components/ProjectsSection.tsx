@@ -1,4 +1,4 @@
- import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Github, Clock, Star, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
