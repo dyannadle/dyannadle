@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- FIREBASE IMPORTS (MANDATORY FOR PERSISTENCE) ---
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithCustomToken, signInAnonymously } from 'firebase/auth';
-import { getFirestore, doc, setDoc, onSnapshot, collection } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, onSnapshot } from 'firebase/firestore'; // Removed unused collection import
 
 // --- CONFIGURATION ---
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
@@ -191,6 +191,8 @@ const filters = [
 // --- APP COMPONENT (The Single File/Main Component) ---
 
 export default function App() {
+  // Fixes a potential Vite caching/resolution issue by regenerating the file.
+  
   const [db, setDb] = useState<any>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -377,7 +379,7 @@ export default function App() {
                 <button 
                   onClick={(e) => toggleFavorite(e, p.id)} // Calls fixed toggleFavorite with event stopping
                   className="absolute top-4 right-4 bg-white dark:bg-gray-900 p-1.5 rounded-full shadow-lg z-10 transition-transform hover:scale-110"
-                  aria-label={`Toggle favorite for ${p.title}`}
+                  aria-label="Toggle favorite button"
                 >
                   <Star
                     size={22}
