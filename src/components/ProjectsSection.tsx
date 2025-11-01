@@ -299,25 +299,26 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
       : "p-6 overflow-y-auto max-h-[75vh]"; // Standard scrollable description view
 
     const modalContentClasses = isImage
-        ? "bg-white rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[98vh] overflow-hidden transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95 flex flex-col"
-        : "bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-300 scale-100 animate-in fade-in zoom-in-95";
+        ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
+        : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500";
 
     return (
-        // Modal Overlay
+        // Modal Overlay - Same blurred locked screen for both image and description
         <div 
-            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[1000] animate-fade-in"
-            onClick={onClose} // Close on clicking the backdrop
+            className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000] transition-all duration-300"
+            onClick={onClose}
+            style={{ backdropFilter: 'blur(8px)' }}
         >
             {/* Modal Content Box */}
             <div 
-                className={`${modalContentClasses} animate-scale-in`}
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the content
+                className={`${modalContentClasses} animate-scale-in shadow-2xl`}
+                onClick={(e) => e.stopPropagation()}
             >
-                <header className="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50">
-                    <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+                <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 sticky top-0 z-20">
+                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>
                     <button 
                         onClick={onClose} 
-                        className="text-gray-500 hover:text-red-500 p-2 rounded-full hover:bg-red-50 transition-all duration-300 hover:rotate-90 hover:scale-110"
+                        className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300 hover:rotate-90 hover:scale-110"
                         aria-label="Close modal"
                     >
                         <X size={24} />
@@ -326,11 +327,11 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
 
                 <div className={modalBodyClasses}>
                     {isImage && (
-                        <div className="flex justify-center items-center h-full w-full">
+                        <div className="flex justify-center items-center h-full w-full p-4 bg-gray-50 dark:bg-gray-900">
                             <img 
                                 src={project.image} 
                                 alt={`Full view of ${project.title}`} 
-                                className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl border border-gray-100 transition-transform duration-500 hover:scale-105 animate-fade-in"
+                                className="w-auto max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 transition-transform duration-500 hover:scale-[1.02] animate-fade-in"
                                 onError={(e) => {
                                     e.currentTarget.onerror = null;
                                     e.currentTarget.src = "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
@@ -340,23 +341,23 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                     )}
                     
                     {isDescription && (
-                        <div className="space-y-6 text-gray-700">
+                        <div className="space-y-6 text-gray-700 dark:text-gray-300">
                             {/* Short Description */}
-                            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4">{project.description}</p>
+                            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 dark:text-gray-200">{project.description}</p>
                             
                             {/* Responsibilities */}
-                            <h3 className="text-2xl font-semibold mb-3 text-blue-600 border-b pb-1">Key Responsibilities</h3>
+                            <h3 className="text-2xl font-semibold mb-3 text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">Key Responsibilities</h3>
                             <ul className="list-disc list-outside ml-5 space-y-2">
                                 {project.responsibilities.map((resp, i) => (
-                                    <li key={i} className="leading-relaxed">{resp}</li>
+                                    <li key={i} className="leading-relaxed dark:text-gray-300">{resp}</li>
                                 ))}
                             </ul>
 
                             {/* Tools Used */}
-                            <h3 className="text-xl font-semibold mb-3 text-blue-600 border-b pb-1">Technology Stack</h3>
+                            <h3 className="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">Technology Stack</h3>
                             <div className="flex flex-wrap gap-2">
                                 {project.tools.map((tool, i) => (
-                                    <span key={i} className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full font-medium shadow-sm">
+                                    <span key={i} className="text-sm px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full font-medium shadow-sm">
                                         {tool}
                                     </span>
                                 ))}
