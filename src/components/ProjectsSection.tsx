@@ -305,19 +305,19 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
     return (
         // Modal Overlay
         <div 
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-[1000] backdrop-blur-sm transition-opacity duration-300"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[1000] animate-fade-in"
             onClick={onClose} // Close on clicking the backdrop
         >
             {/* Modal Content Box */}
             <div 
-                className={modalContentClasses}
+                className={`${modalContentClasses} animate-scale-in`}
                 onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the content
             >
-                <header className="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
+                <header className="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50">
                     <h2 className="text-xl font-bold text-gray-800">{title}</h2>
                     <button 
                         onClick={onClose} 
-                        className="text-gray-500 hover:text-red-500 p-1 rounded-full hover:bg-red-50 transition-colors"
+                        className="text-gray-500 hover:text-red-500 p-2 rounded-full hover:bg-red-50 transition-all duration-300 hover:rotate-90 hover:scale-110"
                         aria-label="Close modal"
                     >
                         <X size={24} />
@@ -330,8 +330,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                             <img 
                                 src={project.image} 
                                 alt={`Full view of ${project.title}`} 
-                                // FIX: Adjusted max-h to 90vh for maximum fit within viewport
-                                className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl border border-gray-100"
+                                className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl border border-gray-100 transition-transform duration-500 hover:scale-105 animate-fade-in"
                                 onError={(e) => {
                                     e.currentTarget.onerror = null;
                                     e.currentTarget.src = "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
@@ -352,35 +351,6 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                                     <li key={i} className="leading-relaxed">{resp}</li>
                                 ))}
                             </ul>
-
-
-                                  {/* Search + Filter UI */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
-          <input
-            type="text"
-            placeholder="Search projects by title..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border dark:border-gray-700 dark:bg-gray-800 dark:text-white px-4 py-2 rounded-lg shadow-inner w-full sm:max-w-xs focus:ring-2 focus:ring-blue-500"
-          />
-
-          <div className='flex flex-wrap justify-center gap-2'>
-            {filters.map((cat) => (
-              <button
-                key={cat}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors shadow-sm
-                  ${filter === cat
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/50"
-                    : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200 hover:bg-blue-100 hover:text-blue-600"
-                  }`}
-                onClick={() => setFilter(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
 
                             {/* Tools Used */}
                             <h3 className="text-xl font-semibold mb-3 text-blue-600 border-b pb-1">Technology Stack</h3>
@@ -438,6 +408,29 @@ const ProjectsSection: React.FC = () => {
   });
   const [showAllTools, setShowAllTools] = useState<{ [key: string]: boolean }>({});
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  // Close modal on ESC key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        closeModal();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isModalOpen]);
+
   // Filter projects based on activeFilter and favorites
   const filteredProjects = activeFilter === 'All'
     ? projects
@@ -482,9 +475,9 @@ const ProjectsSection: React.FC = () => {
           {filters.map((filter) => (
             <button
               key={filter}
-              className={`capitalize px-4 py-2 rounded-full border-2 transition-all duration-300 transform hover:scale-105 shadow-md text-sm sm:text-base
+              className={`capitalize px-4 py-2 rounded-full border-2 transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-md text-sm sm:text-base
                 ${activeFilter === filter 
-                    ? 'bg-blue-600 text-white border-blue-600 font-semibold shadow-lg shadow-blue-500/50' 
+                    ? 'bg-blue-600 text-white border-blue-600 font-semibold shadow-lg shadow-blue-500/50 scale-105' 
                     : 'text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-400'}`}
               onClick={() => setActiveFilter(filter)}
               aria-pressed={activeFilter === filter}
@@ -497,8 +490,13 @@ const ProjectsSection: React.FC = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {filteredProjects.map((project, idx) => (
-            <RevealAnimation key={project.title}>
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-2 hover:shadow-blue-300/50">
+            <RevealAnimation 
+              key={project.title}
+              animation="fade-in-up"
+              delay={idx * 100}
+              duration={600}
+            >
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-300/40 hover:scale-[1.02]">
                 
                 {/* Image - Clickable for Image Modal */}
                 <div 
@@ -511,7 +509,7 @@ const ProjectsSection: React.FC = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-115 group-hover:rotate-1"
                     loading="lazy"
                     onError={(e) => {
                         e.currentTarget.onerror = null;
@@ -523,13 +521,13 @@ const ProjectsSection: React.FC = () => {
                 {/* Favorite button */}
                 <button
                   onClick={() => toggleFavorite(project.title)}
-                  className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg text-gray-700 hover:text-red-500 transition-all duration-300 hover:scale-110"
+                  className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg text-gray-700 hover:text-red-500 transition-all duration-300 hover:scale-125 active:scale-95 z-10"
                   aria-label={`Toggle favorite for ${project.title}`}
                 >
                   {favoritedProjects.includes(project.title) ? (
-                    <Star size={24} fill="#FBBF24" color="#FBBF24" />
+                    <Star size={24} fill="#FBBF24" color="#FBBF24" className="animate-pulse" />
                   ) : (
-                    <StarOff size={24} color="#4B5563" /> // FIX: Changed StarOutline to StarOff
+                    <StarOff size={24} color="#4B5563" />
                   )}
                 </button>
 
@@ -537,7 +535,7 @@ const ProjectsSection: React.FC = () => {
                 <div className="p-6">
                   {/* Title - Clickable for Description Modal */}
                   <h3 
-                    className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-colors"
+                    className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-all duration-300 hover:translate-x-1"
                     onClick={() => openModal('description', project)} 
                     role="button" 
                     tabIndex={0} 
