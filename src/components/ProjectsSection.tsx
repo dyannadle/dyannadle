@@ -1,5 +1,6 @@
 // React and Hooks
 import React, { useState, useCallback, Fragment, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 // --- START RevealAnimation Component (From uploaded RevealAnimation.tsx) ---
 // Note: This requires a utility function `cn` which is assumed to be present.
@@ -302,7 +303,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
         ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
         : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500";
 
-    return (
+        return createPortal(
         // Modal Overlay - Same blurred locked screen for both image and description
         <div 
             className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000] transition-all duration-300"
@@ -393,7 +394,8 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                     )}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
