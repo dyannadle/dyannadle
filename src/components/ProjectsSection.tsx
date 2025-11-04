@@ -303,28 +303,34 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
         ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
         : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500";
 
-        return createPortal(
-        // Modal Overlay - Same blurred locked screen for both image and description
+    const modalRoot = (typeof document !== 'undefined' && document.getElementById('modal-root')) || document.body;
+    const overlayRef = useRef<HTMLDivElement>(null);
+
+    return createPortal(
+    // Modal Overlay - Same blurred locked screen for both image and description
+    <div 
+        ref={overlayRef}
+        role="dialog"
+        aria-modal="true"
+        className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000] transition-all duration-300"
+        onMouseDown={(e) => { if (e.target === overlayRef.current) onClose(); }}
+        style={{ backdropFilter: 'blur(8px)' }}
+    >
+        {/* Modal Content Box */}
         <div 
-            className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000] transition-all duration-300"
-            onClick={onClose}
-            style={{ backdropFilter: 'blur(8px)' }}
+            className={`${modalContentClasses} animate-scale-in shadow-2xl relative z-[1001]`}
+            onMouseDown={(e) => e.stopPropagation()}
         >
-            {/* Modal Content Box */}
-            <div 
-                className={`${modalContentClasses} animate-scale-in shadow-2xl`}
-                onClick={(e) => e.stopPropagation()}
-            >
-                <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 sticky top-0 z-20">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>
-                    <button 
-                        onClick={onClose} 
-                        className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300 hover:rotate-90 hover:scale-110"
-                        aria-label="Close modal"
-                    >
-                        <X size={24} />
-                    </button>
-                </header>
+            <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 flex-shrink-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 sticky top-0 z-20">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>
+                <button 
+                    onClick={onClose} 
+                    className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300 hover:rotate-90 hover:scale-110"
+                    aria-label="Close modal"
+                >
+                    <X size={24} />
+                </button>
+            </header>
 
                 <div className={modalBodyClasses}>
                     {isImage && (
@@ -395,7 +401,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                 </div>
             </div>
         </div>,
-        document.body
+        modalRoot as Element
     );
 };
 
