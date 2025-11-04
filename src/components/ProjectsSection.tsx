@@ -296,12 +296,12 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
 
     // Conditional classes for the modal body and content based on type
     const modalBodyClasses = isImage 
-      ? "p-2 flex items-center justify-center h-full"
-      : "p-6 overflow-y-auto max-h-[75vh]"; // Standard scrollable description view
+      ? "p-2 flex-1 flex items-center justify-center"
+      : "p-6 overflow-y-auto flex-1"; // Standard scrollable description view
 
     const modalContentClasses = isImage
-        ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
-        : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500";
+        ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] transform transition-all duration-500 flex flex-col"
+        : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] transform transition-all duration-500 flex flex-col";
 
     const modalRoot = (typeof document !== 'undefined' && document.getElementById('modal-root')) || document.body;
     const overlayRef = useRef<HTMLDivElement>(null);
