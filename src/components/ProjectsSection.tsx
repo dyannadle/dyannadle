@@ -296,7 +296,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
 
     // Conditional classes for the modal body and content based on type
     const modalBodyClasses = isImage 
-      ? "p-2 flex items-center justify-center"
+      ? "p-2 flex-1 min-h-0 flex items-center justify-center"
       : "p-6 overflow-y-auto max-h-[75vh]"; // Standard scrollable description view
 
     const modalContentClasses = isImage
