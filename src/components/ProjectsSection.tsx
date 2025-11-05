@@ -514,7 +514,7 @@ const ProjectsSection: React.FC = () => {
               delay={idx * 100}
               duration={600}
             >
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-300/40 hover:scale-[1.02]">
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 transform transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-300/40 hover:scale-[1.02]" onClick={() => openModal('image', project)} role="button" tabIndex={0} aria-label={`Open image for ${project.title}`}>
                 
                 {/* Image - Clickable for Image Modal */}
                 <div 
@@ -538,7 +538,7 @@ const ProjectsSection: React.FC = () => {
 
                 {/* Favorite button */}
                 <button
-                  onClick={() => toggleFavorite(project.title)}
+                  onClick={(e) => { e.stopPropagation(); toggleFavorite(project.title); }}
                   className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg text-gray-700 hover:text-red-500 transition-all duration-300 hover:scale-125 active:scale-95 z-10"
                   aria-label={`Toggle favorite for ${project.title}`}
                 >
@@ -554,7 +554,7 @@ const ProjectsSection: React.FC = () => {
                   {/* Title - Clickable for Description Modal */}
                   <h3 
                     className="text-2xl font-bold mb-3 text-gray-900 cursor-pointer hover:text-blue-600 transition-all duration-300 hover:translate-x-1"
-                    onClick={() => openModal('description', project)} 
+                    onClick={(e) => { e.stopPropagation(); openModal('description', project); }} 
                     role="button" 
                     tabIndex={0} 
                     aria-label={`View full details for ${project.title}`}
