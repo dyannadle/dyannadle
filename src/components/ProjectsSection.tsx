@@ -268,7 +268,7 @@ const projects: Project[] = [
       "Confirmed clear visibility, accessibility compliance, and UI consistency across various screen sizes and resolutions."
     ],
     tools: ["Manual Testing", "Google Sheets", "Bug Tracking Software (JIRA)", "UI Specifications Document"],
-    image: "UI Testing.png",
+    image: "/UI Testing.png",
     category: "Testing Project",
     github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"
   }
@@ -300,7 +300,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
       : "p-6 overflow-y-auto max-h-[75vh]"; // Standard scrollable description view
 
     const modalContentClasses = isImage
-        ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
+        ? "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full h-[90vh] max-h-[95vh] overflow-hidden transform transition-all duration-500 flex flex-col"
         : "bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500 flex flex-col";
 
     const modalRoot = (typeof document !== 'undefined' && document.getElementById('modal-root')) || document.body;
@@ -339,8 +339,16 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
                                 src={project.image} 
                                 alt={`Full view of ${project.title}`} 
                                 className="w-auto max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 transition-transform duration-500 hover:scale-[1.02] animate-fade-in"
+                                onLoad={(e) => {
+                                  console.log('ProjectModal image loaded', {
+                                    src: e.currentTarget.currentSrc,
+                                    naturalWidth: e.currentTarget.naturalWidth,
+                                    naturalHeight: e.currentTarget.naturalHeight,
+                                  });
+                                }}
                                 onError={(e) => {
                                     e.currentTarget.onerror = null;
+                                    console.error('ProjectModal image failed', project.image);
                                     e.currentTarget.src = "https://placehold.co/800x600/E0E7FF/3730A3?text=Image+Unavailable";
                                 }}
                             />
@@ -454,6 +462,7 @@ const ProjectsSection: React.FC = () => {
   }, []);
 
   const openModal = (type: 'image' | 'description', project: Project) => {
+    console.log('Open modal', { type, image: project.image, title: project.title });
     setModalContent({ type, project });
     setIsModalOpen(true);
   };
