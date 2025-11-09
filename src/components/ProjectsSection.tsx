@@ -86,7 +86,7 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
 // --- END RevealAnimation Component ---
 
 // Icons
-import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 
 // Import project data
 import { Project, projects, filters } from '../data/projectsData';
@@ -106,13 +106,63 @@ interface ModalProps {
 const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewImage }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen && content.type === 'image') {
       setImageLoading(true);
       setImageError(false);
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
     }
   }, [isOpen, content.type]);
+
+  // Mouse wheel zoom
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (content.type === 'image' && imageContainerRef.current?.contains(e.target as Node)) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        setZoom((prev) => Math.max(0.5, Math.min(5, prev + delta)));
+      }
+    };
+
+    if (isOpen && content.type === 'image') {
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      return () => window.removeEventListener('wheel', handleWheel);
+    }
+  }, [isOpen, content.type]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 1) {
+      setPan({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleZoomIn = () => setZoom((prev) => Math.min(5, prev + 0.25));
+  const handleZoomOut = () => setZoom((prev) => Math.max(0.5, prev - 0.25));
+  const handleZoomReset = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
 
   if (!isOpen || !content.project) return null;
   
@@ -146,7 +196,15 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
         </header>
 
         {isImage && (
-          <div className="p-4 flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 relative">
+          <div 
+            ref={imageContainerRef}
+            className="p-4 flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+          >
             {imageLoading && !imageError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
                 <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={48} />
@@ -168,15 +226,56 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               <img
                 src={project.image}
                 alt={project.title}
-                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 hover:scale-[1.02] transition-all ${
+                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 transition-all ${
                   imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
                 }`}
+                style={{
+                  transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                  transformOrigin: 'center center',
+                  userSelect: 'none',
+                }}
                 onLoad={() => setImageLoading(false)}
                 onError={() => {
                   setImageLoading(false);
                   setImageError(true);
                 }}
+                draggable={false}
               />
+            )}
+            
+            {/* Zoom Controls */}
+            {!imageLoading && !imageError && (
+              <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={handleZoomIn}
+                  disabled={zoom >= 5}
+                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Zoom in"
+                  title="Zoom In (Scroll Up)"
+                >
+                  <ZoomIn size={20} />
+                </button>
+                <button
+                  onClick={handleZoomReset}
+                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 transition-colors"
+                  aria-label="Reset zoom"
+                  title="Reset Zoom"
+                >
+                  <Maximize2 size={20} />
+                </button>
+                <button
+                  onClick={handleZoomOut}
+                  disabled={zoom <= 0.5}
+                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  aria-label="Zoom out"
+                  title="Zoom Out (Scroll Down)"
+                >
+                  <ZoomOut size={20} />
+                </button>
+                <div className="text-xs text-center text-gray-600 dark:text-gray-400 font-mono mt-1 px-1">
+                  {Math.round(zoom * 100)}%
+                </div>
+              </div>
             )}
           </div>
         )}
