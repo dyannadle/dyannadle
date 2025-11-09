@@ -275,8 +275,8 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
       <div
         className={`${
           isImage
-            ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden animate-scale-in flex flex-col'
-            : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-scale-in'
+            ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
+            : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
