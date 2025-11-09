@@ -110,6 +110,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [touchDistance, setTouchDistance] = useState(0);
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -136,6 +137,90 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
       return () => window.removeEventListener('wheel', handleWheel);
     }
   }, [isOpen, content.type]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyboard = (e: KeyboardEvent) => {
+      if (!isOpen || content.type !== 'image') return;
+
+      switch (e.key) {
+        case '+':
+        case '=':
+          e.preventDefault();
+          setZoom((prev) => Math.min(5, prev + 0.25));
+          break;
+        case '-':
+        case '_':
+          e.preventDefault();
+          setZoom((prev) => Math.max(0.5, prev - 0.25));
+          break;
+        case '0':
+          e.preventDefault();
+          setZoom(1);
+          setPan({ x: 0, y: 0 });
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setPan((prev) => ({ ...prev, y: prev.y + 50 }));
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          setPan((prev) => ({ ...prev, y: prev.y - 50 }));
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          setPan((prev) => ({ ...prev, x: prev.x + 50 }));
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          setPan((prev) => ({ ...prev, x: prev.x - 50 }));
+          break;
+      }
+    };
+
+    if (isOpen && content.type === 'image') {
+      window.addEventListener('keydown', handleKeyboard);
+      return () => window.removeEventListener('keydown', handleKeyboard);
+    }
+  }, [isOpen, content.type]);
+
+  // Touch handlers for pinch-to-zoom
+  const getTouchDistance = (touches: React.TouchList) => {
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      setTouchDistance(getTouchDistance(e.touches));
+    } else if (e.touches.length === 1 && zoom > 1) {
+      setIsDragging(true);
+      setDragStart({ x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const currentDistance = getTouchDistance(e.touches);
+      const scale = currentDistance / touchDistance;
+      setZoom((prev) => Math.max(0.5, Math.min(5, prev * scale)));
+      setTouchDistance(currentDistance);
+    } else if (e.touches.length === 1 && isDragging && zoom > 1) {
+      e.preventDefault();
+      setPan({
+        x: e.touches[0].clientX - dragStart.x,
+        y: e.touches[0].clientY - dragStart.y,
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    setTouchDistance(0);
+  };
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (zoom > 1) {
@@ -203,7 +288,13 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            style={{ cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{ 
+              cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+              touchAction: 'none'
+            }}
           >
             {imageLoading && !imageError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
@@ -226,13 +317,14 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               <img
                 src={project.image}
                 alt={project.title}
-                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 transition-all ${
+                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 ${
                   imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
                 }`}
                 style={{
                   transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
                   transformOrigin: 'center center',
                   userSelect: 'none',
+                  transition: isDragging ? 'none' : 'transform 0.2s ease-out',
                 }}
                 onLoad={() => setImageLoading(false)}
                 onError={() => {
@@ -246,6 +338,9 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
             {/* Zoom Controls */}
             {!imageLoading && !imageError && (
               <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700">
+                <div className="text-xs text-center text-gray-500 dark:text-gray-400 px-2 pb-1 border-b border-gray-200 dark:border-gray-700">
+                  Shortcuts: +/- • Arrows • 0
+                </div>
                 <button
                   onClick={handleZoomIn}
                   disabled={zoom >= 5}
