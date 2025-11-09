@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => {
 
       <div className="section-container">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Role Badge */}
+          {/* Role Badge */}  
           <RevealAnimation animation="fade-in-down" delay={100}>
             <div
               className="mx-auto w-full max-w-2xl py-2 px-6 mb-5 text-sm font-semibold tracking-wider text-white uppercase rounded-full shadow-lg from-blue-600/90 to-purple-600/90 bg-gradient-to-r text-center"
