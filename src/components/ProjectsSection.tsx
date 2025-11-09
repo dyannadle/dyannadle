@@ -1,5 +1,6 @@
 // React and Hooks
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 // --- START RevealAnimation Component ---
 const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
@@ -267,7 +268,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
   const isDescription = content.type === 'description';
   const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
 
-  return (
+  const modalContent = (
     <div
       className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000]"
       onClick={onClose}
@@ -362,6 +363,8 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content }) => {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 // --- MAIN SHOWCASE COMPONENT ---
