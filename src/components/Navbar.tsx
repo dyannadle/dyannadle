@@ -31,7 +31,8 @@ const Navbar: React.FC = () => {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-10 py-4",
-        scrolled ? "bg-white/80 backdrop-blur-lg shadow-sm" : "bg-transparent",
+        "glass border-b border-border/20",
+        scrolled && "shadow-lg"
       )}
     >
       <div className="flex justify-between items-center mx-auto max-w-7xl">
@@ -91,7 +92,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "md:hidden fixed inset-x-0 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 ease-in-out overflow-hidden",
+          "md:hidden fixed inset-x-0 glass border-b border-border/20 shadow-lg transition-all duration-300 ease-in-out overflow-hidden",
           mobileMenuOpen ? "max-h-[100vh] py-4" : "max-h-0 py-0",
         )}
       >
