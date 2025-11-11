@@ -13,42 +13,141 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    
+
     /* Multicolor Primary Palette */
     --primary: 262 83% 58%; /* Purple */
     --primary-foreground: 0 0% 98%;
     --primary-variant: 280 100% 70%; /* Bright Purple */
-    
+
     /* Vibrant Secondary Colors */
     --secondary: 195 100% 50%; /* Cyan */
     --secondary-foreground: 0 0% 98%;
     --secondary-variant: 210 100% 56%; /* Blue */
-    
+
     /* Accent Colors */
     --accent: 45 100% 60%; /* Gold/Yellow */
     --accent-foreground: 240 10% 3.9%;
     --accent-variant: 25 95% 53%; /* Orange */
-    
+
     /* Success/Error Colors */
     --success: 142 76% 36%; /* Green */
     --success-foreground: 0 0% 98%;
     --destructive: 0 84% 60%; /* Red */
     --destructive-foreground: 0 0% 98%;
-    
+
     /* Neutral Colors */
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 262 83% 58%;
-    
+
     /* Gradient Variables */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-variant)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-variant)));
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-variant)));
     --gradient-rainbow: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)), hsl(var(--accent-variant)));
-    
+
     --radius: 1rem;
+  }
+
+  /* High Contrast Theme */
+  .high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --primary-variant: 0 0% 90%;
+
+    --secondary: 0 0% 80%;
+    --secondary-foreground: 0 0% 0%;
+    --secondary-variant: 0 0% 70%;
+
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
+    --accent-variant: 0 0% 90%;
+
+    --success: 0 0% 100%;
+    --success-foreground: 0 0% 0%;
+    --destructive: 0 0% 100%;
+    --destructive-foreground: 0 0% 0%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+    --border: 0 0% 30%;
+    --input: 0 0% 10%;
+    --ring: 0 0% 100%;
+  }
+
+  /* Blue Theme */
+  .blue {
+    --background: 210 40% 98%;
+    --foreground: 210 40% 10%;
+    --card: 210 40% 98%;
+    --card-foreground: 210 40% 10%;
+    --popover: 210 40% 98%;
+    --popover-foreground: 210 40% 10%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 98%;
+    --primary-variant: 210 100% 60%;
+
+    --secondary: 210 50% 70%;
+    --secondary-foreground: 210 40% 10%;
+    --secondary-variant: 210 50% 80%;
+
+    --accent: 210 100% 70%;
+    --accent-foreground: 210 40% 10%;
+    --accent-variant: 210 100% 80%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 210 20% 40%;
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 210 100% 50%;
+  }
+
+  /* Purple Theme */
+  .purple {
+    --background: 270 40% 98%;
+    --foreground: 270 40% 10%;
+    --card: 270 40% 98%;
+    --card-foreground: 270 40% 10%;
+    --popover: 270 40% 98%;
+    --popover-foreground: 270 40% 10%;
+
+    --primary: 270 100% 50%;
+    --primary-foreground: 0 0% 98%;
+    --primary-variant: 270 100% 60%;
+
+    --secondary: 270 50% 70%;
+    --secondary-foreground: 270 40% 10%;
+    --secondary-variant: 270 50% 80%;
+
+    --accent: 270 100% 70%;
+    --accent-foreground: 270 40% 10%;
+    --accent-variant: 270 100% 80%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --muted: 270 20% 95%;
+    --muted-foreground: 270 20% 40%;
+    --border: 270 20% 90%;
+    --input: 270 20% 95%;
+    --ring: 270 100% 50%;
   }
   
   * {
