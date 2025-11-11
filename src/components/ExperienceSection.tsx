@@ -44,7 +44,7 @@ const ExperienceSection: React.FC = () => {
         <RevealAnimation animation="zoom-in">
           <h2 className="section-title bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 bg-clip-text text-transparent">Professional Experience</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-6 rounded-full animate-pulse"></div>
-          <p className="section-subtitle mx-auto text-gray-700">
+          <p className="section-subtitle mx-auto text-muted-foreground">
             My professional journey in software testing and quality assurance
           </p>
         </RevealAnimation>

@@ -192,7 +192,7 @@ const ContactSection: React.FC = () => {
         {/* form container */}
         <div className="mx-auto mt-12 max-w-3xl">
           <RevealAnimation animation="fade-in-up" delay={200}>
-            <div className="p-8 mt-10 rounded-2xl border shadow-lg bg-gradient-to-br from-white/95 to-blue-50/80 border-blue-100/50 backdrop-blur-sm">
+            <div className="p-8 mt-10 rounded-2xl border shadow-lg bg-gradient-to-br from-card/95 to-background/80 border-border backdrop-blur-sm">
               <h3 className="mb-6 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                 Send a Message
               </h3>
@@ -209,10 +209,10 @@ const ContactSection: React.FC = () => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white/90"
+                      className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
                       placeholder="Your name"
                     />
-                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
                   </div>
 
                   <div>
@@ -224,10 +224,10 @@ const ContactSection: React.FC = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white/90"
+                      className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
                       placeholder="Your email"
                     />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                    {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
@@ -240,10 +240,10 @@ const ContactSection: React.FC = () => {
                     type="text"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white/90"
+                    className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
                     placeholder="Subject"
                   />
-                  {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+                  {errors.subject && <p className="text-destructive text-sm mt-1">{errors.subject}</p>}
                 </div>
 
                 <div>
@@ -255,9 +255,9 @@ const ContactSection: React.FC = () => {
                     type="date"
                     value={formData.date}
                     onChange={handleChange}
-                    className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white/90"
+                    className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
                   />
-                  {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
+                  {errors.date && <p className="text-destructive text-sm mt-1">{errors.date}</p>}
                 </div>
 
                 <div>
@@ -269,10 +269,10 @@ const ContactSection: React.FC = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className="py-3 px-4 w-full rounded-lg border border-blue-200 focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white/90"
+                    className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
                     placeholder="Your message"
                   />
-                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                  {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
                 </div>
 
                 <button
@@ -296,17 +296,17 @@ const ContactSection: React.FC = () => {
           } bg-black/50`}
         >
           <div
-            className={`bg-white p-6 rounded-lg shadow-lg text-center transform transition-all duration-500 ${
+            className={`bg-card p-6 rounded-lg shadow-lg text-center transform transition-all duration-500 ${
               isFadingOut ? "scale-95 opacity-0" : "scale-100 opacity-100"
-            } w-full max-w-sm`}
+            } w-full max-w-sm border border-border`}
           >
-            <h3 className="text-xl font-bold mb-2">✅ Thank You!</h3>
-            <p className="text-gray-700 mb-4">
+            <h3 className="text-xl font-bold mb-2 text-card-foreground">✅ Thank You!</h3>
+            <p className="text-muted-foreground mb-4">
               Your message has been sent successfully. I will get back to you soon.
             </p>
             <div className="flex items-center justify-center gap-3">
-              <div className="text-sm text-gray-500">This will close in</div>
-              <div className="bg-indigo-50 text-indigo-700 font-semibold px-3 py-1 rounded-md">
+              <div className="text-sm text-muted-foreground">This will close in</div>
+              <div className="bg-primary/10 text-primary font-semibold px-3 py-1 rounded-md">
                 {countdown}s
               </div>
             </div>

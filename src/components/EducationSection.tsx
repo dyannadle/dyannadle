@@ -184,7 +184,7 @@ const EducationSection: React.FC = () => {
 
                     {/* Card for each education entry */}
                     <div
-                      className="flex-1 bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-border 
+                      className="flex-1 bg-card/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-border 
                       hover:shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                     >
                       <h4 className="font-bold text-lg text-card-foreground mb-1">{item.degree}</h4>
@@ -240,7 +240,7 @@ const EducationSection: React.FC = () => {
                 {certifications.map((cert, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-4 bg-white/70 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:scale-102 animate-fade-in-left"
+                    className="flex items-center gap-4 bg-card/70 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:scale-102 animate-fade-in-left"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md transition-transform duration-300 hover:scale-110" />
@@ -285,7 +285,7 @@ const EducationSection: React.FC = () => {
               {continuousLearningSkills.map((skill, index) => (
                 <div key={index} className="relative group animate-zoom-in" style={{ animationDelay: `${index * 100}ms` }}>
                   <div
-                    className="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center shadow-md border border-border 
+                    className="bg-card/80 backdrop-blur-sm rounded-xl p-4 text-center shadow-md border border-border 
                     transition-all duration-300 hover:scale-110 hover:shadow-xl hover:-translate-y-2 cursor-pointer hover:border-primary/50"
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary group-hover:rotate-12 transition-transform duration-300">
@@ -296,9 +296,9 @@ const EducationSection: React.FC = () => {
 
                   {/* Tooltip */}
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-foreground text-background 
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-popover text-popover-foreground border border-border
                     rounded-lg text-sm opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
-                    transition-all duration-300 ease-out z-10"
+                    transition-all duration-300 ease-out z-10 shadow-lg"
                   >
                     {(() => {
                       switch (skill.name) {
@@ -334,7 +334,7 @@ const EducationSection: React.FC = () => {
                     • {area.name}
                   </span>
                   <div
-                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-white/95 backdrop-blur-sm shadow-xl rounded-lg text-muted-foreground text-sm border border-primary/20
+                    className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-56 p-3 bg-popover backdrop-blur-sm shadow-xl rounded-lg text-popover-foreground text-sm border border-border
                     opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 
                     transition-all duration-300 ease-out z-10"
                   >

@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
 
           {/* Intro paragraph */}
           <RevealAnimation animation="fade-in-up" delay={300}>
-            <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl text-gray-600">
+            <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl text-muted-foreground">
               I’m a passionate Software Tester who loves ensuring that software not only works but
               works flawlessly. With a strong foundation in manual testing, SDLC, STLC, and SQL, I
               specialize in creating and executing test strategies that uncover hidden issues and
@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
                 href="https://github.com/dyannadle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                className="flex gap-2 items-center py-3 px-6 bg-secondary text-secondary-foreground rounded-lg shadow-md transition transform hover:bg-secondary/80 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 <Github size={18} />
                 GitHub
@@ -86,14 +86,14 @@ const HeroSection: React.FC = () => {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                className="flex gap-2 items-center py-3 px-6 bg-card text-card-foreground rounded-lg border border-border shadow-md transition transform hover:bg-accent hover:text-accent-foreground hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 <Download size={18} />
                 Download Resume
               </a>
               <a
                 href="#about"
-                className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                className="py-3 px-6 rounded-lg border bg-background/80 backdrop-blur-sm border-border shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
               >
                 Learn More
               </a>

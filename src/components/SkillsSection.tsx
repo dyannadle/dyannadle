@@ -27,7 +27,7 @@ const SkillsSection: React.FC = () => {
           <RevealAnimation animation="zoom-in">
             <h2 className="section-title text-center bg-gradient-to-r from-blue-700 via-purple-600 to-pink-600 bg-clip-text text-transparent">My Skills</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mx-auto mb-6 rounded-full animate-pulse"></div>
-            <p className="section-subtitle text-center mx-auto text-gray-700">
+            <p className="section-subtitle text-center mx-auto text-muted-foreground">
               Technical skills and competencies I've developed throughout my career
             </p>
           </RevealAnimation>
