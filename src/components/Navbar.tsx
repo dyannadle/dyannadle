@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/context/ThemeContext";
+import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,32 +65,59 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            className="ml-2"
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? (
+              <Moon className="h-5 w-5" />
+            ) : (
+              <Sun className="h-5 w-5" />
+            )}
+          </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="flex flex-col space-y-1.5 md:hidden"
-        >
-          <span
-            className={cn(
-              "block h-0.5 w-6 bg-current transition-transform duration-300",
-              mobileMenuOpen && "rotate-45 translate-y-2",
+        {/* Mobile Menu Button and Theme Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? (
+              <Moon className="h-5 w-5" />
+            ) : (
+              <Sun className="h-5 w-5" />
             )}
-          ></span>
-          <span
-            className={cn(
-              "block h-0.5 w-6 bg-current transition-opacity duration-300",
-              mobileMenuOpen && "opacity-0",
-            )}
-          ></span>
-          <span
-            className={cn(
-              "block h-0.5 w-6 bg-current transition-transform duration-300",
-              mobileMenuOpen && "-rotate-45 -translate-y-2",
-            )}
-          ></span>
-        </button>
+          </Button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex flex-col space-y-1.5"
+          >
+            <span
+              className={cn(
+                "block h-0.5 w-6 bg-current transition-transform duration-300",
+                mobileMenuOpen && "rotate-45 translate-y-2",
+              )}
+            ></span>
+            <span
+              className={cn(
+                "block h-0.5 w-6 bg-current transition-opacity duration-300",
+                mobileMenuOpen && "opacity-0",
+              )}
+            ></span>
+            <span
+              className={cn(
+                "block h-0.5 w-6 bg-current transition-transform duration-300",
+                mobileMenuOpen && "-rotate-45 -translate-y-2",
+              )}
+            ></span>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
