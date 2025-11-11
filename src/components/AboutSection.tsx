@@ -1,6 +1,12 @@
 
 import React from 'react';
 import RevealAnimation from './ui/RevealAnimation';
+import RippleEffect from './ui/RippleEffect';
+import StaggeredAnimation from './ui/StaggeredAnimation';
+import ParallaxSection from './ui/ParallaxSection';
+import InteractiveBackground from './ui/InteractiveBackground';
+import ParticleSystem from './ui/ParticleSystem';
+import FloatingElements from './ui/FloatingElements';
 import { Briefcase, FileCheck, Database, Code } from 'lucide-react';
 import { useScrollAnimation, useParallax } from '../hooks/useScrollAnimation';
 
@@ -14,6 +20,21 @@ const AboutSection: React.FC = () => {
       id="about"
       className="py-20 bg-gradient-to-b from-white to-blue-50/30 relative overflow-hidden"
     >
+      {/* Particle System Background */}
+      <ParticleSystem
+        particleCount={50}
+        colors={['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b']}
+        speed={0.5}
+        size={{ min: 1, max: 3 }}
+        className="-z-10"
+      />
+
+      {/* Floating Elements */}
+      <FloatingElements
+        count={8}
+        className="-z-10"
+      />
+
       {/* Animated background elements */}
       <div
         ref={parallaxRef}
@@ -48,7 +69,8 @@ const AboutSection: React.FC = () => {
           <RevealAnimation animation="fade-in-left">
               <div className="space-y-6">
                 <RevealAnimation animation="fade-in-up" delay={100}>
-                  <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 animate-ripple">
+                  <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Briefcase className="text-blue-600" size={20} />
@@ -60,11 +82,13 @@ const AboutSection: React.FC = () => {
                 <p className="text-muted-foreground">
                   Professional experience as a Mobile Application Tester at Pivot DevOps, specializing in manual testing, test case design, and defect reporting for mobile applications. Skilled in creating comprehensive test documentation, executing regression and functional testing, and ensuring software quality through meticulous testing methodologies in an Agile environment.
                 </p>
-                  </div>
+                      </div>
+                  </RippleEffect>
                 </RevealAnimation>
 
                 <RevealAnimation animation="fade-in-up" delay={200}>
-                  <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 animate-ripple">
+                  <RippleEffect rippleColor="rgba(147, 51, 234, 0.3)">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <FileCheck className="text-purple-600" size={20} />
@@ -74,11 +98,13 @@ const AboutSection: React.FC = () => {
                 <p className="text-muted-foreground">
                   Experienced in creating and maintaining comprehensive documentation including Test Plans, Test Scenarios, and Test Cases.
                 </p>
-                  </div>
+                      </div>
+                  </RippleEffect>
                 </RevealAnimation>
 
                 <RevealAnimation animation="fade-in-up" delay={300}>
-                  <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 animate-ripple">
+                  <RippleEffect rippleColor="rgba(99, 102, 241, 0.3)">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Code className="text-indigo-600" size={20} />
@@ -92,11 +118,13 @@ const AboutSection: React.FC = () => {
                 <p className="text-muted-foreground mt-2">
                   I have foundational knowledge in automation testing and am currently mastering Selenium, PyTest, and other advanced frameworks to enhance testing efficiency, scalability, and test coverage in modern software development.
                 </p>
-                  </div>
+                      </div>
+                  </RippleEffect>
                 </RevealAnimation>
 
                 <RevealAnimation animation="fade-in-up" delay={400}>
-                  <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 animate-ripple">
+                  <RippleEffect rippleColor="rgba(20, 184, 166, 0.3)">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Database className="text-teal-600" size={20} />
@@ -117,7 +145,8 @@ const AboutSection: React.FC = () => {
                     <span><strong>Problem Solving:</strong> Analytical mindset to identify root causes and propose effective solutions</span>
                   </li>
                 </ul>
-                  </div>
+                      </div>
+                  </RippleEffect>
                 </RevealAnimation>
               </div>
           </RevealAnimation>

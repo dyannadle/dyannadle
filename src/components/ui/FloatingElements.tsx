@@ -35,7 +35,11 @@ const FloatingElements: React.FC<FloatingElementsProps> = ({
     'text-green-500',
     'text-orange-500',
     'text-pink-500',
-    'text-indigo-500'
+    'text-indigo-500',
+    'text-teal-500',
+    'text-cyan-500',
+    'text-emerald-500',
+    'text-lime-500'
   ];
 
   useEffect(() => {
