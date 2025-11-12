@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Send } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
+import ParticleSystem from "./ui/ParticleSystem";
+import FloatingElements from "./ui/FloatingElements";
 
 type FormState = {
   name: string;
@@ -160,6 +162,21 @@ const ContactSection: React.FC = () => {
       id="contact"
       className="relative min-h-screen flex items-center bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-100 overflow-hidden"
     >
+      {/* Particle System Background */}
+      <ParticleSystem
+        particleCount={35}
+        colors={['#6366f1', '#8b5cf6', '#a855f7', '#3b82f6', '#06b6d4']}
+        speed={0.3}
+        size={{ min: 1, max: 3 }}
+        className="-z-10"
+      />
+
+      {/* Floating Elements */}
+      <FloatingElements
+        count={5}
+        className="-z-10"
+      />
+
       {/* Animated background elements */}
       <div className="absolute top-10 right-1/4 w-32 h-32 bg-purple-300/20 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-blue-300/20 rounded-full blur-2xl animate-float animation-delay-300"></div>

@@ -1,5 +1,7 @@
 import React from "react";
 import RevealAnimation from "./ui/RevealAnimation";
+import ParticleSystem from "./ui/ParticleSystem";
+import FloatingElements from "./ui/FloatingElements";
 import { educationData } from "@/data/educationData";
 import {
   GraduationCap,
@@ -148,8 +150,22 @@ const EducationSection: React.FC = () => {
   return (
     <section
       id="education"
-      className="min-h-screen flex items-center bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50"
+      className="min-h-screen flex items-center bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden"
     >
+      {/* Particle System Background */}
+      <ParticleSystem
+        particleCount={40}
+        colors={['#10b981', '#06b6d4', '#14b8a6', '#059669', '#0d9488']}
+        speed={0.4}
+        size={{ min: 1, max: 3 }}
+        className="-z-10"
+      />
+
+      {/* Floating Elements */}
+      <FloatingElements
+        count={6}
+        className="-z-10"
+      />
       <div className="section-container">
         {/* ---------- Header ---------- */}
         <RevealAnimation>
