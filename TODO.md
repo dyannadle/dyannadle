@@ -3,6 +3,7 @@
 ## Tasks
 - [x] Remove theme toggle button from navbar
 - [x] Simplify theme system back to basic light/dark/system
+- [x] Theme now automatically follows system preferences
 - [x] Add advanced scroll-triggered animations
 - [x] Implement interactive hover effects for cards and buttons
 - [x] Add particle system enhancements

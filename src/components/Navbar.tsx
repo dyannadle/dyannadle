@@ -1,29 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Moon, Sun, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/context/ThemeContext";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { mode, resolvedTheme, cycleTheme } = useTheme();
-
-  const getThemeIcon = () => {
-    if (mode === "light") return <Sun className="h-5 w-5" />;
-    if (mode === "dark") return <Moon className="h-5 w-5" />;
-    return <Monitor className="h-5 w-5" />;
-  };
-
-  const getThemeLabel = () => {
-    if (mode === "auto") return `Auto (${resolvedTheme === "dark" ? "Dark" : "Light"})`;
-    return mode.charAt(0).toUpperCase() + mode.slice(1);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,44 +61,10 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={cycleTheme}
-                className="ml-2 transition-transform hover:rotate-12"
-                aria-label="Toggle theme"
-              >
-                {getThemeIcon()}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm">Theme: {getThemeLabel()}</p>
-              <p className="text-xs text-muted-foreground">Click to cycle</p>
-            </TooltipContent>
-          </Tooltip>
         </div>
 
-        {/* Mobile Menu Button and Theme Toggle */}
-        <div className="flex items-center gap-2 md:hidden">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={cycleTheme}
-                className="transition-transform hover:rotate-12"
-                aria-label="Toggle theme"
-              >
-                {getThemeIcon()}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm">Theme: {getThemeLabel()}</p>
-              <p className="text-xs text-muted-foreground">Click to cycle</p>
-            </TooltipContent>
-          </Tooltip>
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col space-y-1.5"
