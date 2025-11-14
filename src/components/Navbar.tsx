@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/context/LangContext";
+import LanguageToggle from "./LanguageToggle";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,13 +21,13 @@ const Navbar: React.FC = () => {
   }, [scrolled]);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Education", href: "#education" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: t("navbar.home"), href: "#home" },
+    { name: t("navbar.about"), href: "#about" },
+    { name: t("navbar.projects"), href: "#projects" },
+    { name: t("navbar.education"), href: "#education" },
+    { name: t("navbar.skills"), href: "#skills" },
+    { name: t("navbar.experience"), href: "#experience" },
+    { name: t("navbar.contact"), href: "#contact" },
   ];
 
   return (
@@ -61,10 +64,12 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
+          <LanguageToggle />
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-4">
+          <LanguageToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col space-y-1.5"
