@@ -1,21 +1,22 @@
-# Enhanced Animations and Interactivity
+# Remove Language Feature - Keep Only English
 
-## Tasks
-- [x] Remove theme toggle button from navbar
-- [x] Simplify theme system back to basic light/dark/system
-- [x] Theme now automatically follows system preferences
-- [x] Add advanced scroll-triggered animations
-- [x] Implement interactive hover effects for cards and buttons
-- [x] Add particle system enhancements
-- [x] Create floating elements with technology-based animations
-- [x] Add click ripple effects
-- [x] Implement staggered animation sequences
-- [x] Add parallax scrolling effects
-- [x] Create interactive background elements
+## Plan
+- Remove LangProvider from App.tsx
+- Remove LanguageToggle from Navbar.tsx
+- Replace all t() calls with English strings in components
+- Remove LangContext.tsx
+- Remove hi.json and mr.json locale files
+- Update components to remove useLang imports and usage
 
-## Progress
-- [x] Previous theme toggle implementation completed
-- [x] Removed theme toggle button from navbar
-- [x] Simplified theme system back to basic light/dark/system
-- [x] Removed extra theme CSS classes from index.css
-- [ ] New plan created - awaiting user approval
+## Files to Edit
+- src/App.tsx: Remove LangProvider
+- src/components/Navbar.tsx: Remove LanguageToggle and t() usage
+- src/components/HeroSection.tsx: Replace t() with English strings
+- src/context/LangContext.tsx: Delete file
+- src/components/LanguageToggle.tsx: Delete file
+- src/locales/hi.json: Delete file
+- src/locales/mr.json: Delete file
+
+## Followup Steps
+- Test the application to ensure no errors
+- Verify all text displays correctly in English

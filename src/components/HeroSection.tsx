@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
               role="status"
               aria-label="Role"
             >
-              {t("hero.role")}
+              SOFTWARE TESTER
             </div>
           </RevealAnimation>
 
@@ -61,7 +61,7 @@ const HeroSection: React.FC = () => {
 
               {/* Name */}
               <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-indigo-700 md:text-5xl lg:text-6xl">
-                {t("hero.greeting")} <span className="text-blue-600">{t("hero.name")}</span>
+                Hi, I'm <span className="text-blue-600">Deepak Yannadle</span>
               </h1>
             </div>
           </RevealAnimation>
@@ -69,7 +69,7 @@ const HeroSection: React.FC = () => {
           {/* Intro paragraph */}
           <RevealAnimation animation="fade-in-up" delay={300}>
             <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl text-muted-foreground">
-              {t("hero.description")}
+              I'm a passionate Software Tester who loves ensuring that software not only works but works flawlessly. With a strong foundation in manual testing, SDLC, STLC, and SQL, I specialize in creating and executing test strategies that uncover hidden issues and improve user experience. I've worked with tools like JIRA, Postman, and Selenium, and I'm continuously sharpening my skills in automation frameworks, cloud testing, and performance engineering. My goal is to blend precision in manual testing with the power of automation and modern QA practices to deliver high-quality, reliable, and user-focused software solutions.
             </p>
           </RevealAnimation>
 
@@ -81,7 +81,7 @@ const HeroSection: React.FC = () => {
                   href="#contact"
                   className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
                 >
-                  {t("hero.contactMe")}
+                  Contact Me
                   <ArrowRight size={18} className="ml-1" />
                 </a>
               </RippleEffect>
@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
                   className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
                 >
                   <Github size={18} />
-                  {t("hero.github")}
+                  GitHub
                 </a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
@@ -104,7 +104,7 @@ const HeroSection: React.FC = () => {
                   className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
                 >
                   <Download size={18} />
-                  {t("hero.downloadResume")}
+                  Download Resume
                 </a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.2)">
@@ -112,7 +112,7 @@ const HeroSection: React.FC = () => {
                   href="#about"
                   className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
                 >
-                  {t("hero.learnMore")}
+                  Learn More
                 </a>
               </RippleEffect>
             </div>
