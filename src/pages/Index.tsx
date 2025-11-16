@@ -7,9 +7,10 @@ import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
-
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import RevealAnimation from "@/components/ui/RevealAnimation";
 
 
 const Index: React.FC = () => {
@@ -30,13 +31,26 @@ const Index: React.FC = () => {
       <AnimatedParticles />
       <Navbar />
       <HeroSection />
-      <AboutSection />
-      <ProjectsSection />
-      <EducationSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ContactSection />
+      <RevealAnimation animation="fade-in-up" duration={600}>
+        <AboutSection />
+      </RevealAnimation>
+      <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <ProjectsSection />
+      </RevealAnimation>
+      <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <EducationSection />
+      </RevealAnimation>
+      <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <SkillsSection />
+      </RevealAnimation>
+      <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <ExperienceSection />
+      </RevealAnimation>
+      <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <ContactSection />
+      </RevealAnimation>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
