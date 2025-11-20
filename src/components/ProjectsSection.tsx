@@ -168,6 +168,144 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
     setPan({ x: 0, y: 0 });
   };
 
+  if (!isOpen || !content.project) return null;
+
+  const { project } = content;
+  const isImage = content.type === 'image';
+  const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
+
+  console.log('Rendering Modal:', { type: content.type, project: project.title });
+
+  const modalContent = (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80"
+      onClick={onClose}
+    >
+      <div
+        className={`relative w-full bg-white dark:bg-gray-900 rounded-xl shadow-2xl flex flex-col border-4 border-green-500 ${isImage ? 'max-w-6xl h-[90vh]' : 'max-w-4xl max-h-[90vh]'
+          }`}
+        onClick={(e) => e.stopPropagation()}
+        style={{ opacity: 1, visibility: 'visible' }}
+      >
+        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gray-100 dark:bg-gray-800 shrink-0">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate pr-4">{title}</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-red-500 p-2"
+            aria-label="Close modal"
+          >
+            <X size={24} />
+          </button>
+        </header>
+
+        <div className="flex-1 overflow-hidden relative bg-white dark:bg-gray-900">
+          {isImage ? (
+            <div
+              ref={imageContainerRef}
+              className="w-full h-full flex items-center justify-center overflow-hidden relative bg-gray-50"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{
+                cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                touchAction: 'none'
+              }}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="max-h-full max-w-full object-contain shadow-lg"
+                style={{
+                  transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                  transformOrigin: 'center center',
+                  userSelect: 'none',
+                  transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                }}
+                draggable={false}
+              />
+
+              {/* Zoom Controls */}
+              <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white rounded-lg shadow-xl p-2 border border-gray-200 z-20">
+                <button onClick={handleZoomIn} className="p-2"><ZoomIn size={20} /></button>
+                <button onClick={handleZoomReset} className="p-2"><Maximize2 size={20} /></button>
+                <button onClick={handleZoomOut} className="p-2"><ZoomOut size={20} /></button>
+              </div>
+            </div>
+          ) : (
+            <div className="p-6 overflow-y-auto h-full space-y-6 text-gray-800">
+              <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4">
+                {project.description}
+              </p>
+
+              <h3 className="text-2xl font-semibold text-blue-600 border-b pb-1">
+                Key Responsibilities
+              </h3>
+              <ul className="list-disc list-outside ml-5 space-y-2">
+                {project.responsibilities.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+
+              <h3 className="text-xl font-semibold text-blue-600 border-b pb-1">
+                Technology Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.tools.map((t, i) => (
+                  <span
+                    key={i}
+                    className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full font-medium"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4 pt-4 border-t mt-4">
+                <button
+                  onClick={() => onViewImage(project)}
+                  className="flex items-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
+                >
+                  <ImageIcon size={20} /> View Full Image
+                </button>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:text-blue-300 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <Github size={20} /> View Code on GitHub
+                  </a>
+                )}
+                {project.paperPublished && (
+                  <a
+                    href={project.paperPublished}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-semibold text-green-600 hover:text-green-700 bg-green-50 dark:bg-green-900/30 dark:text-green-400 dark:hover:text-green-300 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    View Published Paper
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : null;
+};
+
+// --- MAIN SHOWCASE COMPONENT ---
+const ProjectsSection: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [favorites, setFavorites] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState<ModalContent>({ type: null, project: null });
   const [showAllTools, setShowAllTools] = useState<Record<string, boolean>>({});
