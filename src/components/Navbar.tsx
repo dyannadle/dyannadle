@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { NAV_LINKS } from "@/data/constants";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -17,15 +18,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Education", href: "#education" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ];
+
 
   return (
     <nav
@@ -48,7 +41,7 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center space-x-8 md:flex">
-          {navLinks.map((link, index) => (
+          {NAV_LINKS.map((link, index) => (
             <a
               key={link.name}
               href={link.href}
@@ -99,7 +92,7 @@ const Navbar: React.FC = () => {
         )}
       >
         <div className="flex flex-col px-6 space-y-4">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}

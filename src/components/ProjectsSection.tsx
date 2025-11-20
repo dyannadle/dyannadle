@@ -2,88 +2,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-// --- START RevealAnimation Component ---
-const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
-
-interface RevealAnimationProps {
-  children: React.ReactNode;
-  className?: string;
-  animation?:
-    | 'fade-in'
-    | 'fade-in-up'
-    | 'fade-in-down'
-    | 'fade-in-left'
-    | 'fade-in-right'
-    | 'blur-in'
-    | 'zoom-in'
-    | 'flip-in';
-  delay?: number;
-  threshold?: number;
-  duration?: number;
-  once?: boolean;
-  style?: React.CSSProperties;
-}
-
-const RevealAnimation: React.FC<RevealAnimationProps> = ({
-  children,
-  className = '',
-  animation = 'fade-in-up',
-  delay = 0,
-  threshold = 0.1,
-  duration = 500,
-  once = true,
-  style = {},
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && (!once || !hasAnimated)) {
-          setIsVisible(true);
-          if (once) setHasAnimated(true);
-        } else if (!once) setIsVisible(false);
-      },
-      { threshold }
-    );
-
-    const current = ref.current;
-    if (current) observer.observe(current);
-    return () => current && observer.unobserve(current);
-  }, [threshold, once, hasAnimated]);
-
-  const animationClass = !isVisible
-    ? 'opacity-0'
-    : {
-        'fade-in': 'animate-fade-in',
-        'fade-in-up': 'animate-fade-in-up',
-        'fade-in-down': 'animate-fade-in-down',
-        'fade-in-left': 'animate-fade-in-left',
-        'fade-in-right': 'animate-fade-in-right',
-        'blur-in': 'animate-blur-in',
-        'zoom-in': 'animate-zoom-in',
-        'flip-in': 'animate-flip-in',
-      }[animation] ?? 'animate-fade-in';
-
-  return (
-    <div
-      ref={ref}
-      className={cn(animationClass, className)}
-      style={{
-        animationDelay: `${delay}ms`,
-        animationDuration: `${duration}ms`,
-        ...style,
-        opacity: isVisible || !once ? 1 : 0,
-        transform: isVisible || !once ? 'none' : 'translateY(20px)',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-// --- END RevealAnimation Component ---
+import RevealAnimation from './ui/RevealAnimation';
 
 // Icons
 import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
@@ -250,195 +169,190 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
   };
 
   if (!isOpen || !content.project) return null;
-  
+
   const { project } = content;
   const isImage = content.type === 'image';
-  const isDescription = content.type === 'description';
   const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
 
   const modalContent = (
     <div
-      className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000]"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className={`${
-          isImage
-            ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
-            : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
-        }`}
+        className={`relative w-full bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden flex flex-col ${isImage ? 'max-w-6xl h-[90vh]' : 'max-w-4xl max-h-[90vh]'
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>
+        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 shrink-0">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate pr-4">{title}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full transition-all hover:bg-red-50 dark:hover:bg-red-900/20"
+            className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full transition-all hover:bg-red-50 dark:hover:bg-red-900/20 shrink-0"
             aria-label="Close modal"
           >
             <X size={24} />
           </button>
         </header>
 
-        {isImage && (
-          <div 
-            ref={imageContainerRef}
-            className="p-4 flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            style={{ 
-              cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
-              touchAction: 'none'
-            }}
-          >
-            {imageLoading && !imageError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-                <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={48} />
-              </div>
-            )}
-            {imageError ? (
-              <div className="text-center p-8">
-                <div className="text-red-500 mb-4">
-                  <X size={64} className="mx-auto" />
+        <div className="flex-1 overflow-hidden relative">
+          {isImage ? (
+            <div
+              ref={imageContainerRef}
+              className="w-full h-full bg-gray-50 dark:bg-gray-900 flex items-center justify-center overflow-hidden relative"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{
+                cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                touchAction: 'none'
+              }}
+            >
+              {imageLoading && !imageError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 z-10">
+                  <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={48} />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                  Failed to Load Image
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  The image could not be loaded. Please try again later.
-                </p>
-              </div>
-            ) : (
-              <img
-                src={project.image}
-                alt={project.title}
-                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 ${
-                  imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
-                }`}
-                style={{
-                  transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
-                  transformOrigin: 'center center',
-                  userSelect: 'none',
-                  transition: isDragging ? 'none' : 'transform 0.2s ease-out',
-                }}
-                onLoad={() => setImageLoading(false)}
-                onError={() => {
-                  setImageLoading(false);
-                  setImageError(true);
-                }}
-                draggable={false}
-              />
-            )}
-            
-            {/* Zoom Controls */}
-            {!imageLoading && !imageError && (
-              <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700">
-                <div className="text-xs text-center text-gray-500 dark:text-gray-400 px-2 pb-1 border-b border-gray-200 dark:border-gray-700">
-                  Shortcuts: +/- • Arrows • 0
-                </div>
-                <button
-                  onClick={handleZoomIn}
-                  disabled={zoom >= 5}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Zoom in"
-                  title="Zoom In (Scroll Up)"
-                >
-                  <ZoomIn size={20} />
-                </button>
-                <button
-                  onClick={handleZoomReset}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 transition-colors"
-                  aria-label="Reset zoom"
-                  title="Reset Zoom"
-                >
-                  <Maximize2 size={20} />
-                </button>
-                <button
-                  onClick={handleZoomOut}
-                  disabled={zoom <= 0.5}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Zoom out"
-                  title="Zoom Out (Scroll Down)"
-                >
-                  <ZoomOut size={20} />
-                </button>
-                <div className="text-xs text-center text-gray-600 dark:text-gray-400 font-mono mt-1 px-1">
-                  {Math.round(zoom * 100)}%
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {isDescription && (
-          <div className="p-6 overflow-y-auto max-h-[75vh] space-y-6 text-gray-700 dark:text-gray-300">
-            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 dark:text-gray-200">
-              {project.description}
-            </p>
-
-            <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
-              Key Responsibilities
-            </h3>
-            <ul className="list-disc list-outside ml-5 space-y-2">
-              {project.responsibilities.map((r, i) => (
-                <li key={i}>{r}</li>
-              ))}
-            </ul>
-
-            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
-              Technology Stack
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {project.tools.map((t, i) => (
-                <span
-                  key={i}
-                  className="text-sm px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full font-medium shadow-sm"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-4 pt-4 border-t mt-4">
-              <button
-                onClick={() => onViewImage(project)}
-                className="flex items-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
-              >
-                <ImageIcon size={20} /> View Full Image
-              </button>
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:text-blue-300 px-4 py-2 rounded-lg transition-colors"
-                >
-                  <Github size={20} /> View Code on GitHub
-                </a>
               )}
-              {project.paperPublished && (
-                <a
-                  href={project.paperPublished}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-semibold text-green-600 hover:text-green-700 bg-green-50 dark:bg-green-900/30 dark:text-green-400 dark:hover:text-green-300 px-4 py-2 rounded-lg transition-colors"
-                >
-                  View Published Paper
-                </a>
+              {imageError ? (
+                <div className="text-center p-8">
+                  <div className="text-red-500 mb-4">
+                    <X size={64} className="mx-auto" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                    Failed to Load Image
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    The image could not be loaded. Please try again later.
+                  </p>
+                </div>
+              ) : (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={`max-h-full max-w-full object-contain shadow-lg ${imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
+                    }`}
+                  style={{
+                    transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                    transformOrigin: 'center center',
+                    userSelect: 'none',
+                    transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                  }}
+                  onLoad={() => setImageLoading(false)}
+                  onError={() => {
+                    setImageLoading(false);
+                    setImageError(true);
+                  }}
+                  draggable={false}
+                />
+              )}
+
+              {/* Zoom Controls */}
+              {!imageLoading && !imageError && (
+                <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700 z-20">
+                  <div className="text-xs text-center text-gray-500 dark:text-gray-400 px-2 pb-1 border-b border-gray-200 dark:border-gray-700">
+                    Shortcuts: +/- • Arrows • 0
+                  </div>
+                  <button
+                    onClick={handleZoomIn}
+                    disabled={zoom >= 5}
+                    className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Zoom in"
+                    title="Zoom In (Scroll Up)"
+                  >
+                    <ZoomIn size={20} />
+                  </button>
+                  <button
+                    onClick={handleZoomReset}
+                    className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 transition-colors"
+                    aria-label="Reset zoom"
+                    title="Reset Zoom"
+                  >
+                    <Maximize2 size={20} />
+                  </button>
+                  <button
+                    onClick={handleZoomOut}
+                    disabled={zoom <= 0.5}
+                    className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Zoom out"
+                    title="Zoom Out (Scroll Down)"
+                  >
+                    <ZoomOut size={20} />
+                  </button>
+                  <div className="text-xs text-center text-gray-600 dark:text-gray-400 font-mono mt-1 px-1">
+                    {Math.round(zoom * 100)}%
+                  </div>
+                </div>
               )}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="p-6 overflow-y-auto h-full space-y-6 text-gray-700 dark:text-gray-300">
+              <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 dark:text-gray-200">
+                {project.description}
+              </p>
+
+              <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
+                Key Responsibilities
+              </h3>
+              <ul className="list-disc list-outside ml-5 space-y-2">
+                {project.responsibilities.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+
+              <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
+                Technology Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.tools.map((t, i) => (
+                  <span
+                    key={i}
+                    className="text-sm px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full font-medium shadow-sm"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4 pt-4 border-t mt-4">
+                <button
+                  onClick={() => onViewImage(project)}
+                  className="flex items-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
+                >
+                  <ImageIcon size={20} /> View Full Image
+                </button>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:text-blue-300 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <Github size={20} /> View Code on GitHub
+                  </a>
+                )}
+                {project.paperPublished && (
+                  <a
+                    href={project.paperPublished}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-semibold text-green-600 hover:text-green-700 bg-green-50 dark:bg-green-900/30 dark:text-green-400 dark:hover:text-green-300 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    View Published Paper
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 
-  return createPortal(modalContent, document.body);
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : null;
 };
 
 // --- MAIN SHOWCASE COMPONENT ---
@@ -466,8 +380,8 @@ const ProjectsSection: React.FC = () => {
     activeFilter === 'All'
       ? projects
       : activeFilter === 'Favorites'
-      ? projects.filter((p) => favorites.includes(p.title))
-      : projects.filter((p) => p.category.includes(activeFilter));
+        ? projects.filter((p) => favorites.includes(p.title))
+        : projects.filter((p) => p.category.includes(activeFilter));
 
   const toggleFavorite = useCallback(
     (title: string) =>
@@ -510,11 +424,10 @@ const ProjectsSection: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${
-                activeFilter === f
-                  ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
-                  : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
-              }`}
+              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${activeFilter === f
+                ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
+                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
+                }`}
             >
               {f}
             </button>
@@ -526,7 +439,10 @@ const ProjectsSection: React.FC = () => {
           {filtered.map((p, idx) => (
             <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
               <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500">
-                <div className="h-52 overflow-hidden relative">
+                <div
+                  className="h-52 overflow-hidden relative cursor-pointer"
+                  onClick={() => openModal('image', p)}
+                >
                   <img
                     src={p.image}
                     alt={p.title}
@@ -566,7 +482,7 @@ const ProjectsSection: React.FC = () => {
                     <Clock size={14} /> {p.duration}
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{p.description}</p>
-                  
+
                   <button
                     onClick={() => openModal('image', p)}
                     className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"

@@ -2,7 +2,7 @@ import React from "react";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
 import FloatingElements from "./ui/FloatingElements";
-import { educationData } from "@/data/educationData";
+import { educationData, certifications, continuousLearningSkills, highlightedAreas } from "@/data/educationData";
 import {
   GraduationCap,
   Award,
@@ -19,133 +19,15 @@ const EducationSection: React.FC = () => {
   const getFaviconUrl = (url: string): string =>
     `https://www.google.com/s2/favicons?domain=${url}&sz=32`;
 
-  const certifications = [
-    {
-      name: "Certified Software Tester",
-      institution: "Quastech",
-      year: "2025",
-      icon: "/logos/Quastech-logo.jpg.ico",
-      link: "/Certificates/Certified Software Tester.pdf",
-    },
-    {
-      name: "GenAI Powered Data Analytics",
-      institution: "Coursera",
-      year: "2025",
-      icon: "/logos/coursera logo.svg",
-      link: "/Certificates/GenAI Powered Data Analytics.pdf",
-    },
-    {
-      name: "Google Associate Cloud Engineer",
-      institution: "Google Cloud",
-      year: "2024",
-      icon: "/logos/google-cloud-storage.png",
-      link: "/Certificates/Google_Associate_Cloud_Engineer_Certificate.pdf",
-    },
-    {
-      name: "AWS Academy Introduction to Cloud",
-      institution: "Amazon",
-      year: "2024",
-      icon: "/logos/AWS-Logo.png",
-      link: "/Certificates/AWS Academy Introduction to Cloud.pdf",
-    },
-    {
-      name: "Career Essentials in Generative AI",
-      institution: "Microsoft & LinkedIn",
-      year: "2024",
-      icon: "/logos/linkedin-learning-logo.jpg",
-      link: "/Certificates/Career Essentials in Generative AI.pdf",
-    },
-    {
-      name: "Google AI Essentials",
-      institution: "Coursera",
-      year: "2024",
-      icon: "/logos/coursera logo.svg",
-      link: "/Certificates/Google AI Essentials.pdf",
-    },
-    {
-      name: "What is Generative AI?",
-      institution: "LinkedIn Learning",
-      year: "2024",
-      icon: "/logos/linkedin-learning-logo.jpg",
-      link: "/Certificates/What is Generative AI.pdf",
-    },
-    {
-      name: "Data Manipulation with pandas",
-      institution: "DataCamp",
-      year: "2023",
-      icon: "/logos/DC.png",
-      link: "/Certificates/Data Manipulation with pandas.pdf",
-    },
-    {
-      name: "Value Added Course By SAP",
-      institution: "SAP & Edunet",
-      year: "2023",
-      icon: "/",
-      link: "/Certificates/Value Added Course By SAP.pdf",
-    },
-    {
-      name: "Joining Data in SQL",
-      institution: "DataCamp",
-      year: "2023",
-      icon: "/logos/DC.png",
-      link: "/Certificates/Joining Data in SQL.pdf",
-    },
-    {
-      name: "Introduction to Python",
-      institution: "DataCamp",
-      year: "2023",
-      icon: "/logos/DC.png",
-      link: "/Certificates/Introduction to Python.pdf",
-    },
-    {
-      name: "Android App Development",
-      institution: "Internshala",
-      year: "2022",
-      icon: "/logos/internshala-logo.jpg",
-      link: "/Certificates/Android App Development.pdf",
-    },
-    {
-      name: "Maharashtra State Certificate in IT",
-      institution: "MS-CIT",
-      year: "2019",
-      icon: "/logos/logo-mscit.png",
-      link: "/Certificates/Maharashtra State Certificate in IT.pdf",
-    },
-  ];
-
-  const continuousLearningSkills = [
-    { name: "Testing Framework", icon: <BookOpen size={20} /> },
-    { name: "Quality Assurance", icon: <Award size={20} /> },
-    { name: "Cloud Technologies", icon: <Globe size={20} /> },
-    { name: "Development Process", icon: <Code size={20} /> },
-    { name: "Data Science", icon: <Database size={20} /> },
-    { name: "Certification", icon: <GraduationCap size={20} /> },
-    { name: "Artificial Intelligence", icon: <Brain size={20} /> },
-    { name: "Academic Growth", icon: <BookOpen size={20} /> },
-  ];
-
-  const highlightedAreas = [
-    {
-      name: "Advanced Testing Frameworks",
-      description: "Covers Selenium, Cypress, Playwright, and other automation frameworks.",
-    },
-    {
-      name: "AI in Software Testing",
-      description: "Applying ML/AI for defect prediction, test optimization, and automation.",
-    },
-    {
-      name: "Cloud Testing Strategies",
-      description: "Testing apps in cloud platforms like AWS, Azure, and GCP.",
-    },
-    {
-      name: "Performance Engineering",
-      description: "Load, stress, and scalability testing to ensure system reliability.",
-    },
-    {
-      name: "API Security Testing",
-      description: "OWASP practices, Postman, and BurpSuite for secure APIs.",
-    },
-  ];
+  const iconMap: { [key: string]: React.ReactNode } = {
+    BookOpen: <BookOpen size={20} />,
+    Award: <Award size={20} />,
+    Globe: <Globe size={20} />,
+    Code: <Code size={20} />,
+    Database: <Database size={20} />,
+    GraduationCap: <GraduationCap size={20} />,
+    Brain: <Brain size={20} />,
+  };
 
   return (
     <section
@@ -305,7 +187,7 @@ const EducationSection: React.FC = () => {
                     transition-all duration-300 hover:scale-110 hover:shadow-xl hover:-translate-y-2 cursor-pointer hover:border-primary/50"
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary group-hover:rotate-12 transition-transform duration-300">
-                      {skill.icon}
+                      {iconMap[skill.iconKey]}
                     </div>
                     <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors duration-200">{skill.name}</p>
                   </div>

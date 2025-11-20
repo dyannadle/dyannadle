@@ -1,4 +1,5 @@
 import React from "react";
+import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { ArrowRight, Github, Download } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
@@ -20,7 +21,7 @@ const HeroSection: React.FC = () => {
       {/* Particle System Background */}
       <ParticleSystem
         particleCount={80}
-        colors={['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b']}
+        colors={PARTICLE_COLORS.hero}
         speed={0.8}
         size={{ min: 1, max: 4 }}
         className="-z-10"
@@ -87,7 +88,7 @@ const HeroSection: React.FC = () => {
               </RippleEffect>
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.2)">
                 <a
-                  href="https://github.com/dyannadle"
+                  href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
@@ -98,7 +99,7 @@ const HeroSection: React.FC = () => {
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
                 <a
-                  href="/resume.pdf"
+                  href={SOCIAL_LINKS.resume}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
