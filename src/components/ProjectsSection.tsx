@@ -9,14 +9,14 @@ interface RevealAnimationProps {
   children: React.ReactNode;
   className?: string;
   animation?:
-    | 'fade-in'
-    | 'fade-in-up'
-    | 'fade-in-down'
-    | 'fade-in-left'
-    | 'fade-in-right'
-    | 'blur-in'
-    | 'zoom-in'
-    | 'flip-in';
+  | 'fade-in'
+  | 'fade-in-up'
+  | 'fade-in-down'
+  | 'fade-in-left'
+  | 'fade-in-right'
+  | 'blur-in'
+  | 'zoom-in'
+  | 'flip-in';
   delay?: number;
   threshold?: number;
   duration?: number;
@@ -57,15 +57,15 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
   const animationClass = !isVisible
     ? 'opacity-0'
     : {
-        'fade-in': 'animate-fade-in',
-        'fade-in-up': 'animate-fade-in-up',
-        'fade-in-down': 'animate-fade-in-down',
-        'fade-in-left': 'animate-fade-in-left',
-        'fade-in-right': 'animate-fade-in-right',
-        'blur-in': 'animate-blur-in',
-        'zoom-in': 'animate-zoom-in',
-        'flip-in': 'animate-flip-in',
-      }[animation] ?? 'animate-fade-in';
+      'fade-in': 'animate-fade-in',
+      'fade-in-up': 'animate-fade-in-up',
+      'fade-in-down': 'animate-fade-in-down',
+      'fade-in-left': 'animate-fade-in-left',
+      'fade-in-right': 'animate-fade-in-right',
+      'blur-in': 'animate-blur-in',
+      'zoom-in': 'animate-zoom-in',
+      'flip-in': 'animate-flip-in',
+    }[animation] ?? 'animate-fade-in';
 
   return (
     <div
@@ -250,7 +250,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
   };
 
   if (!isOpen || !content.project) return null;
-  
+
   const { project } = content;
   const isImage = content.type === 'image';
   const isDescription = content.type === 'description';
@@ -258,15 +258,14 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
 
   const modalContent = (
     <div
-      className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[1000]"
+      className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[9999]"
       onClick={onClose}
     >
       <div
-        className={`${
-          isImage
+        className={`${isImage
             ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
             : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
-        }`}
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
         <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
@@ -281,7 +280,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
         </header>
 
         {isImage && (
-          <div 
+          <div
             ref={imageContainerRef}
             className="p-4 flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
             onMouseDown={handleMouseDown}
@@ -291,7 +290,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            style={{ 
+            style={{
               cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
               touchAction: 'none'
             }}
@@ -317,9 +316,8 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               <img
                 src={project.image}
                 alt={project.title}
-                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 ${
-                  imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
-                }`}
+                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 ${imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
+                  }`}
                 style={{
                   transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
                   transformOrigin: 'center center',
@@ -334,7 +332,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
                 draggable={false}
               />
             )}
-            
+
             {/* Zoom Controls */}
             {!imageLoading && !imageError && (
               <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700">
@@ -466,8 +464,8 @@ const ProjectsSection: React.FC = () => {
     activeFilter === 'All'
       ? projects
       : activeFilter === 'Favorites'
-      ? projects.filter((p) => favorites.includes(p.title))
-      : projects.filter((p) => p.category.includes(activeFilter));
+        ? projects.filter((p) => favorites.includes(p.title))
+        : projects.filter((p) => p.category.includes(activeFilter));
 
   const toggleFavorite = useCallback(
     (title: string) =>
@@ -510,11 +508,10 @@ const ProjectsSection: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${
-                activeFilter === f
+              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${activeFilter === f
                   ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
                   : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
-              }`}
+                }`}
             >
               {f}
             </button>
@@ -566,7 +563,7 @@ const ProjectsSection: React.FC = () => {
                     <Clock size={14} /> {p.duration}
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{p.description}</p>
-                  
+
                   <button
                     onClick={() => openModal('image', p)}
                     className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"

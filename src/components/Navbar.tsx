@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useLang } from "@/context/LangContext";
-import LanguageToggle from "./LanguageToggle";
+
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -64,12 +64,12 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          <LanguageToggle />
+          {/* LanguageToggle removed */}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
-          <LanguageToggle />
+          {/* LanguageToggle removed */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col space-y-1.5"

@@ -1,13 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import enTranslations from '../locales/en.json';
-import hiTranslations from '../locales/hi.json';
-import mrTranslations from '../locales/mr.json';
 
-type Language = 'en' | 'hi' | 'mr';
+type Language = 'en';
 
 interface LangContextType {
   language: Language;
-  setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
 
@@ -26,31 +23,16 @@ interface LangProviderProps {
 }
 
 export const LangProvider: React.FC<LangProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
-
-  useEffect(() => {
-    const savedLang = localStorage.getItem('language') as Language;
-    if (savedLang && ['en', 'hi', 'mr'].includes(savedLang)) {
-      setLanguage(savedLang);
-    }
-  }, []);
-
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('language', lang);
-  };
+  // Always default to 'en'
+  const language: Language = 'en';
 
   const t = (key: string): string => {
-    const translations = {
-      en: enTranslations,
-      hi: hiTranslations,
-      mr: mrTranslations,
-    };
-    return translations[language][key] || key;
+    // @ts-ignore
+    return enTranslations[key] || key;
   };
 
   return (
-    <LangContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+    <LangContext.Provider value={{ language, t }}>
       {children}
     </LangContext.Provider>
   );
