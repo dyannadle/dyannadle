@@ -110,7 +110,7 @@ const HeroSection: React.FC = () => {
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.2)">
                 <a
                   href="#about"
-                  className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex items-center justify-center py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
                 >
                   {t("hero.learnMore")}
                 </a>

@@ -2,7 +2,7 @@ export interface EducationItemType {
   degree: string;
   institution: string;
   duration: string;
-  details: string[]; // ✅ Fix: should be an array of strings
+  details: string[];
   url: string;
 }
 
@@ -55,4 +55,46 @@ export const educationData: EducationItemType[] = [
     ],
     url: "https://holyparadiseschool.com/",
   },
+];
+
+export const certifications = [
+  {
+    name: "ISTQB Foundation Level",
+    institution: "ISTQB",
+    year: "2024",
+    link: "https://www.istqb.org/",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/7/7b/ISTQB_Logo.png"
+  },
+  {
+    name: "Selenium WebDriver with Java",
+    institution: "Udemy",
+    year: "2024",
+    link: "https://www.udemy.com/",
+    icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png"
+  },
+  {
+    name: "Postman API Testing",
+    institution: "Udemy",
+    year: "2024",
+    link: "https://www.postman.com/",
+    icon: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
+  }
+];
+
+export const continuousLearningSkills = [
+  { name: "Testing Framework", iconKey: "Code" },
+  { name: "Quality Assurance", iconKey: "Award" },
+  { name: "Cloud Technologies", iconKey: "Globe" },
+  { name: "Development Process", iconKey: "Brain" },
+  { name: "Data Science", iconKey: "Database" },
+  { name: "Certification", iconKey: "Award" },
+  { name: "Artificial Intelligence", iconKey: "Brain" },
+  { name: "Academic Growth", iconKey: "GraduationCap" }
+];
+
+export const highlightedAreas = [
+  { name: "Manual Testing", description: "Expertise in manual test execution." },
+  { name: "Automation Testing", description: "Proficient in Selenium and Cypress." },
+  { name: "API Testing", description: "Experienced with Postman and REST Assured." },
+  { name: "Database Testing", description: "Strong SQL skills for data validation." }
 ];
