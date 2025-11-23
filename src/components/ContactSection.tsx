@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { CONTACT_CONFIG, SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { Send } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
@@ -132,7 +133,7 @@ const ContactSection: React.FC = () => {
         timezone,
       };
 
-      const FORMSPREE_URL = "https://formspree.io/f/mkgqjaol";
+      const FORMSPREE_URL = CONTACT_CONFIG.formspreeUrl;
 
       const response = await fetch(FORMSPREE_URL, {
         method: "POST",
@@ -165,7 +166,7 @@ const ContactSection: React.FC = () => {
       {/* Particle System Background */}
       <ParticleSystem
         particleCount={35}
-        colors={['#6366f1', '#8b5cf6', '#a855f7', '#3b82f6', '#06b6d4']}
+        colors={PARTICLE_COLORS.contact}
         speed={0.3}
         size={{ min: 1, max: 3 }}
         className="-z-10"
@@ -191,11 +192,11 @@ const ContactSection: React.FC = () => {
           <p className="mx-auto text-center section-subtitle">
             Get in touch with me for opportunities or collaborations
           </p>
-          
+
           {/* Hire Me Button */}
           <div className="flex justify-center mt-8">
             <a
-              href="https://www.linkedin.com/in/deepak-yannadle-4319771a1/"
+              href={SOCIAL_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex gap-3 items-center py-4 px-12 text-white text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-xl transition-all duration-300 transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-110"
@@ -308,14 +309,12 @@ const ContactSection: React.FC = () => {
       {/* ✅ Modal */}
       {showModal && (
         <div
-          className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${
-            isFadingOut ? "opacity-0" : "opacity-100"
-          } bg-black/50`}
+          className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${isFadingOut ? "opacity-0" : "opacity-100"
+            } bg-black/50`}
         >
           <div
-            className={`bg-card p-6 rounded-lg shadow-lg text-center transform transition-all duration-500 ${
-              isFadingOut ? "scale-95 opacity-0" : "scale-100 opacity-100"
-            } w-full max-w-sm border border-border`}
+            className={`bg-card p-6 rounded-lg shadow-lg text-center transform transition-all duration-500 ${isFadingOut ? "scale-95 opacity-0" : "scale-100 opacity-100"
+              } w-full max-w-sm border border-border`}
           >
             <h3 className="text-xl font-bold mb-2 text-card-foreground">✅ Thank You!</h3>
             <p className="text-muted-foreground mb-4">

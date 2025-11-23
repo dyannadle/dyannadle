@@ -59,42 +59,128 @@ export const educationData: EducationItemType[] = [
 
 export const certifications = [
   {
-    name: "ISTQB Foundation Level",
-    institution: "ISTQB",
-    year: "2024",
-    link: "https://www.istqb.org/",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/7/7b/ISTQB_Logo.png"
+    name: "Certified Software Tester",
+    institution: "Quastech",
+    year: "2025",
+    icon: "/logos/Quastech-logo.jpg.ico",
+    link: "/Certificates/Certified Software Tester.pdf",
   },
   {
-    name: "Selenium WebDriver with Java",
-    institution: "Udemy",
-    year: "2024",
-    link: "https://www.udemy.com/",
-    icon: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png"
+    name: "GenAI Powered Data Analytics",
+    institution: "Coursera",
+    year: "2025",
+    icon: "/logos/coursera logo.svg",
+    link: "/Certificates/GenAI Powered Data Analytics.pdf",
   },
   {
-    name: "Postman API Testing",
-    institution: "Udemy",
+    name: "Google Associate Cloud Engineer",
+    institution: "Google Cloud",
     year: "2024",
-    link: "https://www.postman.com/",
-    icon: "https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg"
-  }
+    icon: "/logos/google-cloud-storage.png",
+    link: "/Certificates/Google_Associate_Cloud_Engineer_Certificate.pdf",
+  },
+  {
+    name: "AWS Academy Introduction to Cloud",
+    institution: "Amazon",
+    year: "2024",
+    icon: "/logos/AWS-Logo.png",
+    link: "/Certificates/AWS Academy Introduction to Cloud.pdf",
+  },
+  {
+    name: "Career Essentials in Generative AI",
+    institution: "Microsoft & LinkedIn",
+    year: "2024",
+    icon: "/logos/linkedin-learning-logo.jpg",
+    link: "/Certificates/Career Essentials in Generative AI.pdf",
+  },
+  {
+    name: "Google AI Essentials",
+    institution: "Coursera",
+    year: "2024",
+    icon: "/logos/coursera logo.svg",
+    link: "/Certificates/Google AI Essentials.pdf",
+  },
+  {
+    name: "What is Generative AI?",
+    institution: "LinkedIn Learning",
+    year: "2024",
+    icon: "/logos/linkedin-learning-logo.jpg",
+    link: "/Certificates/What is Generative AI.pdf",
+  },
+  {
+    name: "Data Manipulation with pandas",
+    institution: "DataCamp",
+    year: "2023",
+    icon: "/logos/DC.png",
+    link: "/Certificates/Data Manipulation with pandas.pdf",
+  },
+  {
+    name: "Value Added Course By SAP",
+    institution: "SAP & Edunet",
+    year: "2023",
+    icon: "/",
+    link: "/Certificates/Value Added Course By SAP.pdf",
+  },
+  {
+    name: "Joining Data in SQL",
+    institution: "DataCamp",
+    year: "2023",
+    icon: "/logos/DC.png",
+    link: "/Certificates/Joining Data in SQL.pdf",
+  },
+  {
+    name: "Introduction to Python",
+    institution: "DataCamp",
+    year: "2023",
+    icon: "/logos/DC.png",
+    link: "/Certificates/Introduction to Python.pdf",
+  },
+  {
+    name: "Android App Development",
+    institution: "Internshala",
+    year: "2022",
+    icon: "/logos/internshala-logo.jpg",
+    link: "/Certificates/Android App Development.pdf",
+  },
+  {
+    name: "Maharashtra State Certificate in IT",
+    institution: "MS-CIT",
+    year: "2019",
+    icon: "/logos/logo-mscit.png",
+    link: "/Certificates/Maharashtra State Certificate in IT.pdf",
+  },
 ];
 
 export const continuousLearningSkills = [
-  { name: "Testing Framework", iconKey: "Code" },
+  { name: "Testing Framework", iconKey: "BookOpen" },
   { name: "Quality Assurance", iconKey: "Award" },
   { name: "Cloud Technologies", iconKey: "Globe" },
-  { name: "Development Process", iconKey: "Brain" },
+  { name: "Development Process", iconKey: "Code" },
   { name: "Data Science", iconKey: "Database" },
-  { name: "Certification", iconKey: "Award" },
+  { name: "Certification", iconKey: "GraduationCap" },
   { name: "Artificial Intelligence", iconKey: "Brain" },
-  { name: "Academic Growth", iconKey: "GraduationCap" }
+  { name: "Academic Growth", iconKey: "BookOpen" },
 ];
 
 export const highlightedAreas = [
-  { name: "Manual Testing", description: "Expertise in manual test execution." },
-  { name: "Automation Testing", description: "Proficient in Selenium and Cypress." },
-  { name: "API Testing", description: "Experienced with Postman and REST Assured." },
-  { name: "Database Testing", description: "Strong SQL skills for data validation." }
+  {
+    name: "Advanced Testing Frameworks",
+    description: "Covers Selenium, Cypress, Playwright, and other automation frameworks.",
+  },
+  {
+    name: "AI in Software Testing",
+    description: "Applying ML/AI for defect prediction, test optimization, and automation.",
+  },
+  {
+    name: "Cloud Testing Strategies",
+    description: "Testing apps in cloud platforms like AWS, Azure, and GCP.",
+  },
+  {
+    name: "Performance Engineering",
+    description: "Load, stress, and scalability testing to ensure system reliability.",
+  },
+  {
+    name: "API Security Testing",
+    description: "OWASP practices, Postman, and BurpSuite for secure APIs.",
+  },
 ];

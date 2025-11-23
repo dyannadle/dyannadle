@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { useLang } from "@/context/LangContext";
-
+import { NAV_LINKS } from "@/data/constants";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { t } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,15 +18,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
 
-  const navLinks = [
-    { name: t("navbar.home"), href: "#home" },
-    { name: t("navbar.about"), href: "#about" },
-    { name: t("navbar.projects"), href: "#projects" },
-    { name: t("navbar.education"), href: "#education" },
-    { name: t("navbar.skills"), href: "#skills" },
-    { name: t("navbar.experience"), href: "#experience" },
-    { name: t("navbar.contact"), href: "#contact" },
-  ];
+
 
   return (
     <nav
@@ -51,7 +41,7 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center space-x-8 md:flex">
-          {navLinks.map((link, index) => (
+          {NAV_LINKS.map((link, index) => (
             <a
               key={link.name}
               href={link.href}
@@ -64,12 +54,10 @@ const Navbar: React.FC = () => {
               {link.name}
             </a>
           ))}
-          {/* LanguageToggle removed */}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
-          {/* LanguageToggle removed */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col space-y-1.5"
@@ -104,7 +92,7 @@ const Navbar: React.FC = () => {
         )}
       >
         <div className="flex flex-col px-6 space-y-4">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}

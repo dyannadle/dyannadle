@@ -1,4 +1,5 @@
 import React from "react";
+import { SOCIAL_LINKS, NAV_LINKS } from "@/data/constants";
 import { Mail, Linkedin, Phone, MessageSquare } from "lucide-react";
 
 const Footer: React.FC = () => {
@@ -22,14 +23,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center md:gap-8 md:justify-end">
-            {[
-              { name: "Home", href: "#home" },
-              { name: "About", href: "#about" },
-              { name: "Education", href: "#education" },
-              { name: "Skills", href: "#skills" },
-              { name: "Projects", href: "#projects" },
-              { name: "Contact", href: "#contact" },
-            ].map((link, index) => (
+            {NAV_LINKS.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -53,13 +47,13 @@ const Footer: React.FC = () => {
           <div className="flex mt-4 space-x-6 md:mt-0">
             {[
               {
-                href: "mailto:dyannadle05@gmail.com",
+                href: `mailto:${SOCIAL_LINKS.email}`,
                 icon: <Mail size={18} />,
                 label: "Email",
                 target: "_blank",
               },
               {
-                href: "https://www.linkedin.com/in/deepak-yannadle-4319771a1/",
+                href: SOCIAL_LINKS.linkedin,
                 icon: <Linkedin size={18} />,
                 label: "LinkedIn",
                 target: "_blank",

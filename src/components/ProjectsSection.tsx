@@ -2,88 +2,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-// --- START RevealAnimation Component ---
-const cn = (...classes: (string | undefined)[]) => classes.filter(Boolean).join(' ');
-
-interface RevealAnimationProps {
-  children: React.ReactNode;
-  className?: string;
-  animation?:
-  | 'fade-in'
-  | 'fade-in-up'
-  | 'fade-in-down'
-  | 'fade-in-left'
-  | 'fade-in-right'
-  | 'blur-in'
-  | 'zoom-in'
-  | 'flip-in';
-  delay?: number;
-  threshold?: number;
-  duration?: number;
-  once?: boolean;
-  style?: React.CSSProperties;
-}
-
-const RevealAnimation: React.FC<RevealAnimationProps> = ({
-  children,
-  className = '',
-  animation = 'fade-in-up',
-  delay = 0,
-  threshold = 0.1,
-  duration = 500,
-  once = true,
-  style = {},
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && (!once || !hasAnimated)) {
-          setIsVisible(true);
-          if (once) setHasAnimated(true);
-        } else if (!once) setIsVisible(false);
-      },
-      { threshold }
-    );
-
-    const current = ref.current;
-    if (current) observer.observe(current);
-    return () => current && observer.unobserve(current);
-  }, [threshold, once, hasAnimated]);
-
-  const animationClass = !isVisible
-    ? 'opacity-0'
-    : {
-      'fade-in': 'animate-fade-in',
-      'fade-in-up': 'animate-fade-in-up',
-      'fade-in-down': 'animate-fade-in-down',
-      'fade-in-left': 'animate-fade-in-left',
-      'fade-in-right': 'animate-fade-in-right',
-      'blur-in': 'animate-blur-in',
-      'zoom-in': 'animate-zoom-in',
-      'flip-in': 'animate-flip-in',
-    }[animation] ?? 'animate-fade-in';
-
-  return (
-    <div
-      ref={ref}
-      className={cn(animationClass, className)}
-      style={{
-        animationDelay: `${delay}ms`,
-        animationDuration: `${duration}ms`,
-        ...style,
-        opacity: isVisible || !once ? 1 : 0,
-        transform: isVisible || !once ? 'none' : 'translateY(20px)',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-// --- END RevealAnimation Component ---
+import RevealAnimation from './ui/RevealAnimation';
 
 // Icons
 import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
@@ -253,8 +172,9 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
 
   const { project } = content;
   const isImage = content.type === 'image';
-  const isDescription = content.type === 'description';
   const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
+
+  console.log('Rendering Modal:', { type: content.type, project: project.title });
 
   const modalContent = (
     <div
@@ -263,16 +183,17 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
     >
       <div
         className={`${isImage
-            ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
-            : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
+          ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
+          : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
           }`}
         onClick={(e) => e.stopPropagation()}
+        style={{ opacity: 1, visibility: 'visible' }}
       >
-        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h2>
+        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gray-100 dark:bg-gray-800 shrink-0">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate pr-4">{title}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 p-2 rounded-full transition-all hover:bg-red-50 dark:hover:bg-red-900/20"
+            className="text-gray-500 hover:text-red-500 p-2"
             aria-label="Close modal"
           >
             <X size={24} />
@@ -324,11 +245,6 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
                   userSelect: 'none',
                   transition: isDragging ? 'none' : 'transform 0.2s ease-out',
                 }}
-                onLoad={() => setImageLoading(false)}
-                onError={() => {
-                  setImageLoading(false);
-                  setImageError(true);
-                }}
                 draggable={false}
               />
             )}
@@ -373,13 +289,13 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
           </div>
         )}
 
-        {isDescription && (
-          <div className="p-6 overflow-y-auto max-h-[75vh] space-y-6 text-gray-700 dark:text-gray-300">
-            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 dark:text-gray-200">
+        {!isImage && (
+          <div className="p-6 overflow-y-auto h-full space-y-6 text-gray-800">
+            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4">
               {project.description}
             </p>
 
-            <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
+            <h3 className="text-2xl font-semibold text-blue-600 border-b pb-1">
               Key Responsibilities
             </h3>
             <ul className="list-disc list-outside ml-5 space-y-2">
@@ -388,14 +304,14 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               ))}
             </ul>
 
-            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 border-b dark:border-gray-700 pb-1">
+            <h3 className="text-xl font-semibold text-blue-600 border-b pb-1">
               Technology Stack
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.tools.map((t, i) => (
                 <span
                   key={i}
-                  className="text-sm px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full font-medium shadow-sm"
+                  className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full font-medium"
                 >
                   {t}
                 </span>
@@ -436,7 +352,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
     </div>
   );
 
-  return createPortal(modalContent, document.body);
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : null;
 };
 
 // --- MAIN SHOWCASE COMPONENT ---
@@ -509,8 +425,8 @@ const ProjectsSection: React.FC = () => {
               key={f}
               onClick={() => setActiveFilter(f)}
               className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${activeFilter === f
-                  ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
-                  : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
+                ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
+                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
                 }`}
             >
               {f}
@@ -523,7 +439,10 @@ const ProjectsSection: React.FC = () => {
           {filtered.map((p, idx) => (
             <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
               <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500">
-                <div className="h-52 overflow-hidden relative">
+                <div
+                  className="h-52 overflow-hidden relative cursor-pointer"
+                  onClick={() => openModal('image', p)}
+                >
                   <img
                     src={p.image}
                     alt={p.title}
