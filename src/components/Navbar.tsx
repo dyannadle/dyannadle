@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/data/constants";
 
@@ -42,17 +43,19 @@ const Navbar: React.FC = () => {
         {/* Desktop Navigation */}
         <div className="hidden items-center space-x-8 md:flex">
           {NAV_LINKS.map((link, index) => (
-            <a
+            <motion.a
               key={link.name}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-all duration-300 link-underline hover:scale-110 hover:text-blue-600",
+                "text-sm font-medium transition-colors duration-300 link-underline hover:text-blue-600",
                 scrolled ? "text-foreground" : "text-foreground",
               )}
               style={{ animationDelay: `${index * 100}ms` }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
         </div>
 
@@ -61,6 +64,7 @@ const Navbar: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex flex-col space-y-1.5"
+            aria-label="Toggle mobile menu"
           >
             <span
               className={cn(

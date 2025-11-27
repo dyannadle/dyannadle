@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import RevealAnimation from './ui/RevealAnimation';
 import { MapPin, Calendar, Building2, ExternalLink } from 'lucide-react';
 
@@ -39,7 +40,7 @@ const ExperienceSection: React.FC = () => {
       <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-teal-300/30 rounded-full blur-2xl animate-float animation-delay-300"></div>
       <div className="absolute top-1/2 left-10 w-24 h-24 bg-green-300/20 rounded-full blur-xl animate-float animation-delay-600"></div>
       <div className="absolute top-1/3 right-10 w-20 h-20 bg-lime-300/20 rounded-full blur-xl animate-float animation-delay-900"></div>
-      
+
       <div className="section-container w-full text-center relative z-10">
         <RevealAnimation animation="zoom-in">
           <h2 className="section-title bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 bg-clip-text text-transparent">Professional Experience</h2>
@@ -52,10 +53,12 @@ const ExperienceSection: React.FC = () => {
         <div className="mt-12 max-w-4xl mx-auto">
           {experiences.map((experience, index) => (
             <RevealAnimation key={index} animation="fade-in-up" delay={200}>
-              <div
+              <motion.div
                 className="glass bg-gradient-to-br from-white/95 to-emerald-50/80 
                 p-8 rounded-2xl shadow-lg border border-emerald-100/50 
-                hover:shadow-2xl transition-all duration-500 hover:translate-y-[-8px] hover:scale-[1.02] backdrop-blur-sm"
+                backdrop-blur-sm"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 {/* Header row */}
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
@@ -139,7 +142,7 @@ const ExperienceSection: React.FC = () => {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             </RevealAnimation>
           ))}
         </div>

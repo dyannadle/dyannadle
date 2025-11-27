@@ -1,8 +1,10 @@
 // React and Hooks
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import RevealAnimation from './ui/RevealAnimation';
+import { ProjectCardSkeleton } from './ui/ProjectCardSkeleton';
 
 // Icons
 import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
@@ -362,6 +364,7 @@ const ProjectsSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState<ModalContent>({ type: null, project: null });
   const [showAllTools, setShowAllTools] = useState<Record<string, boolean>>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? 'hidden' : 'unset';
@@ -375,6 +378,15 @@ const ProjectsSection: React.FC = () => {
     window.addEventListener('keydown', onEsc);
     return () => window.removeEventListener('keydown', onEsc);
   }, [isModalOpen]);
+
+  // Simulate loading on filter change
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [activeFilter]);
 
   const filtered =
     activeFilter === 'All'
@@ -436,83 +448,107 @@ const ProjectsSection: React.FC = () => {
 
         {/* grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {filtered.map((p, idx) => (
-            <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
-              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500">
-                <div
-                  className="h-52 overflow-hidden relative cursor-pointer"
-                  onClick={() => openModal('image', p)}
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              // Show skeletons
+              Array.from({ length: 6 }).map((_, idx) => (
+                <motion.div
+                  key={`skeleton-${idx}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
                 >
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.15] group-hover:rotate-[1deg]"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src =
-                        'https://placehold.co/400x208/F0F4FF/4F46E5?text=Project+Image';
-                    }}
-                  />
-                </div>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(p.title);
-                  }}
-                  className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-lg hover:scale-125 transition z-10"
-                  aria-label="favorite"
-                >
-                  {favorites.includes(p.title) ? (
-                    <Star size={24} fill="#FBBF24" color="#FBBF24" />
-                  ) : (
-                    <StarOff size={24} color="#4B5563" />
-                  )}
-                </button>
-
-                <div className="p-6">
-                  <h3
-                    onClick={() => openModal('description', p)}
-                    className="text-2xl font-bold mb-3 cursor-pointer text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  <ProjectCardSkeleton />
+                </motion.div>
+              ))
+            ) : (
+              // Show actual projects
+              filtered.map((p, idx) => (
+                <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
+                  <motion.div
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 h-full flex flex-col"
+                    whileHover={{ y: -10, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    {p.title}
-                  </h3>
-                  <div className="inline-flex items-center gap-1 mb-3 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-semibold">
-                    <Clock size={14} /> {p.duration}
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{p.description}</p>
-
-                  <button
-                    onClick={() => openModal('image', p)}
-                    className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
-                  >
-                    <ImageIcon size={18} /> View Full Image
-                  </button>
-
-                  <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">Tools Used:</h4>
-                  <ul className="flex flex-wrap gap-2 text-xs">
-                    {(showAllTools[p.title] ? p.tools : p.tools.slice(0, 4)).map((t, i) => (
-                      <li key={i} className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full">
-                        {t}
-                      </li>
-                    ))}
-                    {p.tools.length > 4 && (
-                      <button
-                        className="text-blue-600 dark:text-blue-400 underline text-xs ml-2 mt-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowAllTools((s) => ({ ...s, [p.title]: !s[p.title] }));
+                    <div
+                      className="h-52 overflow-hidden relative cursor-pointer"
+                      onClick={() => openModal('image', p)}
+                    >
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.15] group-hover:rotate-[1deg]"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src =
+                            'https://placehold.co/400x208/F0F4FF/4F46E5?text=Project+Image';
                         }}
+                      />
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(p.title);
+                      }}
+                      className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-lg hover:scale-125 transition z-10"
+                      aria-label="favorite"
+                    >
+                      {favorites.includes(p.title) ? (
+                        <Star size={24} fill="#FBBF24" color="#FBBF24" />
+                      ) : (
+                        <StarOff size={24} color="#4B5563" />
+                      )}
+                    </button>
+
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3
+                        onClick={() => openModal('description', p)}
+                        className="text-2xl font-bold mb-3 cursor-pointer text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        {showAllTools[p.title] ? 'Show Less' : `+${p.tools.length - 4} More`}
+                        {p.title}
+                      </h3>
+                      <div className="inline-flex items-center gap-1 mb-3 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-semibold w-fit">
+                        <Clock size={14} /> {p.duration}
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm flex-1">{p.description}</p>
+
+                      <button
+                        onClick={() => openModal('image', p)}
+                        className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
+                      >
+                        <ImageIcon size={18} /> View Full Image
                       </button>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            </RevealAnimation>
-          ))}
+
+                      <div className="mt-auto">
+                        <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">Tools Used:</h4>
+                        <ul className="flex flex-wrap gap-2 text-xs">
+                          {(showAllTools[p.title] ? p.tools : p.tools.slice(0, 4)).map((t, i) => (
+                            <li key={i} className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full">
+                              {t}
+                            </li>
+                          ))}
+                          {p.tools.length > 4 && (
+                            <button
+                              className="text-blue-600 dark:text-blue-400 underline text-xs ml-2 mt-1"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setShowAllTools((s) => ({ ...s, [p.title]: !s[p.title] }));
+                              }}
+                            >
+                              {showAllTools[p.title] ? 'Show Less' : `+${p.tools.length - 4} More`}
+                            </button>
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+                  </motion.div>
+                </RevealAnimation>
+              ))
+            )}
+          </AnimatePresence>
         </div>
       </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { ArrowRight, Github, Download } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
@@ -78,43 +79,51 @@ const HeroSection: React.FC = () => {
           <RevealAnimation animation="fade-in-up" delay={500}>
             <div className="flex flex-wrap gap-4 justify-center">
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.3)">
-                <a
+                <motion.a
                   href="#contact"
-                  className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition-colors hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Contact Me
                   <ArrowRight size={18} className="ml-1" />
-                </a>
+                </motion.a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.2)">
-                <a
+                <motion.a
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition-colors hover:bg-gray-800 hover:shadow-lg"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Github size={18} />
                   GitHub
-                </a>
+                </motion.a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
-                <a
+                <motion.a
                   href={SOCIAL_LINKS.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition-colors hover:bg-gray-50 hover:shadow-lg"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Download size={18} />
                   Download Resume
-                </a>
+                </motion.a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.2)">
-                <a
+                <motion.a
                   href="#about"
-                  className="flex items-center justify-center py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex items-center justify-center py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition-colors hover:shadow-lg"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Learn More
-                </a>
+                </motion.a>
               </RippleEffect>
             </div>
           </RevealAnimation>

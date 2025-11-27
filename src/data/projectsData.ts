@@ -149,6 +149,5 @@ export const filters = [
   'Testing Project',
   'AI/ML Project',
   'Automation Project',
-  'API Testing',
   'Game Development',
 ];

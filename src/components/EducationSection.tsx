@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
 import FloatingElements from "./ui/FloatingElements";
@@ -81,9 +82,11 @@ const EducationSection: React.FC = () => {
                     </div>
 
                     {/* Card for each education entry */}
-                    <div
+                    <motion.div
                       className="flex-1 bg-card/70 backdrop-blur-sm rounded-xl p-6 shadow-md border border-border 
-                      hover:shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                      cursor-pointer"
+                      whileHover={{ scale: 1.05, y: -4, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                       <h4 className="font-bold text-lg text-card-foreground mb-1">{item.degree}</h4>
 
@@ -114,7 +117,7 @@ const EducationSection: React.FC = () => {
                           <li key={i}>{detail}</li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   </div>
                 ))}
               </div>
@@ -136,10 +139,12 @@ const EducationSection: React.FC = () => {
 
               <div className="space-y-3 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
                 {certifications.map((cert, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="flex items-center gap-4 bg-card/70 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border hover:shadow-lg hover:border-primary/30 transition-all duration-300 hover:scale-102 animate-fade-in-left"
+                    className="flex items-center gap-4 bg-card/70 backdrop-blur-sm rounded-lg p-4 shadow-sm border border-border animate-fade-in-left"
                     style={{ animationDelay: `${index * 50}ms` }}
+                    whileHover={{ scale: 1.02, boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md transition-transform duration-300 hover:scale-110" />
                     <div className="flex-1">
@@ -156,7 +161,7 @@ const EducationSection: React.FC = () => {
                     <div className="text-right">
                       <span className="text-muted-foreground text-xs font-medium">{cert.year}</span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -182,15 +187,17 @@ const EducationSection: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {continuousLearningSkills.map((skill, index) => (
                 <div key={index} className="relative group animate-zoom-in" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div
+                  <motion.div
                     className="bg-card/80 backdrop-blur-sm rounded-xl p-4 text-center shadow-md border border-border 
-                    transition-all duration-300 hover:scale-110 hover:shadow-xl hover:-translate-y-2 cursor-pointer hover:border-primary/50"
+                    cursor-pointer hover:border-primary/50"
+                    whileHover={{ scale: 1.1, y: -5, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mx-auto mb-3 text-primary group-hover:rotate-12 transition-transform duration-300">
                       {iconMap[skill.iconKey]}
                     </div>
                     <p className="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors duration-200">{skill.name}</p>
-                  </div>
+                  </motion.div>
 
                   {/* Tooltip */}
                   <div
