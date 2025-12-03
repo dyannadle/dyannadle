@@ -371,9 +371,9 @@ const ProjectsSection: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${activeFilter === f
-                ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
-                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
+              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 active:scale-95 ${activeFilter === f
+                ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/30 scale-105'
+                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400 hover:-translate-y-0.5 hover:shadow-md'
                 }`}
             >
               {f}
@@ -385,7 +385,7 @@ const ProjectsSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {filtered.map((p, idx) => (
             <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
-              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500">
+              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 hover:shadow-primary/20 hover:border-primary/30 hover-shine">
                 <div
                   className="h-52 overflow-hidden relative cursor-pointer"
                   onClick={() => openModal('image', p)}
@@ -408,7 +408,7 @@ const ProjectsSection: React.FC = () => {
                     e.stopPropagation();
                     toggleFavorite(p.title);
                   }}
-                  className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-lg hover:scale-125 transition z-10"
+                  className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-lg hover:scale-125 hover:rotate-12 transition-all duration-300 z-10 active:scale-95"
                   aria-label="favorite"
                 >
                   {favorites.includes(p.title) ? (
@@ -432,7 +432,7 @@ const ProjectsSection: React.FC = () => {
 
                   <button
                     onClick={() => openModal('image', p)}
-                    className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
+                    className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/30 active:scale-95 icon-bounce"
                   >
                     <ImageIcon size={18} /> View Full Image
                   </button>
@@ -440,13 +440,13 @@ const ProjectsSection: React.FC = () => {
                   <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">Tools Used:</h4>
                   <ul className="flex flex-wrap gap-2 text-xs">
                     {(showAllTools[p.title] ? p.tools : p.tools.slice(0, 4)).map((t, i) => (
-                      <li key={i} className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full">
+                      <li key={i} className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full transition-all duration-200 hover:bg-purple-200 dark:hover:bg-purple-800/50 hover:scale-110 hover:-translate-y-0.5 cursor-default">
                         {t}
                       </li>
                     ))}
                     {p.tools.length > 4 && (
                       <button
-                        className="text-blue-600 dark:text-blue-400 underline text-xs ml-2 mt-1"
+                        className="text-blue-600 dark:text-blue-400 underline text-xs ml-2 mt-1 hover:text-blue-700 dark:hover:text-blue-300 transition-colors underline-grow"
                         onClick={(e) => {
                           e.stopPropagation();
                           setShowAllTools((s) => ({ ...s, [p.title]: !s[p.title] }));

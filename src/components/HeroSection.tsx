@@ -80,10 +80,10 @@ const HeroSection: React.FC = () => {
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.3)">
                 <a
                   href="#contact"
-                  className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1 hover:scale-105 active:scale-95 group"
                 >
                   Contact Me
-                  <ArrowRight size={18} className="ml-1" />
+                  <ArrowRight size={18} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.2)">
@@ -91,9 +91,9 @@ const HeroSection: React.FC = () => {
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition transform hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 bg-gray-900 text-white rounded-lg shadow-md transition-all duration-300 hover:bg-gray-800 hover:shadow-xl hover:shadow-gray-500/30 hover:-translate-y-1 hover:scale-105 active:scale-95 group"
                 >
-                  <Github size={18} />
+                  <Github size={18} className="transition-transform duration-300 group-hover:rotate-12" />
                   GitHub
                 </a>
               </RippleEffect>
@@ -102,16 +102,16 @@ const HeroSection: React.FC = () => {
                   href={SOCIAL_LINKS.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition transform hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="flex gap-2 items-center py-3 px-6 bg-white text-gray-800 rounded-lg border shadow-md transition-all duration-300 hover:bg-gray-50 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 hover:scale-105 active:scale-95 group"
                 >
-                  <Download size={18} />
+                  <Download size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                   Download Resume
                 </a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.2)">
                 <a
                   href="#about"
-                  className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition transform hover:shadow-lg hover:-translate-y-1 hover:scale-105"
+                  className="py-3 px-6 rounded-lg border bg-white/80 backdrop-blur-sm border-gray-200 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 hover:scale-105 active:scale-95"
                 >
                   Learn More
                 </a>
