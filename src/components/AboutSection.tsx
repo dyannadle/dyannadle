@@ -70,7 +70,7 @@ const AboutSection: React.FC = () => {
               <div className="space-y-6">
                 <RevealAnimation animation="fade-in-up" delay={100}>
                   <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
-                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:border-primary/30 hover-shine icon-bounce">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Briefcase className="text-blue-600" size={20} />
@@ -88,7 +88,7 @@ const AboutSection: React.FC = () => {
 
                 <RevealAnimation animation="fade-in-up" delay={200}>
                   <RippleEffect rippleColor="rgba(147, 51, 234, 0.3)">
-                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:border-secondary/30 hover-shine icon-bounce">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <FileCheck className="text-purple-600" size={20} />
@@ -104,7 +104,7 @@ const AboutSection: React.FC = () => {
 
                 <RevealAnimation animation="fade-in-up" delay={300}>
                   <RippleEffect rippleColor="rgba(99, 102, 241, 0.3)">
-                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:border-accent/30 hover-shine icon-bounce">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Code className="text-indigo-600" size={20} />
@@ -124,7 +124,7 @@ const AboutSection: React.FC = () => {
 
                 <RevealAnimation animation="fade-in-up" delay={400}>
                   <RippleEffect rippleColor="rgba(20, 184, 166, 0.3)">
-                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-3px] hover:scale-105">
+                    <div className="glass bg-gradient-to-r from-white/95 to-blue-50/80 p-6 rounded-2xl card-hover border border-blue-100/50 shadow-md hover:shadow-xl transition-all duration-300 hover:translate-y-[-3px] hover:scale-105 hover:border-success/30 hover-shine icon-bounce">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-lg bg-teal-100 flex items-center justify-center mr-3 animate-bounce-gentle">
                     <Database className="text-teal-600" size={20} />
