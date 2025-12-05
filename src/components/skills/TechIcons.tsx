@@ -28,7 +28,7 @@ export const TechIcons: Record<string, React.FC<IconProps>> = {
 
     // Tools & Frameworks
     "JIRA": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg", "JIRA"),
-    "Bugzilla": SvgIcon(<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />, "0 0 24 24", "#D72B26", "none", "0"),
+    "Bugzilla": ImageIcon("/bugzilla-icon.png", "Bugzilla"), // Custom user image
     "Selenium": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/selenium/selenium-original.svg", "Selenium"),
     "Maven": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg", "Maven"),
     "Postman": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg", "Postman"),
