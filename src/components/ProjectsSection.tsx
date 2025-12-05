@@ -436,9 +436,9 @@ const ProjectsSection: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 ${activeFilter === f
-                ? 'bg-blue-600 text-white border-blue-600 shadow-lg scale-105'
-                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400'
+              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 active:scale-95 ${activeFilter === f
+                ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/30 scale-105'
+                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400 hover:-translate-y-0.5 hover:shadow-md'
                 }`}
             >
               {f}

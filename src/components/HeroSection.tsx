@@ -98,7 +98,7 @@ const HeroSection: React.FC = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Github size={18} />
+                  <Github size={18} className="transition-transform duration-300 group-hover:rotate-12" />
                   GitHub
                 </motion.a>
               </RippleEffect>
@@ -111,7 +111,7 @@ const HeroSection: React.FC = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Download size={18} />
+                  <Download size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                   Download Resume
                 </motion.a>
               </RippleEffect>

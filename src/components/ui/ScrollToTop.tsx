@@ -30,13 +30,14 @@ const ScrollToTop: React.FC = () => {
       onClick={scrollToTop}
       className={cn(
         'fixed bottom-8 right-8 z-50 p-3 rounded-full transition-all duration-300',
-        'bg-primary text-primary-foreground shadow-lg hover:shadow-xl',
-        'hover:scale-110 active:scale-95',
+        'bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/40',
+        'hover:scale-110 hover:-translate-y-1 active:scale-95',
+        'group overflow-hidden',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none'
       )}
       aria-label="Scroll to top"
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
     </button>
   );
 };
