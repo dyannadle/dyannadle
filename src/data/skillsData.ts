@@ -5,6 +5,7 @@ export interface SkillItemType {
   level: number;
   description?: string;
   version?: string;
+  excludeFromCloud?: boolean;
 }
 
 export const technicalSkills: SkillItemType[] = [
@@ -34,16 +35,49 @@ export const technicalSkills: SkillItemType[] = [
       "A widely used programming language known for its object-oriented principles and platform independence.",
   },
   {
+    name: "CI/CD",
+    level: 75,
+    description:
+      "Continuous Integration and Continuous Delivery testing practices.",
+  },
+  {
+    name: "Jenkins",
+    level: 70,
+    description:
+      "An open source automation server which enables developers around the world to reliably build, test, and deploy their software.",
+  },
+  {
+    name: "Rest API",
+    level: 80,
+    description:
+      "Designing and testing Representational State Transfer (REST) Application Programming Interfaces.",
+  },
+  {
+    name: "Test Automation",
+    level: 75,
+    description:
+      "Using software tools to execute pre-scripted tests on a software application before it is released into production.",
+  },
+  {
     name: "Test case writing",
     level: 95,
     description:
       "Creating detailed, clear and effective test cases covering all aspects of software functionality.",
+    excludeFromCloud: true,
   },
   {
     name: "Test plan creation",
     level: 85,
     description:
       "Developing comprehensive test plans that outline testing scope, approach, resources and schedule.",
+    excludeFromCloud: true,
+  },
+  {
+    name: "Test scenarios creation",
+    level: 90,
+    description:
+      "Developing comprehensive test scenarios that cover all aspects of software functionality.",
+    excludeFromCloud: true,
   },
   {
     name: "Bugzilla",
@@ -131,12 +165,7 @@ export const otherSkills: SkillItemType[] = [
     description:
       "A suite of productivity applications, including Word, Excel, and PowerPoint, used for document creation, data analysis, and presentations.",
   },
-  {
-    name: "Test scenarios creation",
-    level: 90,
-    description:
-      "Developing comprehensive test scenarios that cover all aspects of software functionality.",
-  },
+
   {
     name: "Verification & Validation",
     level: 85,

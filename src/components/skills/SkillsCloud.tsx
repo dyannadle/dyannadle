@@ -11,7 +11,7 @@ const SkillsCloud: React.FC<SkillsCloudProps> = ({ skills }) => {
     return (
         <div className="relative w-full max-w-5xl mx-auto py-20 px-4">
             <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-                {skills.map((skill, index) => {
+                {skills.filter(skill => !skill.excludeFromCloud).map((skill, index) => {
                     const Icon = getTechIcon(skill.name);
                     // Randomize animation delay for a more organic feel
                     const delay = Math.random() * 2;

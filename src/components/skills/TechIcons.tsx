@@ -20,7 +20,7 @@ export const TechIcons: Record<string, React.FC<IconProps>> = {
     // Using 'original' versions for full color logos
 
     // Languages
-    "SQL": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original.svg", "SQL Server"), // Official MS SQL Logo
+    "SQL": ImageIcon("/sql-icon.png", "SQL"), // Custom user image
     "MySQL": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg", "MySQL"),
     "No SQL": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg", "NoSQL"), // MongoDB as representative
     "Basic JAVA": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", "Java"),
@@ -44,6 +44,24 @@ export const TechIcons: Record<string, React.FC<IconProps>> = {
     // AI & ML
     "ML Basics": ImageIcon("/ml-icon.png", "Machine Learning"), // Custom user image
     "AI in Testing": ImageIcon("/ai-icon.png", "AI in Testing"), // Custom user image
+
+    // New Skills
+    "Jenkins": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg", "Jenkins"),
+    "CI/CD": ImageIcon("https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg", "CI/CD"), // Using GitHub Actions as representative for CI/CD
+    "Rest API": SvgIcon(<>
+        <circle cx="12" cy="12" r="10" stroke="none" fill="#0284c7" />
+        <path d="M12 2a10 10 0 0 0-9.95 9h19.9A10 10 0 0 0 12 2z" fill="#0ea5e9" />
+        <path d="M12 22a10 10 0 0 0 9.95-9H2.05A10 10 0 0 0 12 22z" fill="#0284c7" />
+        <path d="M2.05 13h19.9M2.05 11h19.9" stroke="white" strokeWidth="2" />
+    </>, "0 0 24 24", "none"),
+    "Test Automation": SvgIcon(<>
+        <rect x="3" y="11" width="18" height="10" rx="2" fill="#6366f1" stroke="none" />
+        <circle cx="12" cy="5" r="2" fill="#6366f1" stroke="none" />
+        <path d="M12 7v4" stroke="#6366f1" strokeWidth="2" />
+        <line x1="8" y1="16" x2="16" y2="16" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="9" cy="13" r="1" fill="white" />
+        <circle cx="15" cy="13" r="1" fill="white" />
+    </>, "0 0 24 24", "none"),
 
     // --- Abstract / General Skills (Custom SVGs) ---
     "Manual Testing": SvgIcon(<>
