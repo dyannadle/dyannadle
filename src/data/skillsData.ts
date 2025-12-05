@@ -6,6 +6,7 @@ export interface SkillItemType {
   description?: string;
   version?: string;
   excludeFromCloud?: boolean;
+  excludeFromList?: boolean;
 }
 
 export const technicalSkills: SkillItemType[] = [
@@ -39,18 +40,21 @@ export const technicalSkills: SkillItemType[] = [
     level: 75,
     description:
       "Continuous Integration and Continuous Delivery testing practices.",
+    excludeFromList: true,
   },
   {
     name: "Jenkins",
     level: 70,
     description:
       "An open source automation server which enables developers around the world to reliably build, test, and deploy their software.",
+    excludeFromList: true,
   },
   {
     name: "Rest API",
     level: 80,
     description:
       "Designing and testing Representational State Transfer (REST) Application Programming Interfaces.",
+    excludeFromList: true,
   },
   {
     name: "Test Automation",

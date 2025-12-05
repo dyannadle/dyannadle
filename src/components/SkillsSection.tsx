@@ -48,7 +48,7 @@ const SkillsSection: React.FC = () => {
           <RevealAnimation animation="fade-in-right" delay={100}>
             <div className="space-y-8">
               <StaggeredAnimation staggerDelay={150} animationClass="animate-fade-in-up">
-                <SkillsList title="Technical Skills" skills={technicalSkills} />
+                <SkillsList title="Technical Skills" skills={technicalSkills.filter(s => !s.excludeFromList)} />
                 <SkillsList
                   title="Additional Skills"
                   skills={otherSkills}
