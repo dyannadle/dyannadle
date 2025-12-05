@@ -21,6 +21,7 @@ export const technicalSkills: SkillItemType[] = [
     level: 90,
     description:
       "A process where testers manually execute test cases to identify bugs in software.",
+    excludeFromCloud: true,
   },
   {
     name: "JIRA",
