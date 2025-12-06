@@ -1,17 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
+import { HERO_DATA } from "@/data/heroData";
 import { ArrowRight, Github, Download } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
 import { useMousePosition } from "../hooks/useScrollAnimation";
-import { useLang } from "@/context/LangContext";
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
-  const { t } = useLang();
 
   return (
     <section
@@ -53,7 +52,7 @@ const HeroSection: React.FC = () => {
               role="status"
               aria-label="Role"
             >
-              SOFTWARE TESTER
+              {HERO_DATA.role}
             </div>
           </RevealAnimation>
 
@@ -63,7 +62,7 @@ const HeroSection: React.FC = () => {
 
               {/* Name */}
               <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-indigo-700 md:text-5xl lg:text-6xl">
-                Hi, I'm <span className="text-blue-600">Deepak Yannadle</span>
+                Hi, I'm <span className="text-blue-600">{HERO_DATA.name}</span>
               </h1>
             </div>
           </RevealAnimation>
@@ -71,7 +70,7 @@ const HeroSection: React.FC = () => {
           {/* Intro paragraph */}
           <RevealAnimation animation="fade-in-up" delay={300}>
             <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl text-muted-foreground">
-              I'm a passionate Software Tester who loves ensuring that software not only works but works flawlessly. With a strong foundation in manual testing, SDLC, STLC, and SQL, I specialize in creating and executing test strategies that uncover hidden issues and improve user experience. I've worked with tools like JIRA, Postman, and Selenium, and I'm continuously sharpening my skills in automation frameworks, cloud testing, and performance engineering. My goal is to blend precision in manual testing with the power of automation and modern QA practices to deliver high-quality, reliable, and user-focused software solutions.
+              {HERO_DATA.description}
             </p>
           </RevealAnimation>
 
@@ -85,7 +84,7 @@ const HeroSection: React.FC = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Contact Me
+                  {HERO_DATA.cta.contact}
                   <ArrowRight size={18} className="ml-1" />
                 </motion.a>
               </RippleEffect>
@@ -99,7 +98,7 @@ const HeroSection: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Github size={18} className="transition-transform duration-300 group-hover:rotate-12" />
-                  GitHub
+                  {HERO_DATA.cta.github}
                 </motion.a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.3)">
@@ -112,7 +111,7 @@ const HeroSection: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Download size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
-                  Download Resume
+                  {HERO_DATA.cta.resume}
                 </motion.a>
               </RippleEffect>
               <RippleEffect rippleColor="rgba(59, 130, 246, 0.2)">
@@ -122,7 +121,7 @@ const HeroSection: React.FC = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Learn More
+                  {HERO_DATA.cta.learnMore}
                 </motion.a>
               </RippleEffect>
             </div>
