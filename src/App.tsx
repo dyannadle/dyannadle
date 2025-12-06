@@ -9,7 +9,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { LangProvider } from "@/context/LangContext";
 import { Loader2 } from "lucide-react";
 
 // Lazy load pages
@@ -28,23 +27,21 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <ThemeProvider>
-        <LangProvider>
-          <TooltipProvider delayDuration={0}>
-            <Toaster />
-            <Sonner />
-            <CustomCursor />
-            <BackToTop />
-            <ScrollProgress />
-            <BrowserRouter>
-              <Suspense fallback={<PageLoader />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </TooltipProvider>
-        </LangProvider>
+        <TooltipProvider delayDuration={0}>
+          <Toaster />
+          <Sonner />
+          <CustomCursor />
+          <BackToTop />
+          <ScrollProgress />
+          <BrowserRouter>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
       </ThemeProvider>
     </HelmetProvider>
   </QueryClientProvider>

@@ -8,11 +8,9 @@ import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
 import { useMousePosition } from "../hooks/useScrollAnimation";
-import { useLang } from "@/context/LangContext";
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
-  const { t } = useLang();
 
   return (
     <section
