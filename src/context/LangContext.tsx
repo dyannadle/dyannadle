@@ -27,7 +27,6 @@ export const LangProvider: React.FC<LangProviderProps> = ({ children }) => {
   const language: Language = 'en';
 
   const t = (key: string): string => {
-    // @ts-ignore
     return enTranslations[key] || key;
   };
 
