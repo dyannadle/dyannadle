@@ -1,69 +1,68 @@
-# Welcome to your Lovable project
+# Deepak Yannadle - Portfolio
 
-## Project info
+A modern, responsive personal portfolio website built to showcase my experience, skills, and projects.
 
-**URL**: https://lovable.dev/projects/66b9acf0-8c2f-4fe1-b59f-8abdf2587ed1
+## 🚀 Features
 
-## How can I edit this code?
+- **Interactive UI**: Smooth animations and transitions using Framer Motion.
+- **Responsive Design**: Fully responsive layout built with Tailwind CSS.
+- **Experience Timeline**: A visual representation of my professional journey.
+- **Skills Visualization**: Interactive skills cloud and categorized technical skills.
+- **Project Showcase**: Detailed view of my projects with links and descriptions.
+- **Contact Section**: Easy way to get in touch.
 
-There are several ways of editing your application.
+## 🛠️ Tech Stack
 
-**Use Lovable**
+This project is built with the following technologies:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/66b9acf0-8c2f-4fe1-b59f-8abdf2587ed1) and start prompting.
+- **Frontend**: [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🏁 Getting Started
 
-**Use your preferred IDE**
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [Node.js](https://nodejs.org/) (v16 or higher installed)
+- [npm](https://www.npmjs.com/) (usually comes with Node.js)
 
-Follow these steps:
+### Installation
+
+1.  **Clone the repository**
+    ```sh
+    git clone <YOUR_GIT_URL>
+    cd dyannadle
+    ```
+
+2.  **Install dependencies**
+    ```sh
+    npm install
+    ```
+
+### 🏃‍♂️ Running Locally
+
+Start the development server with hot-reload:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080` (or the port shown in your terminal).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 🏗️ Building for Production
 
-**Use GitHub Codespaces**
+Build the app for production:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+npm run build
+```
 
-## What technologies are used for this project?
+This will create a `dist` folder with the optimized production build.
 
-This project is built with .
+## 📄 License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/66b9acf0-8c2f-4fe1-b59f-8abdf2587ed1) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License.
