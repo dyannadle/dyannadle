@@ -34,22 +34,22 @@ const Index: React.FC = () => {
       <HeroSection />
 
       <Suspense fallback={<SectionLoader />}>
-        <RevealAnimation animation="fade-in-up" duration={600}>
+        <RevealAnimation animation="fade-in-up" duration={800} distance={60}>
           <AboutSection />
         </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <RevealAnimation animation="slide-up" duration={800} distance={50}>
           <ProjectsSection />
         </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <RevealAnimation animation="fade-in-left" duration={800} distance={60}>
           <EducationSection />
         </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <RevealAnimation animation="scale-up" duration={700}>
           <SkillsSection />
         </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <RevealAnimation animation="fade-in-right" duration={800} distance={60}>
           <ExperienceSection />
         </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+        <RevealAnimation animation="zoom-in" duration={700}>
           <ContactSection />
         </RevealAnimation>
       </Suspense>
