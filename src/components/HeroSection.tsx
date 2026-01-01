@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { HERO_DATA } from "@/data/heroData";
@@ -7,10 +7,12 @@ import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
+import TypingAnimation from "./ui/TypingAnimation";
 import { useMousePosition } from "../hooks/useScrollAnimation";
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
+  const [nameTyped, setNameTyped] = useState(false);
 
   return (
     <section
@@ -56,13 +58,21 @@ const HeroSection: React.FC = () => {
             </div>
           </RevealAnimation>
 
-          {/* Avatar + Name */}
+          {/* Avatar + Name with Typing Animation */}
           <RevealAnimation animation="fade-in-up" delay={200}>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
-
-              {/* Name */}
+              {/* Name with typing effect */}
               <h1 className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-indigo-700 md:text-5xl lg:text-6xl">
-                Hi, I'm <span className="text-blue-600">{HERO_DATA.name}</span>
+                <span>Hi, I'm </span>
+                <span className="text-blue-600">
+                  <TypingAnimation 
+                    text={HERO_DATA.name} 
+                    speed={120} 
+                    delay={800}
+                    cursor={!nameTyped}
+                    onComplete={() => setNameTyped(true)}
+                  />
+                </span>
               </h1>
             </div>
           </RevealAnimation>
