@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { CONTACT_CONFIG, SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { Send } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
+import StaggeredAnimation from "./ui/StaggeredAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
 import FloatingElements from "./ui/FloatingElements";
 
@@ -217,37 +218,83 @@ const ContactSection: React.FC = () => {
 
               {/* form */}
               <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div>
-                    <label htmlFor="name" className="block mb-2 text-sm font-medium">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                      placeholder="Your name"
-                    />
-                    {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
+                <StaggeredAnimation staggerDelay={100} direction="up" duration={500} distance={20}>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className="block mb-2 text-sm font-medium">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
+                        placeholder="Your name"
+                      />
+                      {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className="block mb-2 text-sm font-medium">
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
+                        placeholder="Your email"
+                      />
+                      {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
+                    </div>
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium">
-                      Email
+                    <label htmlFor="subject" className="block mb-2 text-sm font-medium">
+                      Subject
                     </label>
                     <input
-                      id="email"
-                      type="email"
-                      value={formData.email}
+                      id="subject"
+                      type="text"
+                      value={formData.subject}
                       onChange={handleChange}
                       className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                      placeholder="Your email"
+                      placeholder="Subject"
                     />
-                    {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
+                    {errors.subject && <p className="text-destructive text-sm mt-1">{errors.subject}</p>}
                   </div>
-                </div>
+
+                  <div>
+                    <label htmlFor="date" className="block mb-2 text-sm font-medium">
+                      Date
+                    </label>
+                    <input
+                      id="date"
+                      type="date"
+                      value={formData.date}
+                      onChange={handleChange}
+                      className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
+                    />
+                    {errors.date && <p className="text-destructive text-sm mt-1">{errors.date}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block mb-2 text-sm font-medium">
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
+                      placeholder="Your message"
+                    />
+                    {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
+                  </div>
+                </StaggeredAnimation>
 
                 <div>
                   <label htmlFor="subject" className="block mb-2 text-sm font-medium">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import RevealAnimation from './ui/RevealAnimation';
+import StaggeredAnimation from './ui/StaggeredAnimation';
 import { MapPin, Calendar, Building2, ExternalLink } from 'lucide-react';
 
 import { EXPERIENCES } from '@/data/experienceData';
@@ -80,45 +81,44 @@ const ExperienceSection: React.FC = () => {
                   <h4 className="text-lg font-semibold mb-3 text-emerald-700 flex items-center gap-2">
                     <span className="text-2xl">🏆</span> Key Achievements:
                   </h4>
-                  <ul className="space-y-2 text-left">
+                  <StaggeredAnimation 
+                    staggerDelay={100} 
+                    direction="right" 
+                    duration={500} 
+                    distance={30}
+                    className="space-y-2"
+                  >
                     {experience.achievements.map((achievement, i) => (
-                      <RevealAnimation
-                        key={i}
-                        animation="fade-in-right"
-                        delay={200 + i * 100}
-                      >
-                        <li className="flex items-start bg-emerald-50 p-3 rounded-lg">
-                          <span className="text-emerald-600 mr-3 mt-1 text-lg">✓</span>
-                          <span className="text-muted-foreground font-medium">
-                            {achievement}
-                          </span>
-                        </li>
-                      </RevealAnimation>
+                      <li key={i} className="flex items-start bg-emerald-50 p-3 rounded-lg">
+                        <span className="text-emerald-600 mr-3 mt-1 text-lg">✓</span>
+                        <span className="text-muted-foreground font-medium">
+                          {achievement}
+                        </span>
+                      </li>
                     ))}
-                  </ul>
+                  </StaggeredAnimation>
                 </div>
 
-                {/* Responsibilities */}
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-emerald-700">
                     Key Responsibilities:
                   </h4>
-                  <ul className="space-y-2 text-left">
+                  <StaggeredAnimation 
+                    staggerDelay={80} 
+                    direction="left" 
+                    duration={400} 
+                    distance={25}
+                    className="space-y-2"
+                  >
                     {experience.responsibilities.map((responsibility, i) => (
-                      <RevealAnimation
-                        key={i}
-                        animation="fade-in-right"
-                        delay={300 + i * 100}
-                      >
-                        <li className="flex items-start">
-                          <span className="text-emerald-600 mr-3 mt-1">•</span>
-                          <span className="text-muted-foreground">
-                            {responsibility}
-                          </span>
-                        </li>
-                      </RevealAnimation>
+                      <li key={i} className="flex items-start list-none">
+                        <span className="text-emerald-600 mr-3 mt-1">•</span>
+                        <span className="text-muted-foreground">
+                          {responsibility}
+                        </span>
+                      </li>
                     ))}
-                  </ul>
+                  </StaggeredAnimation>
                 </div>
               </motion.div>
             </RevealAnimation>

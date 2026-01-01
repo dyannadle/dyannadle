@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface StaggeredAnimationProps {
   children: React.ReactNode;
@@ -7,23 +8,27 @@ interface StaggeredAnimationProps {
   animationClass?: string;
   trigger?: 'mount' | 'scroll' | 'hover';
   threshold?: number;
+  direction?: 'up' | 'down' | 'left' | 'right' | 'scale' | 'fade';
+  duration?: number;
+  distance?: number;
 }
 
 const StaggeredAnimation: React.FC<StaggeredAnimationProps> = ({
   children,
   className = '',
   staggerDelay = 100,
-  animationClass = 'animate-fade-in-up',
+  animationClass = '',
   trigger = 'scroll',
-  threshold = 0.1
+  threshold = 0.1,
+  direction = 'up',
+  duration = 500,
+  distance = 30,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(trigger === 'mount');
-  const [animatedChildren, setAnimatedChildren] = useState<React.ReactNode[]>([]);
 
   useEffect(() => {
     if (trigger === 'mount') {
-      animateChildren();
       return;
     }
 
@@ -34,7 +39,7 @@ const StaggeredAnimation: React.FC<StaggeredAnimationProps> = ({
           observer.disconnect();
         }
       },
-      { threshold }
+      { threshold, rootMargin: '0px 0px -30px 0px' }
     );
 
     if (containerRef.current) {
@@ -44,32 +49,36 @@ const StaggeredAnimation: React.FC<StaggeredAnimationProps> = ({
     return () => observer.disconnect();
   }, [trigger, threshold]);
 
-  useEffect(() => {
-    if (isVisible) {
-      animateChildren();
+  const getInitialTransform = () => {
+    switch (direction) {
+      case 'up': return `translateY(${distance}px)`;
+      case 'down': return `translateY(-${distance}px)`;
+      case 'left': return `translateX(${distance}px)`;
+      case 'right': return `translateX(-${distance}px)`;
+      case 'scale': return 'scale(0.9)';
+      case 'fade': return 'none';
+      default: return `translateY(${distance}px)`;
     }
-  }, [isVisible, children]);
-
-  const animateChildren = () => {
-    const childArray = React.Children.toArray(children);
-    const animated = childArray.map((child, index) => (
-      <div
-        key={index}
-        className={`${animationClass} opacity-0`}
-        style={{
-          animationDelay: `${index * staggerDelay}ms`,
-          animationFillMode: 'forwards'
-        }}
-      >
-        {child}
-      </div>
-    ));
-    setAnimatedChildren(animated);
   };
 
+  const childArray = React.Children.toArray(children);
+
   return (
-    <div ref={containerRef} className={className}>
-      {animatedChildren.length > 0 ? animatedChildren : children}
+    <div ref={containerRef} className={cn(className)}>
+      {childArray.map((child, index) => (
+        <div
+          key={index}
+          className={cn(animationClass)}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0) translateX(0) scale(1)' : getInitialTransform(),
+            transition: `all ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+            transitionDelay: isVisible ? `${index * staggerDelay}ms` : '0ms',
+          }}
+        >
+          {child}
+        </div>
+      ))}
     </div>
   );
 };
