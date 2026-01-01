@@ -203,7 +203,7 @@ export const manualTestingSkills = [
   "Defect Tracking & Reporting",
   "Functional & Regression Testing",
   "Integration & System Testing",
-  "User Experience (UX) Testing",
+
 ];
 
 export const automationTestingSkills = [
@@ -227,8 +227,7 @@ export const skillTooltips: Record<string, string> = {
     "Ensuring software functionality remains intact after changes.",
   "Integration & System Testing":
     "Verifying seamless interaction between components.",
-  "User Experience (UX) Testing":
-    "Evaluating software from an end-user perspective.",
+
   "Selenium & WebDriver": "Automating browser-based testing.",
   "PyTest & Unit Testing": "Writing and executing automated test scripts.",
   "TestNG & JUnit": "Frameworks for structured test execution.",
@@ -268,7 +267,7 @@ export const skillCategories: SkillCategory[] = [
           "Identifying and logging bugs using tools like JIRA.",
           "Ensuring software functionality remains intact after changes.",
           "Verifying seamless interaction between components.",
-          "Evaluating software from an end-user perspective.",
+
         ],
       },
       {
@@ -280,7 +279,7 @@ export const skillCategories: SkillCategory[] = [
           "Frameworks for structured test execution.",
           "Implementing tests in DevOps pipelines.",
           "Testing RESTful APIs for correctness and performance using Postman.",
-          "Modern automation tool for fast and reliable UI testing.",
+          "Modern automation tool for fast and reliable testing.",
           "Using machine learning and AI to optimize and generate tests.",
           "Java library used for automating REST API tests.",
         ],

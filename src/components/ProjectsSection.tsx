@@ -11,6 +11,7 @@ import { Github, Star, StarOff, Clock, X, Image as ImageIcon, Loader2, ZoomIn, Z
 
 // Import project data
 import { Project, projects, filters } from '../data/projectsData';
+import { UI_TEXT } from '@/data/uiConstants';
 
 interface ModalContent {
   type: 'image' | 'description' | null;
@@ -174,29 +175,29 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
 
   const { project } = content;
   const isImage = content.type === 'image';
-  const title = isImage ? `Image: ${project.title}` : `Details: ${project.title}`;
+  const title = isImage ? `${UI_TEXT.projects.modal.imagePrefix} ${project.title}` : `${UI_TEXT.projects.modal.detailsPrefix} ${project.title}`;
 
   console.log('Rendering Modal:', { type: content.type, project: project.title });
 
   const modalContent = (
     <div
-      className="fixed inset-0 bg-black/75 backdrop-blur-lg flex items-center justify-center p-4 z-[9999]"
+      className="fixed inset-0 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 z-[9999]"
       onClick={onClose}
     >
       <div
         className={`${isImage
-          ? 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col'
-          : 'bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden'
+          ? 'glass p-2 rounded-2xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col border border-white/10'
+          : 'glass rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/10'
           }`}
         onClick={(e) => e.stopPropagation()}
         style={{ opacity: 1, visibility: 'visible' }}
       >
-        <header className="flex justify-between items-center p-4 border-b dark:border-gray-700 border-gray-200 bg-gray-100 dark:bg-gray-800 shrink-0">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white truncate pr-4">{title}</h2>
+        <header className="flex justify-between items-center p-6 border-b border-white/5 bg-white/5 shrink-0">
+          <h2 className="text-xl font-bold text-white truncate pr-4">{title}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-red-500 p-2"
-            aria-label="Close modal"
+            className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+            aria-label={UI_TEXT.projects.modal.close}
           >
             <X size={24} />
           </button>
@@ -205,7 +206,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
         {isImage && (
           <div
             ref={imageContainerRef}
-            className="p-4 flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+            className="p-4 flex items-center justify-center h-full bg-black/40 relative overflow-hidden rounded-xl"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -219,8 +220,8 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
             }}
           >
             {imageLoading && !imageError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-                <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={48} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Loader2 className="animate-spin text-blue-400" size={48} />
               </div>
             )}
             {imageError ? (
@@ -228,18 +229,18 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
                 <div className="text-red-500 mb-4">
                   <X size={64} className="mx-auto" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
-                  Failed to Load Image
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {UI_TEXT.projects.modal.failedLoad}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  The image could not be loaded. Please try again later.
+                <p className="text-gray-400">
+                  {UI_TEXT.projects.modal.failedLoadDesc}
                 </p>
               </div>
             ) : (
               <img
                 src={project.image}
                 alt={project.title}
-                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 ${imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
+                className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl ${imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
                   }`}
                 style={{
                   transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
@@ -253,100 +254,68 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
 
             {/* Zoom Controls */}
             {!imageLoading && !imageError && (
-              <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-xl p-2 border border-gray-200 dark:border-gray-700">
-                <div className="text-xs text-center text-gray-500 dark:text-gray-400 px-2 pb-1 border-b border-gray-200 dark:border-gray-700">
-                  Shortcuts: +/- • Arrows • 0
-                </div>
+              <div className="absolute bottom-6 right-6 flex flex-col gap-2 glass p-2 rounded-lg border border-white/10">
                 <button
                   onClick={handleZoomIn}
                   disabled={zoom >= 5}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Zoom in"
-                  title="Zoom In (Scroll Up)"
+                  className="p-2 rounded-lg hover:bg-white/10 text-gray-300 transition-colors"
                 >
                   <ZoomIn size={20} />
                 </button>
                 <button
                   onClick={handleZoomReset}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 transition-colors"
-                  aria-label="Reset zoom"
-                  title="Reset Zoom"
+                  className="p-2 rounded-lg hover:bg-white/10 text-gray-300 transition-colors"
                 >
                   <Maximize2 size={20} />
                 </button>
                 <button
                   onClick={handleZoomOut}
                   disabled={zoom <= 0.5}
-                  className="p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  aria-label="Zoom out"
-                  title="Zoom Out (Scroll Down)"
+                  className="p-2 rounded-lg hover:bg-white/10 text-gray-300 transition-colors"
                 >
                   <ZoomOut size={20} />
                 </button>
-                <div className="text-xs text-center text-gray-600 dark:text-gray-400 font-mono mt-1 px-1">
-                  {Math.round(zoom * 100)}%
-                </div>
               </div>
             )}
           </div>
         )}
 
         {!isImage && (
-          <div className="p-6 overflow-y-auto h-full space-y-6 text-gray-800">
-            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4">
+          <div className="p-8 overflow-y-auto h-full space-y-6 text-gray-300 bg-black/40">
+            <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 text-white">
               {project.description}
             </p>
 
-            <h3 className="text-2xl font-semibold text-blue-600 border-b pb-1">
-              Key Responsibilities
+            <h3 className="text-2xl font-semibold text-blue-400 border-b border-white/10 pb-2">
+              {UI_TEXT.projects.card.keyResponsibilities}
             </h3>
-            <ul className="list-disc list-outside ml-5 space-y-2">
+            <ul className="list-disc list-outside ml-5 space-y-3">
               {project.responsibilities.map((r, i) => (
-                <li key={i}>{r}</li>
+                <li key={i} className="leading-relaxed">{r}</li>
               ))}
             </ul>
 
-            <h3 className="text-xl font-semibold text-blue-600 border-b pb-1">
-              Technology Stack
+            <h3 className="text-xl font-semibold text-blue-400 border-b border-white/10 pb-2">
+              {UI_TEXT.projects.card.techStack}
             </h3>
             <div className="flex flex-wrap gap-2">
               {project.tools.map((t, i) => (
                 <span
                   key={i}
-                  className="text-sm px-3 py-1 bg-purple-100 text-purple-700 rounded-full font-medium"
+                  className="text-sm px-4 py-1.5 bg-white/5 text-blue-200 border border-white/10 rounded-full font-medium"
                 >
                   {t}
                 </span>
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-4 border-t mt-4">
+            <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10 mt-6">
               <button
                 onClick={() => onViewImage(project)}
-                className="flex items-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-5 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
+                className="flex items-center gap-2 font-semibold text-black bg-white hover:bg-gray-200 px-6 py-3 rounded-full transition-all"
               >
-                <ImageIcon size={20} /> View Full Image
+                <ImageIcon size={20} /> {UI_TEXT.projects.card.viewImage}
               </button>
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:text-blue-300 px-4 py-2 rounded-lg transition-colors"
-                >
-                  <Github size={20} /> View Code on GitHub
-                </a>
-              )}
-              {project.paperPublished && (
-                <a
-                  href={project.paperPublished}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-semibold text-green-600 hover:text-green-700 bg-green-50 dark:bg-green-900/30 dark:text-green-400 dark:hover:text-green-300 px-4 py-2 rounded-lg transition-colors"
-                >
-                  View Published Paper
-                </a>
-              )}
             </div>
           </div>
         )}
@@ -359,7 +328,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
 
 // --- MAIN SHOWCASE COMPONENT ---
 const ProjectsSection: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState(UI_TEXT.projects.filters.all);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modal, setModal] = useState<ModalContent>({ type: null, project: null });
@@ -389,9 +358,9 @@ const ProjectsSection: React.FC = () => {
   }, [activeFilter]);
 
   const filtered =
-    activeFilter === 'All'
+    activeFilter === UI_TEXT.projects.filters.all
       ? projects
-      : activeFilter === 'Favorites'
+      : activeFilter === UI_TEXT.projects.filters.favorites
         ? projects.filter((p) => favorites.includes(p.title))
         : projects.filter((p) => p.category.includes(activeFilter));
 
@@ -420,15 +389,17 @@ const ProjectsSection: React.FC = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen pt-16 pb-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans"
+      className="relative overflow-hidden font-sans"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4 text-gray-900 dark:text-white">
-          My <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Projects</span>
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-4xl mx-auto text-center mb-10">
-          Click the "View Image" button to see project screenshots, or select a title for full details.
-        </p>
+      <div className="section-container">
+        <RevealAnimation>
+          <h2 className="section-title text-center text-white">
+            {UI_TEXT.projects.title.split(' ')[0]} <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-amber-400">{UI_TEXT.projects.title.split(' ')[1]}</span>
+          </h2>
+          <p className="section-subtitle text-center mx-auto text-gray-400 mb-12">
+            {UI_TEXT.projects.subtitle}
+          </p>
+        </RevealAnimation>
 
         {/* Filter buttons */}
         <div className="flex justify-center flex-wrap gap-3 mb-12">
@@ -436,9 +407,9 @@ const ProjectsSection: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`capitalize px-4 py-2 rounded-full border-2 text-sm transition-all duration-300 active:scale-95 ${activeFilter === f
-                ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/30 scale-105'
-                : 'text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400 hover:-translate-y-0.5 hover:shadow-md'
+              className={`capitalize px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === f
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25 scale-105'
+                : 'glass text-gray-300 hover:bg-white/10 hover:border-white/20'
                 }`}
             >
               {f}
@@ -467,7 +438,7 @@ const ProjectsSection: React.FC = () => {
               filtered.map((p, idx) => (
                 <RevealAnimation key={p.title} animation="fade-in-up" delay={idx * 100}>
                   <motion.div
-                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-2xl relative overflow-hidden group border border-gray-200 dark:border-gray-700 h-full flex flex-col"
+                    className="glass-dark rounded-xl relative overflow-hidden group h-full flex flex-col hover:border-primary/50 transition-colors duration-300"
                     whileHover={{ y: -10, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
@@ -483,7 +454,7 @@ const ProjectsSection: React.FC = () => {
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src =
-                            'https://placehold.co/400x208/F0F4FF/4F46E5?text=Project+Image';
+                            e.currentTarget.src = UI_TEXT.projects.images.placeholder;
                         }}
                       />
                     </div>
@@ -494,7 +465,7 @@ const ProjectsSection: React.FC = () => {
                         toggleFavorite(p.title);
                       }}
                       className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 rounded-full p-2 shadow-lg hover:scale-125 transition z-10"
-                      aria-label="favorite"
+                      aria-label={UI_TEXT.projects.card.star}
                     >
                       {favorites.includes(p.title) ? (
                         <Star size={24} fill="#FBBF24" color="#FBBF24" />
@@ -506,24 +477,24 @@ const ProjectsSection: React.FC = () => {
                     <div className="p-6 flex-1 flex flex-col">
                       <h3
                         onClick={() => openModal('description', p)}
-                        className="text-2xl font-bold mb-3 cursor-pointer text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="text-2xl font-bold mb-3 cursor-pointer text-white hover:text-blue-400 transition-colors"
                       >
                         {p.title}
                       </h3>
-                      <div className="inline-flex items-center gap-1 mb-3 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-semibold w-fit">
+                      <div className="inline-flex items-center gap-1 mb-3 px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-xs font-semibold w-fit">
                         <Clock size={14} /> {p.duration}
                       </div>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm flex-1">{p.description}</p>
+                      <p className="text-gray-300 mb-4 text-sm flex-1">{p.description}</p>
 
                       <button
                         onClick={() => openModal('image', p)}
                         className="w-full mb-4 flex items-center justify-center gap-2 font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4 py-2.5 rounded-lg shadow-lg transition-all hover:scale-105"
                       >
-                        <ImageIcon size={18} /> View Full Image
+                        <ImageIcon size={18} /> {UI_TEXT.projects.card.viewImage}
                       </button>
 
                       <div className="mt-auto">
-                        <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">Tools Used:</h4>
+                        <h4 className="font-semibold mb-2 text-gray-800 dark:text-gray-200">{UI_TEXT.projects.card.toolsUsed}</h4>
                         <ul className="flex flex-wrap gap-2 text-xs">
                           {(showAllTools[p.title] ? p.tools : p.tools.slice(0, 4)).map((t, i) => (
                             <li key={i} className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full">
@@ -538,7 +509,7 @@ const ProjectsSection: React.FC = () => {
                                 setShowAllTools((s) => ({ ...s, [p.title]: !s[p.title] }));
                               }}
                             >
-                              {showAllTools[p.title] ? 'Show Less' : `+${p.tools.length - 4} More`}
+                              {showAllTools[p.title] ? UI_TEXT.projects.card.showLess : `+${p.tools.length - 4} ${UI_TEXT.projects.card.showMore}`}
                             </button>
                           )}
                         </ul>

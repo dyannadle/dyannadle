@@ -22,7 +22,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ name, level, index, description, 
               <TooltipTrigger asChild>
                 <button
                   type="button"
-                  className="font-medium cursor-help text-gray-800 hover:text-blue-600 transition-colors duration-200"
+                  className="font-medium cursor-help text-gray-200 hover:text-blue-400 transition-colors duration-200"
                 >
                   {name}
                 </button>
@@ -30,28 +30,28 @@ const SkillItem: React.FC<SkillItemProps> = ({ name, level, index, description, 
               <TooltipContent
                 side="top"
                 sideOffset={10}
-                className="z-[9999] bg-white border px-2 py-1 text-xs text-gray-900 rounded shadow-md"
+                className="z-[9999] bg-slate-900 border border-slate-700 px-2 py-1 text-xs text-white rounded shadow-md"
               >
                 <div>
                   <p>{description}</p>
                   {version && (
-                    <p className="text-[10px] text-gray-500 mt-1">Version: {version}</p>
+                    <p className="text-[10px] text-gray-400 mt-1">Version: {version}</p>
                   )}
                 </div>
               </TooltipContent>
             </Tooltip>
           ) : (
-            <span className="font-medium text-gray-800">{name}</span>
+            <span className="font-medium text-gray-200">{name}</span>
           )}
 
           {version && (
-            <span className="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full font-semibold">
+            <span className="text-xs px-2 py-0.5 bg-blue-900/40 text-blue-300 rounded-full font-semibold">
               {version}
             </span>
           )}
         </div>
 
-        <span className="text-sm text-gray-500">{level}%</span>
+        <span className="text-sm text-gray-400">{level}%</span>
       </div>
 
       <Progress value={level} className="w-full h-2.5" />

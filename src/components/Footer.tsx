@@ -1,5 +1,6 @@
 import React from "react";
 import { SOCIAL_LINKS, NAV_LINKS } from "@/data/constants";
+import { UI_TEXT } from "@/data/uiConstants";
 import { Mail, Linkedin, Phone, MessageSquare } from "lucide-react";
 
 const Footer: React.FC = () => {
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
               Deepak Yannadle
             </h3>
             <p className="mt-1 text-white/70">
-              Software Tester & Quality Assurance Professional
+              {UI_TEXT.footer.role}
             </p>
           </div>
 
@@ -41,7 +42,7 @@ const Footer: React.FC = () => {
 
         <div className="flex flex-col justify-between items-center text-sm md:flex-row text-white/60">
           <p className="flex gap-2 items-center">
-            © {currentYear} Deepak Yannadle. All rights reserved.
+            {UI_TEXT.footer.copyright}
             <span className="text-blue-300"></span>
           </p>
           <div className="flex mt-4 space-x-6 md:mt-0">
@@ -49,13 +50,13 @@ const Footer: React.FC = () => {
               {
                 href: `mailto:${SOCIAL_LINKS.email}`,
                 icon: <Mail size={18} />,
-                label: "Email",
+                label: UI_TEXT.footer.links.email,
                 target: "_blank",
               },
               {
                 href: SOCIAL_LINKS.linkedin,
                 icon: <Linkedin size={18} />,
-                label: "LinkedIn",
+                label: UI_TEXT.footer.links.linkedin,
                 target: "_blank",
               },
             ].map((social, index) => (

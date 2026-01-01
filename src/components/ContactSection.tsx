@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CONTACT_CONFIG, SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
+import { UI_TEXT } from "@/data/uiConstants";
 import { Send } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import ParticleSystem from "./ui/ParticleSystem";
@@ -37,20 +38,20 @@ const ContactSection: React.FC = () => {
     let error = "";
     switch (id) {
       case "name":
-        if (!value.trim()) error = "Name is required";
+        if (!value.trim()) error = UI_TEXT.contact.form.errors.nameRequired;
         break;
       case "email":
-        if (!value.trim()) error = "Email is required";
-        else if (!/\S+@\S+\.\S+/.test(value)) error = "Invalid email format";
+        if (!value.trim()) error = UI_TEXT.contact.form.errors.emailRequired;
+        else if (!/\S+@\S+\.\S+/.test(value)) error = UI_TEXT.contact.form.errors.emailInvalid;
         break;
       case "subject":
-        if (!value.trim()) error = "Subject is required";
+        if (!value.trim()) error = UI_TEXT.contact.form.errors.subjectRequired;
         break;
       case "date":
-        if (!value) error = "Date is required";
+        if (!value) error = UI_TEXT.contact.form.errors.dateRequired;
         break;
       case "message":
-        if (!value.trim()) error = "Message is required";
+        if (!value.trim()) error = UI_TEXT.contact.form.errors.messageRequired;
         break;
       default:
         break;
@@ -186,11 +187,11 @@ const ContactSection: React.FC = () => {
       <div className="section-container relative z-10">
         <RevealAnimation animation="fade-in-down" delay={100}>
           <h2 className="mb-2 text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-700 md:text-4xl">
-            Contact Me
+            {UI_TEXT.contact.title}
           </h2>
           <div className="mx-auto mb-6 w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full animate-pulse" />
           <p className="mx-auto text-center section-subtitle">
-            Get in touch with me for opportunities or collaborations
+            {UI_TEXT.contact.subtitle}
           </p>
 
           {/* Hire Me Button */}
@@ -202,7 +203,7 @@ const ContactSection: React.FC = () => {
               className="inline-flex gap-3 items-center py-4 px-12 text-white text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-xl transition-all duration-300 transform hover:from-emerald-700 hover:to-teal-700 hover:shadow-2xl hover:-translate-y-2 hover:scale-110"
             >
               <Send className="w-5 h-5" />
-              Hire Me Now
+              {UI_TEXT.contact.hireMe}
             </a>
           </div>
         </RevealAnimation>
@@ -212,7 +213,7 @@ const ContactSection: React.FC = () => {
           <RevealAnimation animation="fade-in-up" delay={200}>
             <div className="p-8 mt-10 rounded-2xl border shadow-lg bg-gradient-to-br from-card/95 to-background/80 border-border backdrop-blur-sm">
               <h3 className="mb-6 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                Send a Message
+                {UI_TEXT.contact.sendMessage}
               </h3>
 
               {/* form */}
@@ -220,7 +221,7 @@ const ContactSection: React.FC = () => {
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
                     <label htmlFor="name" className="block mb-2 text-sm font-medium">
-                      Name
+                      {UI_TEXT.contact.form.name}
                     </label>
                     <input
                       id="name"
@@ -228,14 +229,14 @@ const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                      placeholder="Your name"
+                      placeholder={UI_TEXT.contact.form.namePlaceholder}
                     />
                     {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block mb-2 text-sm font-medium">
-                      Email
+                      {UI_TEXT.contact.form.email}
                     </label>
                     <input
                       id="email"
@@ -243,7 +244,7 @@ const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                      placeholder="Your email"
+                      placeholder={UI_TEXT.contact.form.emailPlaceholder}
                     />
                     {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
                   </div>
@@ -251,7 +252,7 @@ const ContactSection: React.FC = () => {
 
                 <div>
                   <label htmlFor="subject" className="block mb-2 text-sm font-medium">
-                    Subject
+                    {UI_TEXT.contact.form.subject}
                   </label>
                   <input
                     id="subject"
@@ -259,14 +260,14 @@ const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                    placeholder="Subject"
+                    placeholder={UI_TEXT.contact.form.subjectPlaceholder}
                   />
                   {errors.subject && <p className="text-destructive text-sm mt-1">{errors.subject}</p>}
                 </div>
 
                 <div>
                   <label htmlFor="date" className="block mb-2 text-sm font-medium">
-                    Date
+                    {UI_TEXT.contact.form.date}
                   </label>
                   <input
                     id="date"
@@ -280,7 +281,7 @@ const ContactSection: React.FC = () => {
 
                 <div>
                   <label htmlFor="message" className="block mb-2 text-sm font-medium">
-                    Message
+                    {UI_TEXT.contact.form.message}
                   </label>
                   <textarea
                     id="message"
@@ -288,7 +289,7 @@ const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={handleChange}
                     className="py-3 px-4 w-full rounded-lg border border-input focus:ring-2 focus:ring-ring focus:outline-none bg-background/90"
-                    placeholder="Your message"
+                    placeholder={UI_TEXT.contact.form.messagePlaceholder}
                   />
                   {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
                 </div>
@@ -298,7 +299,7 @@ const ContactSection: React.FC = () => {
                   disabled={isSubmitting}
                   className="flex gap-2 justify-center items-center py-3 px-6 w-full text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-md transition-all duration-300 transform hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? "Sending..." : (<><Send className="w-4 h-4" /> Send Message</>)}
+                  {isSubmitting ? UI_TEXT.contact.form.sending : (<><Send className="w-4 h-4" /> {UI_TEXT.contact.form.send}</>)}
                 </button>
               </form>
             </div>
@@ -316,12 +317,12 @@ const ContactSection: React.FC = () => {
             className={`bg-card p-6 rounded-lg shadow-lg text-center transform transition-all duration-500 ${isFadingOut ? "scale-95 opacity-0" : "scale-100 opacity-100"
               } w-full max-w-sm border border-border`}
           >
-            <h3 className="text-xl font-bold mb-2 text-card-foreground">✅ Thank You!</h3>
+            <h3 className="text-xl font-bold mb-2 text-card-foreground">{UI_TEXT.contact.form.successTitle}</h3>
             <p className="text-muted-foreground mb-4">
-              Your message has been sent successfully. I will get back to you soon.
+              {UI_TEXT.contact.form.successMessage}
             </p>
             <div className="flex items-center justify-center gap-3">
-              <div className="text-sm text-muted-foreground">This will close in</div>
+              <div className="text-sm text-muted-foreground">{UI_TEXT.contact.form.closeIn}</div>
               <div className="bg-primary/10 text-primary font-semibold px-3 py-1 rounded-md">
                 {countdown}s
               </div>
