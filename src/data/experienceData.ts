@@ -10,7 +10,7 @@ export const EXPERIENCES = [
         description:
             "Conduct end-to-end testing across Kan Innovations’ product suite—including Ezra, Vital PT, Ezra Plus, and Afora—ensuring functional accuracy, performance consistency, and high-quality user experiences across platforms.",
         responsibilities: [
-            "Performed functional, regression, UI/UX, and integration testing on multiple applications.",
+            "Performed functional, regression, and integration testing on multiple applications.",
             "Created and executed 100+ detailed manual test cases based on requirements.",
             "Tested auto-update functionality to ensure smooth version upgrades.",
             "Identified, documented, and tracked defects with detailed reproduction steps.",
@@ -38,7 +38,7 @@ export const EXPERIENCES = [
         responsibilities: [
             "Assisted in testing Android and iOS mobile applications to ensure functionality, usability, and performance.",
             "Designed and executed manual test cases, documented results, and reported defects using tools such as Excel and Google Sheets.",
-            "Conducted regression, functional, and UI testing to identify and resolve issues before production release.",
+            "Conducted regression and functional testing to identify and resolve issues before production release.",
             "Collaborated with developers and QA team members in an Agile environment to improve product quality.",
             "Prepared detailed bug reports and provided feedback for enhancing user experience.",
             "Gained hands-on experience in mobile app testing methodologies, test documentation, and defect tracking.",

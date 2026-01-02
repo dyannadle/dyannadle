@@ -33,7 +33,7 @@ const EducationSection: React.FC = () => {
   return (
     <section
       id="education"
-      className="min-h-screen flex items-center bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden"
+      className="min-h-screen flex items-center relative overflow-hidden"
     >
       {/* Particle System Background */}
       <ParticleSystem
@@ -125,8 +125,8 @@ const EducationSection: React.FC = () => {
           </RevealAnimation>
 
           {/* ---------- Certifications Section ---------- */}
-          <RevealAnimation animation="fade-in-left" delay={200}>
-            <div>
+          <RevealAnimation animation="fade-in-left" delay={200} className="h-full">
+            <div className="h-full flex flex-col">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-8 h-8 bg-success rounded-lg flex items-center justify-center">
                   <Award className="text-success-foreground" size={20} />
@@ -137,7 +137,7 @@ const EducationSection: React.FC = () => {
                 </span>
               </div>
 
-              <div className="space-y-3 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+              <div className="space-y-3 flex-1 overflow-y-auto min-h-0 pr-2 custom-scrollbar">
                 {certifications.map((cert, index) => (
                   <motion.div
                     key={index}
@@ -170,7 +170,7 @@ const EducationSection: React.FC = () => {
 
         {/* ---------- Continuous Learning Section ---------- */}
         <RevealAnimation animation="fade-in-up" delay={400}>
-          <div className="mt-16 bg-gradient-to-r from-purple-50 via-pink-50 to-blue-50 rounded-2xl p-8 shadow-xl border border-purple-100 hover:shadow-2xl transition-all duration-500">
+          <div className="mt-16 glass rounded-2xl p-8 shadow-xl border border-purple-100/10 hover:shadow-2xl transition-all duration-500">
             <div className="flex items-center gap-3 mb-6 animate-fade-in">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center animate-pulse">
                 <Brain className="text-primary-foreground" size={20} />

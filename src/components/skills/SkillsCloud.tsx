@@ -37,7 +37,7 @@ const SkillsCloud: React.FC<SkillsCloudProps> = ({ skills }) => {
                                         </div>
 
                                         {/* Label (optional, can be hidden if relying solely on tooltip) */}
-                                        <span className="mt-3 text-sm font-medium text-slate-600 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute -bottom-6 whitespace-nowrap">
+                                        <span className="mt-3 text-sm font-medium text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute -bottom-6 whitespace-nowrap">
                                             {skill.name}
                                         </span>
                                     </div>

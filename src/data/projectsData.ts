@@ -125,8 +125,8 @@ export const projects: Project[] = [
     github: "https://github.com/dyannadle/Face-attendance"
   },
   {
-    title: "Popular Web Series Page UI Testing",
-    description: "Manual and functional UI testing conducted for a mobile app page displaying trending web series,focusing on navigation, interaction, and content rendering validation.",
+    title: "Popular Web Series Page Functional Testing",
+    description: "Manual and functional testing conducted for a mobile app page displaying trending web series,focusing on navigation, interaction, and content rendering validation.",
     duration: "2 weeks",
     responsibilities: [
       "Verified correct rendering of web series posters, titles, and platform badges (e.g., Netflix, Hotstar Specials) across devices.",
@@ -134,9 +134,9 @@ export const projects: Project[] = [
       "Validated responsiveness and visual state changes of filter buttons (Trending, Newest, Comedy) under different scenarios.",
       "Checked functionality and feedback of 'like/favorite' and 'share' buttons for each web series card to enhance UX.",
       "Ensured smooth vertical scrolling and lazy loading of additional content without performance issues.",
-      "Confirmed clear visibility, accessibility compliance, and UI consistency across various screen sizes and resolutions."
+      "Confirmed clear visibility, accessibility compliance, and consistency across various screen sizes and resolutions."
     ],
-    tools: ["Manual Testing", "Google Sheets", "Bug Tracking Software (JIRA)", "UI Specifications Document"],
+    tools: ["Manual Testing", "Google Sheets", "Bug Tracking Software (JIRA)", "Specifications Document"],
     image: "/UI Testing.png",
     category: "Testing Project",
     github: "https://github.com/dyannadle/Manual-Testing--UI-Testing"

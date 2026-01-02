@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import AnimatedParticles from "@/components/AnimatedParticles";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
@@ -29,30 +28,46 @@ const Index: React.FC = () => {
         title="Deepak Yannadle | Software Tester & Developer"
         description="Portfolio of Deepak Yannadle, a Software Tester and Developer specializing in Automation, Manual Testing, and AI/ML projects."
       />
-      <AnimatedParticles />
       <Navbar />
       <HeroSection />
 
-      <Suspense fallback={<SectionLoader />}>
-        <RevealAnimation animation="fade-in-up" duration={600}>
-          <AboutSection />
-        </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
-          <ProjectsSection />
-        </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
-          <EducationSection />
-        </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
-          <SkillsSection />
-        </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
-          <ExperienceSection />
-        </RevealAnimation>
-        <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
-          <ContactSection />
-        </RevealAnimation>
-      </Suspense>
+      <div className="space-y-0">
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600}>
+            <AboutSection />
+          </RevealAnimation>
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+            <ProjectsSection />
+          </RevealAnimation>
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+            <EducationSection />
+          </RevealAnimation>
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+            <SkillsSection />
+          </RevealAnimation>
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+            <ExperienceSection />
+          </RevealAnimation>
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <RevealAnimation animation="fade-in-up" duration={600} delay={100}>
+            <ContactSection />
+          </RevealAnimation>
+        </Suspense>
+      </div>
 
       <Footer />
       <ScrollToTop />

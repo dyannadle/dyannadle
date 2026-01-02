@@ -26,14 +26,24 @@ export default {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				primary: {
-					DEFAULT: "hsl(var(--primary))",
-					foreground: "hsl(var(--primary-foreground))",
-					variant: "hsl(var(--primary-variant))",
+					DEFAULT: "#00E5FF", // Neon Cyan
+					foreground: "#000000",
 				},
 				secondary: {
-					DEFAULT: "hsl(var(--secondary))",
-					foreground: "hsl(var(--secondary-foreground))",
-					variant: "hsl(var(--secondary-variant))",
+					DEFAULT: "#FF5722", // Burnt Orange
+					foreground: "#ffffff",
+				},
+				tertiary: {
+					DEFAULT: "#050816", // Deep Space Blue
+					foreground: "#ffffff",
+				},
+				accent: {
+					DEFAULT: "#FFC107", // Amber
+					foreground: "#000000",
+				},
+				muted: {
+					DEFAULT: "rgba(255, 255, 255, 0.05)",
+					foreground: "rgba(255, 255, 255, 0.7)",
 				},
 				destructive: {
 					DEFAULT: "hsl(var(--destructive))",
@@ -43,29 +53,19 @@ export default {
 					DEFAULT: "hsl(var(--success))",
 					foreground: "hsl(var(--success-foreground))",
 				},
-				muted: {
-					DEFAULT: "hsl(var(--muted))",
-					foreground: "hsl(var(--muted-foreground))",
-				},
-				accent: {
-					DEFAULT: "hsl(var(--accent))",
-					foreground: "hsl(var(--accent-foreground))",
-					variant: "hsl(var(--accent-variant))",
-				},
 				popover: {
-					DEFAULT: "hsl(var(--popover))",
-					foreground: "hsl(var(--popover-foreground))",
+					DEFAULT: "#050816",
+					foreground: "#ffffff",
 				},
 				card: {
-					DEFAULT: "hsl(var(--card))",
-					foreground: "hsl(var(--card-foreground))",
+					DEFAULT: "rgba(5, 8, 22, 0.7)",
+					foreground: "#ffffff",
 				},
 			},
 			backgroundImage: {
-				"gradient-primary": "var(--gradient-primary)",
-				"gradient-secondary": "var(--gradient-secondary)",
-				"gradient-accent": "var(--gradient-accent)",
-				"gradient-rainbow": "var(--gradient-rainbow)",
+				"gradient-primary": "linear-gradient(to right, #00E5FF, #FFC107)",
+				"gradient-secondary": "linear-gradient(to right, #FF5722, #FFC107)",
+				"gradient-vignette": "radial-gradient(circle at center, transparent 0%, #050816 100%)",
 			},
 			fontFamily: {
 				sans: ["SF Pro Display", "Inter", "sans-serif"],
