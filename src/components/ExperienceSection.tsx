@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import RevealAnimation from './ui/RevealAnimation';
+import StaggeredAnimation from './ui/StaggeredAnimation';
 import { MapPin, Calendar, Building2, ExternalLink } from 'lucide-react';
 
 import { EXPERIENCES } from '@/data/experienceData';
@@ -77,7 +78,13 @@ const ExperienceSection: React.FC = () => {
                   <h4 className="text-lg font-semibold mb-3 text-secondary flex items-center gap-2">
                     <span className="text-2xl">🏆</span> {UI_TEXT.experience.achievements}
                   </h4>
-                  <ul className="space-y-2 text-left">
+                  <StaggeredAnimation
+                    staggerDelay={100}
+                    direction="right"
+                    duration={500}
+                    distance={30}
+                    className="space-y-2"
+                  >
                     {experience.achievements.map((achievement, i) => (
                       <RevealAnimation
                         key={i}
@@ -92,15 +99,20 @@ const ExperienceSection: React.FC = () => {
                         </li>
                       </RevealAnimation>
                     ))}
-                  </ul>
+                  </StaggeredAnimation>
                 </div>
 
-                {/* Responsibilities */}
                 <div>
                   <h4 className="text-lg font-semibold mb-3 text-secondary">
                     {UI_TEXT.experience.responsibilities}
                   </h4>
-                  <ul className="space-y-2 text-left">
+                  <StaggeredAnimation
+                    staggerDelay={80}
+                    direction="left"
+                    duration={400}
+                    distance={25}
+                    className="space-y-2"
+                  >
                     {experience.responsibilities.map((responsibility, i) => (
                       <RevealAnimation
                         key={i}
@@ -115,7 +127,7 @@ const ExperienceSection: React.FC = () => {
                         </li>
                       </RevealAnimation>
                     ))}
-                  </ul>
+                  </StaggeredAnimation>
                 </div>
               </motion.div>
             </RevealAnimation>

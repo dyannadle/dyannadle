@@ -2,14 +2,11 @@
 import React from 'react';
 import RevealAnimation from './ui/RevealAnimation';
 import RippleEffect from './ui/RippleEffect';
-import StaggeredAnimation from './ui/StaggeredAnimation';
 import ParallaxSection from './ui/ParallaxSection';
-import InteractiveBackground from './ui/InteractiveBackground';
 import ParticleSystem from './ui/ParticleSystem';
 import FloatingElements from './ui/FloatingElements';
 import { Briefcase, FileCheck, Database, Code } from 'lucide-react';
 import { ABOUT_DATA } from '@/data/aboutData';
-import { UI_TEXT } from '@/data/uiConstants';
 import { useScrollAnimation, useParallax } from '../hooks/useScrollAnimation';
 
 const AboutSection: React.FC = () => {
@@ -65,7 +62,7 @@ const AboutSection: React.FC = () => {
                   I am committed to continuous learning and staying aligned with industry best practices, emerging testing methodologies, and modern automation tools. I actively explore new frameworks, defect-management systems, and AI-driven testing techniques to enhance testing efficiency, accuracy, and scalability. This allows me to contribute meaningfully to robust, data-driven, and future-ready software solutions.
                 </p>
                 <p>
-                  Beyond my professional work, I have a strong passion for financial markets, including mutual funds and stock investing. I continuously expand my knowledge of market trends, technical analysis, and investment strategies to make informed financial decisions. My analytical mindset—and the attention to detail I apply in software testing—also helps me evaluate market risks, portfolio diversification, and long-term investment opportunities with clarity and confidence.
+                  Beyond my professional work, I have a strong passion for financial markets, including mutual funds and stock investing. I continuously expand my knowledge of market trends, technical analysis, and investment strategies to make informed financial decisions. My analytical mindset—and the attention to detail I apply in software testing, also helps me evaluate market risks, portfolio diversification, and long-term investment opportunities with clarity and confidence.
                 </p>
               </div>
             </div>

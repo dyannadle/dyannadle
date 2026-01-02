@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { HERO_DATA } from "@/data/heroData";
@@ -9,10 +9,12 @@ import TypewriterText from "./ui/TypewriterText";
 import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
+import TypingAnimation from "./ui/TypingAnimation";
 import { useMousePosition } from "../hooks/useScrollAnimation";
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
+  const [nameTyped, setNameTyped] = useState(false);
 
   return (
     <section
@@ -43,7 +45,7 @@ const HeroSection: React.FC = () => {
             </div>
           </RevealAnimation>
 
-          {/* Avatar + Name */}
+          {/* Avatar + Name with Typing Animation */}
           <RevealAnimation animation="fade-in-up" delay={200}>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
               {/* Name */}
