@@ -5,6 +5,7 @@ import { HERO_DATA } from "@/data/heroData";
 import { UI_TEXT } from "@/data/uiConstants";
 import { ArrowRight, Github, Download } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
+import TypewriterText from "./ui/TypewriterText";
 import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
@@ -48,9 +49,12 @@ const HeroSection: React.FC = () => {
               {/* Name */}
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
                 {UI_TEXT.hero.greeting} <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 animate-gradient-shift">
-                  {HERO_DATA.name}
-                </span>
+                <TypewriterText
+                  text={HERO_DATA.name}
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 animate-gradient-shift"
+                  speed={100}
+                  startDelay={500}
+                />
               </h1>
             </div>
           </RevealAnimation>

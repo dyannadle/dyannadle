@@ -162,7 +162,7 @@ const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-100 overflow-hidden"
+      className="relative min-h-screen flex items-center bg-transparent overflow-hidden"
     >
       {/* Particle System Background */}
       <ParticleSystem

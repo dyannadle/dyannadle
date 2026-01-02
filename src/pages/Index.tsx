@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import AnimatedParticles from "@/components/AnimatedParticles";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
@@ -29,7 +28,6 @@ const Index: React.FC = () => {
         title="Deepak Yannadle | Software Tester & Developer"
         description="Portfolio of Deepak Yannadle, a Software Tester and Developer specializing in Automation, Manual Testing, and AI/ML projects."
       />
-      <AnimatedParticles />
       <Navbar />
       <HeroSection />
 

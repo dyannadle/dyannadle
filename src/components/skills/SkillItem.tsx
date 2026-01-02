@@ -54,7 +54,10 @@ const SkillItem: React.FC<SkillItemProps> = ({ name, level, index, description, 
         <span className="text-sm text-gray-400">{level}%</span>
       </div>
 
-      <Progress value={level} className="w-full h-2.5" />
+      <Progress
+        value={level}
+        className="w-full h-2.5 bg-slate-800 [&>div]:bg-gradient-to-r [&>div]:from-blue-500 [&>div]:to-cyan-400"
+      />
     </RevealAnimation>
   );
 };

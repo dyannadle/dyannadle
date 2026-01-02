@@ -10,6 +10,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import BackToTop from "@/components/ui/BackToTop";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import StarryBackground from "@/components/ui/StarryBackground";
+import LiveBackground from "@/components/ui/LiveBackground";
 import { ThemeProvider } from "@/context/ThemeContext";
 
 import Index from "@/pages/Index";
@@ -29,6 +30,7 @@ const App = () => (
     <HelmetProvider>
       <ThemeProvider>
         <SmoothScroll>
+          <LiveBackground />
           <StarryBackground />
           <TooltipProvider delayDuration={0}>
             <Toaster />
