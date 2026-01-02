@@ -27,7 +27,7 @@ const ExperienceSection: React.FC = () => {
           </p>
         </RevealAnimation>
 
-        <div className="mt-12 max-w-4xl mx-auto">
+        <div className="mt-12 max-w-4xl mx-auto flex flex-col gap-10">
           {experiences.map((experience, index) => (
             <RevealAnimation key={index} animation="fade-in-up" delay={200}>
               <motion.div
