@@ -17,7 +17,7 @@ const LiveBackground: React.FC = () => {
       />
 
       {/* --- Wireless Globe (Cyan/Blue) - Right Side --- */}
-      <div className="absolute right-[-10%] top-[10%] opacity-30 md:opacity-40 animate-spin-slow-reverse">
+      <div className="absolute right-[-10%] top-[10%] opacity-50 md:opacity-60 animate-spin-slow-reverse">
         <svg width="600" height="600" viewBox="0 0 500 500" className="w-[80vw] h-[80vw] md:w-[600px] md:h-[600px]">
           <defs>
             <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -43,7 +43,7 @@ const LiveBackground: React.FC = () => {
       </div>
 
       {/* --- Wireframe Polyhedron (Orange/Gold) - Left Side --- */}
-      <div className="absolute left-[-5%] bottom-[15%] opacity-20 md:opacity-30 animate-float-slow">
+      <div className="absolute left-[-5%] bottom-[15%] opacity-40 md:opacity-50 animate-float-slow">
         <svg width="500" height="500" viewBox="0 0 400 400" className="w-[60vw] h-[60vw] md:w-[500px] md:h-[500px] animate-spin-slow">
           <defs>
             <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">

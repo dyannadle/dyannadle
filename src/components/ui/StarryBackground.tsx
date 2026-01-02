@@ -29,7 +29,7 @@ const StarryBackground = () => {
             options={{
                 background: {
                     color: {
-                        value: "#050816",
+                        value: "transparent",
                     },
                 },
                 fpsLimit: 60,
