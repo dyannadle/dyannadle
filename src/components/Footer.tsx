@@ -9,7 +9,10 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative pt-20 pb-10 overflow-hidden bg-gradient-to-t from-black/90 via-black/50 to-transparent border-t border-white/5">
+    <footer className="relative pt-20 pb-10 overflow-hidden bg-transparent border-t border-white/5">
+      {/* Glass gradient for readability only at the very bottom if needed, otherwise transparent */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent -z-10 pointer-events-none" />
+
       {/* Background Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
 
@@ -37,7 +40,7 @@ const Footer: React.FC = () => {
             <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-blue-400 rounded-full shadow-[0_0_8px_#60a5fa] animate-pulse" style={{ animationDelay: '1.5s' }} />
 
             <p className="text-lg md:text-xl text-gray-300 italic font-light leading-relaxed">
-              Enthusiastic and collaborative team player with a strong work ethic, eager to learn and contribute to a fast-paced tech-driven and research-intensive learning environment.
+              Working with a unified team turns complex technical challenges into opportunities for innovation and better design
             </p>
           </div>
         </div>
@@ -151,9 +154,7 @@ const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4">
           <p>© {currentYear} Deepak Yannadle. All rights reserved.</p>
 
-          <div className="flex items-center gap-2">
-            Made with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> in India
-          </div>
+
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

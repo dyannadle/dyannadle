@@ -62,6 +62,14 @@ const LiveBackground: React.FC = () => {
         </svg>
       </div>
 
+      {/* 6. Rotating Bottom Footer Rings (New) */}
+      <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 opacity-40 animate-spin-slow pointer-events-none" style={{ animationDuration: '40s' }}>
+        <svg width="600" height="300" viewBox="0 0 600 300" className="overflow-visible">
+          <ellipse cx="300" cy="150" rx="400" ry="100" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="20 10" opacity="0.5" />
+          <ellipse cx="300" cy="150" rx="350" ry="80" fill="none" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="10 5" opacity="0.3" transform="rotate(-10 300 150)" />
+        </svg>
+      </div>
+
       <style>{`
             @keyframes spin-slow {
                 from { transform: rotate(0deg); }

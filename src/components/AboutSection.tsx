@@ -56,10 +56,17 @@ const AboutSection: React.FC = () => {
                 <span className="block h-1.5 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2"></span>
               </h2>
 
-              <div className="space-y-6 text-lg text-gray-300 font-light leading-relaxed">
-                {ABOUT_DATA.description.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
+              <div className="space-y-4 text-lg text-gray-300 font-light leading-relaxed">
+                <p>
+                  I take a methodical and detail-driven approach to software testing, ensuring comprehensive test coverage and consistent quality assurance throughout the development lifecycle. My focus is on identifying issues early, reducing risks, improving product stability, and ultimately delivering a reliable and seamless user experience.
+                  My structured testing process includes test planning, execution, documentation, defect tracking, and regression testing—ensuring every release meets the highest standards of quality and performance.
+                </p>
+                <p>
+                  I am committed to continuous learning and staying aligned with industry best practices, emerging testing methodologies, and modern automation tools. I actively explore new frameworks, defect-management systems, and AI-driven testing techniques to enhance testing efficiency, accuracy, and scalability. This allows me to contribute meaningfully to robust, data-driven, and future-ready software solutions.
+                </p>
+                <p>
+                  Beyond my professional work, I have a strong passion for financial markets, including mutual funds and stock investing. I continuously expand my knowledge of market trends, technical analysis, and investment strategies to make informed financial decisions. My analytical mindset—and the attention to detail I apply in software testing—also helps me evaluate market risks, portfolio diversification, and long-term investment opportunities with clarity and confidence.
+                </p>
               </div>
             </div>
           </RevealAnimation>
