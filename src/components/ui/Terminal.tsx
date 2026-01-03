@@ -147,7 +147,7 @@ const Terminal = () => {
             else if (ua.indexOf("Android") !== -1) os = "Android-Device";
             else if (ua.indexOf("like Mac") !== -1) os = "iOS-Device";
 
-            const browserInfo = `guest@${os}`;
+            const browserInfo = `visitor@${os}`;
 
             setHistory(prev => [
                 ...prev,
