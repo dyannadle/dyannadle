@@ -240,6 +240,11 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               <img
                 src={project.image}
                 alt={project.title}
+                onLoad={() => setImageLoading(false)}
+                onError={() => {
+                  setImageLoading(false);
+                  setImageError(true);
+                }}
                 className={`max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl ${imageLoading ? 'opacity-0' : 'opacity-100 animate-fade-in'
                   }`}
                 style={{

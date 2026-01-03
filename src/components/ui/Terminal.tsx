@@ -9,12 +9,13 @@ interface TerminalLine {
 }
 
 const COMMANDS = {
-    help: "Available commands: help, about, skills, contact, social, projects, clear, date, whoami",
+    help: "Available commands: help, about, skills, contact, social, projects, resume, clear, date, whoami",
     about: "I am a Full Stack Developer passionate about building high-performance, scalable applications.",
     skills: "Java, SQL, Microservices, React, TypeScript, Node.js, Python, Docker, AWS, Kubernetes, Next.js",
     contact: `Email: ${SOCIAL_LINKS.email}`,
     matrix: "Wake up, Neo... The Matrix has you.",
     date: new Date().toString(),
+    resume: "Click the link below to view/download my resume.",
     clear: "Cleared terminal history.",
 };
 
@@ -133,6 +134,30 @@ const Terminal = () => {
                 ...prev,
                 { type: 'input', content: cmd },
                 { type: 'output', content: socialLinks }
+            ]);
+            return;
+        }
+
+        // Custom Handler for 'resume'
+        if (cleanCmd === 'resume') {
+            const resumeLink = (
+                <div className="flex items-center gap-2 mt-1 font-mono pl-2">
+                    <span className="text-green-500">➜</span>
+                    <a
+                        href={SOCIAL_LINKS.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold"
+                    >
+                        Download Resume
+                    </a>
+                </div>
+            );
+
+            setHistory(prev => [
+                ...prev,
+                { type: 'input', content: cmd },
+                { type: 'output', content: resumeLink }
             ]);
             return;
         }
