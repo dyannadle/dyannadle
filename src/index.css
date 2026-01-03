@@ -6,12 +6,12 @@
 
 @layer base {
   :root {
-    --background: 230 58% 5%;
-    /* Deep Space Blue #050816 */
+    --background: 220 60% 5%;
+    /* #050A14 Deep Tech Charcoal */
     --foreground: 0 0% 100%;
-    --card: 229 60% 5%;
+    --card: 220 50% 10%;
     --card-foreground: 0 0% 100%;
-    --popover: 230 58% 5%;
+    --popover: 220 50% 10%;
     --popover-foreground: 0 0% 100%;
 
     /* Neon Cyan Palette */

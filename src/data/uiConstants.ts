@@ -45,11 +45,11 @@ export const UI_TEXT = {
             additional: "Additional Skills",
         },
         approach: {
-title: "My Approach",
-p1: "I bring a methodical and detail-oriented approach to software testing, ensuring thorough test coverage and strong quality assurance throughout the development lifecycle. My goal is to identify and resolve issues early, reducing risks, improving product stability, and delivering an exceptional user experience. I follow a structured testing process that includes test planning, execution, defect tracking, and regression testing to ensure software meets the highest quality standards.",
-p2: "I am deeply committed to continuous learning and staying current with industry best practices, emerging testing methodologies, and modern automation tools. I actively explore new testing frameworks, defect management systems, and AI-driven testing solutions to enhance efficiency, accuracy, and overall testing effectiveness.",
-p3: "Beyond my professional work, I have a strong passion for investing in mutual funds and the stock market. I continuously expand my knowledge of market trends, technical analysis, and investment strategies to make informed financial decisions. My analytical mindset and attention to detail, which I apply in software testing, also help me in evaluating ",
-p3_highlight: "market risks, portfolio diversification, and long-term investment opportunities"
+            title: "My Approach",
+            p1: "I bring a methodical and detail-oriented approach to software testing, ensuring thorough test coverage and strong quality assurance throughout the development lifecycle. My goal is to identify and resolve issues early, reducing risks, improving product stability, and delivering an exceptional user experience. I follow a structured testing process that includes test planning, execution, defect tracking, and regression testing to ensure software meets the highest quality standards.",
+            p2: "I am deeply committed to continuous learning and staying current with industry best practices, emerging testing methodologies, and modern automation tools. I actively explore new testing frameworks, defect management systems, and AI-driven testing solutions to enhance efficiency, accuracy, and overall testing effectiveness.",
+            p3: "Beyond my professional work, I have a strong passion for investing in mutual funds and the stock market. I continuously expand my knowledge of market trends, technical analysis, and investment strategies to make informed financial decisions. My analytical mindset and attention to detail, which I apply in software testing, also help me in evaluating ",
+            p3_highlight: "market risks, portfolio diversification, and long-term investment opportunities"
         }
     },
     experience: {
@@ -58,29 +58,7 @@ p3_highlight: "market risks, portfolio diversification, and long-term investment
         achievements: "Key Achievements:",
         responsibilities: "Key Responsibilities:",
     },
-    contact: {
-        title: "Get in Touch",
-        subtitle: "Have a question or want to work together?",
-        form: {
-            name: "Your Name",
-            email: "Your Email",
-            message: "Your Message",
-            send: "Send Message",
-            sending: "Sending...",
-        },
-        info: {
-            email: "Email",
-            location: "Location",
-            social: "Social Profiles",
-        }
-    },
-    footer: {
-        copyright: "© 2024 Deepak Yannadle. All rights reserved.",
-        links: {
-            github: "GitHub",
-            linkedin: "LinkedIn",
-        }
-    },
+    // Duplicates removed to fix build warning
     contact: {
         title: "Contact Me",
         subtitle: "Get in touch with me for opportunities or collaborations",

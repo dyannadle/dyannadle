@@ -151,9 +151,7 @@ const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-sm text-gray-500 gap-4">
           <p>© {currentYear} Deepak Yannadle. All rights reserved.</p>
 
-          <div className="flex items-center gap-2">
-            Made with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> in India
-          </div>
+
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
