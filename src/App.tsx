@@ -4,14 +4,16 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
 import BackToTop from "@/components/ui/BackToTop";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import StarryBackground from "@/components/ui/StarryBackground";
-import LiveBackground from "@/components/ui/LiveBackground";
+import TechBackground from "@/components/ui/TechBackground";
+import SafeTechBackground from "@/components/ui/SafeTechBackground";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { ThemeProvider } from "@/context/ThemeContext";
+import Terminal from "@/components/ui/Terminal"; // Added Terminal import
 
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
@@ -29,15 +31,18 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <ThemeProvider>
-        <SmoothScroll>
-          <LiveBackground />
-          <StarryBackground />
-          <TooltipProvider delayDuration={0}>
+        {/* Using Safe CSS-3D Engine for guaranteed stability + visuals */}
+        <SafeTechBackground />
+        <Terminal />
+
+        <TooltipProvider delayDuration={0}>
+          <div className="relative z-10 min-h-screen flex flex-col font-sans">
             <Toaster />
             <Sonner />
             <CustomCursor />
             <BackToTop />
             <ScrollProgress />
+
             <BrowserRouter>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
@@ -46,8 +51,8 @@ const App = () => (
                 </Routes>
               </Suspense>
             </BrowserRouter>
-          </TooltipProvider>
-        </SmoothScroll>
+          </div>
+        </TooltipProvider>
       </ThemeProvider>
     </HelmetProvider>
   </QueryClientProvider>
