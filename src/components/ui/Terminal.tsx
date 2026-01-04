@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Minimize2, Maximize2, X, Terminal as TerminalIcon, GripHorizontal } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/data/constants';
 import { projects } from '@/data/projectsData';
+import { certifications } from '@/data/educationData';
 
 interface TerminalLine {
     type: 'input' | 'output' | 'error' | 'system';
@@ -9,7 +10,7 @@ interface TerminalLine {
 }
 
 const COMMANDS = {
-    help: "Available commands: help, about, skills, contact, social, projects, resume, clear, date, whoami",
+    help: "Available commands: help, about, skills, contact, social, projects, certificates, resume, clear, date, whoami",
     about: "I am a Full Stack Developer passionate about building high-performance, scalable applications.",
     skills: "Java, SQL, Microservices, React, TypeScript, Node.js, Python, Docker, AWS, Kubernetes, Next.js",
     contact: `Email: ${SOCIAL_LINKS.email}`,
@@ -107,6 +108,38 @@ const Terminal = () => {
                 ...prev,
                 { type: 'input', content: cmd },
                 { type: 'output', content: projectList }
+            ]);
+            return;
+        }
+
+        // Custom Handler for 'certificates'
+        if (cleanCmd === 'certificates') {
+            const certList = (
+                <div className="flex flex-col gap-1 mt-1 font-mono">
+                    <div className="text-[#00E5FF] mb-2 border-b border-[#00E5FF]/30 pb-1 w-fit">Found {certifications.length} Certificates:</div>
+                    {certifications.map((c, i) => (
+                        <div key={i} className="flex items-start gap-2 pl-2">
+                            <span className="text-yellow-500 mt-1">➜</span>
+                            <div className="flex flex-col">
+                                <a
+                                    href={c.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-gray-200 hover:text-white hover:underline transition-colors font-bold"
+                                >
+                                    {c.name}
+                                </a>
+                                <span className="text-xs text-gray-500">{c.institution} | {c.year}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+
+            setHistory(prev => [
+                ...prev,
+                { type: 'input', content: cmd },
+                { type: 'output', content: certList }
             ]);
             return;
         }
