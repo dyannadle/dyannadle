@@ -5,7 +5,7 @@ export const HERO_DATA = {
     cta: {
         contact: "Contact Me",
         github: "GitHub",
-        resume: "Download Resume",
+        resume: "View Resume",
         learnMore: "Learn More"
     }
 };
