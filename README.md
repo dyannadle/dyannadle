@@ -1,67 +1,70 @@
-# Deepak Yannadle - Portfolio
+# Deepak Yannadle - Software Engineer Portfolio
 
-A modern, responsive personal portfolio website built to showcase my experience, skills, and projects.
+A modern, high-performance personal portfolio website designed to showcase my expertise in Software Testing, Development, and "Vibe Coding". Built with a focus on smooth user experience, interactive animations, and clean code.
 
 ## 🚀 Features
 
-- **Interactive UI**: Smooth animations and transitions using Framer Motion.
-- **Responsive Design**: Fully responsive layout built with Tailwind CSS.
-- **Experience Timeline**: A visual representation of my professional journey.
-- **Skills Visualization**: Interactive skills cloud and categorized technical skills.
-- **Project Showcase**: Detailed view of my projects with links and descriptions.
-- **Contact Section**: Easy way to get in touch.
+- **Dynamic Hero Section**: featuring a custom **Rotating Typewriter** effect that cycles through professional roles.
+- **Interactive UI**: Powered by [Framer Motion](https://www.framer.com/motion/) for smooth reveal animations, scroll effects, and hover interactions.
+- **Particle Effects**: subtle, non-intrusive background particle systems for a modern aesthetic.
+- **Responsive Design**: Mobile-first approach ensuring a perfect experience on devices of all sizes, styled with [Tailwind CSS](https://tailwindcss.com/).
+- **Skills Visualization**: An interactive, categorised display of technical skills and tools.
+- **Project Showcase**: A dedicated section to highlight key projects with descriptions, links, and modal details.
+- **Performance Optimized**: Fast loading times and optimized assets using Vite.
 
 ## 🛠️ Tech Stack
 
-This project is built with the following technologies:
-
-- **Frontend**: [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-
+- **Frontend Framework**: [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/) for type safety.
+- **Build Tool**: [Vite](https://vitejs.dev/) for lightning-fast HMR and bundling.
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/) for component primitives.
+- **Animations**: 
+  - [Framer Motion](https://www.framer.com/motion/)
+  - Custom Typewriter & Reveal/Scroll hooks
+- **Icons**: [Lucide React](https://lucide.dev/)
+                                              
 ## 🏁 Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine.
+To run this project locally, follow these steps:
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v16 or higher installed)
-- [npm](https://www.npmjs.com/) (usually comes with Node.js)
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 
 1.  **Clone the repository**
-    ```sh
-    git clone <YOUR_GIT_URL>
+    ```bash
+    git clone https://github.com/dyannadle/dyannadle.git
     cd dyannadle
     ```
 
 2.  **Install dependencies**
-    ```sh
+    ```bash
     npm install
     ```
 
-### 🏃‍♂️ Running Locally
+3.  **Start the development server**
+    ```bash
+    npm run dev
+    ```
+    The app will typically run at `http://localhost:5173`.
 
-Start the development server with hot-reload:
+4.  **Build for Production**
+    ```bash
+    npm run build
+    ```
+    To preview the production build locally:
+    ```bash
+    npm run preview
+    ```
 
-```sh
-npm run dev
-```
+## 🏗️ Project Structure
 
-The application will be available at `http://localhost:8080` (or the port shown in your terminal).
-
-### 🏗️ Building for Production
-
-Build the app for production:
-
-```sh
-npm run build
-```
-
-This will create a `dist` folder with the optimized production build.
+- `src/components`: Reusable UI components and page sections.
+- `src/data`: Content data (experience, projects, skills) separate from UI logic.
+- `src/hooks`: Custom React hooks (e.g., scroll animation).
+- `src/lib`: Utility functions.
 
 ## 📄 License
 
