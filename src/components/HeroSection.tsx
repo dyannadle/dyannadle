@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { HERO_DATA } from "@/data/heroData";
 import { UI_TEXT } from "@/data/uiConstants";
 import { ArrowRight, Github, Download } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import TypewriterText from "./ui/TypewriterText";
+import RotatingTypewriter from "./ui/RotatingTypewriter";
 import ParticleSystem from "./ui/ParticleSystem";
 import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
@@ -15,6 +16,8 @@ import { useMousePosition } from "../hooks/useScrollAnimation";
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
   const [nameTyped, setNameTyped] = useState(false);
+
+
 
   return (
     <section
@@ -41,7 +44,14 @@ const HeroSection: React.FC = () => {
               aria-label="Role"
             >
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-              {HERO_DATA.role}
+              <div className="relative h-6 w-56 flex items-center">
+                <RotatingTypewriter
+                  words={HERO_DATA.roles}
+                  typingSpeed={100}
+                  deletingSpeed={50}
+                  pauseTime={2000}
+                />
+              </div>
             </div>
           </RevealAnimation>
 
