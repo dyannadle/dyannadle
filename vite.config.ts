@@ -38,6 +38,7 @@ export default defineConfig(({ mode }) => ({
     }) */
   ].filter(Boolean),
   build: {
+    assetsInlineLimit: 0,
     sourcemap: false,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
