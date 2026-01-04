@@ -1,28 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Minimize2, Maximize2, X, Terminal as TerminalIcon, GripHorizontal } from 'lucide-react';
-import { SOCIAL_LINKS } from '@/data/constants';
-import { projects } from '@/data/projectsData';
-import { certifications } from '@/data/educationData';
+import React, { useState, useEffect, useRef } from "react";
+import {
+    Minimize2,
+    Maximize2,
+    X,
+    Terminal as TerminalIcon,
+    GripHorizontal,
+} from "lucide-react";
+import { SOCIAL_LINKS } from "@/data/constants";
+import { projects } from "@/data/projectsData";
+import { certifications } from "@/data/educationData";
 
-import { CERTIFICATES_MAP } from '@/data/pdfs/certificatesMap';
-import { RESUME_BASE64 } from '@/data/pdfs/RESUME_BASE64';
+import { CERTIFICATES_MAP } from "@/data/pdfs/certificatesMap";
+import { RESUME_BASE64 } from "@/data/pdfs/RESUME_BASE64";
 
 interface TerminalLine {
-    type: 'input' | 'output' | 'error' | 'system';
+    type: "input" | "output" | "error" | "system";
     content: React.ReactNode;
 }
 
-const openPdfViewer = (base64Data: string | undefined, title: string, fallbackLink: string) => {
+const openPdfViewer = (
+    base64Data: string | undefined,
+    title: string,
+    fallbackLink: string,
+) => {
     if (!base64Data) {
-        window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+        window.open(fallbackLink, "_blank", "noopener,noreferrer");
         return;
     }
 
     try {
         // Convert Base64 to Blob
-        const arr = base64Data.split(',');
+        const arr = base64Data.split(",");
         const mimeMatch = arr[0].match(/:(.*?);/);
-        const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+        const mime = mimeMatch ? mimeMatch[1] : "application/pdf";
         const bstr = atob(arr[1]);
         let n = bstr.length;
         const u8arr = new Uint8Array(n);
@@ -33,7 +43,7 @@ const openPdfViewer = (base64Data: string | undefined, title: string, fallbackLi
         const blobUrl = URL.createObjectURL(blob);
 
         // Open Blob URL in new tab
-        const newWindow = window.open('', '_blank');
+        const newWindow = window.open("", "_blank");
 
         if (newWindow) {
             newWindow.document.write(`
@@ -81,29 +91,33 @@ const openPdfViewer = (base64Data: string | undefined, title: string, fallbackLi
             setTimeout(() => URL.revokeObjectURL(blobUrl), 60000); // 1 minute delay
         } else {
             // Popup blocked, fallback to direct open or original link
-            window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+            window.open(fallbackLink, "_blank", "noopener,noreferrer");
             URL.revokeObjectURL(blobUrl);
         }
     } catch (e) {
         console.error("Error opening PDF:", e);
-        window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+        window.open(fallbackLink, "_blank", "noopener,noreferrer");
     }
 };
 
-const downloadBase64Pdf = (base64Data: string | undefined, filename: string, fallbackLink: string) => {
+const downloadBase64Pdf = (
+    base64Data: string | undefined,
+    filename: string,
+    fallbackLink: string,
+) => {
     if (!base64Data) {
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = fallbackLink;
         a.download = filename;
-        a.target = '_blank';
+        a.target = "_blank";
         a.click();
         return;
     }
 
     try {
-        const arr = base64Data.split(',');
+        const arr = base64Data.split(",");
         const mimeMatch = arr[0].match(/:(.*?);/);
-        const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+        const mime = mimeMatch ? mimeMatch[1] : "application/pdf";
         const bstr = atob(arr[1]);
         let n = bstr.length;
         const u8arr = new Uint8Array(n);
@@ -113,7 +127,7 @@ const downloadBase64Pdf = (base64Data: string | undefined, filename: string, fal
         const blob = new Blob([u8arr], { type: mime });
         const blobUrl = URL.createObjectURL(blob);
 
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = blobUrl;
         a.download = filename;
         document.body.appendChild(a);
@@ -123,18 +137,20 @@ const downloadBase64Pdf = (base64Data: string | undefined, filename: string, fal
         setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
     } catch (e) {
         console.error("Error downloading PDF:", e);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = fallbackLink;
         a.download = filename;
-        a.target = '_blank';
+        a.target = "_blank";
         a.click();
     }
 };
 
 const COMMANDS = {
     help: "Available commands: help, about, skills, contact, social, projects, certificates, resume, clear, date, whoami",
-    about: "I am a Full Stack Developer passionate about building high-performance, scalable applications.",
-    skills: "Java, SQL, Microservices, React, TypeScript, Node.js, Python, Docker, AWS, Kubernetes, Next.js",
+    about:
+        "I am a Full Stack Developer passionate about building high-performance, scalable applications.",
+    skills:
+        "Java, SQL, Microservices, React, TypeScript, Node.js, Python, Docker, AWS, Kubernetes, Next.js",
     contact: `Email: ${SOCIAL_LINKS.email}`,
     matrix: "Wake up, Neo... The Matrix has you.",
     date: new Date().toString(),
@@ -146,7 +162,7 @@ const Terminal = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
     const [history, setHistory] = useState<TerminalLine[]>([]);
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState("");
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const dragStartPos = useRef({ x: 0, y: 0 });
@@ -163,18 +179,21 @@ const Terminal = () => {
                 "Mounting virtual filesystem...",
                 "Connecting to secure server...",
                 "Access granted.",
-                "Welcome guest@portfolio."
+                "Welcome guest@portfolio.",
             ];
 
             let delay = 0;
             bootLines.forEach((line, index) => {
                 delay += 300 + Math.random() * 400;
                 setTimeout(() => {
-                    setHistory(prev => [...prev, { type: 'system', content: line }]);
+                    setHistory((prev) => [...prev, { type: "system", content: line }]);
                 }, delay);
             });
             setTimeout(() => {
-                setHistory(prev => [...prev, { type: 'system', content: 'Type "help" for instructions.' }]);
+                setHistory((prev) => [
+                    ...prev,
+                    { type: "system", content: 'Type "help" for instructions.' },
+                ]);
             }, delay + 500);
         }
     }, [isOpen]);
@@ -182,7 +201,7 @@ const Terminal = () => {
     // Auto-scroll
     useEffect(() => {
         if (isOpen && !isMinimized) {
-            bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+            bottomRef.current?.scrollIntoView({ behavior: "smooth" });
         }
     }, [history, isOpen, isMinimized]);
 
@@ -196,25 +215,27 @@ const Terminal = () => {
     const handleCommand = (cmd: string) => {
         const cleanCmd = cmd.trim().toLowerCase();
 
-        if (cleanCmd === 'clear') {
+        if (cleanCmd === "clear") {
             setHistory([]);
             return;
         }
 
         // Custom Handler for 'projects'
-        if (cleanCmd === 'projects') {
+        if (cleanCmd === "projects") {
             const projectList = (
                 <div className="flex flex-col gap-1 mt-1 font-mono">
-                    <div className="text-[#00E5FF] mb-2 border-b border-[#00E5FF]/30 pb-1 w-fit">Detected {projects.length} Projects:</div>
+                    <div className="pb-1 mb-2 border-b text-[#00E5FF] border-[#00E5FF]/30 w-fit">
+                        Detected {projects.length} Projects:
+                    </div>
                     {projects.map((p, i) => (
-                        <div key={i} className="flex items-start gap-2 pl-2">
-                            <span className="text-green-500 mt-1">➜</span>
+                        <div key={i} className="flex gap-2 items-start pl-2">
+                            <span className="mt-1 text-green-500">➜</span>
                             <div className="flex flex-col">
                                 <a
-                                    href={p.github || '#'}
+                                    href={p.github || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-200 hover:text-white hover:underline transition-colors font-bold"
+                                    className="font-bold text-gray-200 transition-colors hover:text-white hover:underline"
                                 >
                                     {p.title}
                                 </a>
@@ -222,93 +243,123 @@ const Terminal = () => {
                             </div>
                         </div>
                     ))}
-                    <div className="text-gray-500 italic mt-2 text-xs">Click any project to view repository.</div>
+                    <div className="mt-2 text-xs italic text-gray-500">
+                        Click any project to view repository.
+                    </div>
                 </div>
             );
 
-            setHistory(prev => [
+            setHistory((prev) => [
                 ...prev,
-                { type: 'input', content: cmd },
-                { type: 'output', content: projectList }
+                { type: "input", content: cmd },
+                { type: "output", content: projectList },
             ]);
             return;
         }
 
         // Custom Handler for 'certificates'
-        if (cleanCmd === 'certificates') {
+        if (cleanCmd === "certificates") {
             const certList = (
                 <div className="flex flex-col gap-1 mt-1 font-mono">
-                    <div className="text-[#00E5FF] mb-2 border-b border-[#00E5FF]/30 pb-1 w-fit">Found {certifications.length} Certificates:</div>
+                    <div className="pb-1 mb-2 border-b text-[#00E5FF] border-[#00E5FF]/30 w-fit">
+                        Found {certifications.length} Certificates:
+                    </div>
                     {certifications.map((c, i) => (
-                        <div key={i} className="flex items-start gap-2 pl-2">
-                            <span className="text-yellow-500 mt-1">➜</span>
+                        <div key={i} className="flex gap-2 items-start pl-2">
+                            <span className="mt-1 text-yellow-500">➜</span>
                             <div className="flex flex-col">
                                 <button
-                                    onClick={() => openPdfViewer(CERTIFICATES_MAP[c.name], c.name, c.link)}
-                                    className="text-left text-gray-200 hover:text-white hover:underline transition-colors font-bold"
+                                    onClick={() =>
+                                        openPdfViewer(CERTIFICATES_MAP[c.name], c.name, c.link)
+                                    }
+                                    className="font-bold text-left text-gray-200 transition-colors hover:text-white hover:underline"
                                 >
                                     {c.name}
                                 </button>
-                                <span className="text-xs text-gray-500">{c.institution} | {c.year}</span>
+                                <span className="text-xs text-gray-500">
+                                    {c.institution} | {c.year}
+                                </span>
                             </div>
                         </div>
                     ))}
                 </div>
             );
 
-            setHistory(prev => [
+            setHistory((prev) => [
                 ...prev,
-                { type: 'input', content: cmd },
-                { type: 'output', content: certList }
+                { type: "input", content: cmd },
+                { type: "output", content: certList },
             ]);
             return;
         }
 
         // Custom Handler for 'social'
-        if (cleanCmd === 'social') {
+        if (cleanCmd === "social") {
             const socialLinks = (
-                <div className="flex flex-col gap-2 mt-1 font-mono pl-2">
-                    <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-2 pl-2 mt-1 font-mono">
+                    <div className="flex gap-2 items-center">
                         <span className="text-green-500">➜</span>
-                        <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-[#00E5FF] hover:underline hover:text-white transition-colors">
+                        <a
+                            href={SOCIAL_LINKS.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-colors hover:text-white hover:underline text-[#00E5FF]"
+                        >
                             GitHub Profile
                         </a>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex gap-2 items-center">
                         <span className="text-green-500">➜</span>
-                        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-[#00E5FF] hover:underline hover:text-white transition-colors">
+                        <a
+                            href={SOCIAL_LINKS.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-colors hover:text-white hover:underline text-[#00E5FF]"
+                        >
                             LinkedIn Profile
                         </a>
                     </div>
                 </div>
             );
 
-            setHistory(prev => [
+            setHistory((prev) => [
                 ...prev,
-                { type: 'input', content: cmd },
-                { type: 'output', content: socialLinks }
+                { type: "input", content: cmd },
+                { type: "output", content: socialLinks },
             ]);
             return;
         }
 
         // Custom Handler for 'resume'
-        if (cleanCmd === 'resume') {
+        if (cleanCmd === "resume") {
             const resumeOptions = (
-                <div className="flex flex-col gap-2 mt-1 font-mono pl-2">
-                    <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-2 pl-2 mt-1 font-mono">
+                    <div className="flex gap-2 items-center">
                         <span className="text-green-500">➜</span>
                         <button
-                            onClick={() => openPdfViewer(RESUME_BASE64, "Deepak Yannadle Resume", SOCIAL_LINKS.resume)}
-                            className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold text-left"
+                            onClick={() =>
+                                openPdfViewer(
+                                    RESUME_BASE64,
+                                    "Deepak Yannadle Resume",
+                                    SOCIAL_LINKS.resume,
+                                )
+                            }
+                            className="font-bold text-left transition-colors hover:text-white hover:underline text-[#00E5FF]"
                         >
                             View Resume
                         </button>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex gap-2 items-center">
                         <span className="text-green-500">➜</span>
                         <button
-                            onClick={() => downloadBase64Pdf(RESUME_BASE64, "Deepak_Yannadle_Resume.pdf", SOCIAL_LINKS.resume)}
-                            className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold text-left"
+                            onClick={() =>
+                                downloadBase64Pdf(
+                                    RESUME_BASE64,
+                                    "Deepak_Yannadle_Resume.pdf",
+                                    SOCIAL_LINKS.resume,
+                                )
+                            }
+                            className="font-bold text-left transition-colors hover:text-white hover:underline text-[#00E5FF]"
                         >
                             Download Resume
                         </button>
@@ -316,16 +367,16 @@ const Terminal = () => {
                 </div>
             );
 
-            setHistory(prev => [
+            setHistory((prev) => [
                 ...prev,
-                { type: 'input', content: cmd },
-                { type: 'output', content: resumeOptions }
+                { type: "input", content: cmd },
+                { type: "output", content: resumeOptions },
             ]);
             return;
         }
 
         // Custom Handler for 'whoami'
-        if (cleanCmd === 'whoami') {
+        if (cleanCmd === "whoami") {
             const ua = navigator.userAgent;
             let os = "Unknown-System";
             if (ua.indexOf("Win") !== -1) os = "Windows-Workstation";
@@ -336,44 +387,46 @@ const Terminal = () => {
 
             const browserInfo = `visitor@${os}`;
 
-            setHistory(prev => [
+            setHistory((prev) => [
                 ...prev,
-                { type: 'input', content: cmd },
-                { type: 'output', content: browserInfo }
+                { type: "input", content: cmd },
+                { type: "output", content: browserInfo },
             ]);
             return;
         }
 
         let response: React.ReactNode = `Command not found: ${cleanCmd}. Type "help" for available commands.`;
-        let type: TerminalLine['type'] = 'error';
+        let type: TerminalLine["type"] = "error";
 
         if (Object.keys(COMMANDS).includes(cleanCmd)) {
-            // @ts-ignore
             response = COMMANDS[cleanCmd];
-            type = 'output';
-        } else if (cleanCmd === '') {
-            response = '';
-            type = 'output';
+            type = "output";
+        } else if (cleanCmd === "") {
+            response = "";
+            type = "output";
         }
 
-        setHistory(prev => [
+        setHistory((prev) => [
             ...prev,
-            { type: 'input', content: cmd },
-            { type, content: response }
+            { type: "input", content: cmd },
+            { type, content: response },
         ]);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
+        if (e.key === "Enter") {
             handleCommand(input);
-            setInput('');
+            setInput("");
         }
     };
 
     // Drag Logic
     const handleMouseDown = (e: React.MouseEvent) => {
         setIsDragging(true);
-        dragStartPos.current = { x: e.clientX - position.x, y: e.clientY - position.y };
+        dragStartPos.current = {
+            x: e.clientX - position.x,
+            y: e.clientY - position.y,
+        };
     };
 
     useEffect(() => {
@@ -381,7 +434,7 @@ const Terminal = () => {
             if (isDragging) {
                 setPosition({
                     x: e.clientX - dragStartPos.current.x,
-                    y: e.clientY - dragStartPos.current.y
+                    y: e.clientY - dragStartPos.current.y,
                 });
             }
         };
@@ -390,12 +443,12 @@ const Terminal = () => {
         };
 
         if (isDragging) {
-            window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('mouseup', handleMouseUp);
+            window.addEventListener("mousemove", handleMouseMove);
+            window.addEventListener("mouseup", handleMouseUp);
         }
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseup", handleMouseUp);
         };
     }, [isDragging]);
 
@@ -403,10 +456,10 @@ const Terminal = () => {
         return (
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 z-50 p-4 bg-black/90 backdrop-blur-md border border-[#00E5FF]/50 rounded-full text-[#00E5FF] hover:bg-[#00E5FF]/20 transition-all shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:scale-110 group"
+                className="fixed right-6 bottom-6 z-50 p-4 rounded-full border transition-all hover:scale-110 bg-black/90 backdrop-blur-md border-[#00E5FF]/50 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] group hover:bg-[#00E5FF]/20"
             >
                 <TerminalIcon size={24} />
-                <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-black/90 text-xs px-2 py-1 rounded border border-[#00E5FF]/30 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none text-[#00E5FF]">
+                <span className="absolute top-1/2 right-full py-1 px-2 mr-3 text-xs whitespace-nowrap rounded border opacity-0 transition-opacity -translate-y-1/2 pointer-events-none group-hover:opacity-100 bg-black/90 border-[#00E5FF]/30 text-[#00E5FF]">
                     Open Terminal
                 </span>
             </button>
@@ -416,14 +469,14 @@ const Terminal = () => {
     return (
         <div
             className={`fixed z-50 transition-shadow duration-300 ease-in-out border border-[#00E5FF]/40 bg-black/95 backdrop-blur-xl shadow-[0_0_40px_rgba(0,229,255,0.2)] font-mono overflow-hidden
-                ${isMinimized ? 'h-12 w-72' : 'h-[500px] w-[90vw] md:w-[650px]'}
+                ${isMinimized ? "h-12 w-72" : "h-[500px] w-[90vw] md:w-[650px]"}
                 rounded-lg
             `}
             style={{
-                bottom: '24px',
-                right: '24px',
+                bottom: "24px",
+                right: "24px",
                 transform: `translate(${position.x}px, ${position.y}px)`,
-                cursor: isDragging ? 'grabbing' : 'default'
+                cursor: isDragging ? "grabbing" : "default",
             }}
         >
             {/* CRT Overlay Effect */}
@@ -431,24 +484,30 @@ const Terminal = () => {
 
             {/* Header */}
             <div
-                className="flex items-center justify-between px-4 py-2 bg-[#00E5FF]/10 border-b border-[#00E5FF]/20 select-none cursor-grab active:cursor-grabbing"
+                className="flex justify-between items-center py-2 px-4 border-b select-none bg-[#00E5FF]/10 border-[#00E5FF]/20 cursor-grab active:cursor-grabbing"
                 onMouseDown={handleMouseDown}
             >
-                <div className="flex items-center gap-2 text-[#00E5FF] text-sm font-bold tracking-wider">
+                <div className="flex gap-2 items-center text-sm font-bold tracking-wider text-[#00E5FF]">
                     <TerminalIcon size={14} />
                     <span>user@portfolio:~</span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <GripHorizontal size={14} className="text-[#00E5FF]/50 mr-2" />
+                <div className="flex gap-2 items-center">
+                    <GripHorizontal size={14} className="mr-2 text-[#00E5FF]/50" />
                     <button
-                        onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }}
-                        className="p-1 hover:bg-[#00E5FF]/20 rounded text-[#00E5FF] transition-colors"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsMinimized(!isMinimized);
+                        }}
+                        className="p-1 rounded transition-colors text-[#00E5FF] hover:bg-[#00E5FF]/20"
                     >
                         {isMinimized ? <Maximize2 size={14} /> : <Minimize2 size={14} />}
                     </button>
                     <button
-                        onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
-                        className="p-1 hover:bg-red-500/20 rounded text-red-400 transition-colors"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsOpen(false);
+                        }}
+                        className="p-1 text-red-400 rounded transition-colors hover:bg-red-500/20"
                     >
                         <X size={14} />
                     </button>
@@ -462,30 +521,40 @@ const Terminal = () => {
                     onClick={() => inputRef.current?.focus()}
                 >
                     {history.map((line, i) => (
-                        <div key={i} className="mb-2 break-words leading-relaxed animate-in fade-in duration-300">
-                            {line.type === 'input' && (
-                                <span className="text-green-500 font-bold mr-2">➜ ~</span>
+                        <div
+                            key={i}
+                            className="mb-2 leading-relaxed break-words duration-300 animate-in fade-in"
+                        >
+                            {line.type === "input" && (
+                                <span className="mr-2 font-bold text-green-500">➜ ~</span>
                             )}
-                            <span className={
-                                line.type === 'input' ? 'text-white' :
-                                    line.type === 'error' ? 'text-red-400' :
-                                        line.type === 'system' ? 'text-cyan-400/80 italic' :
-                                            'text-[#00E5FF] drop-shadow-[0_0_2px_rgba(0,229,255,0.5)]'
-                            }>
+                            <span
+                                className={
+                                    line.type === "input"
+                                        ? "text-white"
+                                        : line.type === "error"
+                                            ? "text-red-400"
+                                            : line.type === "system"
+                                                ? "text-cyan-400/80 italic"
+                                                : "text-[#00E5FF] drop-shadow-[0_0_2px_rgba(0,229,255,0.5)]"
+                                }
+                            >
                                 {line.content}
                             </span>
                         </div>
                     ))}
 
                     <div className="flex items-center mt-2 group">
-                        <span className="text-green-500 font-bold mr-2 group-focus-within:animate-pulse">➜ ~</span>
+                        <span className="mr-2 font-bold text-green-500 group-focus-within:animate-pulse">
+                            ➜ ~
+                        </span>
                         <input
                             ref={inputRef}
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-600 caret-[#00E5FF]"
+                            className="flex-1 placeholder-gray-600 text-white bg-transparent border-none outline-none caret-[#00E5FF]"
                             autoFocus
                             spellCheck={false}
                             autoComplete="off"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface RotatingTypewriterProps {
     words: string[];
@@ -15,15 +15,15 @@ const RotatingTypewriter: React.FC<RotatingTypewriterProps> = ({
     deletingSpeed = 100,
     pauseTime = 2000,
     className = "",
-    cursorColor = "bg-blue-400"
+    cursorColor = "bg-blue-400",
 }) => {
-    const [text, setText] = useState('');
+    const [text, setText] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
     const [delta, setDelta] = useState(typingSpeed);
 
     useEffect(() => {
-        let ticker = setTimeout(() => {
+        const ticker = setTimeout(() => {
             tick();
         }, delta);
 
@@ -48,7 +48,7 @@ const RotatingTypewriter: React.FC<RotatingTypewriterProps> = ({
         if (!isDeleting && updatedText === fullText) {
             setIsDeleting(true);
             setDelta(pauseTime);
-        } else if (isDeleting && updatedText === '') {
+        } else if (isDeleting && updatedText === "") {
             setIsDeleting(false);
             setLoopNum(loopNum + 1);
             setDelta(500); // Pause before typing next word
@@ -58,7 +58,9 @@ const RotatingTypewriter: React.FC<RotatingTypewriterProps> = ({
     return (
         <span className={className}>
             {text}
-            <span className={`inline-block w-[3px] h-[1em] align-middle ml-1 ${cursorColor} animate-pulse`} />
+            <span
+                className={`inline-block w-[3px] h-[1em] align-middle ml-1 ${cursorColor} animate-pulse`}
+            />
         </span>
     );
 };
