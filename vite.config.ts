@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    VitePWA({
+    /* VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
           }
         ]
       }
-    })
+    }) */
   ].filter(Boolean),
   build: {
     sourcemap: false,

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_LINKS, PARTICLE_COLORS } from "@/data/constants";
 import { HERO_DATA } from "@/data/heroData";
 import { UI_TEXT } from "@/data/uiConstants";
-import { ArrowRight, Github, Download } from "lucide-react";
+import { ArrowRight, Github, Eye } from "lucide-react";
 import RevealAnimation from "./ui/RevealAnimation";
 import TypewriterText from "./ui/TypewriterText";
 import RotatingTypewriter from "./ui/RotatingTypewriter";
@@ -12,10 +12,14 @@ import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
 import TypingAnimation from "./ui/TypingAnimation";
 import { useMousePosition } from "../hooks/useScrollAnimation";
+import PdfViewerModal from "./PdfViewerModal";
+
+import { RESUME_BASE64 } from "@/data/pdfs/RESUME_BASE64";
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
   const [nameTyped, setNameTyped] = useState(false);
+  const [showResumeModal, setShowResumeModal] = useState(false);
 
 
 
@@ -106,21 +110,26 @@ const HeroSection: React.FC = () => {
               </RippleEffect>
 
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.1)">
-                <motion.a
-                  href={SOCIAL_LINKS.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-2 items-center py-3 px-8 text-white glass rounded-full hover:bg-white/10 transition-all border-white/20 hover:border-white/40"
+                <motion.button
+                  onClick={() => setShowResumeModal(true)}
+                  className="flex gap-2 items-center py-3 px-8 text-white glass rounded-full hover:bg-white/10 transition-all border-white/20 hover:border-white/40 cursor-pointer"
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Download size={18} />
+                  <Eye size={18} />
                   {HERO_DATA.cta.resume}
-                </motion.a>
+                </motion.button>
               </RippleEffect>
             </div>
           </RevealAnimation>
         </div>
       </div>
+
+      <PdfViewerModal
+        isOpen={showResumeModal}
+        onOpenChange={setShowResumeModal}
+        pdfUrl={RESUME_BASE64}
+        title="My Resume"
+      />
     </section>
   );
 };

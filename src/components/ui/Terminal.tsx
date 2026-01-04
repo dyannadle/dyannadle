@@ -2,14 +2,137 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Minimize2, Maximize2, X, Terminal as TerminalIcon, GripHorizontal } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/data/constants';
 import { projects } from '@/data/projectsData';
+import { certifications } from '@/data/educationData';
+
+import { CERTIFICATES_MAP } from '@/data/pdfs/certificatesMap';
+import { RESUME_BASE64 } from '@/data/pdfs/RESUME_BASE64';
 
 interface TerminalLine {
     type: 'input' | 'output' | 'error' | 'system';
     content: React.ReactNode;
 }
 
+const openPdfViewer = (base64Data: string | undefined, title: string, fallbackLink: string) => {
+    if (!base64Data) {
+        window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+        return;
+    }
+
+    try {
+        // Convert Base64 to Blob
+        const arr = base64Data.split(',');
+        const mimeMatch = arr[0].match(/:(.*?);/);
+        const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        const blob = new Blob([u8arr], { type: mime });
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Open Blob URL in new tab
+        const newWindow = window.open('', '_blank');
+
+        if (newWindow) {
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>${title}</title>
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1">
+                        <style>
+                            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #1a1a1a; font-family: system-ui, -apple-system, sans-serif; }
+                            .header {
+                                height: 50px;
+                                background-color: #000;
+                                color: #fff;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                px: 20px;
+                                padding: 0 20px;
+                                border-bottom: 1px solid #333;
+                                box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+                            }
+                            .title { font-weight: 600; font-size: 16px; color: #00E5FF; }
+                            .close-btn { 
+                                background: #333; color: #fff; border: none; padding: 6px 12px; 
+                                border-radius: 4px; cursor: pointer; font-size: 12px;
+                            }
+                            .close-btn:hover { background: #444; }
+                            iframe { width: 100%; height: calc(100% - 50px); border: none; display: block; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <span class="title">📄 ${title}</span>
+                            <button class="close-btn" onclick="window.close()">Close</button>
+                        </div>
+                        <iframe src="${blobUrl}" type="application/pdf"></iframe>
+                    </body>
+                </html>
+            `);
+            newWindow.document.close();
+
+            // Clean up Blob URL after a delay (enough time for new tab to load)
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 60000); // 1 minute delay
+        } else {
+            // Popup blocked, fallback to direct open or original link
+            window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+            URL.revokeObjectURL(blobUrl);
+        }
+    } catch (e) {
+        console.error("Error opening PDF:", e);
+        window.open(fallbackLink, '_blank', 'noopener,noreferrer');
+    }
+};
+
+const downloadBase64Pdf = (base64Data: string | undefined, filename: string, fallbackLink: string) => {
+    if (!base64Data) {
+        const a = document.createElement('a');
+        a.href = fallbackLink;
+        a.download = filename;
+        a.target = '_blank';
+        a.click();
+        return;
+    }
+
+    try {
+        const arr = base64Data.split(',');
+        const mimeMatch = arr[0].match(/:(.*?);/);
+        const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        const blob = new Blob([u8arr], { type: mime });
+        const blobUrl = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+    } catch (e) {
+        console.error("Error downloading PDF:", e);
+        const a = document.createElement('a');
+        a.href = fallbackLink;
+        a.download = filename;
+        a.target = '_blank';
+        a.click();
+    }
+};
+
 const COMMANDS = {
-    help: "Available commands: help, about, skills, contact, social, projects, resume, clear, date, whoami",
+    help: "Available commands: help, about, skills, contact, social, projects, certificates, resume, clear, date, whoami",
     about: "I am a Full Stack Developer passionate about building high-performance, scalable applications.",
     skills: "Java, SQL, Microservices, React, TypeScript, Node.js, Python, Docker, AWS, Kubernetes, Next.js",
     contact: `Email: ${SOCIAL_LINKS.email}`,
@@ -111,6 +234,36 @@ const Terminal = () => {
             return;
         }
 
+        // Custom Handler for 'certificates'
+        if (cleanCmd === 'certificates') {
+            const certList = (
+                <div className="flex flex-col gap-1 mt-1 font-mono">
+                    <div className="text-[#00E5FF] mb-2 border-b border-[#00E5FF]/30 pb-1 w-fit">Found {certifications.length} Certificates:</div>
+                    {certifications.map((c, i) => (
+                        <div key={i} className="flex items-start gap-2 pl-2">
+                            <span className="text-yellow-500 mt-1">➜</span>
+                            <div className="flex flex-col">
+                                <button
+                                    onClick={() => openPdfViewer(CERTIFICATES_MAP[c.name], c.name, c.link)}
+                                    className="text-left text-gray-200 hover:text-white hover:underline transition-colors font-bold"
+                                >
+                                    {c.name}
+                                </button>
+                                <span className="text-xs text-gray-500">{c.institution} | {c.year}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+
+            setHistory(prev => [
+                ...prev,
+                { type: 'input', content: cmd },
+                { type: 'output', content: certList }
+            ]);
+            return;
+        }
+
         // Custom Handler for 'social'
         if (cleanCmd === 'social') {
             const socialLinks = (
@@ -140,24 +293,33 @@ const Terminal = () => {
 
         // Custom Handler for 'resume'
         if (cleanCmd === 'resume') {
-            const resumeLink = (
-                <div className="flex items-center gap-2 mt-1 font-mono pl-2">
-                    <span className="text-green-500">➜</span>
-                    <a
-                        href={SOCIAL_LINKS.resume}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold"
-                    >
-                        Download Resume
-                    </a>
+            const resumeOptions = (
+                <div className="flex flex-col gap-2 mt-1 font-mono pl-2">
+                    <div className="flex items-center gap-2">
+                        <span className="text-green-500">➜</span>
+                        <button
+                            onClick={() => openPdfViewer(RESUME_BASE64, "Deepak Yannadle Resume", SOCIAL_LINKS.resume)}
+                            className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold text-left"
+                        >
+                            View Resume
+                        </button>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <span className="text-green-500">➜</span>
+                        <button
+                            onClick={() => downloadBase64Pdf(RESUME_BASE64, "Deepak_Yannadle_Resume.pdf", SOCIAL_LINKS.resume)}
+                            className="text-[#00E5FF] hover:underline hover:text-white transition-colors font-bold text-left"
+                        >
+                            Download Resume
+                        </button>
+                    </div>
                 </div>
             );
 
             setHistory(prev => [
                 ...prev,
                 { type: 'input', content: cmd },
-                { type: 'output', content: resumeLink }
+                { type: 'output', content: resumeOptions }
             ]);
             return;
         }

@@ -22,6 +22,7 @@ A modern, high-performance personal portfolio website designed to showcase my ex
   - Custom Typewriter & Reveal/Scroll hooks
 - **Icons**: [Lucide React](https://lucide.dev/)
 
+
 ## 🏁 Getting Started
 
 To run this project locally, follow these steps:

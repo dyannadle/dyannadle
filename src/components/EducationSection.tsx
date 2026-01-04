@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import RevealAnimation from "./ui/RevealAnimation";
+import PdfViewerModal from "./PdfViewerModal";
 import ParticleSystem from "./ui/ParticleSystem";
 import FloatingElements from "./ui/FloatingElements";
 import { educationData, certifications, continuousLearningSkills, highlightedAreas } from "@/data/educationData";
@@ -14,7 +15,20 @@ import {
   Globe,
 } from "lucide-react";
 
+import { CERTIFICATES_MAP } from "@/data/pdfs/certificatesMap";
+
 const EducationSection: React.FC = () => {
+  const [selectedCert, setSelectedCert] = useState<{ data: string; name: string } | null>(null);
+
+  // Helper to get base64 from certificate name
+  const getCertBase64 = (certName: string) => {
+    // The keys in CERTIFICATES_MAP are now the Certificate Names
+    if (CERTIFICATES_MAP[certName]) {
+      return CERTIFICATES_MAP[certName];
+    }
+    console.warn(`Certificate not found: "${certName}"`);
+    return ""; // Return empty string or handle fallback
+  };
   const iconColors = ["bg-purple-500", "bg-emerald-500", "bg-blue-500", "bg-orange-500"];
 
   const getFaviconUrl = (url: string): string =>
@@ -148,14 +162,17 @@ const EducationSection: React.FC = () => {
                   >
                     <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md transition-transform duration-300 hover:scale-110" />
                     <div className="flex-1">
-                      <a
-                        href={cert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-semibold text-card-foreground text-sm hover:text-primary transition-colors duration-200 story-link"
+                      <button
+                        onClick={() => {
+                          const certData = getCertBase64(cert.name);
+                          if (certData) {
+                            setSelectedCert({ data: certData, name: cert.name });
+                          }
+                        }}
+                        className="font-semibold text-card-foreground text-sm hover:text-primary transition-colors duration-200 story-link text-left"
                       >
                         {cert.name}
-                      </a>
+                      </button>
                       <p className="text-muted-foreground text-xs">{cert.institution}</p>
                     </div>
                     <div className="text-right">
@@ -251,6 +268,13 @@ const EducationSection: React.FC = () => {
           </div>
         </RevealAnimation>
       </div>
+
+      <PdfViewerModal
+        isOpen={!!selectedCert}
+        onOpenChange={(open) => !open && setSelectedCert(null)}
+        pdfUrl={selectedCert?.data || ""}
+        title={selectedCert?.name || "Certificate Viewer"}
+      />
     </section>
   );
 };
