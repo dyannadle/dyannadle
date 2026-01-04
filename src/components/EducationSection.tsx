@@ -18,56 +18,16 @@ import {
 import { CERTIFICATES_MAP } from "@/data/pdfs/certificatesMap";
 
 const EducationSection: React.FC = () => {
-  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+  const [selectedCert, setSelectedCert] = useState<{ data: string; name: string } | null>(null);
 
-  // Helper to get base64 from link URL
-  const getCertBase64 = (link: string) => {
-    try {
-      // link is like "/Certificates/Foo.pdf" -> need "Foo.pdf"
-      const filename = link.split('/').pop() || "";
-      const decodedFilename = decodeURIComponent(filename);
-
-      // Debug logging
-      if (!CERTIFICATES_MAP) {
-        console.error("CERTIFICATES_MAP is undefined or empty!");
-        return link;
-      }
-
-      // 1. Try exact match
-      if (CERTIFICATES_MAP[decodedFilename]) {
-        console.log("Found cert (exact):", decodedFilename);
-        return CERTIFICATES_MAP[decodedFilename];
-      }
-
-      // 2. Try replacing underscores with spaces
-      const withSpaces = decodedFilename.replace(/_/g, ' ');
-      if (CERTIFICATES_MAP[withSpaces]) {
-        console.log("Found cert (spaces):", withSpaces);
-        return CERTIFICATES_MAP[withSpaces];
-      }
-
-      // 3. Try replacing spaces with underscores
-      const withUnderscores = decodedFilename.replace(/ /g, '_');
-      if (CERTIFICATES_MAP[withUnderscores]) {
-        console.log("Found cert (underscores):", withUnderscores);
-        return CERTIFICATES_MAP[withUnderscores];
-      }
-
-      // 4. Try keys directly if something is weird
-      const foundKey = Object.keys(CERTIFICATES_MAP).find(k => k.toLowerCase() === decodedFilename.toLowerCase());
-      if (foundKey) {
-        console.log("Found cert (case-insensitive):", foundKey);
-        return CERTIFICATES_MAP[foundKey];
-      }
-
-      console.warn(`Certificate not found in map: "${decodedFilename}" (tried: "${withSpaces}", "${withUnderscores}")`);
-      console.log("Available keys:", Object.keys(CERTIFICATES_MAP).slice(0, 10)); // Log first 10 keys to debug
-
-      return link;
-    } catch (e) {
-      console.error("Error finding cert", e);
-      return link;
+  // Helper to get base64 from certificate name
+  const getCertBase64 = (certName: string) => {
+    // The keys in CERTIFICATES_MAP are now the Certificate Names
+    if (CERTIFICATES_MAP[certName]) {
+      return CERTIFICATES_MAP[certName];
     }
+    console.warn(`Certificate not found: "${certName}"`);
+    return ""; // Return empty string or handle fallback
   };
   const iconColors = ["bg-purple-500", "bg-emerald-500", "bg-blue-500", "bg-orange-500"];
 
@@ -203,7 +163,12 @@ const EducationSection: React.FC = () => {
                     <img src={cert.icon} alt={cert.institution} className="w-10 h-10 rounded-md transition-transform duration-300 hover:scale-110" />
                     <div className="flex-1">
                       <button
-                        onClick={() => setSelectedCert(getCertBase64(cert.link))}
+                        onClick={() => {
+                          const certData = getCertBase64(cert.name);
+                          if (certData) {
+                            setSelectedCert({ data: certData, name: cert.name });
+                          }
+                        }}
                         className="font-semibold text-card-foreground text-sm hover:text-primary transition-colors duration-200 story-link text-left"
                       >
                         {cert.name}
@@ -307,8 +272,8 @@ const EducationSection: React.FC = () => {
       <PdfViewerModal
         isOpen={!!selectedCert}
         onOpenChange={(open) => !open && setSelectedCert(null)}
-        pdfUrl={selectedCert || ""}
-        title="Certificate Viewer"
+        pdfUrl={selectedCert?.data || ""}
+        title={selectedCert?.name || "Certificate Viewer"}
       />
     </section>
   );

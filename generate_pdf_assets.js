@@ -1,69 +1,93 @@
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// --- ESM Compatibility for __dirname ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PUBLIC_DIR = path.join(__dirname, 'public');
-const DATA_DIR = path.join(__dirname, 'src/data/pdfs');
+// --- Configuration ---
+const certificatesDir = path.join(__dirname, 'public', 'Certificates');
+const resumePath = path.join(__dirname, 'public', 'resume.pdf');
+const outputDir = path.join(__dirname, 'src', 'data', 'pdfs');
 
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-// Helper to process a file
-const processFile = (filePath, outputName) => {
-    try {
-        const fileBuffer = fs.readFileSync(filePath);
-        const base64 = fileBuffer.toString('base64');
-        const content = `export const ${outputName} = "data:application/pdf;base64,${base64}";`;
-
-        // Create safe filename
-        const safeFileName = outputName + '.ts';
-        fs.writeFileSync(path.join(DATA_DIR, safeFileName), content);
-        console.log(`Generated ${safeFileName} (${(fileBuffer.length / 1024).toFixed(2)} KB)`);
-    } catch (err) {
-        console.error(`Error processing ${filePath}:`, err);
-    }
+// --- Mapping: Filename -> Certificate Name ---
+const CERTIFICATE_NAME_MAP = {
+    "Certified_Software_Tester.pdf": "Certified Software Tester",
+    "GenAI_Powered_Data_Analytics.pdf": "GenAI Powered Data Analytics",
+    "Google_Associate_Cloud_Engineer.pdf": "Google Associate Cloud Engineer",
+    "AWS_Academy_Introduction_to_Cloud.pdf": "AWS Academy Introduction to Cloud",
+    "Career_Essentials_in_Generative_AI.pdf": "Career Essentials in Generative AI",
+    "Google_AI_Essentials.pdf": "Google AI Essentials",
+    "What_is_Generative_AI.pdf": "What is Generative AI?",
+    "Data_Manipulation_with_pandas.pdf": "Data Manipulation with pandas",
+    "Value_Added_Course_By_SAP.pdf": "Value Added Course By SAP",
+    "Joining_Data_in_SQL.pdf": "Joining Data in SQL",
+    "Introduction_to_Python.pdf": "Introduction to Python",
+    "Android_App_Development.pdf": "Android App Development",
+    "Maharashtra_State_Certificate_in_IT.pdf": "Maharashtra State Certificate in IT"
 };
 
-// 1. Process Resume
-const resumePath = path.join(PUBLIC_DIR, 'resume.pdf');
-if (fs.existsSync(resumePath)) {
-    processFile(resumePath, 'RESUME_BASE64');
+// --- Helpers ---
+function getBase64(filePath) {
+    try {
+        const fileBuffer = fs.readFileSync(filePath);
+        return `data:application/pdf;base64,${fileBuffer.toString('base64')}`;
+    } catch (error) {
+        console.error(`Error reading file ${filePath}:`, error.message);
+        return null;
+    }
 }
 
-// 2. Process Certificates
-const certsDir = path.join(PUBLIC_DIR, 'Certificates');
-if (fs.existsSync(certsDir)) {
-    const files = fs.readdirSync(certsDir);
-    const certMap = {};
+function ensureDirectoryExistence(filePath) {
+    const dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    ensureDirectoryExistence(dirname);
+    fs.mkdirSync(dirname);
+}
+
+// --- Main Execution ---
+
+// 1. Generate Certificates Map
+const certificatesMap = {};
+if (fs.existsSync(certificatesDir)) {
+    const files = fs.readdirSync(certificatesDir);
+    console.log(`Found ${files.length} files in Certificates directory.`);
 
     files.forEach(file => {
-        if (file.toLowerCase().endsWith('.pdf')) {
-            // Create a variable name from filename
-            // e.g., "Certified_Software_Tester.pdf" -> "CERT_Certified_Software_Tester"
-            const varName = 'CERT_' + file.replace(/\.pdf$/i, '').replace(/[^a-zA-Z0-9_]/g, '_');
-            const inputPath = path.join(certsDir, file);
+        if (path.extname(file).toLowerCase() === '.pdf') {
+            const fullPath = path.join(certificatesDir, file);
+            const base64Data = getBase64(fullPath);
 
-            // We will put all certs in one mapping file or individual? 
-            // Individual is better for code splitting, but mapping is easier for consumption.
-            // Let's create a huge map for now, or just individual files.
-            // Let's do a single file for certifications to keep it simple for the import map.
-            // Wait, individual files allow dynamic imports.
-
-            const fileBuffer = fs.readFileSync(inputPath);
-            const base64 = fileBuffer.toString('base64');
-            certMap[file] = `data:application/pdf;base64,${base64}`;
+            if (base64Data) {
+                // Use the mapped name if available, otherwise fallback to filename
+                const key = CERTIFICATE_NAME_MAP[file] || file;
+                certificatesMap[key] = base64Data;
+                console.log(`Processed: ${file} -> Key: "${key}"`);
+            }
         }
     });
+} else {
+    console.warn(`Certificates directory not found at: ${certificatesDir}`);
+}
 
-    // Write a single map file for certs (lazy loaded logic will be needed in app)
-    // Actually, let's write them to a big object in `certificatesMap.ts`
-    // It might be large, but it solves the IDM issue 100%.
+const certificatesContent = `export const CERTIFICATES_MAP: Record<string, string> = ${JSON.stringify(certificatesMap, null, 2)};`;
+const certificatesOutputPath = path.join(outputDir, 'certificatesMap.ts');
+ensureDirectoryExistence(certificatesOutputPath);
+fs.writeFileSync(certificatesOutputPath, certificatesContent);
+console.log(`Generated ${certificatesOutputPath}`);
 
-    const mapContent = `export const CERTIFICATES_MAP: Record<string, string> = ${JSON.stringify(certMap, null, 2)};`;
-    fs.writeFileSync(path.join(DATA_DIR, 'certificatesMap.ts'), mapContent);
-    console.log(`Generated certificatesMap.ts with ${Object.keys(certMap).length} certificates.`);
+// 2. Generate Resume Base64
+const resumeBase64 = getBase64(resumePath);
+if (resumeBase64) {
+    const resumeContent = `export const RESUME_BASE64 = "${resumeBase64}";`;
+    const resumeOutputPath = path.join(outputDir, 'RESUME_BASE64.ts');
+    ensureDirectoryExistence(resumeOutputPath);
+    fs.writeFileSync(resumeOutputPath, resumeContent);
+    console.log(`Generated ${resumeOutputPath}`);
+} else {
+    console.warn(`Resume not found at: ${resumePath}`);
 }
