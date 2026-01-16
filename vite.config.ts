@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => ({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@radix-ui/react-dialog', '@radix-ui/react-slot', '@radix-ui/react-toast', '@radix-ui/react-tooltip', 'framer-motion'],
           three: ['three', '@react-three/fiber', '@react-three/drei'],
-          particles: ['@tsparticles/react', '@tsparticles/slim', '@tsparticles/engine']
+          particles: ['@tsparticles/react', '@tsparticles/slim']
         }
       }
     }
