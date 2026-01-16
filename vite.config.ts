@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    /* VitePWA({
+    VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
           }
         ]
       }
-    }) */
+    })
   ].filter(Boolean),
   build: {
     assetsInlineLimit: 0,
@@ -44,8 +44,10 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-slot', 'framer-motion']
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-slot', '@radix-ui/react-toast', '@radix-ui/react-tooltip', 'framer-motion'],
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+          particles: ['@tsparticles/react', '@tsparticles/slim', '@tsparticles/engine']
         }
       }
     }

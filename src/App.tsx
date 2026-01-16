@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
 import BackToTop from "@/components/ui/BackToTop";
@@ -15,8 +15,8 @@ import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Terminal from "@/components/ui/Terminal"; // Added Terminal import
 
-import Index from "@/pages/Index";
-import NotFound from "@/pages/NotFound";
+const Index = lazy(() => import("@/pages/Index"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const queryClient = new QueryClient();
 
