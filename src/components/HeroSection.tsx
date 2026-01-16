@@ -12,16 +12,25 @@ import RippleEffect from "./ui/RippleEffect";
 import ParallaxSection from "./ui/ParallaxSection";
 import TypingAnimation from "./ui/TypingAnimation";
 import { useMousePosition } from "../hooks/useScrollAnimation";
-import PdfViewerModal from "./PdfViewerModal";
-
-import { RESUME_BASE64 } from "@/data/pdfs/RESUME_BASE64";
+const PdfViewerModal = React.lazy(() => import("./PdfViewerModal"));
 
 const HeroSection: React.FC = () => {
   const mousePosition = useMousePosition();
   const [nameTyped, setNameTyped] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [resumeData, setResumeData] = useState<string>("");
 
-
+  const handleResumeClick = async () => {
+    try {
+      if (!resumeData) {
+        const module = await import("@/data/pdfs/RESUME_BASE64");
+        setResumeData(module.RESUME_BASE64);
+      }
+      setShowResumeModal(true);
+    } catch (error) {
+      console.error("Failed to load resume", error);
+    }
+  };
 
   return (
     <section
@@ -111,7 +120,7 @@ const HeroSection: React.FC = () => {
 
               <RippleEffect rippleColor="rgba(255, 255, 255, 0.1)">
                 <motion.button
-                  onClick={() => setShowResumeModal(true)}
+                  onClick={handleResumeClick}
                   className="flex gap-2 items-center py-3 px-8 text-white glass rounded-full hover:bg-white/10 transition-all border-white/20 hover:border-white/40 cursor-pointer"
                   whileTap={{ scale: 0.95 }}
                 >
@@ -124,12 +133,17 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      <PdfViewerModal
-        isOpen={showResumeModal}
-        onOpenChange={setShowResumeModal}
-        pdfUrl={RESUME_BASE64}
-        title="My Resume"
-      />
+      <React.Suspense fallback={null}>
+        {showResumeModal && (
+          <PdfViewerModal
+            isOpen={showResumeModal}
+            onOpenChange={setShowResumeModal}
+            pdfUrl={resumeData}
+            title="My Resume"
+          />
+        )}
+      </React.Suspense>
+
     </section>
   );
 };
