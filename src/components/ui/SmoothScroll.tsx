@@ -8,7 +8,7 @@ interface SmoothScrollProps {
 const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 0.8,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical', // Changed from direction to orientation if using v1+ or remove if unsure
             gestureOrientation: 'vertical',
