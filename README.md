@@ -50,17 +50,11 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img
-    src="https://github-readme-stats.vercel.app/api?username=dyannadle&show_icons=true&theme=radical"
-    alt="Deepak's GitHub Stats"
-  />
+  <img src="https://github-readme-stats.vercel.app/api?username=dyannadle&show_icons=true&theme=radical" alt="Deepak's GitHub Stats" />
 </p>
 
 <p align="center">
-  <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical"
-    alt="Top Languages"
-  />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical" alt="Top Languages" />
 </p>
 
 ---
@@ -105,10 +99,7 @@ Collection of basic games coded for practice and logic building.
 ## 🐍 Contribution Activity
 
 <p align="center">
-  <img
-    src="https://raw.githubusercontent.com/dyannadle/dyannadle/output/github-contribution-grid-snake.svg"
-    alt="Snake animation"
-  />
+  <img src="https://raw.githubusercontent.com/dyannadle/dyannadle/output/github-contribution-grid-snake.svg" alt="Snake animation" />
 </p>
 
 ---
