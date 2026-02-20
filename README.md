@@ -34,7 +34,7 @@
 - Python, Java, SQL, HTML/CSS
 
 ### ⚙️ Backend & Tools
-- FastAPI, Basic REST APIs
+- FastAPI, basic REST APIs
 - Selenium / Test automation
 - Git & GitHub, CI/CD basics
 
@@ -46,7 +46,6 @@
 - MySQL and basic relational database design
 
 ---
-
 
 ## 📊 GitHub Stats
 
@@ -63,6 +62,7 @@
     alt="Top Languages"
   />
 </p>
+
 ---
 
 ## 🚀 Featured Projects
@@ -105,15 +105,19 @@ Collection of basic games coded for practice and logic building.
 ## 🐍 Contribution Activity
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dyannadle/dyannadle/output/github-contribution-grid-snake.svg" alt="Snake animation" />
+  <img
+    src="https://raw.githubusercontent.com/dyannadle/dyannadle/output/github-contribution-grid-snake.svg"
+    alt="Snake animation"
+  />
 </p>
 
 ---
 
 ## 📫 Connect With Me
 
-- 💼 LinkedIn:(https://www.linkedin.com/in/deepak-yannadle-4319771a1/)
-- 📧 Email: Dyannadle05@gmail.com
+- 💼 LinkedIn: [Deepak Yannadle](https://www.linkedin.com/in/deepak-yannadle-4319771a1/)
+- 📧 Email: `Dyannadle05@gmail.com`
+
 <p align="center">
   Thanks for visiting my profile!  
   Open to collaboration on AI, automation, and backend projects.
