@@ -50,11 +50,11 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=dyannadle&show_icons=true&theme=radical" alt="Deepak's GitHub Stats" />
+  <img src="https://yannadle.vercel.app/api?username=dyannadle&show_icons=true&theme=radical" alt="Deepak's GitHub Stats" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical" alt="Top Languages" />
+  <img src="https://yannadle.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical" alt="Top Languages" />
 </p>
 
 ---
