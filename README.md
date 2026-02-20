@@ -106,9 +106,8 @@ Collection of basic games coded for practice and logic building.
 
 ## 📫 Connect With Me
 
-- 💼 LinkedIn: <!-- add your LinkedIn link here -->
-- 📧 Email: <!-- add your email if you want recruiters to contact you -->
-
+- 💼 LinkedIn:(https://www.linkedin.com/in/deepak-yannadle-4319771a1/)
+- 📧 Email: Dyannadle05@gmail.com
 <p align="center">
   Thanks for visiting my profile!  
   Open to collaboration on AI, automation, and backend projects.
