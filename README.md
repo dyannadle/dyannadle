@@ -51,14 +51,14 @@
 
 <p align="center">
   <img
-    src="https://github-readme-stats.vercel.app/api?username=dyannadle&show_icons=true&theme=radical"
+    src="yannadle.vercel.app"
     alt="Deepak's GitHub Stats"
   />
 </p>
 
 <p align="center">
   <img
-    src="https://github-readme-stats.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical"
+    src="yannadle.vercel.app"
     alt="Top Languages"
   />
 </p>
