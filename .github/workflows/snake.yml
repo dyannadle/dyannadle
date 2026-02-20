@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * *"   # run every day at 00:00 UTC
   workflow_dispatch:        # allow manual runs
 
+permissions:
+  contents: write           # allow the bot to push to the repo
+
 jobs:
   build:
     runs-on: ubuntu-latest
