@@ -2,8 +2,12 @@
 <h3 align="center">🚀 Developer & QA Engineer | Python & Java | AI & Automation Enthusiast</h3>
 
 <p align="center">
+  <img src="https://komarev.com/ghpvc/?username=dyannadle&label=Profile%20Views&color=00FF00&style=flat" alt="Profile Views" />
+</p>
+
+<p align="center">
   <a href="https://github.com/dyannadle">
-    <img src="https://readme-typing-svg.herokuapp.com?color=00FF00&center=true&vCenter=true&lines=Python+Developer;QA+Engineer+%7C+Manual+%2B+Automation;AI+%26+Web+App+Enthusiast;Building+Real+World+Projects" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00FF00&center=true&vCenter=true&width=435&lines=Python+Developer;QA+Automation+Specialist;AI+%26+Web+App+Enthusiast;Building+Real+World+Solutions" />
   </a>
 </p>
 
@@ -30,69 +34,56 @@
 
 ## 🛠️ Tech Stack
 
-### 💻 Languages
-- Python, Java, SQL, HTML/CSS
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=python,java,mysql,fastapi,selenium,html,css,js,git,github,vscode,pycharm,postman&perline=7" />
+</div>
 
-### ⚙️ Backend & Tools
-- FastAPI, basic REST APIs
-- Selenium / Test automation
-- Git & GitHub, CI/CD basics
+<br />
 
-### 🧠 AI / ML
-- Image processing & AI APIs (e.g. for generators / recognition)
-- Using AI tools to speed up development and testing
-
-### 🗄️ Databases
-- MySQL and basic relational database design
+| Category | Skills |
+| :--- | :--- |
+| **Languages** | Python, Java, SQL, JavaScript, HTML/CSS |
+| **Backend** | FastAPI, REST APIs, MySQL |
+| **Automation** | Selenium, Pytest, Test Automation Frameworks |
+| **AI / ML** | OpenCV, Image Processing, AI APIs |
+| **Tools** | Git, GitHub, VS Code, Postman, CI/CD Basics |
 
 ---
 
+## 🏆 GitHub Trophies
+
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=dyannadle&theme=radical&no-bg=true&margin-w=15" alt="Trophies" />
+</p>
+
 ## 📊 GitHub Stats
 
-<p align="center">
-  <img src="https://yannadle.vercel.app/api?username=dyannadle&show_icons=true&theme=radical" alt="Deepak's GitHub Stats" />
-</p>
-
-<p align="center">
-  <img src="https://yannadle.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical" alt="Top Languages" />
-</p>
+<div align="center">
+  <img src="https://yannadle.vercel.app/api?username=dyannadle&show_icons=true&theme=radical&rank_icon=github&border_radius=10" alt="GitHub Stats" />
+  <br />
+  <img src="https://yannadle.vercel.app/api/top-langs/?username=dyannadle&layout=compact&theme=radical&border_radius=10" alt="Top Languages" />
+</div>
 
 ---
 
 ## 🚀 Featured Projects
 
-### 🔹 Face-attendance
-Face recognition–based attendance system in Python.
+<div align="center">
 
-- **Tech**: Python, OpenCV / image processing
-- **Highlights**: Automates attendance using camera input  
-- **Repo**: [Face-attendance](https://github.com/dyannadle/Face-attendance)
+| Project | Description | Tech Stack |
+| :--- | :--- | :--- |
+| **Face Attendance** | Face recognition-based attendance system. | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![OpenCV](https://img.shields.io/badge/-OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white) |
+| **Image Generator** | AI-powered image generation application. | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![AI](https://img.shields.io/badge/-AI%20APIs-FF6F61?style=flat-square) |
+| **Flipkart Automation** | E2E automation for Flipkart flows. | ![Java](https://img.shields.io/badge/-Java-007396?style=flat-square&logo=openjdk&logoColor=white) ![Selenium](https://img.shields.io/badge/-Selenium-43B02A?style=flat-square&logo=selenium&logoColor=white) |
+| **Games Portfolio** | Practice games for logic building. | ![Logic](https://img.shields.io/badge/-Logic-brightgreen?style=flat-square) ![Fun](https://img.shields.io/badge/-Fun-orange?style=flat-square) |
 
----
+</div>
 
-### 🔹 Image-Generator
-AI-powered image generation app.
-
-- **Tech**: Python, external AI/image APIs
-- **Highlights**: Generates images from prompts, good demo of API integration  
-- **Repo**: [Image-Generator](https://github.com/dyannadle/Image-Generator)
-
----
-
-### 🔹 Flipkart-Automation
-Test automation project for Flipkart flows.
-
-- **Tech**: Java / Selenium / HTML reports
-- **Highlights**: E2E test cases, automation for real e-commerce site  
-- **Repo**: [Flipkart-Automation](https://github.com/dyannadle/Flipkart-Automation)
-
----
-
-### 🔹 Games
-Collection of basic games coded for practice and logic building.
-
-- **Highlights**: Shows problem-solving and core programming fundamentals  
-- **Repo**: [Games](https://github.com/dyannadle/Games)
+<p align="center">
+  <a href="https://github.com/dyannadle?tab=repositories">
+    <img src="https://img.shields.io/badge/View%20All%20Projects-Click%20Here-blue?style=for-the-badge&logo=github" />
+  </a>
+</p>
 
 ---
 
@@ -106,8 +97,14 @@ Collection of basic games coded for practice and logic building.
 
 ## 📫 Connect With Me
 
-- 💼 LinkedIn: [Deepak Yannadle](https://www.linkedin.com/in/deepak-yannadle-4319771a1/)
-- 📧 Email: `Dyannadle05@gmail.com`
+<p align="center">
+  <a href="https://linkedin.com/in/deepak-yannadle-4319771a1/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="mailto:Dyannadle05@gmail.com">
+    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+</p>
 
 <p align="center">
   Thanks for visiting my profile!  
