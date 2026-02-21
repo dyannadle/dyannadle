@@ -56,11 +56,6 @@
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=dyannadle&theme=radical&border_radius=10" alt="GitHub Streak" />
 </p>
 
-## 🏆 GitHub Trophies
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=dyannadle&theme=onedark&margin-w=15" alt="Trophies" />
-</p>
 
 ## 📊 GitHub Stats
 
