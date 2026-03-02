@@ -112,42 +112,4 @@
   Open to collaboration on AI, automation, and backend projects.
 </p>
 
----
-
-# 🌐 Portfolio Source Code
-
-<div align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
-  <img src="https://img.shields.io/badge/Framer_Motion-white?style=for-the-badge&logo=framer&logoColor=black" />
-</div>
-
-Welcome! This repository not only hosts my GitHub profile, but also serves as the entire codebase for my interactive, animated personal portfolio website.
-
-## 🏗️ Project Architecture & Layout
-
-```mermaid
-graph LR;
-    App([💻 Portfolio App]) --> UI[🎨 UI Components]
-    App --> Data[💾 Content Data]
-    App --> Core[⚙️ Frameworks]
-    UI --> Page[Page Sections]
-    UI --> Visuals[Visual Helpers]
-    Data -.->|Populates| UI
-    Core -.->|Powers| UI
-```
-
-<br/>
-
-```text
-📦 src/
- ┣ 📂 components/      # Reusable UI components & animated sections
- ┃ ┣ 📂 ui/            # Form primitives & micro-interactions
- ┃ ┗ 📂 skills/        # Modular skill visualizers
- ┣ 📂 data/            # Centralized content structure 
- ┣ 📂 hooks/           # Custom React hooks
- ┗ 📂 lib/             # Application utilities
-```
-
 
