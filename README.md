@@ -150,23 +150,4 @@ graph LR;
  ┗ 📂 lib/             # Application utilities
 ```
 
-## 🚀 Quick Start Guide
 
-**Prerequisites:**
-![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white) 
-![NPM](https://img.shields.io/badge/npm-latest-CB3837?style=flat-square&logo=npm&logoColor=white)
-
-| Step | Action | Run Command |
-| :--- | :--- | :--- |
-| **1** | **Clone Repository** | `git clone https://github.com/dyannadle/dyannadle.git` |
-| **2** | **Install Packages** | `npm install` |
-| **3** | **Start Dev Server** | `npm run dev` |
-| **4** | **Production Build** | `npm run build` |
-
-> [!TIP]
-> The local development server will start at `http://localhost:5173`.
-
----
-<div align="center">
-  <i>This portfolio project is licensed under the MIT License.</i>
-</div>
