@@ -114,74 +114,59 @@
 
 ---
 
-# 🌐 Portfolio Website Repository
+# 🌐 Portfolio Source Code
 
-This repository also hosts the source code for my **modern, high-performance personal portfolio website** designed to showcase my expertise in Software Testing, Development, and "Vibe Coding".
+<div align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/Framer_Motion-white?style=for-the-badge&logo=framer&logoColor=black" />
+</div>
 
-## 🚀 Portfolio Features
+Welcome! This repository not only hosts my GitHub profile, but also serves as the entire codebase for my interactive, animated personal portfolio website.
 
-- **Dynamic Hero Section**: featuring a custom **Rotating Typewriter** effect that cycles through professional roles.
-- **Interactive UI**: Powered by [Framer Motion](https://www.framer.com/motion/) for smooth reveal animations, scroll effects, and hover interactions.
-- **Particle Effects**: subtle, non-intrusive background particle systems for a modern aesthetic.
-- **Responsive Design**: Mobile-first approach ensuring a perfect experience on devices of all sizes, styled with [Tailwind CSS](https://tailwindcss.com/).
-- **Skills Visualization**: An interactive, categorised display of technical skills and tools.
-- **Project Showcase**: A dedicated section to highlight key projects with descriptions, links, and modal details.
-- **Performance Optimized**: Fast loading times and optimized assets using Vite.
+## 🏗️ Project Architecture & Layout
 
-## 🛠️ Portfolio Tech Stack
+```mermaid
+graph LR;
+    App([💻 Portfolio App]) --> UI[🎨 UI Components]
+    App --> Data[💾 Content Data]
+    App --> Core[⚙️ Frameworks]
+    UI --> Page[Page Sections]
+    UI --> Visuals[Visual Helpers]
+    Data -.->|Populates| UI
+    Core -.->|Powers| UI
+```
 
-- **Frontend Framework**: [React](https://react.dev/) with [TypeScript](https://www.typescriptlang.org/) for type safety.
-- **Build Tool**: [Vite](https://vitejs.dev/) for lightning-fast HMR and bundling.
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/) for component primitives.
-- **Animations**: 
-  - [Framer Motion](https://www.framer.com/motion/)
-  - Custom Typewriter & Reveal/Scroll hooks
-- **Icons**: [Lucide React](https://lucide.dev/)
+<br/>
 
-## 🏁 Getting Started (Local Development)
+```text
+📦 src/
+ ┣ 📂 components/      # Reusable UI components & animated sections
+ ┃ ┣ 📂 ui/            # Form primitives & micro-interactions
+ ┃ ┗ 📂 skills/        # Modular skill visualizers
+ ┣ 📂 data/            # Centralized content structure 
+ ┣ 📂 hooks/           # Custom React hooks
+ ┗ 📂 lib/             # Application utilities
+```
 
-To run this portfolio project locally, follow these steps:
+## 🚀 Quick Start Guide
 
-### Prerequisites
+**Prerequisites:**
+![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=flat-square&logo=node.js&logoColor=white) 
+![NPM](https://img.shields.io/badge/npm-latest-CB3837?style=flat-square&logo=npm&logoColor=white)
 
-- [Node.js](https://nodejs.org/) (v18+ recommended)
-- [npm](https://www.npmjs.com/)
+| Step | Action | Run Command |
+| :--- | :--- | :--- |
+| **1** | **Clone Repository** | `git clone https://github.com/dyannadle/dyannadle.git` |
+| **2** | **Install Packages** | `npm install` |
+| **3** | **Start Dev Server** | `npm run dev` |
+| **4** | **Production Build** | `npm run build` |
 
-### Installation
+> [!TIP]
+> The local development server will start at `http://localhost:5173`.
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/dyannadle/dyannadle.git
-    cd dyannadle
-    ```
-
-2.  **Install dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Start the development server**
-    ```bash
-    npm run dev
-    ```
-    The app will typically run at `http://localhost:5173`.
-
-4.  **Build for Production**
-    ```bash
-    npm run build
-    ```
-    To preview the production build locally:
-    ```bash
-    npm run preview
-    ```
-
-## 🏗️ Project Structure
-
-- `src/components`: Reusable UI components and page sections.
-- `src/data`: Content data (experience, projects, skills) separate from UI logic.
-- `src/hooks`: Custom React hooks (e.g., scroll animation).
-- `src/lib`: Utility functions.
-
-## 📄 License
-
-This project is licensed under the MIT License.
+---
+<div align="center">
+  <i>This portfolio project is licensed under the MIT License.</i>
+</div>
