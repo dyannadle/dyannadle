@@ -20,11 +20,11 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
   animation = 'fade-in-up',
   delay = 0,
   threshold = 0.1,
-  duration = 600,
+  duration = 450, // Reduced from 600 to prevent popcorn effect
   once = true,
   style = {},
   stagger = 0,
-  distance = 40,
+  distance = 20, // Reduced from 40 for smoother entry
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -100,7 +100,7 @@ const RevealAnimation: React.FC<RevealAnimationProps> = ({
         return { ...base, transform: `translateX(${distance}px)` };
       case 'zoom-in':
       case 'scale-up':
-        return { ...base, transform: 'scale(0.95)' }; // Reduced scale for subtler effect
+        return { ...base, transform: 'scale(0.98)' }; // Increased from 0.95 for subtler effect
       case 'blur-in':
         return { ...base, filter: 'blur(10px)' };
       case 'flip-in':
