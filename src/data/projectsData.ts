@@ -11,6 +11,42 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+
+  {
+    title: "Fintech Pro: Institutional AI Investment Ecosystem",
+    description: "A high-conviction, end-to-end financial intelligence platform leveraging distributed microservices and advanced ML (LSTM, RAG, RL) for real-time portfolio optimization and institutional-grade market analysis.",
+    duration: "4 months ",
+    responsibilities: [
+      "Architected a distributed microservices infrastructure using Spring Boot (Auth/Portfolio), FastAPI (AI/ML Lab), and React 18, achieving sub-40ms execution latency for high-frequency workflows.",
+      "Developed a local-first predictive engine executing 5 parallel models (LSTM, ARIMA, Prophet, Linear, TFT) in-browser via Promise.allSettled, delivering 30-day forecasts with 95% confidence intervals.",
+      "Engineered a RAG (Retrieval-Augmented Generation) Financial Advisor integrating ChromaDB vector storage and Gemini/Ollama LLMs to provide grounded, real-time insights from global news and portfolio context.",
+      "Integrated a Quantitative Optimization layer using scipy SLSQP to solve the Mean-Variance Efficient Frontier, enabling automated portfolio rebalancing and risk-adjusted alpha generation.",
+      "Developed 'The Vault' Academy, a gamified learning ecosystem with interactive Order Flow/Volatility simulators and a persistent XP-based achievement system for investor certification.",
+      "Containerized the entire stack (PostgreSQL, Redis, ChromaDB, 3+ Backends) using Docker and Docker Compose to ensure institutional-grade observability through Prometheus and Grafana dashboards."
+    ],
+    tools: ["React 18", "TypeScript", "Spring Boot", "FastAPI", "PyTorch", "ChromaDB", "PostgreSQL", "Redis", "Docker", "Prometheus", "Tailwind CSS"],
+    image: "/lovable-uploads/Fintech.png", // Representative image from the project
+    category: "AI/ML Project",
+    github: "https://github.com/dyannadle/fintech",
+  },
+
+  {
+    title: "Virtuoso: Java Mastery Ecosystem",
+    description: "A high-fidelity, end-to-end interactive learning platform for mastering Java, from core foundations to advanced enterprise architecture and system design.",
+    duration: "6 months",
+    responsibilities: [
+      "Architected a comprehensive 80-module curriculum organized into 7 levels of mastery, spanning Core Java, Spring Boot, DevOps, and System Design.",
+      "Developed an interactive trio-panel IDE featuring a file explorer, multi-tab editor, and real-time console with secure Piston API integration for code execution.",
+      "Engineered 20+ dynamic visualizations using Framer Motion and React Flow to illustrate complex concepts like JVM memory models, Garbage Collection, and Concurrency.",
+      "Implemented a persistent gamification engine with Supabase, tracking learning streaks, XP-based leveling, and milestone achievement badges.",
+      "Optimized the frontend for high performance and reliability using React 18 and Vite, achieving a production-ready build with zero structural linting or type errors."
+    ],
+    tools: ["React 18", "TypeScript", "Vite", "Supabase", "Framer Motion", "Piston API", "React Flow", "Vanilla CSS"],
+    image: "/lovable-uploads/Java learning platfrom.png",
+    category: "Full-Stack EdTech / AI Learning, AI/ML Project",
+    Link: "https://java-learning-web.vercel.app/",
+  }
+  ,
   {
     title: "E-commerce Site Automation (Flipkart)",
     description: "Developed a robust automation framework using Selenium and Python to validate critical business flows on the Flipkart e-commerce platform.",
@@ -72,7 +108,7 @@ export const projects: Project[] = [
     ],
     tools: ["PyTorch", "Transformers", "Flask", "React 18", "Docker", "JWT", "PostgreSQL"],
     image: "/lovable-uploads/Recipe Generation.png",
-    category: "Full-Stack AI/ML",
+    category: "AI/ML Project, Other",
     paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
     github: "https://github.com/dyannadle/Recipe-Generator",
   },
@@ -151,4 +187,5 @@ export const filters = [
   'AI/ML Project',
   'Automation Project',
   'Game Development',
+  'Other',
 ];

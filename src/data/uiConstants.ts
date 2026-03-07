@@ -13,6 +13,7 @@ export const UI_TEXT = {
         filters: {
             all: "All",
             favorites: "Favorites",
+            other: "Other",
         },
         card: {
             viewImage: "View Full Image",
