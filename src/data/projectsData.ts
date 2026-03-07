@@ -33,7 +33,7 @@ export const projects: Project[] = [
   {
     title: "Virtuoso: Java Mastery Ecosystem",
     description: "A high-fidelity, end-to-end interactive learning platform for mastering Java, from core foundations to advanced enterprise architecture and system design.",
-    duration: "6 months",
+    duration: "2 months",
     responsibilities: [
       "Architected a comprehensive 80-module curriculum organized into 7 levels of mastery, spanning Core Java, Spring Boot, DevOps, and System Design.",
       "Developed an interactive trio-panel IDE featuring a file explorer, multi-tab editor, and real-time console with secure Piston API integration for code execution.",
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     ],
     tools: ["React 18", "TypeScript", "Vite", "Supabase", "Framer Motion", "Piston API", "React Flow", "Vanilla CSS"],
     image: "/lovable-uploads/Java learning platfrom.png",
-    category: "Full-Stack EdTech / AI Learning, AI/ML Project",
+    category: "Full-Stack EdTech / AI Learning, AI/ML Project, Other ",
     Link: "https://java-learning-web.vercel.app/",
   }
   ,
