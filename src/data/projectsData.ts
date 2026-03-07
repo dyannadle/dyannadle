@@ -60,22 +60,23 @@ export const projects: Project[] = [
     github: "https://github.com/dyannadle/Manual-Projects"
   },
   {
-    title: "Food Recipe Generation from Images",
-    description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
+    title: "SnapCook AI: Cross-Modal Recipe Generation",
+    description: "An end-to-end Inverse Cooking system leveraging Cross-Modal Transformers to transform food imagery into structured recipes and nutritional data.",
     duration: "4 months",
     responsibilities: [
-      "Designed and implemented an automated pipeline for generating recipes from food images using convolutional and recurrent neural networks.",
-      "Performed extensive performance optimization and hyperparameter tuning to improve model accuracy and efficiency.",
-      "Validated model predictions against labeled datasets to ensure recipe relevance and correctness.",
-      "Collaborated on dataset collection and preprocessing to enhance training data quality.",
-      "Documented model architecture and results for academic publication."
+      "Architected an Inverse Cooking pipeline using a CNN encoder and a Multi-head Attention Transformer for autoregressive recipe decoding.",
+      "Optimized model convergence using customized loss functions, including SoftIoU for ingredient overlap and cardinality penalties to reduce hallucinations.",
+      "Engineered a full-stack ecosystem with a React 18 frontend, Flask backend, and JWT-based authentication for secure, persistent data management.",
+      "Developed a heuristic nutritional analytics engine mapping predicted ingredients to macro-nutrient profiles for real-time calorie estimation.",
+      "Containerized the entire stack using Docker and Docker Compose to ensure scalable, environment-agnostic deployment to production servers."
     ],
-    tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
-    image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
-    category: "AI/ML Project",
+    tools: ["PyTorch", "Transformers", "Flask", "React 18", "Docker", "JWT", "PostgreSQL"],
+    image: "/lovable-uploads/Recipe Generation.png",
+    category: "Full-Stack AI/ML",
     paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
     github: "https://github.com/dyannadle/Recipe-Generator",
   },
+
   {
     title: "Maze Solver Game",
     description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
