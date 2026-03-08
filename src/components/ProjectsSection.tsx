@@ -187,7 +187,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
       <div
         className={`${isImage
           ? 'glass p-2 rounded-2xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col border border-white/10'
-          : 'glass rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/10'
+          : 'glass rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-white/10'
           }`}
         onClick={(e) => e.stopPropagation()}
         style={{ opacity: 1, visibility: 'visible' }}
@@ -286,7 +286,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
         )}
 
         {!isImage && (
-          <div className="p-8 overflow-y-auto h-full space-y-6 text-gray-300 bg-black/40">
+          <div className="p-8 overflow-y-auto custom-scrollbar flex-1 space-y-6 text-gray-300 bg-black/40">
             <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 text-white">
               {project.description}
             </p>

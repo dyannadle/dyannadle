@@ -116,7 +116,7 @@ export const projects: Project[] = [
   },
 
   {
-    title: "Intelligent-SQL-Query-Agent",
+    title: "Chat With Your PDF",
     description: "A secure, privacy-first AI platform that enables offline conversations with PDF documents using Retrieval-Augmented Generation (RAG), high-fidelity OCR, and hybrid search capabilities.",
     duration: "1 Month (March 2026 – April 2026)",
     responsibilities: [
