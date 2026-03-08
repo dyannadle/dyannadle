@@ -7,6 +7,7 @@ export interface Project {
   image: string;
   category: string;
   github?: string;
+  liveUrl?: string;
   paperPublished?: string;
 }
 
@@ -57,7 +58,7 @@ export const projects: Project[] = [
     tools: ["React 18", "TypeScript", "Vite", "Supabase", "Framer Motion", "Piston API", "React Flow", "Vanilla CSS"],
     image: "/lovable-uploads/Java learning platfrom.png",
     category: "Full-Stack EdTech / AI Learning, AI/ML Project, Java",
-    Link: "https://java-learning-web.vercel.app/",
+    liveUrl: "https://java-learning-web.vercel.app/",
   }
   ,
   {
@@ -85,7 +86,7 @@ export const projects: Project[] = [
     tools: ["Node.js (Runtime Environment)", "TypeScript (Static Type Safety)", "LangChain (LLM Orchestration)", "Google Gemini (Generative AI & Summarization)", "OpenAI (Large Language Model Fallback)", "Telegraf (Telegram Bot Framework)", "RSS Parser (Data Fetching)", "node-cron (Task Scheduling Architecture)"],
     image: "/lovable-uploads/News_bot.png",
     category: "Full-Stack Node.js / AI/ML / Automation",
-    github: "https://github.com/dyannadle/Daily-News-Summarizer-Bot",
+    github: "https://t.me/DailynewsSummarizer_bot",
   },
 
   {

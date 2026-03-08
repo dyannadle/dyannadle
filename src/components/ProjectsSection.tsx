@@ -321,6 +321,28 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               >
                 <ImageIcon size={20} /> {UI_TEXT.projects.card.viewImage}
               </button>
+
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-semibold text-white bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-full transition-all border border-white/10"
+                >
+                  <Github size={20} /> GitHub Code
+                </a>
+              )}
+
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-semibold text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full transition-all shadow-lg shadow-blue-500/20"
+                >
+                  <Maximize2 size={20} /> View Live Site
+                </a>
+              )}
             </div>
           </div>
         )}
