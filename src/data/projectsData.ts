@@ -7,10 +7,60 @@ export interface Project {
   image: string;
   category: string;
   github?: string;
+  liveUrl?: string;
   paperPublished?: string;
 }
 
 export const projects: Project[] = [
+
+  {
+    title: "Fintech Pro: Institutional AI Investment Ecosystem",
+    description: "A high-conviction, end-to-end financial intelligence platform leveraging distributed microservices and advanced ML (LSTM, RAG, RL) for real-time portfolio optimization and institutional-grade market analysis.",
+    duration: "4 months",
+    responsibilities: [
+      "Architected a distributed microservices ecosystem using Spring Boot (Auth/Portfolio), FastAPI (AI/ML Lab), and React 18, achieving sub-40ms execution latency for high-frequency workflows.",
+      "Engineered a dual-backend architecture: Spring Boot for mission-critical Auth and Portfolio CRUD, and FastAPI for compute-intensive RAG and Optimization services.",
+      "Integrated a Retrieval-Augmented Generation (RAG) Advisor using ChromaDB vector storage and Ollama for local LLM orchestration, ensuring 100% data privacy and security.",
+      "Developed a Quantitative Optimization Layer using scipy SLSQP and PyTorch to solve the Mean-Variance Efficient Frontier and execute automated rebalancing logic.",
+      "Implemented a full-stack observability suite with Prometheus and Grafana to track multi-container health, API latencies, and real-time system pulse.",
+      "Systematized deployment through Docker and Docker Compose, managing a complex stack of 5+ services with persistent PostgreSQL, Redis, and ChromaDB volumes."
+    ],
+    tools: [
+      "React 18 & Vite (Core SPA Framework)",
+      "Tailwind CSS (Institutional Dashboard Styling)",
+      "Spring Boot (User/Admin Microservices & JWT Auth)",
+      "FastAPI (AI, Prediction, & Optimization Services)",
+      "PostgreSQL 15 (Relational Data Persistence)",
+      "Redis Stack (Real-time Market Data & Vector Indexing)",
+      "ChromaDB (Dedicated Vector Store for RAG Advisor)",
+      "Ollama (Local LLM Orchestration for Privacy-First AI)",
+      "PyTorch & Stable Baselines3 (Neural Networks & RL Lab)",
+      "Docker & Docker Compose (Containerized Multi-Service Orchestration)",
+      "Prometheus & Grafana (Infrastructure Monitoring & Alerting)"
+    ],
+    image: "/lovable-uploads/Fintech.png",
+    category: "Full-Stack AI/Fintech, AI/ML, Other, Python, Java",
+
+    github: "https://github.com/dyannadle/fintech",
+  },
+
+  {
+    title: "Virtuoso: Java Mastery Ecosystem",
+    description: "A high-fidelity, end-to-end interactive learning platform for mastering Java, from core foundations to advanced enterprise architecture and system design.",
+    duration: "2 months",
+    responsibilities: [
+      "Architected a comprehensive 80-module curriculum organized into 7 levels of mastery, spanning Core Java, Spring Boot, DevOps, and System Design.",
+      "Developed an interactive trio-panel IDE featuring a file explorer, multi-tab editor, and real-time console with secure Piston API integration for code execution.",
+      "Engineered 20+ dynamic visualizations using Framer Motion and React Flow to illustrate complex concepts like JVM memory models, Garbage Collection, and Concurrency.",
+      "Implemented a persistent gamification engine with Supabase, tracking learning streaks, XP-based leveling, and milestone achievement badges.",
+      "Optimized the frontend for high performance and reliability using React 18 and Vite, achieving a production-ready build with zero structural linting or type errors."
+    ],
+    tools: ["React 18", "TypeScript", "Vite", "Supabase", "Framer Motion", "Piston API", "React Flow", "Vanilla CSS"],
+    image: "/lovable-uploads/Java learning platfrom.png",
+    category: "Full-Stack EdTech / AI Learning, AI/ML Project, Java",
+    liveUrl: "https://java-learning-web.vercel.app/",
+  }
+  ,
   {
     title: "E-commerce Site Automation (Flipkart)",
     description: "Developed a robust automation framework using Selenium and Python to validate critical business flows on the Flipkart e-commerce platform.",
@@ -24,9 +74,105 @@ export const projects: Project[] = [
     ],
     tools: ["Selenium WebDriver", "Java", "Java Script", "Page Object Model", "HTML Reporting"],
     image: "/lovable-uploads/Flipkart.png",
-    category: "Automation Project",
+    category: "Automation Project, Java",
     github: "https://github.com/dyannadle/Flipkart-Automation"
   },
+
+  {
+    title: " Daily News Summarizer Bot",
+    description: "A high-performance news intelligence engine that automates the aggregation, synthesis, and multi-channel delivery of global news using advanced LLM reasoning.",
+    duration: "1 month",
+    responsibilities: ["Architected an automated news intelligence pipeline by migrating from manual tracking to a Node.js-based autonomous bot using LangChain and Google Gemini.", "Developed a resilient RSS aggregation service to fetch and parse real-time data from diverse global news feeds (Hacker News, BBC Technology, etc.).", "Engineered a sophisticated summarization engine leveraging Gemini Pro and OpenAI fallbacks to synthesize complex news articles into concise, actionable briefs.", "Implemented a multi-channel notification system using the Telegraf framework to deliver real-time summaries directly to Telegram chats.", "Established a persistent knowledge archive by systematizing local Markdown logging to track historical news trends and maintain data integrity.", "Systematized scheduling workflows using node-cron to support multiple daily triggers, ensuring consistent information delivery and operational reliability."],
+    tools: ["Node.js (Runtime Environment)", "TypeScript (Static Type Safety)", "LangChain (LLM Orchestration)", "Google Gemini (Generative AI & Summarization)", "OpenAI (Large Language Model Fallback)", "Telegraf (Telegram Bot Framework)", "RSS Parser (Data Fetching)", "node-cron (Task Scheduling Architecture)"],
+    image: "/lovable-uploads/News_bot.png",
+    category: "Full-Stack Node.js / AI/ML / Automation",
+    github: "https://t.me/DailynewsSummarizer_bot",
+  },
+
+  {
+    title: "SimpleBank: Modern Java Full-Stack Ecosystem",
+    description: "A high-performance, secure personal banking platform featuring a sleek responsive UI, robust RESTful architecture, and real-time transaction tracking with localized Indian Rupee (₹) support.",
+    duration: "1 month (March 2026 – Present)",
+    responsibilities: [
+      "Architected a full-stack banking ecosystem by migrating a legacy CLI application to a modern web-based architecture using Javalin (Server) and Vanilla JS (Client).",
+      "Developed a secure REST API controller using Java 17 Records to handle account authentication, transaction processing, and history retrieval with high efficiency.",
+      "Engineered a responsive, high-fidelity UI using CSS Grid/Flexbox and a Glassmorphism design system to ensure a premium user experience and smooth micro-animations.",
+      "Implemented a robust persistence layer using H2 Database (SQL) to guarantee data integrity for concurrent deposit, withdrawal, and account creation operations.",
+      "Localized the entire financial ecosystem to Indian Rupees (₹), ensuring consistent currency formatting across balance displays, transaction toasts, and history logs.",
+      "Systematized deployment workflows using Maven for containerized-compatible builds and standalone JAR execution for easy environment migration."
+    ],
+    tools: [
+      "Java 17 (Core Language & Records)",
+      "Javalin (Lightweight Web Framework & REST API)",
+      "Vanilla JS (SPA Logic & Asynchronous Fetch API)",
+      "CSS3 (Glassmorphism & Responsive Design System)",
+      "H2 Database (Relational SQL Persistence)",
+      "Maven (Dependency Management & Build Orchestration)",
+      "Jackson (JSON Data Binding)",
+      "SLF4J (Backend Logging Infrastructure)"
+    ],
+    image: "/lovable-uploads/Banking System .png",
+    category: "Full-Stack, Java, Fintech",
+    github: "https://github.com/dyannadle/simple_banking_system",
+  },
+
+  {
+    title: "Chat With Your PDF",
+    description: "A secure, privacy-first AI platform that enables offline conversations with PDF documents using Retrieval-Augmented Generation (RAG), high-fidelity OCR, and hybrid search capabilities.",
+    duration: "1 Month (March 2026 – April 2026)",
+    responsibilities: [
+      "Engineered a privacy-centric RAG ecosystem by integrating LangChain and Ollama to facilitate secure, local-only AI interactions without external API dependencies.",
+      "Architected a hybrid retrieval engine combining semantic vector search (FAISS) and keyword-based search (BM25) to maximize answer precision and context relevance.",
+      "Developed a robust document processing pipeline featuring Tesseract OCR for scanned PDFs and pdfplumber for high-precision tabular data extraction.",
+      "Designed a modern, responsive dashboard using Streamlit with real-time source citations, passage highlighting, and an interactive semantic retrieval explorer.",
+      "Implemented advanced conversational memory and chat history persistence, allowing users to export entire AI-assisted sessions as professional PDF documents.",
+      "Systematized ethical AI guardrails by integrating password-protected access and local environment configurations for secure multi-user deployment."
+    ],
+    tools: [
+      "Python 3.10+ (Core Language)",
+      "LangChain (RAG Orchestration)",
+      "Ollama / Llama 3 (Large Language Model)",
+      "FAISS (High-Performance Vector Database)",
+      "HuggingFace (Local Sentence-Transformers)",
+      "Streamlit (Interactive UI Framework)",
+      "Tesseract OCR (Optical Character Recognition)",
+      "pdfplumber (Tabular Data Extraction)"
+    ],
+    image: "/lovable-uploads/Chat With Pdf.png",
+    category: "AI/ML, RAG, Python",
+    liveUrl: "https://chat-with-pdf-site.streamlit.app/",
+  },
+
+  {
+    title: "Intelligent SQL Query Agent",
+    description: "A high-performance AI data assistant that translates natural language into secure SQL queries and provides human-friendly insights using a self-correcting agentic workflow.",
+    duration: "1 month (March 2026 – Present)",
+    responsibilities: [
+      "Architected a robust, multi-stage AI agent loop using LangGraph to orchestrate SQL generation, logical validation, query execution, and natural language interpretation.",
+      "Integrated Groq’s Llama 3.1 8B model via LangChain to deliver lightning-fast, free-tier LLM inference with automated rate-limit detection and proactive recovery.",
+      "Developed a self-correcting validation engine that sanitizes SQL queries to prevent destructive DML operations and automatically retries on logic or syntax errors.",
+      "Engineered a high-concurrency API using FastAPI and Asynchronous Python (ainvoke) to handle non-blocking agent requests with strict 45-second execution timeouts.",
+      "Implemented a flexible persistence layer using SQLAlchemy and Python-Dotenv to support seamless migration between local SQLite and cloud-based PostgreSQL/MySQL databases.",
+      "Optimized the entire ecosystem for serverless deployment on Vercel, ensuring a 100% free-tier footprint for hosting, database, and AI compute.",
+      "Secured the repository by performing a deep-history git scrub to remove leaked credentials and establishing strict GitHub secret scanning guards."
+    ],
+    tools: [
+      "Python 3.11+ (Core Development)",
+      "LangGraph (Agent Orchestration & Workflow Design)",
+      "LangChain & Groq API (LLM Integration & Prompt Engineering)",
+      "FastAPI (Asynchronous REST API Infrastructure)",
+      "SQLAlchemy (Database Abstraction & Query Execution)",
+      "Pydantic (Strict Data Validation & Schema Enforcement)",
+      "Uvicorn (High-Performance ASGI Server)",
+      "Git & GitHub (Version Control & History Sanitization)",
+      "Vercel (Cloud Serverless Deployment Host)"
+    ],
+    image: "/lovable-uploads/SQL Agent.png",
+    category: "AI/ML, Data Engineering, Full-Stack",
+    github: "https://github.com/dyannadle/Intelligent-SQL-Query-Agent",
+  },
+
+
   {
     title: "Echoes of the Past (AI Detective Game)",
     description: "A unique procedural narrative detective game using an integrated AI interpreter (Gemini 2.0 Flash) to generate story conclusions from fragmented clues.",
@@ -40,7 +186,7 @@ export const projects: Project[] = [
     ],
     tools: ["HTML5: For the basic structure of the game.", "CSS3 (Tailwind CSS): For responsive and modern styling.", "JavaScript (ES6+): For all game logic, procedural generation, and interactivity.", "Google Gemini API (gemini-2.0-flash): Used for generating the narrative conclusion based on collected clues.", "Firebase SDK (Auth & Firestore): (Planned for future use, currently included for environment compatibility but not fully utilized for saving/loading game state in this version."],
     image: "/lovable-uploads/Echo.png",
-    category: "Game Development, AI/ML Project",
+    category: "Game Development, AI/ML Project, Python",
     github: "https://github.com/dyannadle/Games",
   },
   {
@@ -60,22 +206,23 @@ export const projects: Project[] = [
     github: "https://github.com/dyannadle/Manual-Projects"
   },
   {
-    title: "Food Recipe Generation from Images",
-    description: "AI-powered computer vision model that analyzes food images and generates detailed recipes using deep learning techniques.",
+    title: "SnapCook AI: Cross-Modal Recipe Generation",
+    description: "An end-to-end Inverse Cooking system leveraging Cross-Modal Transformers to transform food imagery into structured recipes and nutritional data.",
     duration: "4 months",
     responsibilities: [
-      "Designed and implemented an automated pipeline for generating recipes from food images using convolutional and recurrent neural networks.",
-      "Performed extensive performance optimization and hyperparameter tuning to improve model accuracy and efficiency.",
-      "Validated model predictions against labeled datasets to ensure recipe relevance and correctness.",
-      "Collaborated on dataset collection and preprocessing to enhance training data quality.",
-      "Documented model architecture and results for academic publication."
+      "Architected an Inverse Cooking pipeline using a CNN encoder and a Multi-head Attention Transformer for autoregressive recipe decoding.",
+      "Optimized model convergence using customized loss functions, including SoftIoU for ingredient overlap and cardinality penalties to reduce hallucinations.",
+      "Engineered a full-stack ecosystem with a React 18 frontend, Flask backend, and JWT-based authentication for secure, persistent data management.",
+      "Developed a heuristic nutritional analytics engine mapping predicted ingredients to macro-nutrient profiles for real-time calorie estimation.",
+      "Containerized the entire stack using Docker and Docker Compose to ensure scalable, environment-agnostic deployment to production servers."
     ],
-    tools: ["PyTorch", "Transformers", "NLP", "CNN", "LSTM"],
-    image: "/lovable-uploads/71a0f015-985f-4444-81ed-1937b2cd2a1d.png",
-    category: "AI/ML Project",
+    tools: ["PyTorch", "Transformers", "Flask", "React 18", "Docker", "JWT", "PostgreSQL"],
+    image: "/lovable-uploads/Recipe Generation.png",
+    category: "AI/ML Project, Other, Python",
     paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
     github: "https://github.com/dyannadle/Recipe-Generator",
   },
+
   {
     title: "Maze Solver Game",
     description: "Classic maze generation and solving game implemented in Python using the Pygame library.",
@@ -89,7 +236,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
     image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
-    category: "AI/ML Project, Game Development",
+    category: "AI/ML Project, Game Development, Python",
     github: "https://github.com/dyannadle/Maze-Solver",
   },
   {
@@ -105,7 +252,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
     image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
-    category: "AI/ML Project",
+    category: "AI/ML Project, Python",
     github: "https://github.com/dyannadle/Image-Generator"
   },
   {
@@ -121,7 +268,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
     image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
-    category: "AI/ML Project",
+    category: "AI/ML Project, Python",
     github: "https://github.com/dyannadle/Face-attendance"
   },
   {
@@ -150,4 +297,7 @@ export const filters = [
   'AI/ML Project',
   'Automation Project',
   'Game Development',
+  'Java',
+  'Python',
+  'Other',
 ];

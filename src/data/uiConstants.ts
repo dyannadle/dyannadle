@@ -13,6 +13,9 @@ export const UI_TEXT = {
         filters: {
             all: "All",
             favorites: "Favorites",
+            other: "Other",
+            java: "Java",
+            python: "Python",
         },
         card: {
             viewImage: "View Full Image",

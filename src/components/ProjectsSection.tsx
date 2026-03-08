@@ -187,7 +187,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
       <div
         className={`${isImage
           ? 'glass p-2 rounded-2xl shadow-2xl max-w-4xl lg:max-w-6xl w-full max-h-[95vh] overflow-hidden flex flex-col border border-white/10'
-          : 'glass rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/10'
+          : 'glass rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-white/10'
           }`}
         onClick={(e) => e.stopPropagation()}
         style={{ opacity: 1, visibility: 'visible' }}
@@ -286,7 +286,7 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
         )}
 
         {!isImage && (
-          <div className="p-8 overflow-y-auto h-full space-y-6 text-gray-300 bg-black/40">
+          <div className="p-8 overflow-y-auto custom-scrollbar flex-1 space-y-6 text-gray-300 bg-black/40">
             <p className="text-lg italic font-medium border-l-4 border-blue-500 pl-4 text-white">
               {project.description}
             </p>
@@ -321,6 +321,28 @@ const ProjectModal: React.FC<ModalProps> = ({ isOpen, onClose, content, onViewIm
               >
                 <ImageIcon size={20} /> {UI_TEXT.projects.card.viewImage}
               </button>
+
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-semibold text-white bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-full transition-all border border-white/10"
+                >
+                  <Github size={20} /> GitHub Code
+                </a>
+              )}
+
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-semibold text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full transition-all shadow-lg shadow-blue-500/20"
+                >
+                  <Maximize2 size={20} /> View Live Site
+                </a>
+              )}
             </div>
           </div>
         )}
