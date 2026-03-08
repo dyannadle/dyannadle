@@ -33,11 +33,12 @@ const Navbar: React.FC = () => {
         <a
           href="#home"
           className={cn(
-            "font-bold text-xl tracking-tight transition-opacity duration-300",
+            "flex items-center gap-2 font-bold text-xl tracking-tight transition-opacity duration-300",
             scrolled ? "text-foreground" : "text-foreground",
           )}
         >
-          Deepak Yannadle
+          <img src="/logo.png" alt="Deepak Yannadle Logo" className="w-8 h-8 rounded-lg object-contain" />
+          <span className="hidden sm:inline-block">Deepak Yannadle</span>
         </a>
 
         {/* Desktop Navigation */}

@@ -113,7 +113,7 @@ export const projects: Project[] = [
     image: "/lovable-uploads/Banking System .png",
     category: "Full-Stack, Java, Fintech",
     github: "https://github.com/dyannadle/simple_banking_system",
-  }
+  },
 
 
   {
