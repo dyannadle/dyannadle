@@ -99,7 +99,7 @@
 ## 🏙️ Git City — 3D Contribution Calendar
 
 <p align="center">
-  <img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Calendar" width="900" />
+  <img src="https://raw.githubusercontent.com/dyannadle/dyannadle/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Calendar" width="900" />
 </p>
 
 ---
