@@ -140,6 +140,35 @@ export const projects: Project[] = [
     ],
     image: "/lovable-uploads/Chat With Pdf.png",
     category: "AI/ML, RAG, Python",
+    liveUrl: "https://chat-with-pdf-site.streamlit.app/",
+  },
+
+  {
+    title: "Intelligent SQL Query Agent",
+    description: "A high-performance AI data assistant that translates natural language into secure SQL queries and provides human-friendly insights using a self-correcting agentic workflow.",
+    duration: "1 month (March 2026 – Present)",
+    responsibilities: [
+      "Architected a robust, multi-stage AI agent loop using LangGraph to orchestrate SQL generation, logical validation, query execution, and natural language interpretation.",
+      "Integrated Groq’s Llama 3.1 8B model via LangChain to deliver lightning-fast, free-tier LLM inference with automated rate-limit detection and proactive recovery.",
+      "Developed a self-correcting validation engine that sanitizes SQL queries to prevent destructive DML operations and automatically retries on logic or syntax errors.",
+      "Engineered a high-concurrency API using FastAPI and Asynchronous Python (ainvoke) to handle non-blocking agent requests with strict 45-second execution timeouts.",
+      "Implemented a flexible persistence layer using SQLAlchemy and Python-Dotenv to support seamless migration between local SQLite and cloud-based PostgreSQL/MySQL databases.",
+      "Optimized the entire ecosystem for serverless deployment on Vercel, ensuring a 100% free-tier footprint for hosting, database, and AI compute.",
+      "Secured the repository by performing a deep-history git scrub to remove leaked credentials and establishing strict GitHub secret scanning guards."
+    ],
+    tools: [
+      "Python 3.11+ (Core Development)",
+      "LangGraph (Agent Orchestration & Workflow Design)",
+      "LangChain & Groq API (LLM Integration & Prompt Engineering)",
+      "FastAPI (Asynchronous REST API Infrastructure)",
+      "SQLAlchemy (Database Abstraction & Query Execution)",
+      "Pydantic (Strict Data Validation & Schema Enforcement)",
+      "Uvicorn (High-Performance ASGI Server)",
+      "Git & GitHub (Version Control & History Sanitization)",
+      "Vercel (Cloud Serverless Deployment Host)"
+    ],
+    image: "/lovable-uploads/sql_agent_architecture.png",
+    category: "AI, Data Engineering, Full-Stack",
     github: "https://github.com/dyannadle/Intelligent-SQL-Query-Agent",
   },
 
