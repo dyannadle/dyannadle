@@ -89,6 +89,34 @@ export const projects: Project[] = [
   },
 
   {
+    title: "SimpleBank: Modern Java Full-Stack Ecosystem",
+    description: "A high-performance, secure personal banking platform featuring a sleek responsive UI, robust RESTful architecture, and real-time transaction tracking with localized Indian Rupee (₹) support.",
+    duration: "1 month (March 2026 – Present)",
+    responsibilities: [
+      "Architected a full-stack banking ecosystem by migrating a legacy CLI application to a modern web-based architecture using Javalin (Server) and Vanilla JS (Client).",
+      "Developed a secure REST API controller using Java 17 Records to handle account authentication, transaction processing, and history retrieval with high efficiency.",
+      "Engineered a responsive, high-fidelity UI using CSS Grid/Flexbox and a Glassmorphism design system to ensure a premium user experience and smooth micro-animations.",
+      "Implemented a robust persistence layer using H2 Database (SQL) to guarantee data integrity for concurrent deposit, withdrawal, and account creation operations.",
+      "Localized the entire financial ecosystem to Indian Rupees (₹), ensuring consistent currency formatting across balance displays, transaction toasts, and history logs.",
+      "Systematized deployment workflows using Maven for containerized-compatible builds and standalone JAR execution for easy environment migration."
+    ],
+    tools: [
+      "Java 17 (Core Language & Records)",
+      "Javalin (Lightweight Web Framework & REST API)",
+      "Vanilla JS (SPA Logic & Asynchronous Fetch API)",
+      "CSS3 (Glassmorphism & Responsive Design System)",
+      "H2 Database (Relational SQL Persistence)",
+      "Maven (Dependency Management & Build Orchestration)",
+      "Jackson (JSON Data Binding)",
+      "SLF4J (Backend Logging Infrastructure)"
+    ],
+    image: "/lovable-uploads/Banking System .png",
+    category: "Full-Stack, Java, Fintech",
+    github: "https://github.com/dyannadle/simple_banking_system",
+  }
+
+
+  {
     title: "Echoes of the Past (AI Detective Game)",
     description: "A unique procedural narrative detective game using an integrated AI interpreter (Gemini 2.0 Flash) to generate story conclusions from fragmented clues.",
     duration: "2 weeks",
@@ -212,7 +240,7 @@ export const filters = [
   'AI/ML Project',
   'Automation Project',
   'Game Development',
-  'Other',
   'Java',
   'Python',
+  'Other',
 ];
