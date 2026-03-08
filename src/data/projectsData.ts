@@ -115,6 +115,33 @@ export const projects: Project[] = [
     github: "https://github.com/dyannadle/simple_banking_system",
   },
 
+  {
+    title: "Intelligent-SQL-Query-Agent",
+    description: "A secure, privacy-first AI platform that enables offline conversations with PDF documents using Retrieval-Augmented Generation (RAG), high-fidelity OCR, and hybrid search capabilities.",
+    duration: "1 Month (March 2026 – April 2026)",
+    responsibilities: [
+      "Engineered a privacy-centric RAG ecosystem by integrating LangChain and Ollama to facilitate secure, local-only AI interactions without external API dependencies.",
+      "Architected a hybrid retrieval engine combining semantic vector search (FAISS) and keyword-based search (BM25) to maximize answer precision and context relevance.",
+      "Developed a robust document processing pipeline featuring Tesseract OCR for scanned PDFs and pdfplumber for high-precision tabular data extraction.",
+      "Designed a modern, responsive dashboard using Streamlit with real-time source citations, passage highlighting, and an interactive semantic retrieval explorer.",
+      "Implemented advanced conversational memory and chat history persistence, allowing users to export entire AI-assisted sessions as professional PDF documents.",
+      "Systematized ethical AI guardrails by integrating password-protected access and local environment configurations for secure multi-user deployment."
+    ],
+    tools: [
+      "Python 3.10+ (Core Language)",
+      "LangChain (RAG Orchestration)",
+      "Ollama / Llama 3 (Large Language Model)",
+      "FAISS (High-Performance Vector Database)",
+      "HuggingFace (Local Sentence-Transformers)",
+      "Streamlit (Interactive UI Framework)",
+      "Tesseract OCR (Optical Character Recognition)",
+      "pdfplumber (Tabular Data Extraction)"
+    ],
+    image: "/lovable-uploads/Chat With Pdf.png",
+    category: "AI/ML, RAG, Python",
+    github: "https://github.com/dyannadle/Intelligent-SQL-Query-Agent",
+  },
+
 
   {
     title: "Echoes of the Past (AI Detective Game)",
