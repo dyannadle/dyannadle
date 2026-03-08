@@ -15,18 +15,31 @@ export const projects: Project[] = [
   {
     title: "Fintech Pro: Institutional AI Investment Ecosystem",
     description: "A high-conviction, end-to-end financial intelligence platform leveraging distributed microservices and advanced ML (LSTM, RAG, RL) for real-time portfolio optimization and institutional-grade market analysis.",
-    duration: "4 months ",
+    duration: "4 months",
     responsibilities: [
-      "Architected a distributed microservices infrastructure using Spring Boot (Auth/Portfolio), FastAPI (AI/ML Lab), and React 18, achieving sub-40ms execution latency for high-frequency workflows.",
-      "Developed a local-first predictive engine executing 5 parallel models (LSTM, ARIMA, Prophet, Linear, TFT) in-browser via Promise.allSettled, delivering 30-day forecasts with 95% confidence intervals.",
-      "Engineered a RAG (Retrieval-Augmented Generation) Financial Advisor integrating ChromaDB vector storage and Gemini/Ollama LLMs to provide grounded, real-time insights from global news and portfolio context.",
-      "Integrated a Quantitative Optimization layer using scipy SLSQP to solve the Mean-Variance Efficient Frontier, enabling automated portfolio rebalancing and risk-adjusted alpha generation.",
-      "Developed 'The Vault' Academy, a gamified learning ecosystem with interactive Order Flow/Volatility simulators and a persistent XP-based achievement system for investor certification.",
-      "Containerized the entire stack (PostgreSQL, Redis, ChromaDB, 3+ Backends) using Docker and Docker Compose to ensure institutional-grade observability through Prometheus and Grafana dashboards."
+      "Architected a distributed microservices ecosystem using Spring Boot (Auth/Portfolio), FastAPI (AI/ML Lab), and React 18, achieving sub-40ms execution latency for high-frequency workflows.",
+      "Engineered a dual-backend architecture: Spring Boot for mission-critical Auth and Portfolio CRUD, and FastAPI for compute-intensive RAG and Optimization services.",
+      "Integrated a Retrieval-Augmented Generation (RAG) Advisor using ChromaDB vector storage and Ollama for local LLM orchestration, ensuring 100% data privacy and security.",
+      "Developed a Quantitative Optimization Layer using scipy SLSQP and PyTorch to solve the Mean-Variance Efficient Frontier and execute automated rebalancing logic.",
+      "Implemented a full-stack observability suite with Prometheus and Grafana to track multi-container health, API latencies, and real-time system pulse.",
+      "Systematized deployment through Docker and Docker Compose, managing a complex stack of 5+ services with persistent PostgreSQL, Redis, and ChromaDB volumes."
     ],
-    tools: ["React 18", "TypeScript", "Spring Boot", "FastAPI", "PyTorch", "ChromaDB", "PostgreSQL", "Redis", "Docker", "Prometheus", "Tailwind CSS"],
-    image: "/lovable-uploads/Fintech.png", // Representative image from the project
-    category: "AI/ML Project",
+    tools: [
+      "React 18 & Vite (Core SPA Framework)",
+      "Tailwind CSS (Institutional Dashboard Styling)",
+      "Spring Boot (User/Admin Microservices & JWT Auth)",
+      "FastAPI (AI, Prediction, & Optimization Services)",
+      "PostgreSQL 15 (Relational Data Persistence)",
+      "Redis Stack (Real-time Market Data & Vector Indexing)",
+      "ChromaDB (Dedicated Vector Store for RAG Advisor)",
+      "Ollama (Local LLM Orchestration for Privacy-First AI)",
+      "PyTorch & Stable Baselines3 (Neural Networks & RL Lab)",
+      "Docker & Docker Compose (Containerized Multi-Service Orchestration)",
+      "Prometheus & Grafana (Infrastructure Monitoring & Alerting)"
+    ],
+    image: "/lovable-uploads/Fintech.png",
+    category: "Full-Stack AI/Fintech, AI/ML, Other",
+
     github: "https://github.com/dyannadle/fintech",
   },
 
