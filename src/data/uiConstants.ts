@@ -14,6 +14,8 @@ export const UI_TEXT = {
             all: "All",
             favorites: "Favorites",
             other: "Other",
+            java: "Java",
+            python: "Python",
         },
         card: {
             viewImage: "View Full Image",

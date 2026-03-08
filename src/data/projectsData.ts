@@ -38,7 +38,7 @@ export const projects: Project[] = [
       "Prometheus & Grafana (Infrastructure Monitoring & Alerting)"
     ],
     image: "/lovable-uploads/Fintech.png",
-    category: "Full-Stack AI/Fintech, AI/ML, Other",
+    category: "Full-Stack AI/Fintech, AI/ML, Other, Python, Java",
 
     github: "https://github.com/dyannadle/fintech",
   },
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     ],
     tools: ["React 18", "TypeScript", "Vite", "Supabase", "Framer Motion", "Piston API", "React Flow", "Vanilla CSS"],
     image: "/lovable-uploads/Java learning platfrom.png",
-    category: "Full-Stack EdTech / AI Learning, AI/ML Project, Other ",
+    category: "Full-Stack EdTech / AI Learning, AI/ML Project, Java",
     Link: "https://java-learning-web.vercel.app/",
   }
   ,
@@ -73,9 +73,21 @@ export const projects: Project[] = [
     ],
     tools: ["Selenium WebDriver", "Java", "Java Script", "Page Object Model", "HTML Reporting"],
     image: "/lovable-uploads/Flipkart.png",
-    category: "Automation Project",
+    category: "Automation Project, Java",
     github: "https://github.com/dyannadle/Flipkart-Automation"
   },
+
+  {
+    title: " Daily News Summarizer Bot",
+    description: "A high-performance news intelligence engine that automates the aggregation, synthesis, and multi-channel delivery of global news using advanced LLM reasoning.",
+    duration: "1 month",
+    responsibilities: ["Architected an automated news intelligence pipeline by migrating from manual tracking to a Node.js-based autonomous bot using LangChain and Google Gemini.", "Developed a resilient RSS aggregation service to fetch and parse real-time data from diverse global news feeds (Hacker News, BBC Technology, etc.).", "Engineered a sophisticated summarization engine leveraging Gemini Pro and OpenAI fallbacks to synthesize complex news articles into concise, actionable briefs.", "Implemented a multi-channel notification system using the Telegraf framework to deliver real-time summaries directly to Telegram chats.", "Established a persistent knowledge archive by systematizing local Markdown logging to track historical news trends and maintain data integrity.", "Systematized scheduling workflows using node-cron to support multiple daily triggers, ensuring consistent information delivery and operational reliability."],
+    tools: ["Node.js (Runtime Environment)", "TypeScript (Static Type Safety)", "LangChain (LLM Orchestration)", "Google Gemini (Generative AI & Summarization)", "OpenAI (Large Language Model Fallback)", "Telegraf (Telegram Bot Framework)", "RSS Parser (Data Fetching)", "node-cron (Task Scheduling Architecture)"],
+    image: "/lovable-uploads/News_bot.png",
+    category: "Full-Stack Node.js / AI/ML / Automation",
+    github: "https://github.com/dyannadle/Daily-News-Summarizer-Bot",
+  },
+
   {
     title: "Echoes of the Past (AI Detective Game)",
     description: "A unique procedural narrative detective game using an integrated AI interpreter (Gemini 2.0 Flash) to generate story conclusions from fragmented clues.",
@@ -89,7 +101,7 @@ export const projects: Project[] = [
     ],
     tools: ["HTML5: For the basic structure of the game.", "CSS3 (Tailwind CSS): For responsive and modern styling.", "JavaScript (ES6+): For all game logic, procedural generation, and interactivity.", "Google Gemini API (gemini-2.0-flash): Used for generating the narrative conclusion based on collected clues.", "Firebase SDK (Auth & Firestore): (Planned for future use, currently included for environment compatibility but not fully utilized for saving/loading game state in this version."],
     image: "/lovable-uploads/Echo.png",
-    category: "Game Development, AI/ML Project",
+    category: "Game Development, AI/ML Project, Python",
     github: "https://github.com/dyannadle/Games",
   },
   {
@@ -121,7 +133,7 @@ export const projects: Project[] = [
     ],
     tools: ["PyTorch", "Transformers", "Flask", "React 18", "Docker", "JWT", "PostgreSQL"],
     image: "/lovable-uploads/Recipe Generation.png",
-    category: "AI/ML Project, Other",
+    category: "AI/ML Project, Other, Python",
     paperPublished: "/AI-Powered Recipe Generator from Food Images Using Deep Learning Published Paper.pdf",
     github: "https://github.com/dyannadle/Recipe-Generator",
   },
@@ -139,7 +151,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "Pygame", "Algorithms", "Data Structures"],
     image: "/lovable-uploads/c400b9cf-269a-4945-8688-165aa7894f4d.png",
-    category: "AI/ML Project, Game Development",
+    category: "AI/ML Project, Game Development, Python",
     github: "https://github.com/dyannadle/Maze-Solver",
   },
   {
@@ -155,7 +167,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "Streamlit", "Cloudflare Workers AI", "Requests"],
     image: "/lovable-uploads/a29f2c35-e89b-4321-9794-594f01dcd11d.png",
-    category: "AI/ML Project",
+    category: "AI/ML Project, Python",
     github: "https://github.com/dyannadle/Image-Generator"
   },
   {
@@ -171,7 +183,7 @@ export const projects: Project[] = [
     ],
     tools: ["Python", "OpenCV", "Tkinter", "Pandas", "NumPy"],
     image: "/lovable-uploads/1dc83084-6bdb-42b4-9125-bf6af70db315.png",
-    category: "AI/ML Project",
+    category: "AI/ML Project, Python",
     github: "https://github.com/dyannadle/Face-attendance"
   },
   {
@@ -201,4 +213,6 @@ export const filters = [
   'Automation Project',
   'Game Development',
   'Other',
+  'Java',
+  'Python',
 ];
