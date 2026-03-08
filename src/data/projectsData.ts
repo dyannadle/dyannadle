@@ -167,8 +167,8 @@ export const projects: Project[] = [
       "Git & GitHub (Version Control & History Sanitization)",
       "Vercel (Cloud Serverless Deployment Host)"
     ],
-    image: "/lovable-uploads/sql_agent_architecture.png",
-    category: "AI, Data Engineering, Full-Stack",
+    image: "/lovable-uploads/SQL Agent.png",
+    category: "AI/ML, Data Engineering, Full-Stack",
     github: "https://github.com/dyannadle/Intelligent-SQL-Query-Agent",
   },
 
