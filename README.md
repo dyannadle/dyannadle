@@ -88,10 +88,11 @@
 
 | Site / App | Description | Link |
 | :--- | :--- | :--- |
-| **[App Name 1]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
-| **[App Name 2]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
-| **[App Name 3]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
-
+| **[Personal Portfolio]** | My professional portfolio showcasing my projects, skills, and experience. | [🔗 Visit Site](https://www.dyannadle.in) |
+| **[Java Learning Site]** | A comprehensive platform for learning Java programming from basics to advanced topics. | [🔗 Visit Site](https://java-learning-web.vercel.app/) |
+| **[Python Learning Site]** | An interactive guide and learning path for mastering Python programming. | [🔗 Visit Site](https://python-pathfinder-73.vercel.app/) |
+| **[Chess Playing Site]** | A fully functional web-based multiplayer chess game application. | [🔗 Visit Site](https://grandmaster-chess-web.vercel.app/) |
+| **[SQL Learning Site]** | An interactive educational platform to practice and learn SQL queries. | [🔗 Visit Site](https://sql-learning-platfrom.vercel.app/) |
 </div>
 
 <br/>
