@@ -70,19 +70,32 @@
 ## 🚀 Featured Projects
 
 <div align="center">
+
+| Project | Description | Tech Stack |
+| :--- | :--- | :--- |
+| **Face Attendance** | Face recognition-based attendance system. | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![OpenCV](https://img.shields.io/badge/-OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white) |
+| **Image Generator** | AI-powered image generation application. | ![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white) ![AI](https://img.shields.io/badge/-AI%20APIs-FF6F61?style=flat-square) |
+| **Flipkart Automation** | E2E automation for Flipkart flows. | ![Java](https://img.shields.io/badge/-Java-007396?style=flat-square&logo=openjdk&logoColor=white) ![Selenium](https://img.shields.io/badge/-Selenium-43B02A?style=flat-square&logo=selenium&logoColor=white) |
+| **Games Portfolio** | Practice games for logic building. | ![Logic](https://img.shields.io/badge/-Logic-brightgreen?style=flat-square) ![Fun](https://img.shields.io/badge/-Fun-orange?style=flat-square) |
+
+</div>
+
+### 🔄 Live GitHub Repositories
+
+<div align="center">
   <a href="https://github.com/dyannadle/Face-attendance">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dyannadle&repo=Face-attendance&theme=radical&border_radius=10" alt="Face Attendance" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Face-attendance&theme=radical&border_radius=10" alt="Face Attendance" width="400" />
   </a>
   <a href="https://github.com/dyannadle/Image-Generator">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dyannadle&repo=Image-Generator&theme=radical&border_radius=10" alt="Image Generator" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Image-Generator&theme=radical&border_radius=10" alt="Image Generator" width="400" />
   </a>
   <br/>
   <br/>
   <a href="https://github.com/dyannadle/Flipkart-Automation">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dyannadle&repo=Flipkart-Automation&theme=radical&border_radius=10" alt="Flipkart Automation" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Flipkart-Automation&theme=radical&border_radius=10" alt="Flipkart Automation" width="400" />
   </a>
   <a href="https://github.com/dyannadle/Games">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=dyannadle&repo=Games&theme=radical&border_radius=10" alt="Games Portfolio" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Games&theme=radical&border_radius=10" alt="Games Portfolio" width="400" />
   </a>
 </div>
 
