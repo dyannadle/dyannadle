@@ -80,7 +80,21 @@
 
 </div>
 
+---
 
+## 🌐 Hosted Sites & Applications
+
+<div align="center">
+
+| Site / App | Description | Link |
+| :--- | :--- | :--- |
+| **[App Name 1]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
+| **[App Name 2]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
+| **[App Name 3]** | Brief description of what the app does. | [🔗 Visit Site](https://your-link-here.com) |
+
+</div>
+
+<br/>
 
 <p align="center">
   <a href="https://github.com/dyannadle?tab=repositories">
