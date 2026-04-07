@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/dyannadle">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00FF00&center=true&vCenter=true&width=435&lines=Python+Developer;QA+Automation+Specialist;AI+%26+Web+App+Enthusiast;Building+Real+World+Solutions" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=00FF00&center=true&vCenter=true&width=435&lines=Building+Real+W;Python+Developer;QA+Automation+Specialist;AI+%26+Web+App+Enthusiast;Building+Real+World+Solutions" />
   </a>
 </p>
 
@@ -80,22 +80,95 @@
 
 </div>
 
-### 🔄 Live GitHub Repositories
+---
+
+### 🔗 Live GitHub Repositories — Full-Stack & AI/ML
+
+<div align="center">
+  <a href="https://github.com/dyannadle/The-Chess-Game">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=The-Chess-Game&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/simple_banking_system">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=simple_banking_system&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/Chat-With-Your-PDFs">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Chat-With-Your-PDFs&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Intelligent-SQL-Query-Agent">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Intelligent-SQL-Query-Agent&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/Recipe-Generator">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Recipe-Generator&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/AI-Powered-Search-Over-Noation">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=AI-Powered-Search-Over-Noation&theme=radical&border_radius=10" width="400" />
+  </a>
+</div>
+
+### 🔗 Live GitHub Repositories — Java & Learning Platforms
+
+<div align="center">
+  <a href="https://github.com/dyannadle/Hotel---Bar-Ordering-System">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Hotel---Bar-Ordering-System&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Student-Management-System">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Student-Management-System&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/AdvancedLibraryManagementSystem">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=AdvancedLibraryManagementSystem&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Java_Tpoint">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Java_Tpoint&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/SQL-Learning-Platfrom">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=SQL-Learning-Platfrom&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Java">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Java&theme=radical&border_radius=10" width="400" />
+  </a>
+</div>
+
+### 🔗 Live GitHub Repositories — Automation, Testing & Games
+
+<div align="center">
+  <a href="https://github.com/dyannadle/Flipkart-Automation">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Flipkart-Automation&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Manual-Projects">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Manual-Projects&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/Manual-Testing--UI-Testing">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Manual-Testing--UI-Testing&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Games">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Games&theme=radical&border_radius=10" width="400" />
+  </a>
+  <br/><br/>
+  <a href="https://github.com/dyannadle/The-Cognitive-Sequence-Recall-Game">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=The-Cognitive-Sequence-Recall-Game&theme=radical&border_radius=10" width="400" />
+  </a>
+  <a href="https://github.com/dyannadle/Maze-Solver">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Maze-Solver&theme=radical&border_radius=10" width="400" />
+  </a>
+</div>
+
+### 🔗 Live GitHub Repositories — AI/ML & Python
 
 <div align="center">
   <a href="https://github.com/dyannadle/Face-attendance">
-    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Face-attendance&theme=radical&border_radius=10" alt="Face Attendance" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Face-attendance&theme=radical&border_radius=10" width="400" />
   </a>
   <a href="https://github.com/dyannadle/Image-Generator">
-    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Image-Generator&theme=radical&border_radius=10" alt="Image Generator" width="400" />
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Image-Generator&theme=radical&border_radius=10" width="400" />
   </a>
-  <br/>
-  <br/>
-  <a href="https://github.com/dyannadle/Flipkart-Automation">
-    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Flipkart-Automation&theme=radical&border_radius=10" alt="Flipkart Automation" width="400" />
-  </a>
-  <a href="https://github.com/dyannadle/Games">
-    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Games&theme=radical&border_radius=10" alt="Games Portfolio" width="400" />
+  <br/><br/>
+  <a href="https://github.com/dyannadle/Projects-">
+    <img src="https://yannadle.vercel.app/api/pin/?username=dyannadle&repo=Projects-&theme=radical&border_radius=10" width="400" />
   </a>
 </div>
 
@@ -132,11 +205,12 @@
   <a href="mailto:Dyannadle05@gmail.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
+  <a href="https://dyannadle.vercel.app/">
+    <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+  </a>
 </p>
 
 <p align="center">
   Thanks for visiting my profile!  
   Open to collaboration on AI, automation, and backend projects.
 </p>
-
-
