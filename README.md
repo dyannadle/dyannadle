@@ -1,8 +1,8 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./light.svg">
-    <img alt="Mr. Deepak Yannadle Profile Banner" src="./light.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="./dark.svg?v=2">
+    <source media="(prefers-color-scheme: light)" srcset="./light.svg?v=2">
+    <img alt="Mr. Deepak Yannadle Profile Banner" src="./light.svg?v=2">
   </picture>
 </div>
 
