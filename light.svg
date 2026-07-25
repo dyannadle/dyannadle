@@ -105,28 +105,29 @@
   <!-- Border Shimmer -->
   <rect x="1" y="1" width="1178" height="608" rx="19" fill="none" stroke="rgba(15,23,42,0.08)" stroke-width="2" />
 
-  <!-- Left Side: Profile Image -->
-  <g class="floating" transform="translate(90, 110)">
-    <defs>
-      <clipPath id="avatar-clip">
-        <circle cx="140" cy="140" r="135" />
-      </clipPath>
-    </defs>
-    
-    <!-- Glowing Outer Ring -->
-    <circle cx="140" cy="140" r="140" fill="none" stroke="url(#ascii-gradient)" stroke-width="4" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.4;1;0.4" dur="4s" repeatCount="indefinite" />
-    </circle>
-    <circle cx="140" cy="140" r="136" fill="none" stroke="rgba(15,23,42,0.2)" stroke-width="2" />
-    
-    <!-- Profile Image -->
-    <image href="data:image/png;base64,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" x="5" y="5" width="270" height="270" clip-path="url(#avatar-clip)" preserveAspectRatio="xMidYMid slice">
+  <!-- Left Side: ASCII Art (approx 38% width = 450px) -->
+  <g class="floating" transform="translate(40, 80)">
+    <!-- Simulated ASCII Art -->
+    <text x="0" y="0" class="ascii-text" fill="url(#ascii-gradient)" filter="url(#glow)">
+      <tspan x="0" dy="20">      _.-'''''-._      </tspan>
+      <tspan x="0" dy="20">    .'  _     _  '.    </tspan>
+      <tspan x="0" dy="20">   /   (_)   (_)   \   </tspan>
+      <tspan x="0" dy="20">  |  ,           ,  |  </tspan>
+      <tspan x="0" dy="20">  |  \`.       .`/  |  </tspan>
+      <tspan x="0" dy="20">   \  '.`'\"\"\"'`.'  /   </tspan>
+      <tspan x="0" dy="20">    '.  `'---'`  .'    </tspan>
+      <tspan x="0" dy="20">      '-._____.-'      </tspan>
+      <tspan x="0" dy="20">     /           \     </tspan>
+      <tspan x="0" dy="20">    |             |    </tspan>
+      <tspan x="0" dy="20">    |  _       _  |    </tspan>
+      <tspan x="0" dy="20">    | (_)     (_) |    </tspan>
+      <!-- Line by line reveal animation -->
       <animate attributeName="opacity" values="0;1" dur="2s" fill="freeze" />
-    </image>
+    </text>
     
-    <!-- Scanline effect over image -->
-    <rect x="0" y="0" width="280" height="4" fill="rgba(6,182,212,0.5)" filter="url(#glow)" opacity="0.5" clip-path="url(#avatar-clip)">
-      <animate attributeName="y" values="0;280;0" dur="5s" repeatCount="indefinite" />
+    <!-- Scanline effect -->
+    <rect x="-20" y="0" width="400" height="4" fill="rgba(6,182,212,0.3)" filter="url(#glow)" opacity="0.5">
+      <animate attributeName="y" values="0;300;0" dur="5s" repeatCount="indefinite" />
     </rect>
   </g>
 
