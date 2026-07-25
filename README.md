@@ -1,3 +1,11 @@
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./light.svg">
+    <img alt="Mr. Deepak Yannadle Profile Banner" src="./light.svg">
+  </picture>
+</div>
+
 <h1 align="center">Hi 👋, I'm Mr. Deepak Yannadle</h1>
 <h3 align="center">🚀 Developer & QA Engineer | Python & Java | AI & Automation Enthusiast</h3>
 
