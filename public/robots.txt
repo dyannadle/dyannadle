@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow sensitive/non-content paths
+Disallow: /src/
+Disallow: /*.json$
+
+Sitemap: https://dyannadle.vercel.app/sitemap.xml

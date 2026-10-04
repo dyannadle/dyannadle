@@ -4,25 +4,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>deepak-portfolio-showcase</title>
-  <link rel="icon" type="image/png" href="/logo.png" />
 
+  <!-- Primary meta (react-helmet-async overrides these per-page) -->
+  <title>Deepak Yannadle | Software Tester &amp; Developer</title>
+  <meta name="description" content="Portfolio of Deepak Yannadle, a Software Tester and Developer specializing in Automation Testing, Manual Testing, and AI/ML projects." />
+  <meta name="keywords" content="Deepak Yannadle, Software Tester, QA Engineer, Automation Testing, Selenium, Python, Portfolio" />
+  <meta name="author" content="Deepak Yannadle" />
+  <link rel="canonical" href="https://dyannadle.vercel.app/" />
 
-  <meta name="apple-mobile-web-app-title" content="Deepak" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta property="og:title" content="deepak-portfolio-showcase">
-  <meta name="twitter:title" content="deepak-portfolio-showcase">
-  <meta name="twitter:card" content="summary">
-  <meta property="og:type" content="website">
+  <!-- Favicons & PWA -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Deepak Portfolio" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Search engine verifications -->
+  <meta name="google-site-verification" content="0dbb65bc5cf7265d" />
+  <!-- Bing Webmaster Tools: site already verified via dashboard -->
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dyannadle.vercel.app/" />
+  <meta property="og:title" content="Deepak Yannadle | Software Tester &amp; Developer" />
+  <meta property="og:description" content="Portfolio of Deepak Yannadle, a Software Tester and Developer specializing in Automation Testing, Manual Testing, and AI/ML projects." />
+  <meta property="og:image" content="https://dyannadle.vercel.app/logo.png" />
+  <meta property="og:site_name" content="Deepak Yannadle Portfolio" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deepak Yannadle | Software Tester &amp; Developer" />
+  <meta name="twitter:description" content="Portfolio of Deepak Yannadle, a Software Tester and Developer specializing in Automation Testing, Manual Testing, and AI/ML projects." />
+  <meta name="twitter:image" content="https://dyannadle.vercel.app/logo.png" />
+
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM647BX4F1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    gtag('config', 'G-ZM647BX4F1');
+    gtag('config', 'G-ZM647BX4F1', {
+      page_path: window.location.pathname,
+      anonymize_ip: true
+    });
   </script>
 </head>
 
